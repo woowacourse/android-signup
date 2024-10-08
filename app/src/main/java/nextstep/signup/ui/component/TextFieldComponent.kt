@@ -18,7 +18,6 @@ import nextstep.signup.ui.theme.Blue50
 import nextstep.signup.ui.theme.BlueGray20
 import nextstep.signup.ui.theme.Gray50
 
-
 @Composable
 fun TextFieldComponent(
     textValue: String,

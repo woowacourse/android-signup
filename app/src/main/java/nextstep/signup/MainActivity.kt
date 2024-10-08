@@ -45,16 +45,16 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun SignupScreen(){
+fun SignupScreen() {
     var userName by remember { mutableStateOf(DEFAULT_TEXT) }
     var email by remember { mutableStateOf(DEFAULT_TEXT) }
     var password by remember { mutableStateOf(DEFAULT_TEXT) }
     var passwordConfirm by remember { mutableStateOf(DEFAULT_TEXT) }
 
-    Column (
+    Column(
         modifier = Modifier.padding(horizontal = 32.dp),
         horizontalAlignment = Alignment.CenterHorizontally
-    ){
+    ) {
         Spacer(Modifier.height(30.dp))
         SubjectComponent(
             subject = stringResource(R.string.subject),
@@ -104,6 +104,6 @@ fun SignupScreen(){
     showBackground = true
 )
 @Composable
-fun PreviewSignupView(){
+fun PreviewSignupView() {
     SignupScreen()
 }
