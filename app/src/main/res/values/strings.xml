@@ -3,4 +3,5 @@
 
     <!--회원가입-->
     <string name="sign_up_title">Welcome to Compose \uD83D\uDE80</string>
+    <string name="username_input">Username</string>
 </resources>
