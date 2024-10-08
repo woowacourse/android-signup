@@ -3,6 +3,7 @@ package woowacourse.signup
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,6 +22,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -52,21 +54,21 @@ class MainActivity : ComponentActivity() {
 @Composable
 private fun SignUpLayout() {
     Column {
-        SignUpTitle(text = "Welcome to Compose \uD83D\uDE80")
+        SignUpTitle()
         Space(dp = 18)
-        SignUpInput(title = "Username")
-        SignUpInput(title = "Email")
-        SignUpInput(title = "Password", isPassword = true)
-        SignUpInput(title = "Password Confirm", isPassword = true)
+        SignUpInput(titleId = R.string.username_input)
+        SignUpInput(titleId = R.string.email_input)
+        SignUpInput(titleId = R.string.password_input, isPassword = true)
+        SignUpInput(titleId = R.string.password_confirm_input, isPassword = true)
         Space(dp = 24)
         SignUpButton()
     }
 }
 
 @Composable
-private fun SignUpTitle(text: String) {
+private fun SignUpTitle() {
     Text(
-        text = text,
+        text = stringResource(id = R.string.sign_up_title),
         fontSize = 26.sp,
         color = Color.Black,
         fontWeight = FontWeight.W700,
@@ -78,11 +80,14 @@ private fun SignUpTitle(text: String) {
 }
 
 @Composable
-private fun SignUpInput(title: String, isPassword: Boolean = false) {
+private fun SignUpInput(
+    @StringRes titleId: Int,
+    isPassword: Boolean = false,
+) {
     var input by remember { mutableStateOf("") }
 
     TextField(
-        label = { SignUpInputLabel(title) },
+        label = { SignUpInputLabel(titleId) },
         value = input,
         onValueChange = { input = it },
         textStyle = TextStyle(
@@ -103,9 +108,9 @@ private fun SignUpInput(title: String, isPassword: Boolean = false) {
 }
 
 @Composable
-private fun SignUpInputLabel(label: String) {
+private fun SignUpInputLabel(@StringRes labelId: Int) {
     Text(
-        text = label,
+        text = stringResource(id = labelId),
         fontWeight = FontWeight.W400,
     )
 }
@@ -136,7 +141,7 @@ fun SignUpButton() {
 
 @Preview(showBackground = true)
 @Composable
-fun MainPreview() {
+fun MainActivityPreview() {
     SignupTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
@@ -146,4 +151,3 @@ fun MainPreview() {
         }
     }
 }
-
