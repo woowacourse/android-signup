@@ -124,7 +124,7 @@ fun SignUpButton() {
             .padding(horizontal = 32.dp),
     ) {
         Text(
-            text = "Sign Up",
+            text = stringResource(id = R.string.sign_up_button),
             fontSize = 14.sp,
             fontWeight = FontWeight.W500,
             modifier = Modifier.padding(vertical = 15.dp)
