@@ -103,9 +103,11 @@ fun ComposeColumn(tag: String, target: String) {
 fun ComposeButton(tag: String, enabled: MutableState<Boolean>) {
     Button(
         onClick = {
-        }, enabled = !enabled.value, modifier = Modifier.testTag(tag)
+            enabled.value = !enabled.value
+        }, enabled = enabled.value, modifier = Modifier.testTag(tag)
     ) {
-        Text(text = "클릭해주세요")
+        val text = if (enabled.value) "Enabled" else "Disabled"
+        ComposeText(text = text)
     }
 }
 
