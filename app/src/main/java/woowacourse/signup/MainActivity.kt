@@ -109,7 +109,7 @@ private fun SignUpInputLabel(@StringRes labelId: Int) {
 }
 
 @Composable
-fun SignUpButton() {
+private fun SignUpButton() {
     Button(
         onClick = {
             // TODO
@@ -134,7 +134,7 @@ fun SignUpButton() {
 
 @Preview(showBackground = true)
 @Composable
-fun MainActivityPreview() {
+private fun MainActivityPreview() {
     FillMaxTheme {
         SignUpLayout()
     }
