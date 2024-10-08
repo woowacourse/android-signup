@@ -1,1 +1,5 @@
-# android-signup# android-signup
+# android-signup
+## 1단계 - 컴포즈 기초
+- [ ] text() 테스트를 성공하도록 수정한다.
+- [ ] column() 테스트를 성공하도록 수정한다.
+- [ ] button() 테스트를 성공하도록 수정한다.
