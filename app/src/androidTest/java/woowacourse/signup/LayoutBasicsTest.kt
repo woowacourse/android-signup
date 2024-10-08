@@ -61,7 +61,7 @@ class LayoutBasicsTest {
             Column(
                 modifier = Modifier.testTag("이름")
             ) {
-                // 바꿔 보세요!
+                Text(text = "깜포즈", color = Color.Red)
                 Text(text = "킴포즈", color = Color.Cyan)
                 Text(text = "끔포즈", color = Color.Yellow)
             }
