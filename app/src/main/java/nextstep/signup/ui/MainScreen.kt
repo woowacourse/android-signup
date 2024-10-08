@@ -1,17 +1,10 @@
 package nextstep.signup.ui
 
 import androidx.annotation.StringRes
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -25,7 +18,6 @@ import nextstep.signup.ui.theme.Blue50
 
 data class InputField(
     @StringRes val titleId: Int,
-    var input: MutableState<String> = mutableStateOf(""),
     val isPassword: Boolean = false,
 )
 
@@ -39,7 +31,7 @@ fun MainScreen() {
             InputField(R.string.password_confirm_input, isPassword = true),
         )
 
-    val fieldsState = remember { inputFields }
+    val inputStates = remember { inputFields.map { mutableStateOf("") } }
 
     Column {
         Spacer(modifier = Modifier.height(60.dp))
@@ -49,11 +41,11 @@ fun MainScreen() {
         )
 
         Spacer(modifier = Modifier.height(18.dp))
-        fieldsState.forEach { field ->
+        inputFields.forEachIndexed { index, field ->
             CustomTextField(
                 modifier = Modifier.padding(horizontal = 32.dp, vertical = 18.dp),
-                value = field.input.value,
-                onValueChange = { newValue -> field.input.value = newValue },
+                value = inputStates[index].value,
+                onValueChange = { newValue -> inputStates[index].value = newValue },
                 labelResId = field.titleId,
                 visualTransformation = if (field.isPassword) PasswordVisualTransformation() else VisualTransformation.None,
             )
