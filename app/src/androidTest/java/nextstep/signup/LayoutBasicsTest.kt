@@ -2,6 +2,8 @@ package nextstep.signup
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -23,7 +25,9 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import nextstep.signup.ui.theme.SignupTheme
 import org.junit.Rule
 import org.junit.Test
 
@@ -102,5 +106,48 @@ fun ComposeButton(tag: String, enabled: MutableState<Boolean>) {
         }, enabled = !enabled.value, modifier = Modifier.testTag(tag)
     ) {
         Text(text = "클릭해주세요")
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun TextTestPreview() {
+    SignupTheme {
+        Surface(
+            color = MaterialTheme.colorScheme.background
+        ) {
+            val text = "안녕 난 컴포즈야~"
+            ComposeText(text)
+        }
+    }
+}
+
+
+@Preview(showBackground = true)
+@Composable
+fun ColumnTestPreview() {
+    SignupTheme {
+        Surface(
+            color = MaterialTheme.colorScheme.background
+        ) {
+            val tag = "이름"
+            val target = "깜포즈"
+            ComposeColumn(tag = tag, target = target)
+        }
+    }
+}
+
+
+@Preview(showBackground = true)
+@Composable
+fun ButtonTestPreview() {
+    SignupTheme {
+        Surface(
+            color = MaterialTheme.colorScheme.background
+        ) {
+            val tag = "버튼"
+            val enabled = remember { mutableStateOf(true) }
+            ComposeButton(tag = tag, enabled = enabled)
+        }
     }
 }
