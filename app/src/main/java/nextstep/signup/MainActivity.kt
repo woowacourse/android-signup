@@ -29,14 +29,20 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             SignupTheme {
-                Surface {
-                    Column(modifier = Modifier.fillMaxWidth()) {
-                        SignUpLabel()
-                        SignUpScreen()
-                    }
-                }
+                SignUpTotalPage()
             }
 
+        }
+    }
+}
+
+@Composable
+private fun SignUpTotalPage() {
+    Surface {
+        Column(modifier = Modifier.fillMaxWidth()) {
+            SignUpLabel()
+            SignUpScreen()
+            SignUpButton()
         }
     }
 }
@@ -99,14 +105,18 @@ fun SignUpScreen() {
             onValueChange = { passwordConfirm = it },
             label = { Text("Password Confirm") }
         )
-        Button(
-            onClick = { /* Sign up logic */ },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(all = 16.dp)
-        ) {
-            Text(text = "Sign Up")
-        }
+    }
+}
+
+@Composable
+private fun SignUpButton() {
+    Button(
+        onClick = { /* Sign up logic */ },
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(all = 16.dp)
+    ) {
+        Text(text = "Sign Up")
     }
 }
 
@@ -114,15 +124,6 @@ fun SignUpScreen() {
 @Composable
 fun SignUpPreview() {
     SignupTheme {
-        Surface {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp)
-            ) {
-                SignUpLabel()
-                SignUpScreen()
-            }
-        }
+        SignUpTotalPage()
     }
 }
