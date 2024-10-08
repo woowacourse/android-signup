@@ -1,4 +1,4 @@
-package nextstep.signup.ui.theme
+package woowacourse.signup.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
