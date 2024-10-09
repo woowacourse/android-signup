@@ -17,7 +17,7 @@ fun SignUpScreen(modifier: Modifier = Modifier) {
     var signUpForm: SignUpFormState by rememberSaveable { mutableStateOf(SignUpFormState()) }
 
     Scaffold(
-        modifier = modifier,
+        modifier = modifier.fillMaxSize(),
     ) { paddingValues ->
         SignUpForm(
             modifier =
