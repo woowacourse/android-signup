@@ -46,6 +46,10 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.padding(horizontal = 33.0.dp)
                     ) {
                         SignUpTitle("Welcome to Compose \uD83D\uDE80")
+                        SignUpField("Username")
+                        SignUpField("Email")
+                        SignUpField("Password", hidden = true)
+                        SignUpField("Password Confirm", hidden = true)
                     }
                 }
             }
@@ -65,6 +69,27 @@ fun SignUpTitle(title: String, modifier: Modifier = Modifier) {
     )
 }
 
+@Composable
+fun SignUpField(label: String, modifier: Modifier = Modifier, hidden: Boolean = false) {
+    var textValue by remember { mutableStateOf(TextFieldValue("")) }
+
+    TextField(
+        value = textValue,
+        onValueChange = { textValue = it },
+        colors = TextFieldDefaults.colors(
+            focusedIndicatorColor = Blue50,
+            focusedLabelColor = Blue50
+        ),
+        maxLines = 1,
+        label = { Text(text = label) },
+        visualTransformation = if (!hidden) VisualTransformation.None
+        else PasswordVisualTransformation(),
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(bottom = 36.dp)
+    )
+}
+
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
@@ -77,6 +102,10 @@ fun GreetingPreview() {
                 modifier = Modifier.padding(horizontal = 33.0.dp)
             ) {
                 SignUpTitle("Welcome to Compose \uD83D\uDE80")
+                SignUpField("Username")
+                SignUpField("Email")
+                SignUpField("Password", hidden = true)
+                SignUpField("Password Confirm", hidden = true)
             }
         }
     }
