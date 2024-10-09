@@ -18,26 +18,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import nextstep.signup.R
 
 @Composable
-private fun DefaultTextField(
-    modifier: Modifier = Modifier,
-    label: String,
-    value: String,
-    visualTransformation: VisualTransformation = VisualTransformation.None,
-    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    onValueChange: (String) -> Unit,
-) {
-    TextField(
-        modifier = modifier,
-        value = value,
-        onValueChange = onValueChange,
-        visualTransformation = visualTransformation,
-        keyboardOptions = keyboardOptions,
-        label = { Text(text = label) },
-        maxLines = 1,
-    )
-}
-
-@Composable
 fun PlainTextField(
     modifier: Modifier = Modifier,
     label: String,
@@ -85,18 +65,23 @@ fun PasswordTextField(
     )
 }
 
-@Preview
 @Composable
-private fun DefaultTextFieldPreview() {
-    var value by remember { mutableStateOf("") }
-
-    DefaultTextField(
-        modifier = Modifier.fillMaxWidth(),
-        label = "Username",
+private fun DefaultTextField(
+    modifier: Modifier = Modifier,
+    label: String,
+    value: String,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    onValueChange: (String) -> Unit,
+) {
+    TextField(
+        modifier = modifier,
         value = value,
-        visualTransformation = VisualTransformation.None,
-        keyboardOptions = KeyboardOptions(),
-        onValueChange = { changedValue -> value = changedValue }
+        onValueChange = onValueChange,
+        visualTransformation = visualTransformation,
+        keyboardOptions = keyboardOptions,
+        label = { Text(text = label) },
+        maxLines = 1,
     )
 }
 
@@ -136,6 +121,21 @@ private fun PasswordTextFieldPreview() {
         label = stringResource(id = R.string.signup_label_password),
         value = password,
         onValueChange = { changedValue -> password = changedValue }
+    )
+}
+
+@Preview
+@Composable
+private fun DefaultTextFieldPreview() {
+    var value by remember { mutableStateOf("") }
+
+    DefaultTextField(
+        modifier = Modifier.fillMaxWidth(),
+        label = "Username",
+        value = value,
+        visualTransformation = VisualTransformation.None,
+        keyboardOptions = KeyboardOptions(),
+        onValueChange = { changedValue -> value = changedValue }
     )
 }
 
