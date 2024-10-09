@@ -26,7 +26,6 @@ import org.junit.Rule
 import org.junit.Test
 
 class LayoutBasicsTest {
-
     @get:Rule
     val composeTestRule = createComposeRule()
 
@@ -39,11 +38,12 @@ class LayoutBasicsTest {
                 // 바꿔 보세요!
                 text = text,
                 color = Color.Blue,
-                style = TextStyle(
-                    fontSize = 26.sp,
-                    fontWeight = FontWeight.Bold,
-                    fontFamily = FontFamily.SansSerif
-                ),
+                style =
+                    TextStyle(
+                        fontSize = 26.sp,
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = FontFamily.SansSerif,
+                    ),
             )
         }
 
@@ -51,7 +51,6 @@ class LayoutBasicsTest {
         composeTestRule
             .onNodeWithText(text)
             .assertExists()
-
     }
 
     @Test
@@ -59,7 +58,7 @@ class LayoutBasicsTest {
         // given
         composeTestRule.setContent {
             Column(
-                modifier = Modifier.testTag("이름")
+                modifier = Modifier.testTag("이름"),
             ) {
                 Text(text = "깜포즈", color = Color.Cyan)
                 Text(text = "끔포즈", color = Color.Yellow)
@@ -85,16 +84,17 @@ class LayoutBasicsTest {
                     enabled.value = false
                 },
                 enabled = enabled.value,
-                modifier = Modifier.testTag("버튼")
+                modifier = Modifier.testTag("버튼"),
             ) {
                 Text(text = "클릭해주세요")
             }
         }
 
         // when
-        val button = composeTestRule
-            .onNodeWithTag("버튼")
-            .performClick()
+        val button =
+            composeTestRule
+                .onNodeWithTag("버튼")
+                .performClick()
 
         // then
         button.assertIsNotEnabled()
