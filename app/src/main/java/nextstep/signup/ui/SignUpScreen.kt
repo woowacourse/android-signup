@@ -34,5 +34,5 @@ fun SignUpScreen(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 private fun SignUpScreenPreview() {
-    SignUpScreen(modifier = Modifier.fillMaxSize())
+    SignUpScreen()
 }
