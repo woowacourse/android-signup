@@ -39,7 +39,7 @@ class LayoutBasicsTest {
         composeTestRule.setContent {
             Text(
                 // 바꿔 보세요!
-                text = "텍스트",
+                text = "안녕 난 컴포즈야~",
                 color = Color.Blue,
                 style =
                     TextStyle(
@@ -64,8 +64,9 @@ class LayoutBasicsTest {
                 modifier = Modifier.testTag("이름"),
             ) {
                 // 바꿔 보세요!
-                Text(text = "킴포즈", color = Color.Cyan)
-                Text(text = "끔포즈", color = Color.Yellow)
+                Text(text = "깜포즈", color = Color.Cyan)
+                Text(text = "깜포즈", color = Color.Yellow)
+                Text(text = "컴포즈", color = Color.Blue)
             }
         }
 
@@ -85,7 +86,7 @@ class LayoutBasicsTest {
             val enabled = remember { mutableStateOf(true) }
             Button(
                 onClick = {
-                    // 바꿔 보세요!
+                    enabled.value = false
                 },
                 enabled = enabled.value,
                 modifier = Modifier.testTag("버튼"),
