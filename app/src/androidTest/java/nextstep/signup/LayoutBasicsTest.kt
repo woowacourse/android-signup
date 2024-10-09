@@ -22,6 +22,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import nextstep.signup.study.HelloCompose
 import org.junit.Rule
 import org.junit.Test
 
@@ -38,16 +39,7 @@ class LayoutBasicsTest {
         // given
         val text = "안녕 난 컴포즈야~"
         composeTestRule.setContent {
-            Text(
-                // 바꿔 보세요!
-                text = "안녕 난 컴포즈야~",
-                color = Color.Blue,
-                style = TextStyle(
-                    fontSize = 26.sp,
-                    fontWeight = FontWeight.Bold,
-                    fontFamily = FontFamily.SansSerif
-                ),
-            )
+            HelloCompose(text = "안녕 난 컴포즈야~")
         }
 
         // then
