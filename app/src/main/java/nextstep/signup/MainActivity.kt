@@ -23,6 +23,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
@@ -45,12 +46,12 @@ class MainActivity : ComponentActivity() {
                     Column(
                         modifier = Modifier.padding(horizontal = 33.0.dp),
                     ) {
-                        SignUpTitle("Welcome to Compose \uD83D\uDE80")
-                        SignUpField("Username")
-                        SignUpField("Email")
-                        SignUpField("Password", hidden = true)
-                        SignUpField("Password Confirm", hidden = true)
-                        SignUpButton("Sign Up")
+                        SignUpTitle(stringResource(R.string.signup_title))
+                        SignUpField(stringResource(R.string.signup_username_label))
+                        SignUpField(stringResource(R.string.signup_email_label))
+                        SignUpField(stringResource(R.string.signup_password_label), hidden = true)
+                        SignUpField(stringResource(R.string.signup_password_confirm_label), hidden = true)
+                        SignUpButton(stringResource(R.string.signup_button))
                     }
                 }
             }
@@ -68,9 +69,9 @@ fun SignUpTitle(
         fontSize = 28.sp,
         fontWeight = FontWeight.W700,
         modifier =
-            modifier
-                .wrapContentWidth()
-                .padding(top = 33.0.dp, bottom = 42.0.dp),
+        modifier
+            .wrapContentWidth()
+            .padding(top = 33.0.dp, bottom = 42.0.dp),
     )
 }
 
@@ -99,9 +100,9 @@ fun SignUpField(
                 PasswordVisualTransformation()
             },
         modifier =
-            modifier
-                .fillMaxWidth()
-                .padding(bottom = 36.dp),
+        modifier
+            .fillMaxWidth()
+            .padding(bottom = 36.dp),
     )
 }
 
@@ -121,9 +122,9 @@ fun SignUpButton(
                 disabledContentColor = Color.White,
             ),
         modifier =
-            modifier
-                .fillMaxWidth()
-                .height(50.dp),
+        modifier
+            .fillMaxWidth()
+            .height(50.dp),
     ) {
         Text(text = text, fontSize = 14.sp)
     }
