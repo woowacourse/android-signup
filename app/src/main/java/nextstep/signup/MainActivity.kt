@@ -69,9 +69,9 @@ fun SignUpTitle(
         fontSize = 28.sp,
         fontWeight = FontWeight.W700,
         modifier =
-        modifier
-            .wrapContentWidth()
-            .padding(top = 33.0.dp, bottom = 42.0.dp),
+            modifier
+                .wrapContentWidth()
+                .padding(top = 33.0.dp, bottom = 42.0.dp),
     )
 }
 
@@ -100,9 +100,9 @@ fun SignUpField(
                 PasswordVisualTransformation()
             },
         modifier =
-        modifier
-            .fillMaxWidth()
-            .padding(bottom = 36.dp),
+            modifier
+                .fillMaxWidth()
+                .padding(bottom = 36.dp),
     )
 }
 
@@ -122,9 +122,9 @@ fun SignUpButton(
                 disabledContentColor = Color.White,
             ),
         modifier =
-        modifier
-            .fillMaxWidth()
-            .height(50.dp),
+            modifier
+                .fillMaxWidth()
+                .height(50.dp),
     ) {
         Text(text = text, fontSize = 14.sp)
     }
