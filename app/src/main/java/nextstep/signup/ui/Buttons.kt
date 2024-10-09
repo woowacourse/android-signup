@@ -34,8 +34,9 @@ fun DefaultButton(
 @Composable
 private fun DefaultButtonPreview() {
     DefaultButton(
-        modifier = Modifier
-            .fillMaxWidth(),
+        modifier =
+            Modifier
+                .fillMaxWidth(),
         text = "Sign Up",
         fontSize = 14.sp,
         onClick = {},

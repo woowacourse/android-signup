@@ -28,7 +28,7 @@ fun PlainTextField(
         modifier = modifier,
         label = label,
         value = value,
-        onValueChange = onValueChange
+        onValueChange = onValueChange,
     )
 }
 
@@ -44,7 +44,7 @@ fun EmailTextField(
         label = label,
         value = value,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
-        onValueChange = onValueChange
+        onValueChange = onValueChange,
     )
 }
 
@@ -61,7 +61,7 @@ fun PasswordTextField(
         value = value,
         visualTransformation = PasswordVisualTransformation(),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-        onValueChange = onValueChange
+        onValueChange = onValueChange,
     )
 }
 
@@ -94,7 +94,7 @@ private fun PlainTextFieldPreview() {
         modifier = Modifier.fillMaxWidth(),
         label = "Username",
         value = value,
-        onValueChange = { changedValue -> value = changedValue }
+        onValueChange = { changedValue -> value = changedValue },
     )
 }
 
@@ -107,7 +107,7 @@ private fun EmailTextFieldPreview() {
         modifier = Modifier.fillMaxWidth(),
         label = stringResource(id = R.string.signup_label_email),
         value = email,
-        onValueChange = { changedValue -> email = changedValue }
+        onValueChange = { changedValue -> email = changedValue },
     )
 }
 
@@ -120,7 +120,7 @@ private fun PasswordTextFieldPreview() {
         modifier = Modifier.fillMaxWidth(),
         label = stringResource(id = R.string.signup_label_password),
         value = password,
-        onValueChange = { changedValue -> password = changedValue }
+        onValueChange = { changedValue -> password = changedValue },
     )
 }
 
@@ -135,7 +135,6 @@ private fun DefaultTextFieldPreview() {
         value = value,
         visualTransformation = VisualTransformation.None,
         keyboardOptions = KeyboardOptions(),
-        onValueChange = { changedValue -> value = changedValue }
+        onValueChange = { changedValue -> value = changedValue },
     )
 }
-

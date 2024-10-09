@@ -34,23 +34,25 @@ fun SignUpForm(
     val scrollState = rememberScrollState()
 
     Column(
-        modifier = modifier
-            .verticalScroll(scrollState)
-            .padding(horizontal = 32.dp),
+        modifier =
+            modifier
+                .verticalScroll(scrollState)
+                .padding(horizontal = 32.dp),
     ) {
         Spacer(modifier = Modifier.height(60.dp))
-        
+
         Text(
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Center,
             text = stringResource(id = R.string.signup_greeting),
-            style = Typography.titleLarge
+            style = Typography.titleLarge,
         )
 
         SignUpFormTextFields(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 40.dp),
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 40.dp),
             signUpFormState = signUpFormState,
             onSignUpFormChange = onSignUpFormChange,
         )

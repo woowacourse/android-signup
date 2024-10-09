@@ -13,18 +13,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import nextstep.signup.ui.model.SignUpFormState
 
 @Composable
-fun SignUpScreen(
-    modifier: Modifier = Modifier,
-) {
+fun SignUpScreen(modifier: Modifier = Modifier) {
     var signUpForm: SignUpFormState by rememberSaveable { mutableStateOf(SignUpFormState()) }
 
     Scaffold(
         modifier = modifier,
     ) { paddingValues ->
         SignUpForm(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues),
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues),
             signUpFormState = signUpForm,
             onSignUpFormChange = { changedValue -> signUpForm = changedValue },
             onConfirm = { /* To-Be Implemented */ },
