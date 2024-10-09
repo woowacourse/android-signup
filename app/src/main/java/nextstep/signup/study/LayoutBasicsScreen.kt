@@ -1,8 +1,11 @@
 package nextstep.signup.study
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
@@ -25,11 +28,6 @@ fun HelloCompose(text: String) {
     )
 }
 
-@Preview
-@Composable
-private fun HelloComposePreview() {
-    HelloCompose("안녕 난 컴포즈야~")
-}
 
 @Composable
 fun KimposeKKmPose(
@@ -46,8 +44,34 @@ fun KimposeKKmPose(
     }
 }
 
+@Composable
+fun MyButton(modifier: Modifier = Modifier) {
+    val enabled = remember { mutableStateOf(true) }
+    Button(
+        onClick = {
+            enabled.value = !enabled.value
+        },
+        enabled = enabled.value,
+        modifier = modifier
+    ) {
+        Text(text = "클릭해주세요")
+    }
+}
+
+@Preview
+@Composable
+private fun HelloComposePreview() {
+    HelloCompose("안녕 난 컴포즈야~")
+}
+
 @Preview
 @Composable
 private fun KimposeKKmPosePreview() {
     KimposeKKmPose("깜포즈", "킴포즈", "끔포즈")
+}
+
+@Preview()
+@Composable
+private fun MyButtonPreview() {
+    MyButton()
 }

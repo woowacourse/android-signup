@@ -1,12 +1,6 @@
 package nextstep.signup
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertCountEquals
@@ -18,12 +12,9 @@ import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.sp
 import nextstep.signup.study.HelloCompose
 import nextstep.signup.study.KimposeKKmPose
+import nextstep.signup.study.MyButton
 import org.junit.Rule
 import org.junit.Test
 
@@ -71,16 +62,7 @@ class LayoutBasicsTest {
     fun button() {
         // given
         composeTestRule.setContent {
-            val enabled = remember { mutableStateOf(true) }
-            Button(
-                onClick = {
-                    // 바꿔 보세요!
-                },
-                enabled = enabled.value,
-                modifier = Modifier.testTag("버튼")
-            ) {
-                Text(text = "클릭해주세요")
-            }
+            MyButton(modifier = Modifier.testTag("버튼"))
         }
 
         // when
