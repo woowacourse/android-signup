@@ -40,10 +40,10 @@ class MainActivity : ComponentActivity() {
             SignupTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    color = MaterialTheme.colorScheme.background,
                 ) {
                     Column(
-                        modifier = Modifier.padding(horizontal = 33.0.dp)
+                        modifier = Modifier.padding(horizontal = 33.0.dp),
                     ) {
                         SignUpTitle("Welcome to Compose \uD83D\uDE80")
                         SignUpField("Username")
@@ -59,53 +59,71 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun SignUpTitle(title: String, modifier: Modifier = Modifier) {
+fun SignUpTitle(
+    title: String,
+    modifier: Modifier = Modifier,
+) {
     Text(
         text = title,
         fontSize = 28.sp,
         fontWeight = FontWeight.W700,
-        modifier = modifier
-            .wrapContentWidth()
-            .padding(top = 33.0.dp, bottom = 42.0.dp)
+        modifier =
+            modifier
+                .wrapContentWidth()
+                .padding(top = 33.0.dp, bottom = 42.0.dp),
     )
 }
 
 @Composable
-fun SignUpField(label: String, modifier: Modifier = Modifier, hidden: Boolean = false) {
+fun SignUpField(
+    label: String,
+    modifier: Modifier = Modifier,
+    hidden: Boolean = false,
+) {
     var textValue by remember { mutableStateOf(TextFieldValue("")) }
 
     TextField(
         value = textValue,
         onValueChange = { textValue = it },
-        colors = TextFieldDefaults.colors(
-            focusedIndicatorColor = Blue50,
-            focusedLabelColor = Blue50
-        ),
+        colors =
+            TextFieldDefaults.colors(
+                focusedIndicatorColor = Blue50,
+                focusedLabelColor = Blue50,
+            ),
         maxLines = 1,
         label = { Text(text = label) },
-        visualTransformation = if (!hidden) VisualTransformation.None
-        else PasswordVisualTransformation(),
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(bottom = 36.dp)
+        visualTransformation =
+            if (!hidden) {
+                VisualTransformation.None
+            } else {
+                PasswordVisualTransformation()
+            },
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .padding(bottom = 36.dp),
     )
 }
 
 @Composable
-fun SignUpButton(text: String, modifier: Modifier = Modifier) {
+fun SignUpButton(
+    text: String,
+    modifier: Modifier = Modifier,
+) {
     Button(
         onClick = {
-
         },
-        colors = ButtonColors(
-            containerColor = Blue50,
-            contentColor = Color.White,
-            disabledContainerColor = Color.Gray,
-            disabledContentColor = Color.White
-        ),
-        modifier = modifier
-            .fillMaxWidth()
-            .height(50.dp)
+        colors =
+            ButtonColors(
+                containerColor = Blue50,
+                contentColor = Color.White,
+                disabledContainerColor = Color.Gray,
+                disabledContentColor = Color.White,
+            ),
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .height(50.dp),
     ) {
         Text(text = text, fontSize = 14.sp)
     }
@@ -117,10 +135,10 @@ fun GreetingPreview() {
     SignupTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colorScheme.background
+            color = MaterialTheme.colorScheme.background,
         ) {
             Column(
-                modifier = Modifier.padding(horizontal = 33.0.dp)
+                modifier = Modifier.padding(horizontal = 33.0.dp),
             ) {
                 SignUpTitle("Welcome to Compose \uD83D\uDE80")
                 SignUpField("Username")
