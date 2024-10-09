@@ -37,10 +37,8 @@ fun SignUpForm(
         modifier =
             modifier
                 .verticalScroll(scrollState)
-                .padding(horizontal = 32.dp),
+                .padding(horizontal = 32.dp, vertical = 60.dp),
     ) {
-        Spacer(modifier = Modifier.height(60.dp))
-
         Text(
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Center,
