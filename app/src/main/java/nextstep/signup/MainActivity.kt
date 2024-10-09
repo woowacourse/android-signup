@@ -3,6 +3,7 @@ package nextstep.signup
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -23,6 +24,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -57,19 +59,27 @@ fun SignUpComponent() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
-        Greeting("Welcome to Compose 🚀")
-        InputText("Username")
-        InputText("Email", KeyboardType.Email)
-        InputText("Password", KeyboardType.Password, PasswordVisualTransformation())
-        InputText("Password Confirm", KeyboardType.Password, PasswordVisualTransformation())
-        SubmitButton("Sign Up")
+        Greeting(R.string.sign_up_title)
+        InputText(R.string.sign_up_user_name_title)
+        InputText(R.string.sign_up_email_title, KeyboardType.Email)
+        InputText(
+            R.string.sign_up_password_title,
+            KeyboardType.Password,
+            PasswordVisualTransformation()
+        )
+        InputText(
+            R.string.sign_up_password_confirm_title,
+            KeyboardType.Password,
+            PasswordVisualTransformation()
+        )
+        SubmitButton(R.string.sign_up_button_title)
     }
 }
 
 @Composable
-fun Greeting(title: String) {
+fun Greeting(@StringRes stringRes: Int) {
     Text(
-        text = title,
+        text = stringResource(stringRes),
         style = TextStyle(
             fontWeight = FontWeight.Bold,
             fontSize = 26.sp
@@ -81,10 +91,11 @@ fun Greeting(title: String) {
 
 @Composable
 fun InputText(
-    title: String,
+    @StringRes stringRes: Int,
     keyBoardType: KeyboardType = KeyboardType.Text,
     visualTransformation: VisualTransformation = VisualTransformation.None,
 ) {
+    val title = stringResource(stringRes)
     var contents: String by remember { mutableStateOf("") }
     TextField(
         contents,
@@ -98,9 +109,9 @@ fun InputText(
 }
 
 @Composable
-fun SubmitButton(titleText: String) {
+fun SubmitButton(@StringRes stringRes: Int) {
     Button(onClick = {}, contentPadding = PaddingValues(120.dp, 15.dp)) {
-        Text(text = titleText)
+        Text(text = stringResource(stringRes))
     }
 }
 
