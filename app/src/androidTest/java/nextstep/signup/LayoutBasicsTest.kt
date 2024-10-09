@@ -40,7 +40,7 @@ class LayoutBasicsTest {
         composeTestRule.setContent {
             Text(
                 // 바꿔 보세요!
-                text = "텍스트",
+                text = "안녕 난 컴포즈야~",
                 color = Color.Blue,
                 style = TextStyle(
                     fontSize = 26.sp,
