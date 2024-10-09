@@ -1,10 +1,7 @@
 package nextstep.signup
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -30,7 +27,6 @@ import androidx.compose.ui.unit.sp
 import nextstep.signup.ui.theme.SignupTheme
 import org.junit.Rule
 import org.junit.Test
-
 
 class LayoutBasicsTest {
     @get:Rule
@@ -85,16 +81,19 @@ class LayoutBasicsTest {
 }
 
 @Composable
-fun TextComposable(text: String, color: Color = Color.Blue) {
+fun TextComposable(
+    text: String,
+    color: Color = Color.Blue,
+) {
     Text(
         text = text,
         color = color,
         style =
-        TextStyle(
-            fontSize = 26.sp,
-            fontWeight = FontWeight.Bold,
-            fontFamily = FontFamily.SansSerif,
-        ),
+            TextStyle(
+                fontSize = 26.sp,
+                fontWeight = FontWeight.Bold,
+                fontFamily = FontFamily.SansSerif,
+            ),
     )
 }
 

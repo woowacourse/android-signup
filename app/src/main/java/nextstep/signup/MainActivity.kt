@@ -43,7 +43,7 @@ class MainActivity : ComponentActivity() {
             SignupTheme(dynamicColor = false) {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    color = MaterialTheme.colorScheme.background,
                 ) {
                     SignUpComponent()
                 }
@@ -65,27 +65,30 @@ fun SignUpComponent() {
         InputText(
             R.string.sign_up_password_title,
             KeyboardType.Password,
-            PasswordVisualTransformation()
+            PasswordVisualTransformation(),
         )
         InputText(
             R.string.sign_up_password_confirm_title,
             KeyboardType.Password,
-            PasswordVisualTransformation()
+            PasswordVisualTransformation(),
         )
         SubmitButton(R.string.sign_up_button_title)
     }
 }
 
 @Composable
-fun Greeting(@StringRes stringRes: Int) {
+fun Greeting(
+    @StringRes stringRes: Int,
+) {
     Text(
         text = stringResource(stringRes),
-        style = TextStyle(
-            fontWeight = FontWeight.Bold,
-            fontSize = 26.sp
-        ),
+        style =
+            TextStyle(
+                fontWeight = FontWeight.Bold,
+                fontSize = 26.sp,
+            ),
         textAlign = TextAlign.Center,
-        modifier = Modifier.padding(0.dp, 42.dp)
+        modifier = Modifier.padding(0.dp, 42.dp),
     )
 }
 
@@ -103,13 +106,15 @@ fun InputText(
         placeholder = { Text(text = title) },
         onValueChange = { contents = it },
         keyboardOptions = KeyboardOptions(keyboardType = keyBoardType),
-        visualTransformation = visualTransformation
+        visualTransformation = visualTransformation,
     )
     Spacer(Modifier.height(36.dp))
 }
 
 @Composable
-fun SubmitButton(@StringRes stringRes: Int) {
+fun SubmitButton(
+    @StringRes stringRes: Int,
+) {
     Button(onClick = {}, contentPadding = PaddingValues(120.dp, 15.dp)) {
         Text(text = stringResource(stringRes))
     }
