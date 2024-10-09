@@ -3,6 +3,7 @@ package nextstep.signup.study
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -21,6 +22,7 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import org.junit.Rule
 import org.junit.Test
@@ -40,7 +42,7 @@ class LayoutBasicsTest {
         composeTestRule.setContent {
             Text(
                 // 바꿔 보세요!
-                text = "텍스트",
+                text = text,
                 color = Color.Blue,
                 style = TextStyle(
                     fontSize = 26.sp,
@@ -64,13 +66,14 @@ class LayoutBasicsTest {
                 modifier = Modifier.testTag("이름")
             ) {
                 // 바꿔 보세요!
+                Text(text = "깜포즈", color = Color.Black)
                 Text(text = "킴포즈", color = Color.Cyan)
                 Text(text = "끔포즈", color = Color.Yellow)
             }
         }
 
         // then
-        composeTestRule.onNodeWithTag("이름")
+        composeTestRule.onNodeWithTag("이름") // 태그로 컴포즈 찾기
             .onChildren()
             .assertCountEquals(3)
             .onFirst()
@@ -84,7 +87,7 @@ class LayoutBasicsTest {
             val enabled = remember { mutableStateOf(true) }
             Button(
                 onClick = {
-                    // 바꿔 보세요!
+                    enabled.value = !enabled.value
                 },
                 enabled = enabled.value,
                 modifier = Modifier.testTag("버튼")
@@ -100,5 +103,47 @@ class LayoutBasicsTest {
 
         // then
         button.assertIsNotEnabled()
+    }
+}
+
+@Preview
+@Composable
+private fun TextPreview() {
+    Text(
+        text = "컴포즈 재밌다 !",
+        color = Color.Cyan,
+        style = TextStyle(
+            fontSize = 26.sp,
+            fontWeight = FontWeight.Bold,
+            fontFamily = FontFamily.SansSerif
+        ),
+    )
+}
+
+@Preview
+@Composable
+private fun ColumnPreview() {
+    Column(
+        modifier = Modifier.testTag("이름")
+    )
+    {
+        Text(text = "깜포즈", color = Color.Black)
+        Text(text = "킴포즈", color = Color.Cyan)
+        Text(text = "끔포즈", color = Color.Yellow)
+    }
+}
+
+@Preview
+@Composable
+private fun ButtonPreview() {
+    val enabled = remember { mutableStateOf(true) }
+    Button(
+        onClick = {
+            enabled.value = !enabled.value
+        },
+        enabled = enabled.value,
+        modifier = Modifier.testTag("버튼")
+    ) {
+        Text(text = "클릭해주세요")
     }
 }
