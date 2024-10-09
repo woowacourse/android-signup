@@ -26,7 +26,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-
 @Composable
 fun SignUpScreen(modifier: Modifier = Modifier) {
     var userName by remember { mutableStateOf("") }
@@ -39,7 +38,7 @@ fun SignUpScreen(modifier: Modifier = Modifier) {
             .fillMaxSize()
             .padding(24.dp),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         SignUpHeader()
 
@@ -70,8 +69,6 @@ fun SignUpScreen(modifier: Modifier = Modifier) {
         )
 
         Spacer(modifier = Modifier.height(24.dp))
-
-
 
         SignUpTextField(
             labelText = "Password",
@@ -104,7 +101,7 @@ fun SignUpScreen(modifier: Modifier = Modifier) {
         SignUpButton(
             enable = {
                 email.isNotEmpty() && userName.isNotEmpty() &&
-                        password.isNotEmpty() && passwordConfirmed.isNotEmpty() && password == passwordConfirmed
+                    password.isNotEmpty() && passwordConfirmed.isNotEmpty() && password == passwordConfirmed
             },
             modifier = modifier.then(
                 Modifier
@@ -115,7 +112,6 @@ fun SignUpScreen(modifier: Modifier = Modifier) {
     }
 }
 
-
 @Composable
 fun SignUpHeader(modifier: Modifier = Modifier) {
     Text(
@@ -125,7 +121,7 @@ fun SignUpHeader(modifier: Modifier = Modifier) {
             fontWeight = FontWeight.Bold,
             fontFamily = FontFamily.SansSerif
         ),
-        modifier = modifier,
+        modifier = modifier
     )
 }
 
@@ -135,7 +131,7 @@ fun SignUpTextField(
     labelText: String = "Enter Text",
     visualTransformation: VisualTransformation = VisualTransformation.None,
     value: String = "",
-    onValueChange: (String) -> Unit = { },
+    onValueChange: (String) -> Unit = { }
 ) {
     TextField(
         value = value,
@@ -150,7 +146,7 @@ fun SignUpTextField(
 @Composable
 fun SignUpButton(
     modifier: Modifier = Modifier,
-    enable: () -> Boolean = { true },
+    enable: () -> Boolean = { true }
 ) {
     val enabled = remember { mutableStateOf(true) }
     Button(
@@ -162,7 +158,7 @@ fun SignUpButton(
     ) {
         Text(
             text = "Sign Up",
-            fontSize = 14.sp,
+            fontSize = 14.sp
         )
     }
 }

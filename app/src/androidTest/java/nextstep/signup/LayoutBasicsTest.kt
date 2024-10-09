@@ -45,7 +45,9 @@ class LayoutBasicsTest {
         // given
         composeTestRule.setContent {
             KimposeKKmPose(
-                text0 = "깜포즈", text1 = "킴포즈", text2 = "끔포즈",
+                text0 = "깜포즈",
+                text1 = "킴포즈",
+                text2 = "끔포즈",
                 modifier = Modifier.testTag("이름")
             )
         }

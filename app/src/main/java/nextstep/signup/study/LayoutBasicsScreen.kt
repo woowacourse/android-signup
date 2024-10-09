@@ -24,14 +24,15 @@ fun HelloCompose(text: String) {
             fontSize = 26.sp,
             fontWeight = FontWeight.Bold,
             fontFamily = FontFamily.SansSerif
-        ),
+        )
     )
 }
 
-
 @Composable
 fun KimposeKKmPose(
-    text0: String, text1: String, text2: String,
+    text0: String,
+    text1: String,
+    text2: String,
     modifier: Modifier = Modifier
 ) {
     Column(
