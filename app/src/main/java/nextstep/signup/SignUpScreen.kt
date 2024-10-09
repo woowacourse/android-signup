@@ -1,5 +1,9 @@
 package nextstep.signup
 
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -12,7 +16,9 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+
 
 @Composable
 fun SignUpHeader(modifier: Modifier = Modifier) {
@@ -40,6 +46,22 @@ fun SignUpTextField(modifier: Modifier = Modifier, labelText: String = "Enter Te
     )
 }
 
+@Composable
+fun SignUpButton(modifier: Modifier = Modifier) {
+    val enabled = remember { mutableStateOf(true) }
+    Button(
+        onClick = {
+            enabled.value = !enabled.value
+        },
+        enabled = enabled.value,
+        modifier = modifier.then(Modifier.fillMaxWidth())
+    ) {
+        Text(
+            text = "Sign Up",
+            fontSize = 14.sp,
+        )
+    }
+}
 
 @Preview
 @Composable
@@ -51,4 +73,10 @@ private fun SignUpHeaderPreview() {
 @Composable
 private fun SignUpTextFieldPreview() {
     SignUpTextField()
+}
+
+@Preview
+@Composable
+private fun SignUpButtonPreview() {
+    SignUpButton()
 }
