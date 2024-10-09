@@ -50,6 +50,7 @@ class MainActivity : ComponentActivity() {
                         SignUpField("Email")
                         SignUpField("Password", hidden = true)
                         SignUpField("Password Confirm", hidden = true)
+                        SignUpButton("Sign Up")
                     }
                 }
             }
@@ -90,6 +91,26 @@ fun SignUpField(label: String, modifier: Modifier = Modifier, hidden: Boolean = 
     )
 }
 
+@Composable
+fun SignUpButton(text: String, modifier: Modifier = Modifier) {
+    Button(
+        onClick = {
+
+        },
+        colors = ButtonColors(
+            containerColor = Blue50,
+            contentColor = Color.White,
+            disabledContainerColor = Color.Gray,
+            disabledContentColor = Color.White
+        ),
+        modifier = modifier
+            .fillMaxWidth()
+            .height(50.dp)
+    ) {
+        Text(text = text, fontSize = 14.sp)
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
@@ -106,6 +127,7 @@ fun GreetingPreview() {
                 SignUpField("Email")
                 SignUpField("Password", hidden = true)
                 SignUpField("Password Confirm", hidden = true)
+                SignUpButton("Sign Up")
             }
         }
     }
