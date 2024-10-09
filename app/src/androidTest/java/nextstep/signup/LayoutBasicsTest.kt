@@ -23,6 +23,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import nextstep.signup.study.HelloCompose
+import nextstep.signup.study.KimposeKKmPose
 import org.junit.Rule
 import org.junit.Test
 
@@ -52,13 +53,10 @@ class LayoutBasicsTest {
     fun column() {
         // given
         composeTestRule.setContent {
-            Column(
+            KimposeKKmPose(
+                text0 = "깜포즈", text1 = "킴포즈", text2 = "끔포즈",
                 modifier = Modifier.testTag("이름")
-            ) {
-                // 바꿔 보세요!
-                Text(text = "킴포즈", color = Color.Cyan)
-                Text(text = "끔포즈", color = Color.Yellow)
-            }
+            )
         }
 
         // then

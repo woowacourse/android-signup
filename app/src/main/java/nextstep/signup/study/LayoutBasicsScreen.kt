@@ -5,7 +5,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -13,10 +12,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun HelloCompose(text: String, modifier: Modifier = Modifier) {
+fun HelloCompose(text: String) {
     Text(
         // 바꿔 보세요!
-        text = "안녕 난 컴포즈야~",
+        text = text,
         color = Color.Blue,
         style = TextStyle(
             fontSize = 26.sp,
@@ -33,18 +32,22 @@ private fun HelloComposePreview() {
 }
 
 @Composable
-fun KimposeKKmPose(modifier: Modifier = Modifier.testTag("이름")) {
+fun KimposeKKmPose(
+    text0: String, text1: String, text2: String,
+    modifier: Modifier = Modifier
+) {
     Column(
         modifier = modifier
     ) {
         // 바꿔 보세요!
-        Text(text = "킴포즈", color = Color.Cyan)
-        Text(text = "끔포즈", color = Color.Yellow)
+        Text(text = text0, color = Color.Red)
+        Text(text = text1, color = Color.Cyan)
+        Text(text = text2, color = Color.Yellow)
     }
 }
 
 @Preview
 @Composable
 private fun KimposeKKmPosePreview() {
-    KimposeKKmPose()
+    KimposeKKmPose("깜포즈", "킴포즈", "끔포즈")
 }
