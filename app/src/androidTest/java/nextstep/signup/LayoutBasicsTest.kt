@@ -28,7 +28,6 @@ import org.junit.Rule
 import org.junit.Test
 
 class LayoutBasicsTest {
-
     @get:Rule
     val composeTestRule = createComposeRule()
 
@@ -40,11 +39,12 @@ class LayoutBasicsTest {
             Text(
                 text = text,
                 color = Color.Blue,
-                style = TextStyle(
+                style =
+                TextStyle(
                     fontSize = 26.sp,
                     fontWeight = FontWeight.Bold,
                     fontFamily = FontFamily.SansSerif
-                ),
+                )
             )
         }
 
@@ -91,9 +91,10 @@ class LayoutBasicsTest {
         }
 
         // when
-        val button = composeTestRule
-            .onNodeWithTag("버튼")
-            .performClick()
+        val button =
+            composeTestRule
+                .onNodeWithTag("버튼")
+                .performClick()
 
         // then
         button.assertIsNotEnabled()
@@ -106,11 +107,12 @@ fun PreviewText() {
     Text(
         text = "안녕 난 컴포즈야~",
         color = Color.Blue,
-        style = TextStyle(
+        style =
+        TextStyle(
             fontSize = 26.sp,
             fontWeight = FontWeight.Bold,
             fontFamily = FontFamily.SansSerif
-        ),
+        )
     )
 }
 

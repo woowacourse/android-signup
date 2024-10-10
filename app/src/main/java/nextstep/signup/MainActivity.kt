@@ -31,7 +31,6 @@ class MainActivity : ComponentActivity() {
             SignupTheme {
                 SignUpTotalPage()
             }
-
         }
     }
 }
@@ -50,13 +49,15 @@ private fun SignUpTotalPage() {
 @Composable
 fun SignUpLabel() {
     Box(
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxWidth()
             .padding(16.dp)
     ) {
         Text(
             text = "Welcome to Compose🚀",
-            modifier = Modifier
+            modifier =
+            Modifier
                 .align(Alignment.Center),
             fontSize = 28.sp,
             fontWeight = FontWeight.Bold
@@ -74,7 +75,8 @@ fun SignUpScreen() {
     Column {
         TextField(
             value = userName,
-            modifier = Modifier
+            modifier =
+            Modifier
                 .fillMaxWidth()
                 .padding(all = 16.dp),
             onValueChange = { userName = it },
@@ -83,7 +85,8 @@ fun SignUpScreen() {
 
         TextField(
             value = email,
-            modifier = Modifier
+            modifier =
+            Modifier
                 .fillMaxWidth()
                 .padding(all = 16.dp),
             onValueChange = { email = it },
@@ -91,7 +94,8 @@ fun SignUpScreen() {
         )
         TextField(
             value = password,
-            modifier = Modifier
+            modifier =
+            Modifier
                 .fillMaxWidth()
                 .padding(all = 16.dp),
             onValueChange = { password = it },
@@ -99,7 +103,8 @@ fun SignUpScreen() {
         )
         TextField(
             value = passwordConfirm,
-            modifier = Modifier
+            modifier =
+            Modifier
                 .fillMaxWidth()
                 .padding(all = 16.dp),
             onValueChange = { passwordConfirm = it },
@@ -112,7 +117,8 @@ fun SignUpScreen() {
 private fun SignUpButton() {
     Button(
         onClick = { /* Sign up logic */ },
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxWidth()
             .padding(all = 16.dp)
     ) {
