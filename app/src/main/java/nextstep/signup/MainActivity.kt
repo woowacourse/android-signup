@@ -1,6 +1,7 @@
 package nextstep.signup
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.StringRes
@@ -57,6 +58,19 @@ class MainActivity : ComponentActivity() {
         var password by remember { mutableStateOf(TextFieldValue("")) }
         var confirmedPassword by remember { mutableStateOf(TextFieldValue("")) }
 
+        var isUserNameValid by remember { mutableStateOf(false) }
+        var isEmailValid by remember { mutableStateOf(false) }
+        var isPasswordValid by remember { mutableStateOf(false) }
+        var isConfirmedPasswordValid by remember { mutableStateOf(false) }
+
+        val isFormValid =
+            isSignUpEnabled(
+                isUserNameValid,
+                isEmailValid,
+                isPasswordValid,
+                isConfirmedPasswordValid,
+            )
+
         Column(
             modifier = Modifier.padding(horizontal = 33.0.dp),
         ) {
@@ -65,20 +79,32 @@ class MainActivity : ComponentActivity() {
                 R.string.signup_username_label,
                 textValue = userName,
                 onValueChange = { userName = it },
-                validateField = { SignupFieldValidation.isValidUserName(it) },
+                validateField = {
+                    val result = SignupFieldValidation.isValidUserName(it)
+                    isUserNameValid = result.isValid
+                    result
+                },
             )
             SignUpField(
                 R.string.signup_email_label,
                 textValue = email,
                 onValueChange = { email = it },
-                validateField = { SignupFieldValidation.isValidEmail(it) },
+                validateField = {
+                    val result = SignupFieldValidation.isValidEmail(it)
+                    isEmailValid = result.isValid
+                    result
+                },
             )
 
             SignUpField(
                 R.string.signup_password_label,
                 textValue = password,
                 onValueChange = { password = it },
-                validateField = { SignupFieldValidation.isValidPassword(it) },
+                validateField = {
+                    val result = SignupFieldValidation.isValidPassword(it)
+                    isPasswordValid = result.isValid
+                    result
+                },
                 hidden = true,
             )
 
@@ -87,16 +113,25 @@ class MainActivity : ComponentActivity() {
                 textValue = confirmedPassword,
                 onValueChange = { confirmedPassword = it },
                 validateField = {
-                    SignupFieldValidation.isValidConfirmedPassword(
-                        password.text,
-                        it,
-                    )
+                    val result = SignupFieldValidation.isValidConfirmedPassword(password.text, it)
+                    isConfirmedPasswordValid = result.isValid
+                    result
                 },
                 hidden = true,
             )
-            SignUpButton(R.string.signup_button)
+            SignUpButton(
+                R.string.signup_button,
+                enabled = isFormValid,
+            )
         }
     }
+
+    private fun isSignUpEnabled(
+        isUserNameValid: Boolean,
+        isEmailValid: Boolean,
+        isPasswordValid: Boolean,
+        isConfirmedPasswordValid: Boolean,
+    ) = isUserNameValid && isEmailValid && isPasswordValid && isConfirmedPasswordValid
 
     @Composable
     fun SignUpTitle(
@@ -159,11 +194,13 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun SignUpButton(
         @StringRes textId: Int,
+        enabled: Boolean,
         modifier: Modifier = Modifier,
     ) {
+        Log.e("seogi", "$enabled")
         Button(
-            onClick = {
-            },
+            onClick = {},
+            enabled = enabled,
             colors =
                 ButtonColors(
                     containerColor = Blue50,
