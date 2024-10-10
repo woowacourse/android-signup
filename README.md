@@ -14,6 +14,6 @@
 
 - [x] 기본 SignUpTextField 를 만든다.
 - [ ] UserName, Email, Password, Password Confirm TextField를 화면에 배치한다.
-- [ ] 화면 밖에 터치면 focus clear 되도록 한다.
+- [x] 화면 밖에 터치하면 focus clear 되도록 한다.
 - [ ] Password 와 Password Confirm 는 secure text field로 만든다.
 - [ ] SignUp 버튼을 화면에 배치한다. 
