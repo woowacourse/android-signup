@@ -79,7 +79,7 @@ object SignupFieldValidation {
         return when {
             confirmedPassword.isEmpty() -> ValidationResult(isValid = false)
 
-            validateConfirmedPassword(password, confirmedPassword) ->
+            !validateConfirmedPassword(password, confirmedPassword) ->
                 ValidationResult(
                     isValid = false,
                     warningMessage = PASSWORD_CONFIRM_WARNING_MESSAGE,
