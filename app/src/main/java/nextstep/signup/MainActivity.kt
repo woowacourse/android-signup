@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun SignUpScreen(
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier
 ) {
     val labels = textFieldLabels()
 
@@ -47,7 +47,7 @@ fun SignUpScreen(
             .fillMaxWidth()
             .padding(start = 32.dp, end = 32.dp, top = 22.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Top,
+        verticalArrangement = Arrangement.Top
     ) {
         SignUpTitle(title = stringResource(R.string.sign_up_title))
 
@@ -65,7 +65,8 @@ fun SignUpScreen(
                 .fillMaxWidth()
                 .padding(vertical = 32.dp),
             text = stringResource(R.string.button_sign_up),
-            onClick = { })
+            onClick = { }
+        )
     }
 }
 

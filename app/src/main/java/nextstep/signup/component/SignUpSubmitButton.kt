@@ -15,7 +15,7 @@ fun SignUpSubmitButton(modifier: Modifier, text: String, onClick: () -> Unit) {
         modifier = modifier,
         onClick = { onClick() },
         colors = ButtonDefaults.buttonColors(containerColor = Color.DarkGray),
-        contentPadding = PaddingValues(vertical = 15.dp),
+        contentPadding = PaddingValues(vertical = 15.dp)
     ) {
         Text(text = text)
     }

@@ -49,7 +49,6 @@ class SignUpScreenTest {
             .onNodeWithText("Username")
             .performTextInput("kkosang")
 
-
         composeTestRule
             .onNodeWithText("kkosang")
             .assertExists()

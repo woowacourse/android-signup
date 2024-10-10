@@ -48,7 +48,7 @@ class LayoutBasicsTest {
                     fontSize = 26.sp,
                     fontWeight = FontWeight.Bold,
                     fontFamily = FontFamily.SansSerif
-                ),
+                )
             )
         }
 
@@ -116,7 +116,7 @@ private fun TextPreview() {
             fontSize = 26.sp,
             fontWeight = FontWeight.Bold,
             fontFamily = FontFamily.SansSerif
-        ),
+        )
     )
 }
 
@@ -125,8 +125,7 @@ private fun TextPreview() {
 private fun ColumnPreview() {
     Column(
         modifier = Modifier.testTag("이름")
-    )
-    {
+    ) {
         Text(text = "깜포즈", color = Color.Black)
         Text(text = "킴포즈", color = Color.Cyan)
         Text(text = "끔포즈", color = Color.Yellow)
