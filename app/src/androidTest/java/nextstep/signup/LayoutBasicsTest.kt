@@ -3,8 +3,10 @@ package nextstep.signup
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
@@ -79,12 +81,12 @@ class LayoutBasicsTest {
     fun button() {
         // given
         composeTestRule.setContent {
-            val enabled = remember { mutableStateOf(true) }
+            var enabled by remember { mutableStateOf(true) }
             Button(
                 onClick = {
-                    enabled.value = false
+                    enabled = false
                 },
-                enabled = enabled.value,
+                enabled = enabled,
                 modifier = Modifier.testTag("버튼")
             ) {
                 Text(text = "클릭해주세요")
