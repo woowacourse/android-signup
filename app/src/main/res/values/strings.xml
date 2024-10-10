@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Signup</string>
+
+    <string name="all_not_implemented_yet">아직 지원하지 않는 기능이에요!</string>
+
+    <string name="signup_title">컴포즈 안녕! 🚀</string>
+    <string name="signup_username">이름</string>
+    <string name="signup_email">이메일</string>
+    <string name="signup_password">비밀번호</string>
+    <string name="signup_password_confirm">비밀번호 확인</string>
+    <string name="signup_signup">회원 가입</string>
 </resources>
