@@ -31,6 +31,7 @@ import nextstep.signup.ui.theme.Black30
 import nextstep.signup.ui.theme.Blue50
 import nextstep.signup.ui.theme.BlueGrey20
 import nextstep.signup.ui.theme.PurpleGrey40
+import nextstep.signup.ui.theme.SignupTheme
 
 @Composable
 fun SignUpScreen(modifier: Modifier = Modifier) {
@@ -137,7 +138,7 @@ fun SignUpTextField(
     labelText: String = "Enter Text",
     visualTransformation: VisualTransformation = VisualTransformation.None,
     value: String = "",
-    onValueChange: (String) -> Unit = { value }
+    onValueChange: (String) -> Unit = {  }
 ) {
     TextField(
         value = value,
@@ -146,16 +147,6 @@ fun SignUpTextField(
         label = { Text(text = labelText) },
         modifier = modifier,
         visualTransformation = visualTransformation,
-        colors = TextFieldDefaults.colors(
-            focusedIndicatorColor = Blue50,
-            unfocusedIndicatorColor = Black30,
-            focusedLabelColor = Blue50,
-            unfocusedLabelColor = Black30,
-            focusedContainerColor = BlueGrey20,
-            unfocusedContainerColor = BlueGrey20,
-            errorContainerColor = Color.Red,
-            disabledContainerColor = PurpleGrey40,
-        )
     )
 }
 
@@ -194,7 +185,9 @@ private fun SignUpHeaderPreview() {
 @Preview
 @Composable
 private fun SignUpTextFieldPreview() {
-    SignUpTextField()
+    SignupTheme {
+        SignUpTextField()
+    }
 }
 
 @Preview
