@@ -6,8 +6,6 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
@@ -19,16 +17,16 @@ import nextstep.signup.ui.theme.BlueGray
 fun SignUpTextField(
     modifier: Modifier = Modifier,
     label: String,
+    value: String,
+    onValueChange: (String) -> Unit,
     keyboardType: KeyboardType = KeyboardType.Text,
     visualTransformation: VisualTransformation = VisualTransformation.None,
 ) {
-    var text by remember { mutableStateOf("") }
-
     TextField(
         modifier = modifier,
-        value = text,
-        onValueChange = { text = it },
         label = { Text(label) },
+        value = value,
+        onValueChange = onValueChange,
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
         visualTransformation = visualTransformation,
         colors =
