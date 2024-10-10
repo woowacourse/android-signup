@@ -7,9 +7,10 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color.Companion.Blue
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import nextstep.signup.R
 import nextstep.signup.ui.theme.SignupTheme
 
 @Composable
@@ -20,10 +21,9 @@ fun SignUpButton(
     Button(
         modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(100.dp),
-        colors = ButtonDefaults.buttonColors(containerColor = Blue),
+        colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.blue_50)),
         onClick = { },
-
-        ) {
+    ) {
         Text(text = title)
     }
 }

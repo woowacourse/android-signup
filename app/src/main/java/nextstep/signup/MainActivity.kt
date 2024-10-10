@@ -36,18 +36,22 @@ class MainActivity : ComponentActivity() {
                         SignUpTextField(
                             Modifier.padding(top = 36.dp),
                             getString(R.string.user_name),
+                            false,
                         )
                         SignUpTextField(
                             Modifier.padding(top = 36.dp),
                             getString(R.string.email),
+                            false,
                         )
                         SignUpTextField(
                             Modifier.padding(top = 36.dp),
                             getString(R.string.password),
+                            true,
                         )
                         SignUpTextField(
                             Modifier.padding(top = 36.dp),
                             getString(R.string.password_confirm),
+                            true,
                         )
                         SignUpButton(
                             Modifier
