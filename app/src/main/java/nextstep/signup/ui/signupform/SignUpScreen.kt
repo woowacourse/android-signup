@@ -29,36 +29,39 @@ fun SignUpScreen(modifier: Modifier = Modifier) {
         val passwordConfirm = remember { mutableStateOf("") }
 
         Text(
+            modifier = Modifier.padding(bottom = 42.dp),
             text = stringResource(id = R.string.welcome),
             fontSize = 26.sp,
             fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(bottom = 42.dp),
         )
         SignUpTextField(
+            modifier = Modifier.padding(bottom = 36.dp),
             label = stringResource(id = R.string.user_name),
             text = userName,
             onValueChange = {userName.value = it},
-            modifier = Modifier.padding(bottom = 36.dp),
         )
         SignUpTextField(
+            modifier = Modifier.padding(bottom = 36.dp),
             label = stringResource(id = R.string.email),
             text = email,
             onValueChange = {email.value = it},
-            modifier = Modifier.padding(bottom = 36.dp),
         )
         SignUpPasswordTextField(
+            modifier = Modifier.padding(bottom = 36.dp),
             label = stringResource(id = R.string.password),
             text = password,
             onValueChange = {password.value = it},
-            modifier = Modifier.padding(bottom = 36.dp),
         )
         SignUpPasswordTextField(
+            modifier = Modifier.padding(bottom = 42.dp),
             label = stringResource(id = R.string.password_confirm),
             text = passwordConfirm,
             onValueChange = {passwordConfirm.value = it},
-            modifier = Modifier.padding(bottom = 42.dp),
         )
-        ConfirmButton(stringResource(id = R.string.signup), modifier = Modifier.fillMaxWidth())
+        ConfirmButton(
+            modifier = Modifier.fillMaxWidth(),
+            text = stringResource(id = R.string.signup),
+        )
     }
 }
 

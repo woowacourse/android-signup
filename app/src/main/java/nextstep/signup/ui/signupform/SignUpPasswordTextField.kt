@@ -11,10 +11,10 @@ import nextstep.signup.ui.theme.SignupTheme
 
 @Composable
 fun SignUpPasswordTextField(
+    modifier: Modifier = Modifier,
     label: String,
     text: MutableState<String>,
     onValueChange: (String) -> Unit = {},
-    modifier: Modifier = Modifier,
 ) = SignUpTextField(
     label = label,
     text = text,
@@ -28,7 +28,7 @@ fun SignUpPasswordTextField(
 fun SignUpPasswordTextFieldPreview() {
     SignupTheme {
         SignUpPasswordTextField(
-            "Preview",
+            label = "Preview",
             text = remember { mutableStateOf("") },
         )
     }
