@@ -1,6 +1,5 @@
 package nextstep.signup.ui
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -9,11 +8,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.signup.R
@@ -22,22 +22,16 @@ import nextstep.signup.componet.CustomText
 import nextstep.signup.componet.CustomTextField
 import nextstep.signup.ui.theme.Blue50
 
-data class InputField(
-    @StringRes val titleId: Int,
-    val isPassword: Boolean = false,
+data class InputState(
+    val username: String = "",
+    val email: String = "",
+    val password: String = "",
+    val passwordConfirm: String = "",
 )
 
 @Composable
 fun MainScreen() {
-    val inputFields =
-        listOf(
-            InputField(R.string.username_input),
-            InputField(R.string.email_input),
-            InputField(R.string.password_input, isPassword = true),
-            InputField(R.string.password_confirm_input, isPassword = true),
-        )
-
-    val inputStates = remember { inputFields.map { mutableStateOf("") } }
+    var inputState by remember { mutableStateOf(InputState()) }
 
     Column {
         Spacer(modifier = Modifier.height(60.dp))
@@ -47,15 +41,34 @@ fun MainScreen() {
         )
 
         Spacer(modifier = Modifier.height(18.dp))
-        inputFields.forEachIndexed { index, field ->
-            CustomTextField(
-                modifier = Modifier.padding(horizontal = 32.dp, vertical = 18.dp),
-                value = inputStates[index].value,
-                onValueChange = { newValue -> inputStates[index].value = newValue },
-                labelResId = field.titleId,
-                visualTransformation = if (field.isPassword) PasswordVisualTransformation() else VisualTransformation.None,
-            )
-        }
+        CustomTextField(
+            modifier = Modifier.padding(horizontal = 32.dp, vertical = 18.dp),
+            value = inputState.username,
+            onValueChange = { username -> inputState = inputState.copy(username = username) },
+            labelResId = R.string.username_input,
+        )
+        CustomTextField(
+            modifier = Modifier.padding(horizontal = 32.dp, vertical = 18.dp),
+            value = inputState.email,
+            onValueChange = { email -> inputState = inputState.copy(email = email) },
+            labelResId = R.string.email_input,
+        )
+        CustomTextField(
+            modifier = Modifier.padding(horizontal = 32.dp, vertical = 18.dp),
+            value = inputState.password,
+            onValueChange = { password -> inputState = inputState.copy(password = password) },
+            labelResId = R.string.password_input,
+            visualTransformation = PasswordVisualTransformation(),
+        )
+        CustomTextField(
+            modifier = Modifier.padding(horizontal = 32.dp, vertical = 18.dp),
+            value = inputState.passwordConfirm,
+            onValueChange = { passwordConfirm ->
+                inputState = inputState.copy(passwordConfirm = passwordConfirm)
+            },
+            labelResId = R.string.password_confirm_input,
+            visualTransformation = PasswordVisualTransformation(),
+        )
 
         Spacer(modifier = Modifier.height(24.dp))
         CustomButton(
