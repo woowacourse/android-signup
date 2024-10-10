@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -32,6 +33,7 @@ import nextstep.signup.ui.theme.Blue50
 import nextstep.signup.ui.theme.BlueGrey20
 import nextstep.signup.ui.theme.PurpleGrey40
 import nextstep.signup.ui.theme.SignupTheme
+import nextstep.signup.ui.theme.Typography
 
 @Composable
 fun SignUpScreen(modifier: Modifier = Modifier) {
@@ -120,15 +122,14 @@ fun SignUpScreen(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun SignUpHeader(modifier: Modifier = Modifier) {
+fun SignUpHeader(
+    modifier: Modifier = Modifier,
+    text: String = "Welcome to Compose 🚀",
+) {
     Text(
-        text = "Welcome to Compose 🚀",
-        style = TextStyle(
-            fontSize = 26.sp,
-            fontWeight = FontWeight.Bold,
-            fontFamily = FontFamily.SansSerif
-        ),
-        modifier = modifier
+        text = text,
+        style = Typography.headlineLarge,
+        modifier = modifier,
     )
 }
 
@@ -180,7 +181,9 @@ private fun SignUpScreenPreview() {
 @Preview
 @Composable
 private fun SignUpHeaderPreview() {
-    SignUpHeader()
+    SignupTheme {
+        SignUpHeader()
+    }
 }
 
 @Preview
