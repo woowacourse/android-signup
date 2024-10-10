@@ -17,7 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import nextstep.signup.component.SignUpSubmitButton
 import nextstep.signup.component.SignUpTitle
-import nextstep.signup.component.SingUpTextField
+import nextstep.signup.component.SignUpTextField
 import nextstep.signup.ui.theme.SignupTheme
 
 class MainActivity : ComponentActivity() {
@@ -52,7 +52,7 @@ fun SignUpScreen(
         SignUpTitle(title = stringResource(R.string.sign_up_title))
 
         for (label in labels) {
-            SingUpTextField(
+            SignUpTextField(
                 modifier = modifier
                     .fillMaxWidth()
                     .padding(vertical = 20.dp),

@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 
 // todo 네이밍변경
 @Composable
-fun SingUpTextField(
+fun SignUpTextField(
     modifier: Modifier = Modifier,
     label: String
 ) {
