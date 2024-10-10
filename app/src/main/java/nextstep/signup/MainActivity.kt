@@ -48,7 +48,10 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.padding(horizontal = 33.0.dp),
                     ) {
                         SignUpTitle(R.string.signup_title)
-                        SignUpField(R.string.signup_username_label)
+                        SignUpField(
+                            R.string.signup_username_label,
+                            validateField = { SignupFieldValidation.isValidUserName(it) }
+                        )
                         SignUpField(R.string.signup_email_label)
                         SignUpField(R.string.signup_password_label, hidden = true)
                         SignUpField(R.string.signup_password_confirm_label, hidden = true)
@@ -80,32 +83,37 @@ fun SignUpTitle(
 fun SignUpField(
     @StringRes labelId: Int,
     modifier: Modifier = Modifier,
+    validateField: ((String) -> ValidationResult)? = null,
     hidden: Boolean = false,
 ) {
     var textValue by remember { mutableStateOf(TextFieldValue("")) }
-    val label = stringResource(labelId)
+    val validationResult = validateField?.invoke(textValue.text) ?: ValidationResult(isValid = true)
+    val textColor = if (validationResult.isValid) Blue50 else Color.Red
 
     TextField(
         value = textValue,
         onValueChange = {
             textValue = it
         },
-        supportingText = { Text(text = "") },
+        supportingText = {
+            Text(
+                text = validationResult.warningMessage,
+                color = textColor
+            )
+        },
         colors =
         TextFieldDefaults.colors(
-            focusedIndicatorColor = Blue50,
-            focusedLabelColor = Blue50,
+            focusedIndicatorColor = textColor,
+            focusedLabelColor = textColor,
         ),
         maxLines = 1,
-        label = { Text(text = label) },
-        visualTransformation =
-        if (!hidden) {
+        label = { Text(text = stringResource(labelId)) },
+        visualTransformation = if (!hidden) {
             VisualTransformation.None
         } else {
             PasswordVisualTransformation()
         },
-        modifier =
-        modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(bottom = 36.dp),
     )
