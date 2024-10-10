@@ -138,7 +138,7 @@ fun SignUpTextField(
     labelText: String = "Enter Text",
     visualTransformation: VisualTransformation = VisualTransformation.None,
     value: String = "",
-    onValueChange: (String) -> Unit = {  }
+    onValueChange: (String) -> Unit = { }
 ) {
     TextField(
         value = value,
@@ -165,7 +165,8 @@ fun SignUpButton(
     ) {
         Text(
             text = "Sign Up",
-            fontSize = 14.sp
+            fontSize = 14.sp,
+            color = Color.White
         )
     }
 }
@@ -193,5 +194,7 @@ private fun SignUpTextFieldPreview() {
 @Preview
 @Composable
 private fun SignUpButtonPreview() {
-    SignUpButton()
+    SignupTheme {
+        SignUpButton()
+    }
 }
