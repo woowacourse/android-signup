@@ -17,7 +17,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -25,7 +24,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -58,16 +56,18 @@ fun SignUpScreen() {
     var confirmPassword by remember { mutableStateOf("") }
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(16.dp),
         verticalArrangement = Arrangement.Top,
     ) {
         Text(
             text = "Welcome to Compose \uD83D\uDE80",
-            style = MaterialTheme.typography.titleLarge.copy(
-                fontWeight = FontWeight.Bold
-            ),
+            style =
+                MaterialTheme.typography.titleLarge.copy(
+                    fontWeight = FontWeight.Bold,
+                ),
             modifier = Modifier.align(Alignment.CenterHorizontally),
         )
 
@@ -77,18 +77,20 @@ fun SignUpScreen() {
             value = userName,
             onValueChange = { userName = it },
             label = { Text("User Name") },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 36.dp)
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 36.dp),
         )
 
         TextField(
             value = email,
             onValueChange = { email = it },
             label = { Text("Email") },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 36.dp)
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 36.dp),
         )
 
         TextField(
@@ -96,9 +98,10 @@ fun SignUpScreen() {
             onValueChange = { password = it },
             label = { Text("Password") },
             visualTransformation = PasswordVisualTransformation(),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 36.dp)
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 36.dp),
         )
 
         TextField(
@@ -106,20 +109,23 @@ fun SignUpScreen() {
             onValueChange = { confirmPassword = it },
             label = { Text("Password Confirm") },
             visualTransformation = PasswordVisualTransformation(),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 36.dp)
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 36.dp),
         )
 
         Button(
             onClick = {},
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(60.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = colorResource(R.color.blue_50),
-                contentColor = Color.White
-            )
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .height(60.dp),
+            colors =
+                ButtonDefaults.buttonColors(
+                    containerColor = colorResource(R.color.blue_50),
+                    contentColor = Color.White,
+                ),
         ) {
             Text(text = "Sign Up")
         }
