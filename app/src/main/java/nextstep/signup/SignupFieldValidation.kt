@@ -18,20 +18,21 @@ object SignupFieldValidation {
 
     private const val PASSWORD_CONFIRM_WARNING_MESSAGE = "비밀번호가 일치하지 않습니다."
 
-
     fun isValidUserName(userName: String): ValidationResult {
         return when {
             userName.isEmpty() -> ValidationResult(isValid = false)
 
-            !validateUserNameLength(userName) -> ValidationResult(
-                isValid = false,
-                warningMessage = USERNAME_LENGTH_WARNING_MESSAGE
-            )
+            !validateUserNameLength(userName) ->
+                ValidationResult(
+                    isValid = false,
+                    warningMessage = USERNAME_LENGTH_WARNING_MESSAGE,
+                )
 
-            !validateUserNameComposition(userName) -> ValidationResult(
-                isValid = false,
-                warningMessage = USERNAME_COMPOSITION_WARNING_MESSAGE
-            )
+            !validateUserNameComposition(userName) ->
+                ValidationResult(
+                    isValid = false,
+                    warningMessage = USERNAME_COMPOSITION_WARNING_MESSAGE,
+                )
 
             else -> ValidationResult(isValid = true)
         }
@@ -41,10 +42,11 @@ object SignupFieldValidation {
         return when {
             email.isEmpty() -> ValidationResult(isValid = false)
 
-            !validateEmailComposition(email) -> ValidationResult(
-                false,
-                EMAIL_COMPOSITION_WARNING_MESSAGE
-            )
+            !validateEmailComposition(email) ->
+                ValidationResult(
+                    false,
+                    EMAIL_COMPOSITION_WARNING_MESSAGE,
+                )
 
             else -> ValidationResult(isValid = true)
         }
@@ -54,48 +56,51 @@ object SignupFieldValidation {
         return when {
             password.isEmpty() -> ValidationResult(isValid = false)
 
-            !validatePasswordLength(password) -> ValidationResult(
-                isValid = false,
-                warningMessage = PASSWORD_LENGTH_WARNING_MESSAGE
-            )
+            !validatePasswordLength(password) ->
+                ValidationResult(
+                    isValid = false,
+                    warningMessage = PASSWORD_LENGTH_WARNING_MESSAGE,
+                )
 
-            !validatePasswordComposition(password) -> ValidationResult(
-                isValid = false,
-                warningMessage = PASSWORD_COMPOSITION_WARNING_MESSAGE
-            )
+            !validatePasswordComposition(password) ->
+                ValidationResult(
+                    isValid = false,
+                    warningMessage = PASSWORD_COMPOSITION_WARNING_MESSAGE,
+                )
 
             else -> ValidationResult(isValid = true)
         }
     }
 
-    fun isValidConfirmedPassword(password: String, confirmedPassword: String): ValidationResult {
+    fun isValidConfirmedPassword(
+        password: String,
+        confirmedPassword: String,
+    ): ValidationResult {
         return when {
             confirmedPassword.isEmpty() -> ValidationResult(isValid = false)
 
-            validateConfirmedPassword(password, confirmedPassword) -> ValidationResult(
-                isValid = false,
-                warningMessage = PASSWORD_CONFIRM_WARNING_MESSAGE
-            )
+            validateConfirmedPassword(password, confirmedPassword) ->
+                ValidationResult(
+                    isValid = false,
+                    warningMessage = PASSWORD_CONFIRM_WARNING_MESSAGE,
+                )
 
             else -> ValidationResult(isValid = true)
         }
     }
 
-    private fun validateUserNameLength(userName: String) =
-        userName.length in USERNAME_LENGTH
+    private fun validateUserNameLength(userName: String) = userName.length in USERNAME_LENGTH
 
-    private fun validateUserNameComposition(userName: String): Boolean =
-        userName.matches(Regex(USERNAME_REGEX))
+    private fun validateUserNameComposition(userName: String): Boolean = userName.matches(Regex(USERNAME_REGEX))
 
-    private fun validateEmailComposition(email: String): Boolean =
-        email.matches(Regex(EMAIL_REGEX))
+    private fun validateEmailComposition(email: String): Boolean = email.matches(Regex(EMAIL_REGEX))
 
-    private fun validatePasswordLength(password: String) =
-        password.length in PASSWORD_LENGTH
+    private fun validatePasswordLength(password: String) = password.length in PASSWORD_LENGTH
 
-    private fun validatePasswordComposition(password: String): Boolean =
-        password.matches(Regex(PASSWORD_REGEX))
+    private fun validatePasswordComposition(password: String): Boolean = password.matches(Regex(PASSWORD_REGEX))
 
-    private fun validateConfirmedPassword(password: String, confirmedPassword: String) =
-        password == confirmedPassword
+    private fun validateConfirmedPassword(
+        password: String,
+        confirmedPassword: String,
+    ) = password == confirmedPassword
 }

@@ -65,13 +65,13 @@ class MainActivity : ComponentActivity() {
                 R.string.signup_username_label,
                 textValue = userName,
                 onValueChange = { userName = it },
-                validateField = { SignupFieldValidation.isValidUserName(it) }
+                validateField = { SignupFieldValidation.isValidUserName(it) },
             )
             SignUpField(
                 R.string.signup_email_label,
                 textValue = email,
                 onValueChange = { email = it },
-                validateField = { SignupFieldValidation.isValidEmail(it) }
+                validateField = { SignupFieldValidation.isValidEmail(it) },
             )
 
             SignUpField(
@@ -79,7 +79,7 @@ class MainActivity : ComponentActivity() {
                 textValue = password,
                 onValueChange = { password = it },
                 validateField = { SignupFieldValidation.isValidPassword(it) },
-                hidden = true
+                hidden = true,
             )
 
             SignUpField(
@@ -89,7 +89,7 @@ class MainActivity : ComponentActivity() {
                 validateField = {
                     SignupFieldValidation.isValidConfirmedPassword(
                         password.text,
-                        it
+                        it,
                     )
                 },
                 hidden = true,
@@ -108,9 +108,9 @@ class MainActivity : ComponentActivity() {
             fontSize = 28.sp,
             fontWeight = FontWeight.W700,
             modifier =
-            modifier
-                .wrapContentWidth()
-                .padding(top = 33.0.dp, bottom = 42.0.dp),
+                modifier
+                    .wrapContentWidth()
+                    .padding(top = 33.0.dp, bottom = 42.0.dp),
         )
     }
 
@@ -133,23 +133,26 @@ class MainActivity : ComponentActivity() {
             supportingText = {
                 Text(
                     text = validationResult.warningMessage,
-                    color = textColor
+                    color = textColor,
                 )
             },
-            colors = TextFieldDefaults.colors(
-                focusedIndicatorColor = textColor,
-                focusedLabelColor = textColor,
-            ),
+            colors =
+                TextFieldDefaults.colors(
+                    focusedIndicatorColor = textColor,
+                    focusedLabelColor = textColor,
+                ),
             maxLines = 1,
             label = { Text(text = stringResource(labelId)) },
-            visualTransformation = if (!hidden) {
-                VisualTransformation.None
-            } else {
-                PasswordVisualTransformation()
-            },
-            modifier = modifier
-                .fillMaxWidth()
-                .padding(bottom = 36.dp),
+            visualTransformation =
+                if (!hidden) {
+                    VisualTransformation.None
+                } else {
+                    PasswordVisualTransformation()
+                },
+            modifier =
+                modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 36.dp),
         )
     }
 
@@ -162,16 +165,16 @@ class MainActivity : ComponentActivity() {
             onClick = {
             },
             colors =
-            ButtonColors(
-                containerColor = Blue50,
-                contentColor = Color.White,
-                disabledContainerColor = Color.Gray,
-                disabledContentColor = Color.White,
-            ),
+                ButtonColors(
+                    containerColor = Blue50,
+                    contentColor = Color.White,
+                    disabledContainerColor = Color.Gray,
+                    disabledContentColor = Color.White,
+                ),
             modifier =
-            modifier
-                .fillMaxWidth()
-                .height(50.dp),
+                modifier
+                    .fillMaxWidth()
+                    .height(50.dp),
         ) {
             Text(text = stringResource(textId), fontSize = 14.sp)
         }
