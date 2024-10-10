@@ -8,13 +8,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.sp
 import nextstep.signup.ui.theme.SignupTheme
+import nextstep.signup.ui.theme.Typography
 
 @Composable
 fun SignUpButton(
     modifier: Modifier = Modifier,
-    enable: () -> Boolean = { true }
+    enable: () -> Boolean = { true },
+    text: String = "Sign Up",
 ) {
     val enabled = remember { mutableStateOf(true) }
     Button(
@@ -22,11 +23,12 @@ fun SignUpButton(
             enabled.value = !enabled.value
         },
         enabled = enable(),
+        modifier = modifier,
     ) {
         Text(
-            text = "Sign Up",
-            fontSize = 14.sp,
-            color = Color.White
+            text = text,
+            style = Typography.labelLarge,
+            color = Color.White,
         )
     }
 }
