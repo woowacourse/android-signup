@@ -17,6 +17,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -24,6 +25,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalInspectionMode
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
@@ -114,8 +117,8 @@ fun SignUpScreen() {
                 .fillMaxWidth()
                 .height(60.dp),
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color.Blue, // 배경색
-                contentColor = Color.White   // 텍스트 색
+                containerColor = colorResource(R.color.blue_50),
+                contentColor = Color.White
             )
         ) {
             Text(text = "Sign Up")
