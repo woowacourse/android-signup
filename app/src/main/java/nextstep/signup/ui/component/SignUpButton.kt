@@ -10,7 +10,7 @@ import nextstep.signup.ui.theme.Blue50
 
 @Composable
 fun SignUpButton(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     text: String,
     onclick: () -> Unit,
 ) {

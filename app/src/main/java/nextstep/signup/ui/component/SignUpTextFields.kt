@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import nextstep.signup.R
 
 @Composable
-fun SignUpTextFields(modifier: Modifier) {
+fun SignUpTextFields(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier,
     ) {
