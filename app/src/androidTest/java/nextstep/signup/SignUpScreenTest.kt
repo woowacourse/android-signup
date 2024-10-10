@@ -6,8 +6,8 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
 import nextstep.signup.component.SignUpSubmitButton
-import nextstep.signup.component.SignUpTitle
 import nextstep.signup.component.SignUpTextField
+import nextstep.signup.component.SignUpTitle
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test

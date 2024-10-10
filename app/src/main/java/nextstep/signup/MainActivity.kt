@@ -16,8 +16,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import nextstep.signup.component.SignUpSubmitButton
-import nextstep.signup.component.SignUpTitle
 import nextstep.signup.component.SignUpTextField
+import nextstep.signup.component.SignUpTitle
 import nextstep.signup.ui.theme.SignupTheme
 
 class MainActivity : ComponentActivity() {
@@ -56,7 +56,7 @@ fun SignUpScreen(
                 modifier = modifier
                     .fillMaxWidth()
                     .padding(vertical = 20.dp),
-                label = label,
+                label = label
             )
         }
 
