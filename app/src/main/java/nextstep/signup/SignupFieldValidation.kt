@@ -68,6 +68,19 @@ object SignupFieldValidation {
         }
     }
 
+    fun isValidConfirmedPassword(password: String, confirmedPassword: String): ValidationResult {
+        return when {
+            confirmedPassword.isEmpty() -> ValidationResult(isValid = false)
+
+            validateConfirmedPassword(password, confirmedPassword) -> ValidationResult(
+                isValid = false,
+                warningMessage = PASSWORD_CONFIRM_WARNING_MESSAGE
+            )
+
+            else -> ValidationResult(isValid = true)
+        }
+    }
+
     private fun validateUserNameLength(userName: String) =
         userName.length in USERNAME_LENGTH
 
@@ -82,4 +95,7 @@ object SignupFieldValidation {
 
     private fun validatePasswordComposition(password: String): Boolean =
         password.matches(Regex(PASSWORD_REGEX))
+
+    private fun validateConfirmedPassword(password: String, confirmedPassword: String) =
+        password == confirmedPassword
 }

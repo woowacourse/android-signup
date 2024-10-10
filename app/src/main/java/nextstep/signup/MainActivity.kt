@@ -44,128 +44,148 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background,
                 ) {
-                    Column(
-                        modifier = Modifier.padding(horizontal = 33.0.dp),
-                    ) {
-                        SignUpTitle(R.string.signup_title)
-                        SignUpField(
-                            R.string.signup_username_label,
-                            validateField = { SignupFieldValidation.isValidUserName(it) }
-                        )
-                        SignUpField(
-                            R.string.signup_email_label,
-                            validateField = { SignupFieldValidation.isValidEmail(it) }
-                        )
-                        SignUpField(
-                            R.string.signup_password_label, hidden = true,
-                            validateField = { SignupFieldValidation.isValidPassword(it) }
-                        )
-                        SignUpField(R.string.signup_password_confirm_label, hidden = true)
-                        SignUpButton(R.string.signup_button)
-                    }
+                    SignUpScreen()
                 }
             }
         }
     }
-}
 
-@Composable
-fun SignUpTitle(
-    @StringRes titleId: Int,
-    modifier: Modifier = Modifier,
-) {
-    Text(
-        text = stringResource(titleId),
-        fontSize = 28.sp,
-        fontWeight = FontWeight.W700,
-        modifier =
-        modifier
-            .wrapContentWidth()
-            .padding(top = 33.0.dp, bottom = 42.0.dp),
-    )
-}
+    @Composable
+    private fun SignUpScreen() {
+        var userName by remember { mutableStateOf(TextFieldValue("")) }
+        var email by remember { mutableStateOf(TextFieldValue("")) }
+        var password by remember { mutableStateOf(TextFieldValue("")) }
+        var confirmedPassword by remember { mutableStateOf(TextFieldValue("")) }
 
-@Composable
-fun SignUpField(
-    @StringRes labelId: Int,
-    modifier: Modifier = Modifier,
-    validateField: ((String) -> ValidationResult)? = null,
-    hidden: Boolean = false,
-) {
-    var textValue by remember { mutableStateOf(TextFieldValue("")) }
-    val validationResult = validateField?.invoke(textValue.text) ?: ValidationResult(isValid = true)
-    val textColor = if (validationResult.isValid) Blue50 else Color.Red
-
-    TextField(
-        value = textValue,
-        onValueChange = {
-            textValue = it
-        },
-        supportingText = {
-            Text(
-                text = validationResult.warningMessage,
-                color = textColor
-            )
-        },
-        colors =
-        TextFieldDefaults.colors(
-            focusedIndicatorColor = textColor,
-            focusedLabelColor = textColor,
-        ),
-        maxLines = 1,
-        label = { Text(text = stringResource(labelId)) },
-        visualTransformation = if (!hidden) {
-            VisualTransformation.None
-        } else {
-            PasswordVisualTransformation()
-        },
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(bottom = 36.dp),
-    )
-}
-
-@Composable
-fun SignUpButton(
-    @StringRes textId: Int,
-    modifier: Modifier = Modifier,
-) {
-    Button(
-        onClick = {
-        },
-        colors =
-        ButtonColors(
-            containerColor = Blue50,
-            contentColor = Color.White,
-            disabledContainerColor = Color.Gray,
-            disabledContentColor = Color.White,
-        ),
-        modifier =
-        modifier
-            .fillMaxWidth()
-            .height(50.dp),
-    ) {
-        Text(text = stringResource(textId), fontSize = 14.sp)
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    SignupTheme {
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colorScheme.background,
+        Column(
+            modifier = Modifier.padding(horizontal = 33.0.dp),
         ) {
-            Column(
-                modifier = Modifier.padding(horizontal = 33.0.dp),
+            SignUpTitle(R.string.signup_title)
+            SignUpField(
+                R.string.signup_username_label,
+                textValue = userName,
+                onValueChange = { userName = it },
+                validateField = { SignupFieldValidation.isValidUserName(it) }
+            )
+            SignUpField(
+                R.string.signup_email_label,
+                textValue = email,
+                onValueChange = { email = it },
+                validateField = { SignupFieldValidation.isValidEmail(it) }
+            )
+
+            SignUpField(
+                R.string.signup_password_label,
+                textValue = password,
+                onValueChange = { password = it },
+                validateField = { SignupFieldValidation.isValidPassword(it) },
+                hidden = true
+            )
+
+            SignUpField(
+                R.string.signup_password_confirm_label,
+                textValue = confirmedPassword,
+                onValueChange = { confirmedPassword = it },
+                validateField = {
+                    SignupFieldValidation.isValidConfirmedPassword(
+                        password.text,
+                        it
+                    )
+                },
+                hidden = true,
+            )
+            SignUpButton(R.string.signup_button)
+        }
+    }
+
+    @Composable
+    fun SignUpTitle(
+        @StringRes titleId: Int,
+        modifier: Modifier = Modifier,
+    ) {
+        Text(
+            text = stringResource(titleId),
+            fontSize = 28.sp,
+            fontWeight = FontWeight.W700,
+            modifier =
+            modifier
+                .wrapContentWidth()
+                .padding(top = 33.0.dp, bottom = 42.0.dp),
+        )
+    }
+
+    @Composable
+    fun SignUpField(
+        @StringRes labelId: Int,
+        textValue: TextFieldValue,
+        onValueChange: (TextFieldValue) -> Unit,
+        modifier: Modifier = Modifier,
+        validateField: ((String) -> ValidationResult)? = null,
+        hidden: Boolean = false,
+    ) {
+        val validationResult =
+            validateField?.invoke(textValue.text) ?: ValidationResult(isValid = true)
+        val textColor = if (validationResult.isValid) Blue50 else Color.Red
+
+        TextField(
+            value = textValue,
+            onValueChange = { onValueChange(it) },
+            supportingText = {
+                Text(
+                    text = validationResult.warningMessage,
+                    color = textColor
+                )
+            },
+            colors = TextFieldDefaults.colors(
+                focusedIndicatorColor = textColor,
+                focusedLabelColor = textColor,
+            ),
+            maxLines = 1,
+            label = { Text(text = stringResource(labelId)) },
+            visualTransformation = if (!hidden) {
+                VisualTransformation.None
+            } else {
+                PasswordVisualTransformation()
+            },
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(bottom = 36.dp),
+        )
+    }
+
+    @Composable
+    fun SignUpButton(
+        @StringRes textId: Int,
+        modifier: Modifier = Modifier,
+    ) {
+        Button(
+            onClick = {
+            },
+            colors =
+            ButtonColors(
+                containerColor = Blue50,
+                contentColor = Color.White,
+                disabledContainerColor = Color.Gray,
+                disabledContentColor = Color.White,
+            ),
+            modifier =
+            modifier
+                .fillMaxWidth()
+                .height(50.dp),
+        ) {
+            Text(text = stringResource(textId), fontSize = 14.sp)
+        }
+    }
+
+    @Preview(showBackground = true)
+    @Composable
+    fun GreetingPreview() {
+        SignupTheme {
+            Surface(
+                modifier = Modifier.fillMaxSize(),
+                color = MaterialTheme.colorScheme.background,
             ) {
-                SignUpTitle(R.string.signup_title)
-                SignUpField(R.string.signup_username_label)
-                SignUpField(R.string.signup_email_label)
-                SignUpField(R.string.signup_password_label, hidden = true)
-                SignUpField(R.string.signup_password_confirm_label, hidden = true)
-                SignUpButton(R.string.signup_button)
+                SignUpScreen()
             }
         }
     }
