@@ -55,9 +55,10 @@ fun SignUpScreen() {
     var confirmPassword by remember { mutableStateOf("") }
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(16.dp),
         verticalArrangement = Arrangement.Top,
     ) {
         TitleText("Welcome to Compose 🚀")
@@ -67,25 +68,25 @@ fun SignUpScreen() {
         UserInputField(
             label = "User Name",
             value = userName,
-            onValueChange = { userName = it }
+            onValueChange = { userName = it },
         )
 
         UserInputField(
             label = "Email",
             value = email,
-            onValueChange = { email = it }
+            onValueChange = { email = it },
         )
 
         PasswordInputField(
             label = "Password",
             value = password,
-            onValueChange = { password = it }
+            onValueChange = { password = it },
         )
 
         PasswordInputField(
             label = "Password Confirm",
             value = confirmPassword,
-            onValueChange = { confirmPassword = it }
+            onValueChange = { confirmPassword = it },
         )
 
         SignUpButton()
@@ -96,36 +97,47 @@ fun SignUpScreen() {
 fun TitleText(text: String) {
     Text(
         text = text,
-        style = MaterialTheme.typography.titleLarge.copy(
-            fontWeight = FontWeight.Bold,
-        ),
+        style =
+            MaterialTheme.typography.titleLarge.copy(
+                fontWeight = FontWeight.Bold,
+            ),
         modifier = Modifier.fillMaxWidth(),
-        textAlign = TextAlign.Center
+        textAlign = TextAlign.Center,
     )
 }
 
 @Composable
-fun UserInputField(label: String, value: String, onValueChange: (String) -> Unit) {
+fun UserInputField(
+    label: String,
+    value: String,
+    onValueChange: (String) -> Unit,
+) {
     TextField(
         value = value,
         onValueChange = onValueChange,
         label = { Text(label) },
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(bottom = 36.dp)
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .padding(bottom = 36.dp),
     )
 }
 
 @Composable
-fun PasswordInputField(label: String, value: String, onValueChange: (String) -> Unit) {
+fun PasswordInputField(
+    label: String,
+    value: String,
+    onValueChange: (String) -> Unit,
+) {
     TextField(
         value = value,
         onValueChange = onValueChange,
         label = { Text(label) },
         visualTransformation = PasswordVisualTransformation(),
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(bottom = 36.dp)
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .padding(bottom = 36.dp),
     )
 }
 
@@ -133,13 +145,15 @@ fun PasswordInputField(label: String, value: String, onValueChange: (String) -> 
 fun SignUpButton() {
     Button(
         onClick = {},
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(60.dp),
-        colors = ButtonDefaults.buttonColors(
-            containerColor = colorResource(R.color.blue_50),
-            contentColor = Color.White
-        )
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .height(60.dp),
+        colors =
+            ButtonDefaults.buttonColors(
+                containerColor = colorResource(R.color.blue_50),
+                contentColor = Color.White,
+            ),
     ) {
         Text(text = "Sign Up")
     }
