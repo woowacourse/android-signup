@@ -18,7 +18,7 @@ import nextstep.signup.R
 import nextstep.signup.ui.theme.SignupTheme
 
 @Composable
-fun SignUpForm(modifier: Modifier = Modifier) {
+fun SignUpScreen(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -66,8 +66,8 @@ fun SignUpForm(modifier: Modifier = Modifier) {
     showBackground = true,
 )
 @Composable
-fun SignUpFormPreview() {
+fun SignUpFormScreen() {
     SignupTheme {
-        SignUpForm()
+        SignUpScreen()
     }
 }
