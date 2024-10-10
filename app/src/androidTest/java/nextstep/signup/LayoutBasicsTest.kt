@@ -3,6 +3,7 @@ package nextstep.signup
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -21,7 +22,12 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import nextstep.signup.fixture.ButtonTest
+import nextstep.signup.fixture.FirstColumnTest
+import nextstep.signup.fixture.FirstColumnTestPreview
+import nextstep.signup.fixture.TextViewTest
 import org.junit.Rule
 import org.junit.Test
 
@@ -36,16 +42,7 @@ class LayoutBasicsTest {
         // given
         val text = "안녕 난 컴포즈야~"
         composeTestRule.setContent {
-            Text(
-                // 바꿔 보세요!
-                text = "텍스트",
-                color = Color.Blue,
-                style = TextStyle(
-                    fontSize = 26.sp,
-                    fontWeight = FontWeight.Bold,
-                    fontFamily = FontFamily.SansSerif
-                ),
-            )
+            TextViewTest(text)
         }
 
         // then
@@ -58,13 +55,7 @@ class LayoutBasicsTest {
     fun column() {
         // given
         composeTestRule.setContent {
-            Column(
-                modifier = Modifier.testTag("이름")
-            ) {
-                // 바꿔 보세요!
-                Text(text = "킴포즈", color = Color.Cyan)
-                Text(text = "끔포즈", color = Color.Yellow)
-            }
+            FirstColumnTest("깜포즈")
         }
 
         // then
@@ -80,14 +71,8 @@ class LayoutBasicsTest {
         // given
         composeTestRule.setContent {
             val enabled = remember { mutableStateOf(true) }
-            Button(
-                onClick = {
-                    // 바꿔 보세요!
-                },
-                enabled = enabled.value,
-                modifier = Modifier.testTag("버튼")
-            ) {
-                Text(text = "클릭해주세요")
+            ButtonTest(enabled.value) {
+                enabled.value = false
             }
         }
 
