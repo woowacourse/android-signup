@@ -27,9 +27,6 @@ import androidx.compose.ui.unit.sp
 import org.junit.Rule
 import org.junit.Test
 
-// 1. 모든 테스트가 성공하도록 만들어보자
-// 2. 힌트를 참고하여 Preview를 노출시킨다.
-// 3. Preview의 interactive 모드를 활용하여 버튼을 클릭해본다.
 class LayoutBasicsTest {
     @get:Rule
     val composeTestRule = createComposeRule()
@@ -40,7 +37,6 @@ class LayoutBasicsTest {
         val text = "안녕 난 컴포즈야~"
         composeTestRule.setContent {
             Text(
-                // 바꿔 보세요!
                 text = text,
                 color = Color.Blue,
                 style =
@@ -65,7 +61,6 @@ class LayoutBasicsTest {
             Column(
                 modifier = Modifier.testTag("이름"),
             ) {
-                // 바꿔 보세요!
                 Text(text = "깜포즈", color = Color.Yellow)
                 Text(text = "킴포즈", color = Color.Cyan)
                 Text(text = "끔포즈", color = Color.Yellow)
