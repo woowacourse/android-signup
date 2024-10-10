@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -17,6 +18,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -25,6 +27,8 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import nextstep.signup.ui.theme.BlueGrey20
+import nextstep.signup.ui.theme.PurpleGrey40
 
 @Composable
 fun SignUpScreen(modifier: Modifier = Modifier) {
@@ -101,7 +105,7 @@ fun SignUpScreen(modifier: Modifier = Modifier) {
         SignUpButton(
             enable = {
                 email.isNotEmpty() && userName.isNotEmpty() &&
-                    password.isNotEmpty() && passwordConfirmed.isNotEmpty() && password == passwordConfirmed
+                        password.isNotEmpty() && passwordConfirmed.isNotEmpty() && password == passwordConfirmed
             },
             modifier = modifier.then(
                 Modifier
@@ -139,7 +143,13 @@ fun SignUpTextField(
         maxLines = 1,
         label = { Text(text = labelText) },
         modifier = modifier,
-        visualTransformation = visualTransformation
+        visualTransformation = visualTransformation,
+        colors = TextFieldDefaults.colors(
+            focusedContainerColor = BlueGrey20,
+            unfocusedContainerColor = BlueGrey20,
+            errorContainerColor = Color.Red,
+            disabledContainerColor = PurpleGrey40,
+        )
     )
 }
 
