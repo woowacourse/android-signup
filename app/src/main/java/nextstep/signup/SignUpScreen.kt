@@ -27,6 +27,8 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import nextstep.signup.ui.theme.Black30
+import nextstep.signup.ui.theme.Blue50
 import nextstep.signup.ui.theme.BlueGrey20
 import nextstep.signup.ui.theme.PurpleGrey40
 
@@ -135,7 +137,7 @@ fun SignUpTextField(
     labelText: String = "Enter Text",
     visualTransformation: VisualTransformation = VisualTransformation.None,
     value: String = "",
-    onValueChange: (String) -> Unit = { }
+    onValueChange: (String) -> Unit = { value }
 ) {
     TextField(
         value = value,
@@ -145,6 +147,10 @@ fun SignUpTextField(
         modifier = modifier,
         visualTransformation = visualTransformation,
         colors = TextFieldDefaults.colors(
+            focusedIndicatorColor = Blue50,
+            unfocusedIndicatorColor = Black30,
+            focusedLabelColor = Blue50,
+            unfocusedLabelColor = Black30,
             focusedContainerColor = BlueGrey20,
             unfocusedContainerColor = BlueGrey20,
             errorContainerColor = Color.Red,
