@@ -18,6 +18,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
@@ -56,7 +57,7 @@ fun SignUpLabel() {
             .padding(16.dp)
     ) {
         Text(
-            text = "Welcome to Compose🚀",
+            text = stringResource(R.string.title),
             modifier =
             Modifier
                 .align(Alignment.Center),
@@ -81,7 +82,7 @@ fun SignUpScreen() {
                 .fillMaxWidth()
                 .padding(all = 16.dp),
             onValueChange = { userName = it },
-            label = { Text("Username") }
+            label = { Text(stringResource(R.string.username)) }
         )
 
         TextField(
@@ -91,7 +92,7 @@ fun SignUpScreen() {
                 .fillMaxWidth()
                 .padding(all = 16.dp),
             onValueChange = { email = it },
-            label = { Text("Email") }
+            label = { Text(stringResource(R.string.email)) }
         )
         TextField(
             value = password,
@@ -100,7 +101,7 @@ fun SignUpScreen() {
                 .fillMaxWidth()
                 .padding(all = 16.dp),
             onValueChange = { password = it },
-            label = { Text("Password") },
+            label = { Text(stringResource(R.string.password)) },
             visualTransformation = PasswordVisualTransformation()
         )
         TextField(
@@ -110,7 +111,7 @@ fun SignUpScreen() {
                 .fillMaxWidth()
                 .padding(all = 16.dp),
             onValueChange = { passwordConfirm = it },
-            label = { Text("Password Confirm") },
+            label = { Text(stringResource(R.string.password_confirm)) },
             visualTransformation = PasswordVisualTransformation(),
         )
     }
@@ -125,7 +126,7 @@ private fun SignUpButton() {
             .fillMaxWidth()
             .padding(all = 16.dp)
     ) {
-        Text(text = "Sign Up")
+        Text(text = stringResource(R.string.sign_up))
     }
 }
 
