@@ -3,6 +3,7 @@ package nextstep.signup
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -46,12 +47,12 @@ class MainActivity : ComponentActivity() {
                     Column(
                         modifier = Modifier.padding(horizontal = 33.0.dp),
                     ) {
-                        SignUpTitle(stringResource(R.string.signup_title))
-                        SignUpField(stringResource(R.string.signup_username_label))
-                        SignUpField(stringResource(R.string.signup_email_label))
-                        SignUpField(stringResource(R.string.signup_password_label), hidden = true)
-                        SignUpField(stringResource(R.string.signup_password_confirm_label), hidden = true)
-                        SignUpButton(stringResource(R.string.signup_button))
+                        SignUpTitle(R.string.signup_title)
+                        SignUpField(R.string.signup_username_label)
+                        SignUpField(R.string.signup_email_label)
+                        SignUpField(R.string.signup_password_label, hidden = true)
+                        SignUpField(R.string.signup_password_confirm_label, hidden = true)
+                        SignUpButton(R.string.signup_button)
                     }
                 }
             }
@@ -61,72 +62,76 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun SignUpTitle(
-    title: String,
+    @StringRes titleId: Int,
     modifier: Modifier = Modifier,
 ) {
     Text(
-        text = title,
+        text = stringResource(titleId),
         fontSize = 28.sp,
         fontWeight = FontWeight.W700,
         modifier =
-            modifier
-                .wrapContentWidth()
-                .padding(top = 33.0.dp, bottom = 42.0.dp),
+        modifier
+            .wrapContentWidth()
+            .padding(top = 33.0.dp, bottom = 42.0.dp),
     )
 }
 
 @Composable
 fun SignUpField(
-    label: String,
+    @StringRes labelId: Int,
     modifier: Modifier = Modifier,
     hidden: Boolean = false,
 ) {
     var textValue by remember { mutableStateOf(TextFieldValue("")) }
+    val label = stringResource(labelId)
 
     TextField(
         value = textValue,
-        onValueChange = { textValue = it },
+        onValueChange = {
+            textValue = it
+        },
+        supportingText = { Text(text = "") },
         colors =
-            TextFieldDefaults.colors(
-                focusedIndicatorColor = Blue50,
-                focusedLabelColor = Blue50,
-            ),
+        TextFieldDefaults.colors(
+            focusedIndicatorColor = Blue50,
+            focusedLabelColor = Blue50,
+        ),
         maxLines = 1,
         label = { Text(text = label) },
         visualTransformation =
-            if (!hidden) {
-                VisualTransformation.None
-            } else {
-                PasswordVisualTransformation()
-            },
+        if (!hidden) {
+            VisualTransformation.None
+        } else {
+            PasswordVisualTransformation()
+        },
         modifier =
-            modifier
-                .fillMaxWidth()
-                .padding(bottom = 36.dp),
+        modifier
+            .fillMaxWidth()
+            .padding(bottom = 36.dp),
     )
 }
 
 @Composable
 fun SignUpButton(
-    text: String,
+    @StringRes textId: Int,
     modifier: Modifier = Modifier,
 ) {
     Button(
         onClick = {
         },
         colors =
-            ButtonColors(
-                containerColor = Blue50,
-                contentColor = Color.White,
-                disabledContainerColor = Color.Gray,
-                disabledContentColor = Color.White,
-            ),
+        ButtonColors(
+            containerColor = Blue50,
+            contentColor = Color.White,
+            disabledContainerColor = Color.Gray,
+            disabledContentColor = Color.White,
+        ),
         modifier =
-            modifier
-                .fillMaxWidth()
-                .height(50.dp),
+        modifier
+            .fillMaxWidth()
+            .height(50.dp),
     ) {
-        Text(text = text, fontSize = 14.sp)
+        Text(text = stringResource(textId), fontSize = 14.sp)
     }
 }
 
@@ -141,12 +146,12 @@ fun GreetingPreview() {
             Column(
                 modifier = Modifier.padding(horizontal = 33.0.dp),
             ) {
-                SignUpTitle("Welcome to Compose \uD83D\uDE80")
-                SignUpField("Username")
-                SignUpField("Email")
-                SignUpField("Password", hidden = true)
-                SignUpField("Password Confirm", hidden = true)
-                SignUpButton("Sign Up")
+                SignUpTitle(R.string.signup_title)
+                SignUpField(R.string.signup_username_label)
+                SignUpField(R.string.signup_email_label)
+                SignUpField(R.string.signup_password_label, hidden = true)
+                SignUpField(R.string.signup_password_confirm_label, hidden = true)
+                SignUpButton(R.string.signup_button)
             }
         }
     }
