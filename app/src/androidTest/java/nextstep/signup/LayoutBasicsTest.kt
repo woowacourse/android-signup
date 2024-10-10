@@ -38,7 +38,6 @@ class LayoutBasicsTest {
         val text = "안녕 난 컴포즈야~"
         composeTestRule.setContent {
             Text(
-                // 바꿔 보세요!
                 text = text,
                 color = Color.Blue,
                 style = TextStyle(
@@ -62,7 +61,6 @@ class LayoutBasicsTest {
             Column(
                 modifier = Modifier.testTag("이름")
             ) {
-                // 바꿔 보세요!
                 Text(text = "깜포즈", color = Color.Cyan)
                 Text(text = "끔포즈", color = Color.Yellow)
             }
