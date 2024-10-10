@@ -36,7 +36,18 @@ class UserNameInputValidationTest {
     }
 
     @Test
-    fun `사용자_이름이_2에서_5자가_아니면_에러메시지가_노출된다`() {
+    fun `사용자_이름이_2에서_5자가_아니면_에러메시지가_노출된다_1`() {
+        // when
+        userName.value = TextFieldValue("남")
+
+        // then
+        composeTestRule
+            .onNodeWithText(USERNAME_LENGTH_ERROR)
+            .assertExists()
+    }
+
+    @Test
+    fun `사용자_이름이_2에서_5자가_아니면_에러메시지가_노출된다_2`() {
         // when
         userName.value = TextFieldValue("남서기입니다")
 
