@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -75,44 +76,30 @@ fun SignUpTotal() {
     var passwordConfirm by remember { mutableStateOf("") }
 
     Column {
-        TextField(
+        CustomTextField(
             value = userName,
-            modifier =
-            Modifier
-                .fillMaxWidth()
-                .padding(all = 16.dp),
             onValueChange = { userName = it },
-            label = { Text(stringResource(R.string.username)) }
+            label = stringResource(R.string.username),
         )
 
-        TextField(
+        CustomTextField(
             value = email,
-            modifier =
-            Modifier
-                .fillMaxWidth()
-                .padding(all = 16.dp),
             onValueChange = { email = it },
-            label = { Text(stringResource(R.string.email)) }
+            label = stringResource(R.string.email),
         )
-        TextField(
+
+        CustomTextField(
             value = password,
-            modifier =
-            Modifier
-                .fillMaxWidth()
-                .padding(all = 16.dp),
             onValueChange = { password = it },
-            label = { Text(stringResource(R.string.password)) },
-            visualTransformation = PasswordVisualTransformation()
+            label = stringResource(R.string.password),
+            isPasswordField = true,
         )
-        TextField(
+
+        CustomTextField(
             value = passwordConfirm,
-            modifier =
-            Modifier
-                .fillMaxWidth()
-                .padding(all = 16.dp),
             onValueChange = { passwordConfirm = it },
-            label = { Text(stringResource(R.string.password_confirm)) },
-            visualTransformation = PasswordVisualTransformation(),
+            label = stringResource(R.string.password_confirm),
+            isPasswordField = true,
         )
     }
 }
@@ -128,6 +115,25 @@ private fun SignUpButton() {
     ) {
         Text(text = stringResource(R.string.sign_up))
     }
+}
+
+
+@Composable
+fun CustomTextField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    label: String,
+    isPasswordField: Boolean = false,
+) {
+    TextField(
+        value = value,
+        onValueChange = onValueChange,
+        label = { Text(label) },
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(all = 16.dp),
+        visualTransformation = if (isPasswordField) PasswordVisualTransformation() else VisualTransformation.None,
+    )
 }
 
 @Preview(showBackground = true)
