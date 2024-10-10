@@ -1,12 +1,8 @@
 package nextstep.signup
 
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertIsNotEnabled
@@ -36,7 +32,6 @@ class LayoutBasicsTest {
             .onNodeWithText(TestFixture.PREVIEW_TEXT)
             .assertExists()
     }
-
 
     @Test
     fun columnTest() {
@@ -86,7 +81,6 @@ fun PreviewText() {
 fun PreviewColumnText() {
     TestFixture.MakeColumnText()
 }
-
 
 @Preview(showBackground = true)
 @Composable

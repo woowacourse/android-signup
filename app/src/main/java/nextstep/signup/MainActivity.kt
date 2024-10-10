@@ -79,27 +79,27 @@ fun SignUpTotal() {
         CustomTextField(
             value = userName,
             onValueChange = { userName = it },
-            label = stringResource(R.string.username),
+            label = stringResource(R.string.username)
         )
 
         CustomTextField(
             value = email,
             onValueChange = { email = it },
-            label = stringResource(R.string.email),
+            label = stringResource(R.string.email)
         )
 
         CustomTextField(
             value = password,
             onValueChange = { password = it },
             label = stringResource(R.string.password),
-            isPasswordField = true,
+            isPasswordField = true
         )
 
         CustomTextField(
             value = passwordConfirm,
             onValueChange = { passwordConfirm = it },
             label = stringResource(R.string.password_confirm),
-            isPasswordField = true,
+            isPasswordField = true
         )
     }
 }
@@ -117,13 +117,12 @@ private fun SignUpButton() {
     }
 }
 
-
 @Composable
 fun CustomTextField(
     value: String,
     onValueChange: (String) -> Unit,
     label: String,
-    isPasswordField: Boolean = false,
+    isPasswordField: Boolean = false
 ) {
     TextField(
         value = value,
@@ -132,7 +131,7 @@ fun CustomTextField(
         modifier = Modifier
             .fillMaxWidth()
             .padding(all = 16.dp),
-        visualTransformation = if (isPasswordField) PasswordVisualTransformation() else VisualTransformation.None,
+        visualTransformation = if (isPasswordField) PasswordVisualTransformation() else VisualTransformation.None
     )
 }
 

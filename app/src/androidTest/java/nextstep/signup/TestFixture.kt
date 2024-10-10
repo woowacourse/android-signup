@@ -31,7 +31,6 @@ object TestFixture {
         }
     }
 
-
     @Composable
     fun TextComponent(text: String = PREVIEW_TEXT, color: Color = Color.Blue) {
         Text(
