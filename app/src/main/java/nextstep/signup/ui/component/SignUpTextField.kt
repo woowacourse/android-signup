@@ -1,4 +1,4 @@
-package nextstep.signup.ui.signup.component
+package nextstep.signup.ui.component
 
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Text

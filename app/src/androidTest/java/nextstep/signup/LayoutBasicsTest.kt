@@ -32,7 +32,6 @@ import org.junit.Rule
 import org.junit.Test
 
 class LayoutBasicsTest {
-
     @get:Rule
     val composeTestRule = createComposeRule()
 
@@ -58,7 +57,11 @@ class LayoutBasicsTest {
         }
 
         // then
-        composeTestRule.onNodeWithTag(tag).onChildren().assertCountEquals(3).onFirst()
+        composeTestRule
+            .onNodeWithTag(tag)
+            .onChildren()
+            .assertCountEquals(3)
+            .onFirst()
             .assert(hasText(target))
     }
 
@@ -80,18 +83,29 @@ class LayoutBasicsTest {
 }
 
 @Composable
-fun ComposeText(text: String, color: Color = Color.Blue) {
+fun ComposeText(
+    text: String,
+    color: Color = Color.Blue,
+) {
     Text(
-        text = text, color = color, style = TextStyle(
-            fontSize = 26.sp, fontWeight = FontWeight.Bold, fontFamily = FontFamily.SansSerif
-        )
+        text = text,
+        color = color,
+        style =
+            TextStyle(
+                fontSize = 26.sp,
+                fontWeight = FontWeight.Bold,
+                fontFamily = FontFamily.SansSerif,
+            ),
     )
 }
 
 @Composable
-fun ComposeColumn(tag: String, target: String) {
+fun ComposeColumn(
+    tag: String,
+    target: String,
+) {
     Column(
-        modifier = Modifier.testTag(tag)
+        modifier = Modifier.testTag(tag),
     ) {
         ComposeText(text = target, color = Color.Red)
         ComposeText(text = "킴포즈", color = Color.Cyan)
@@ -100,11 +114,16 @@ fun ComposeColumn(tag: String, target: String) {
 }
 
 @Composable
-fun ComposeButton(tag: String, enabled: MutableState<Boolean>) {
+fun ComposeButton(
+    tag: String,
+    enabled: MutableState<Boolean>,
+) {
     Button(
         onClick = {
             enabled.value = !enabled.value
-        }, enabled = enabled.value, modifier = Modifier.testTag(tag)
+        },
+        enabled = enabled.value,
+        modifier = Modifier.testTag(tag),
     ) {
         val text = if (enabled.value) "Enabled" else "Disabled"
         ComposeText(text = text)
@@ -116,7 +135,7 @@ fun ComposeButton(tag: String, enabled: MutableState<Boolean>) {
 fun TextTestPreview() {
     SignupTheme {
         Surface(
-            color = MaterialTheme.colorScheme.background
+            color = MaterialTheme.colorScheme.background,
         ) {
             val text = "안녕 난 컴포즈야~"
             ComposeText(text)
@@ -124,13 +143,12 @@ fun TextTestPreview() {
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
 fun ColumnTestPreview() {
     SignupTheme {
         Surface(
-            color = MaterialTheme.colorScheme.background
+            color = MaterialTheme.colorScheme.background,
         ) {
             val tag = "이름"
             val target = "깜포즈"
@@ -139,13 +157,12 @@ fun ColumnTestPreview() {
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
 fun ButtonTestPreview() {
     SignupTheme {
         Surface(
-            color = MaterialTheme.colorScheme.background
+            color = MaterialTheme.colorScheme.background,
         ) {
             val tag = "버튼"
             val enabled = remember { mutableStateOf(true) }
