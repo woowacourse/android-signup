@@ -57,28 +57,31 @@ class LayoutBasicsTest {
     @Test
     fun column() {
         // given
+        val testTag = "이름"
+        val listTitle = listOf<String>("깜포즈", "컴포즈", "끔포즈")
         composeTestRule.setContent {
             Column(
-                modifier = Modifier.testTag("이름"),
+                modifier = Modifier.testTag(testTag),
             ) {
-                Text(text = "깜포즈", color = Color.Yellow)
-                Text(text = "킴포즈", color = Color.Cyan)
-                Text(text = "끔포즈", color = Color.Yellow)
+                listTitle.forEach { title ->
+                    Text(text = title, color = Color.Yellow)
+                }
             }
         }
 
         // then
         composeTestRule
-            .onNodeWithTag("이름")
+            .onNodeWithTag(testTag)
             .onChildren()
-            .assertCountEquals(3)
+            .assertCountEquals(listTitle.size)
             .onFirst()
-            .assert(hasText("깜포즈"))
+            .assert(hasText(listTitle.first()))
     }
 
     @Test
     fun button() {
         // given
+        val testTag = "버튼"
         composeTestRule.setContent {
             val enabled = remember { mutableStateOf(true) }
             Button(
@@ -86,7 +89,7 @@ class LayoutBasicsTest {
                     if (enabled.value) enabled.value = false
                 },
                 enabled = enabled.value,
-                modifier = Modifier.testTag("버튼"),
+                modifier = Modifier.testTag(testTag),
             ) {
                 Text(text = "클릭해주세요")
             }
@@ -95,7 +98,7 @@ class LayoutBasicsTest {
         // when
         val button =
             composeTestRule
-                .onNodeWithTag("버튼")
+                .onNodeWithTag(testTag)
                 .performClick()
 
         // then
