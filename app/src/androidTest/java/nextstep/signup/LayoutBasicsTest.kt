@@ -82,7 +82,9 @@ class LayoutBasicsTest {
         composeTestRule.setContent {
             val enabled = remember { mutableStateOf(true) }
             Button(
-                onClick = { enabled.value = !enabled.value },
+                onClick = {
+                    if (enabled.value) enabled.value = false
+                },
                 enabled = enabled.value,
                 modifier = Modifier.testTag("버튼"),
             ) {
