@@ -52,7 +52,10 @@ class MainActivity : ComponentActivity() {
                             R.string.signup_username_label,
                             validateField = { SignupFieldValidation.isValidUserName(it) }
                         )
-                        SignUpField(R.string.signup_email_label)
+                        SignUpField(
+                            R.string.signup_email_label,
+                            validateField = { SignupFieldValidation.isValidEmail(it) }
+                        )
                         SignUpField(R.string.signup_password_label, hidden = true)
                         SignUpField(R.string.signup_password_confirm_label, hidden = true)
                         SignUpButton(R.string.signup_button)
