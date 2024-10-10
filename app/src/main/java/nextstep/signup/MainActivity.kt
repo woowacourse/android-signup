@@ -3,25 +3,21 @@ package nextstep.signup
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.unit.dp
+import nextstep.signup.component.SignUpSubmitButton
+import nextstep.signup.component.SignUpTitle
+import nextstep.signup.component.SingUpTextField
 import nextstep.signup.ui.theme.SignupTheme
 
 class MainActivity : ComponentActivity() {
@@ -29,12 +25,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             SignupTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    SignUpScreen()
                 }
             }
         }
@@ -42,75 +37,44 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
+fun SignUpScreen(
+    modifier: Modifier = Modifier,
+) {
+    val labels = textFieldLabels()
+
+    Column(
         modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    SignupTheme {
-        Greeting("Android")
-    }
-}
-
-@Composable
-fun SignUpTitle(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = name,
-        modifier = modifier,
-        style = TextStyle(
-            fontSize = 26.sp,
-            fontWeight = FontWeight.Bold
-        )
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun SignUpTitlePreview() {
-    SignupTheme {
-        SignUpTitle(stringResource(R.string.sign_up_title))
-    }
-}
-@Composable
-fun SingUpTextField(label: String = "Username") {
-    var text by remember { mutableStateOf("") }
-
-    TextField(
-        value = text,
-        onValueChange = { text = it },
-        label = { Text(label) }
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun SingUpTextFieldPreview() {
-    SignupTheme {
-        SingUpTextField()
-    }
-}
-
-@Composable
-fun SignUpSubmitButton(modifier: Modifier, text: String, onClick: () -> Unit) {
-    Button(
-        modifier = modifier,
-        onClick = { onClick() },
-        colors = ButtonDefaults.buttonColors(containerColor = Color.DarkGray)
-
+            .fillMaxWidth()
+            .padding(start = 32.dp, end = 32.dp, top = 22.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Top,
     ) {
-        Text(text = text)
+        SignUpTitle(title = stringResource(R.string.sign_up_title))
+
+        for (label in labels) {
+            SingUpTextField(
+                modifier = modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 20.dp),
+                label = label
+            )
+        }
+
+        SignUpSubmitButton(
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(vertical = 32.dp),
+            text = stringResource(R.string.button_sign_up),
+            onClick = { })
     }
 }
 
-@Preview(showBackground = true)
 @Composable
-fun SignUpSubmitButtonPreview() {
-    SignupTheme {
-        SignUpSubmitButton(modifier = Modifier, text = "Sign Up", onClick = { })
-    }
+private fun textFieldLabels(): List<String> {
+    return listOf(
+        stringResource(R.string.input_hint_username),
+        stringResource(R.string.input_hint_email),
+        stringResource(R.string.input_hint_password),
+        stringResource(R.string.input_hint_password_confirm)
+    )
 }

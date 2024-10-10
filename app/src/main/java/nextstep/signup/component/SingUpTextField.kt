@@ -11,12 +11,13 @@ import androidx.compose.ui.Modifier
 
 @Composable
 fun SingUpTextField(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     label: String,
 ) {
     var text by remember { mutableStateOf("") }
 
     TextField(
+        modifier= modifier,
         value = text,
         onValueChange = { text = it },
         label = { Text(label) }
