@@ -25,6 +25,9 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import nextstep.signup.MainActivity.Companion.EMAIL_REGEX
+import nextstep.signup.MainActivity.Companion.PASSWORD_REGEX
+import nextstep.signup.MainActivity.Companion.USERNAME_REGEX
 import nextstep.signup.ui.theme.SignupTheme
 
 class MainActivity : ComponentActivity() {
@@ -35,6 +38,12 @@ class MainActivity : ComponentActivity() {
                 SignUpScreen()
             }
         }
+    }
+
+    companion object {
+        const val USERNAME_REGEX = "^[a-zA-Z가-힣]+$"
+        const val EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$"
+        const val PASSWORD_REGEX = "^(?=.*[a-zA-Z])(?=.*[0-9]).{8,16}$"
     }
 }
 
@@ -74,6 +83,11 @@ fun SignUpTotal() {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordConfirm by remember { mutableStateOf("") }
+
+    var userNameError by remember { mutableStateOf("") }
+    var emailError by remember { mutableStateOf("") }
+    var passwordError by remember { mutableStateOf("") }
+    var passwordConfirmError by remember { mutableStateOf("") }
 
     Column {
         CustomTextField(
