@@ -2,7 +2,7 @@
     <string name="app_name">Signup</string>
 
     <!-- Sign up -->
-    <string name="sign_up_title">Welcome to Compose</string>
+    <string name="sign_up_title">Welcome to Compose 🚀</string>
     <string name="input_hint_username">Username</string>
     <string name="input_hint_email">Email</string>
     <string name="input_hint_password">Password</string>
