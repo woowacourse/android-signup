@@ -2,21 +2,21 @@ package nextstep.signup
 
 object SignupFieldValidation {
     private const val USERNAME_REGEX = "^[a-zA-Z가-힣]+$"
-    private const val USERNAME_COMPOSITION_WARNING_MESSAGE = "이름에는 숫자나 기호가 포함될 수 없습니다."
+    private const val USERNAME_COMPOSITION_ERROR_MESSAGE = "이름에는 숫자나 기호가 포함될 수 없습니다."
 
     private val USERNAME_LENGTH = 2..5
-    private const val USERNAME_LENGTH_WARNING_MESSAGE = "이름은 2~5자여야 합니다."
+    private const val USERNAME_LENGTH_ERROR_MESSAGE = "이름은 2~5자여야 합니다."
 
     private const val EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$"
-    private const val EMAIL_COMPOSITION_WARNING_MESSAGE = "이메일 형식이 올바르지 않습니다."
+    private const val EMAIL_COMPOSITION_ERROR_MESSAGE = "이메일 형식이 올바르지 않습니다."
 
     private const val PASSWORD_REGEX = "^(?=.*[a-zA-Z])(?=.*[0-9]).{8,16}$"
-    private const val PASSWORD_COMPOSITION_WARNING_MESSAGE = "비밀번호는 영문과 숫자를 포함해야 합니다."
+    private const val PASSWORD_COMPOSITION_ERROR_MESSAGE = "비밀번호는 영문과 숫자를 포함해야 합니다."
 
     private val PASSWORD_LENGTH = 8..16
-    private const val PASSWORD_LENGTH_WARNING_MESSAGE = "비밀번호는 8~16자여야 합니다."
+    private const val PASSWORD_LENGTH_ERROR_MESSAGE = "비밀번호는 8~16자여야 합니다."
 
-    private const val PASSWORD_CONFIRM_WARNING_MESSAGE = "비밀번호가 일치하지 않습니다."
+    private const val PASSWORD_CONFIRM_ERROR_MESSAGE = "비밀번호가 일치하지 않습니다."
 
     fun isValidUserName(userName: String): ValidationResult {
         return when {
@@ -25,13 +25,13 @@ object SignupFieldValidation {
             !validateUserNameLength(userName) ->
                 ValidationResult(
                     isValid = false,
-                    warningMessage = USERNAME_LENGTH_WARNING_MESSAGE,
+                    errorMessage = USERNAME_LENGTH_ERROR_MESSAGE,
                 )
 
             !validateUserNameComposition(userName) ->
                 ValidationResult(
                     isValid = false,
-                    warningMessage = USERNAME_COMPOSITION_WARNING_MESSAGE,
+                    errorMessage = USERNAME_COMPOSITION_ERROR_MESSAGE,
                 )
 
             else -> ValidationResult(isValid = true)
@@ -45,7 +45,7 @@ object SignupFieldValidation {
             !validateEmailComposition(email) ->
                 ValidationResult(
                     false,
-                    EMAIL_COMPOSITION_WARNING_MESSAGE,
+                    EMAIL_COMPOSITION_ERROR_MESSAGE,
                 )
 
             else -> ValidationResult(isValid = true)
@@ -59,13 +59,13 @@ object SignupFieldValidation {
             !validatePasswordLength(password) ->
                 ValidationResult(
                     isValid = false,
-                    warningMessage = PASSWORD_LENGTH_WARNING_MESSAGE,
+                    errorMessage = PASSWORD_LENGTH_ERROR_MESSAGE,
                 )
 
             !validatePasswordComposition(password) ->
                 ValidationResult(
                     isValid = false,
-                    warningMessage = PASSWORD_COMPOSITION_WARNING_MESSAGE,
+                    errorMessage = PASSWORD_COMPOSITION_ERROR_MESSAGE,
                 )
 
             else -> ValidationResult(isValid = true)
@@ -82,7 +82,7 @@ object SignupFieldValidation {
             !validateConfirmedPassword(password, confirmedPassword) ->
                 ValidationResult(
                     isValid = false,
-                    warningMessage = PASSWORD_CONFIRM_WARNING_MESSAGE,
+                    errorMessage = PASSWORD_CONFIRM_ERROR_MESSAGE,
                 )
 
             else -> ValidationResult(isValid = true)

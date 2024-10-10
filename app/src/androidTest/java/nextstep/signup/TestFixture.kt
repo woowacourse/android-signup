@@ -18,7 +18,7 @@ fun FakeSignUpField(
         value = textValue,
         onValueChange = { onValueChange(it) },
         supportingText = {
-            Text(text = validationResult.warningMessage)
+            Text(text = validationResult.errorMessage)
         },
     )
 }

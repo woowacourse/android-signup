@@ -132,7 +132,7 @@ class MainActivity : ComponentActivity() {
             onValueChange = { onValueChange(it) },
             supportingText = {
                 Text(
-                    text = validationResult.warningMessage,
+                    text = validationResult.errorMessage,
                     color = textColor,
                 )
             },
