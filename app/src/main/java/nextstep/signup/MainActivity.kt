@@ -56,7 +56,7 @@ fun SignUpScreen(
                 modifier = modifier
                     .fillMaxWidth()
                     .padding(vertical = 20.dp),
-                label = label
+                label = label,
             )
         }
 

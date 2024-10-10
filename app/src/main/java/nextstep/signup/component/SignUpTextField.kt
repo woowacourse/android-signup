@@ -8,8 +8,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 
-// todo 네이밍변경
 @Composable
 fun SignUpTextField(
     modifier: Modifier = Modifier,
@@ -21,6 +22,15 @@ fun SignUpTextField(
         modifier = modifier,
         value = text,
         onValueChange = { text = it },
-        label = { Text(label) }
+        label = { Text(label) },
+        visualTransformation = VisualTransformation(label)
     )
+}
+
+@Composable
+fun VisualTransformation(label: String): VisualTransformation {
+    return when (label.contains("Password")) {
+        true -> PasswordVisualTransformation()
+        else -> VisualTransformation.None
+    }
 }

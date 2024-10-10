@@ -55,6 +55,21 @@ class SignUpScreenTest {
     }
 
     @Test
+    fun 패스워드_필드에_입력하면_입력한_텍스트가_안보여야한다() {
+        composeTestRule.setContent {
+            SignUpTextField(label = "Password")
+        }
+
+        composeTestRule
+            .onNodeWithText("Password")
+            .performTextInput("3188")
+
+        composeTestRule
+            .onNodeWithText("3188")
+            .assertDoesNotExist()
+    }
+
+    @Test
     fun 회원가입을_완료하는_버튼이_존재한다() {
         composeTestRule.setContent {
             SignUpSubmitButton(modifier = Modifier, text = "Sign Up") {}
