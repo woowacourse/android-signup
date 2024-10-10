@@ -28,9 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import org.junit.Rule
 import org.junit.Test
-// 1. 모든 테스트가 성공하도록 만들어보자
-// 2. 힌트를 참고하여 Preview를 노출시킨다.
-// 3. Preview의 interactive 모드를 활용하여 버튼을 클릭해본다.
+
 class LayoutBasicsTest {
 
     @get:Rule
@@ -42,8 +40,7 @@ class LayoutBasicsTest {
         val text = "안녕 난 컴포즈야~"
         composeTestRule.setContent {
             Text(
-                // 바꿔 보세요!
-                text = "텍스트",
+                text = text,
                 color = Color.Blue,
                 style = TextStyle(
                     fontSize = 26.sp,
@@ -66,7 +63,7 @@ class LayoutBasicsTest {
             Column(
                 modifier = Modifier.testTag("이름")
             ) {
-                // 바꿔 보세요!
+                Text(text = "깜포즈", color = Color.Yellow)
                 Text(text = "킴포즈", color = Color.Cyan)
                 Text(text = "끔포즈", color = Color.Yellow)
             }
@@ -78,6 +75,10 @@ class LayoutBasicsTest {
             .assertCountEquals(3)
             .onFirst()
             .assert(hasText("깜포즈"))
+        // or
+        composeTestRule.onNodeWithTag("이름")
+            .onChildAt(0)
+            .assert(hasText("깜포즈"))
     }
 
     @Test
@@ -86,9 +87,7 @@ class LayoutBasicsTest {
         composeTestRule.setContent {
             val enabled = remember { mutableStateOf(true) }
             Button(
-                onClick = {
-                    // 바꿔 보세요!
-                },
+                onClick = { enabled.value = false },
                 enabled = enabled.value,
                 modifier = Modifier.testTag("버튼")
             ) {
@@ -103,5 +102,14 @@ class LayoutBasicsTest {
 
         // then
         button.assertIsNotEnabled()
+    }
+
+}
+
+@Preview(showBackground = true, backgroundColor = 0xFFFFFFFF, device = Devices.PIXEL_4_XL)
+@Composable
+private fun PreviewSample() {
+    Button(onClick = { /*TODO*/ }) {
+        Text(text = "깜포즈", color = Color.Yellow)
     }
 }
