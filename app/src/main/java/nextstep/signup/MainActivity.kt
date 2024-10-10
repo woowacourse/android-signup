@@ -31,18 +31,18 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             SignupTheme {
-                SignUpTotalPage()
+                SignUpScreen()
             }
         }
     }
 }
 
 @Composable
-private fun SignUpTotalPage() {
+private fun SignUpScreen() {
     Surface {
         Column(modifier = Modifier.fillMaxWidth()) {
             SignUpLabel()
-            SignUpScreen()
+            SignUpTotal()
             SignUpButton()
         }
     }
@@ -68,7 +68,7 @@ fun SignUpLabel() {
 }
 
 @Composable
-fun SignUpScreen() {
+fun SignUpTotal() {
     var userName by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -134,6 +134,6 @@ private fun SignUpButton() {
 @Composable
 fun SignUpPreview() {
     SignupTheme {
-        SignUpTotalPage()
+        SignUpScreen()
     }
 }
