@@ -21,12 +21,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.signup.ui.theme.SignupTheme
@@ -36,7 +36,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             SignupTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background,
@@ -56,79 +55,93 @@ fun SignUpScreen() {
     var confirmPassword by remember { mutableStateOf("") }
 
     Column(
-        modifier =
-            Modifier
-                .fillMaxSize()
-                .padding(16.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
         verticalArrangement = Arrangement.Top,
     ) {
-        Text(
-            text = "Welcome to Compose \uD83D\uDE80",
-            style =
-                MaterialTheme.typography.titleLarge.copy(
-                    fontWeight = FontWeight.Bold,
-                ),
-            modifier = Modifier.align(Alignment.CenterHorizontally),
-        )
+        TitleText("Welcome to Compose 🚀")
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        TextField(
+        UserInputField(
+            label = "User Name",
             value = userName,
-            onValueChange = { userName = it },
-            label = { Text("User Name") },
-            modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 36.dp),
+            onValueChange = { userName = it }
         )
 
-        TextField(
+        UserInputField(
+            label = "Email",
             value = email,
-            onValueChange = { email = it },
-            label = { Text("Email") },
-            modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 36.dp),
+            onValueChange = { email = it }
         )
 
-        TextField(
+        PasswordInputField(
+            label = "Password",
             value = password,
-            onValueChange = { password = it },
-            label = { Text("Password") },
-            visualTransformation = PasswordVisualTransformation(),
-            modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 36.dp),
+            onValueChange = { password = it }
         )
 
-        TextField(
+        PasswordInputField(
+            label = "Password Confirm",
             value = confirmPassword,
-            onValueChange = { confirmPassword = it },
-            label = { Text("Password Confirm") },
-            visualTransformation = PasswordVisualTransformation(),
-            modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 36.dp),
+            onValueChange = { confirmPassword = it }
         )
 
-        Button(
-            onClick = {},
-            modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .height(60.dp),
-            colors =
-                ButtonDefaults.buttonColors(
-                    containerColor = colorResource(R.color.blue_50),
-                    contentColor = Color.White,
-                ),
-        ) {
-            Text(text = "Sign Up")
-        }
+        SignUpButton()
+    }
+}
+
+@Composable
+fun TitleText(text: String) {
+    Text(
+        text = text,
+        style = MaterialTheme.typography.titleLarge.copy(
+            fontWeight = FontWeight.Bold,
+        ),
+        modifier = Modifier.fillMaxWidth(),
+        textAlign = TextAlign.Center
+    )
+}
+
+@Composable
+fun UserInputField(label: String, value: String, onValueChange: (String) -> Unit) {
+    TextField(
+        value = value,
+        onValueChange = onValueChange,
+        label = { Text(label) },
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 36.dp)
+    )
+}
+
+@Composable
+fun PasswordInputField(label: String, value: String, onValueChange: (String) -> Unit) {
+    TextField(
+        value = value,
+        onValueChange = onValueChange,
+        label = { Text(label) },
+        visualTransformation = PasswordVisualTransformation(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 36.dp)
+    )
+}
+
+@Composable
+fun SignUpButton() {
+    Button(
+        onClick = {},
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(60.dp),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = colorResource(R.color.blue_50),
+            contentColor = Color.White
+        )
+    ) {
+        Text(text = "Sign Up")
     }
 }
 
