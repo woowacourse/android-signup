@@ -1,4 +1,4 @@
-package nextstep.signup
+package nextstep.signup.presentation.signup
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -7,11 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -19,21 +14,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import nextstep.signup.ui.theme.Black30
-import nextstep.signup.ui.theme.Blue50
-import nextstep.signup.ui.theme.BlueGrey20
-import nextstep.signup.ui.theme.PurpleGrey40
-import nextstep.signup.ui.theme.SignupTheme
-import nextstep.signup.ui.theme.Typography
 
 @Composable
 fun SignUpScreen(modifier: Modifier = Modifier) {
@@ -121,56 +104,6 @@ fun SignUpScreen(modifier: Modifier = Modifier) {
     }
 }
 
-@Composable
-fun SignUpHeader(
-    modifier: Modifier = Modifier,
-    text: String = "Welcome to Compose 🚀",
-) {
-    Text(
-        text = text,
-        style = Typography.headlineLarge,
-        modifier = modifier,
-    )
-}
-
-@Composable
-fun SignUpTextField(
-    modifier: Modifier = Modifier,
-    labelText: String = "Enter Text",
-    visualTransformation: VisualTransformation = VisualTransformation.None,
-    value: String = "",
-    onValueChange: (String) -> Unit = { }
-) {
-    TextField(
-        value = value,
-        onValueChange = onValueChange,
-        maxLines = 1,
-        label = { Text(text = labelText) },
-        modifier = modifier,
-        visualTransformation = visualTransformation,
-    )
-}
-
-@Composable
-fun SignUpButton(
-    modifier: Modifier = Modifier,
-    enable: () -> Boolean = { true }
-) {
-    val enabled = remember { mutableStateOf(true) }
-    Button(
-        onClick = {
-            enabled.value = !enabled.value
-        },
-        enabled = enable(),
-        modifier = modifier.then(Modifier.fillMaxWidth())
-    ) {
-        Text(
-            text = "Sign Up",
-            fontSize = 14.sp,
-            color = Color.White
-        )
-    }
-}
 
 @Preview
 @Composable
@@ -178,26 +111,5 @@ private fun SignUpScreenPreview() {
     SignUpScreen()
 }
 
-@Preview
-@Composable
-private fun SignUpHeaderPreview() {
-    SignupTheme {
-        SignUpHeader()
-    }
-}
 
-@Preview
-@Composable
-private fun SignUpTextFieldPreview() {
-    SignupTheme {
-        SignUpTextField()
-    }
-}
 
-@Preview
-@Composable
-private fun SignUpButtonPreview() {
-    SignupTheme {
-        SignUpButton()
-    }
-}
