@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import nextstep.signup.auth.screen.SignUpScreen
 import nextstep.signup.auth.state.SignUpFormState
 import nextstep.signup.ui.theme.SignupTheme
@@ -14,8 +14,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             SignupTheme {
-                // TODO: rememberSaveable 을 사용하여 회원가입 폼 상태를 저장한다.
-                val (formState, onChnageFormState) = remember {
+                val (formState, onChangeFormState) = rememberSaveable {
                     mutableStateOf(SignUpFormState("", "", "", ""))
                 }
                 val onDoneSignUp = {
@@ -23,7 +22,7 @@ class MainActivity : ComponentActivity() {
                 }
                 SignUpScreen(
                     signUpFormState = formState,
-                    onSignUpFormStateChange = onChnageFormState,
+                    onSignUpFormStateChange = onChangeFormState,
                     onDoneSignUp = onDoneSignUp
                 )
             }

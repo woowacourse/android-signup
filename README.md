@@ -18,3 +18,4 @@
 - [x] 화면 밖에 터치하면 focus clear 되도록 한다.
 - [x] Password 와 Password Confirm 는 PassWord KeyBoard Options 를 준다.
 - [x] SignUp 버튼을 화면에 배치한다. 
+- [x] rememberSaveable 을 사용하여 회원가입 폼 상태를 저장한다.
