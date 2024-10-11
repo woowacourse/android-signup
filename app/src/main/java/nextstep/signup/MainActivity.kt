@@ -17,6 +17,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -34,6 +35,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import nextstep.signup.ui.theme.BlueGrey20
 import nextstep.signup.ui.theme.SignupTheme
 
 class MainActivity : ComponentActivity() {
@@ -103,10 +105,14 @@ fun InputText(
     TextField(
         contents,
         label = { Text(text = title) },
-        placeholder = { Text(text = title) },
         onValueChange = { contents = it },
         keyboardOptions = KeyboardOptions(keyboardType = keyBoardType),
         visualTransformation = visualTransformation,
+        colors =
+            TextFieldDefaults.colors(
+                unfocusedContainerColor = BlueGrey20,
+                focusedContainerColor = BlueGrey20,
+            ),
     )
     Spacer(Modifier.height(36.dp))
 }
