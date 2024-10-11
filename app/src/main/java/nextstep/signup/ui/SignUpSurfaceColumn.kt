@@ -14,9 +14,10 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun SignUpSurfaceColumn(content: @Composable () -> Unit) {
     Surface(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 32.dp),
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(horizontal = 32.dp),
         color = MaterialTheme.colorScheme.background,
     ) {
         Column(

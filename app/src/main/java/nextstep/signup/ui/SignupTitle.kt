@@ -10,7 +10,10 @@ import androidx.compose.ui.unit.sp
 import nextstep.signup.ui.theme.SignupTheme
 
 @Composable
-fun SignupTitle(title: String, modifier: Modifier = Modifier) {
+fun SignupTitle(
+    title: String,
+    modifier: Modifier = Modifier,
+) {
     Text(
         text = title,
         modifier = modifier.wrapContentWidth(),

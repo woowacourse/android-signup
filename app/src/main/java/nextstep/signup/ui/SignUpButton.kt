@@ -33,7 +33,7 @@ fun SignUpButtonPreview() {
     SignupTheme {
         SignUpButton(
             Modifier,
-            "미리 보기 버튼"
+            "미리 보기 버튼",
         )
     }
 }
