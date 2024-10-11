@@ -8,8 +8,10 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import nextstep.signup.R
 import nextstep.signup.ui.theme.SignupTheme
 
 @Composable
@@ -24,7 +26,7 @@ internal fun SignUpConfirmButton(
     ) {
         Text(
             modifier = Modifier.padding(vertical = 6.dp),
-            text = "Sign Up",
+            text = stringResource(id = R.string.sign_up_confirm_button),
             style = MaterialTheme.typography.bodyMedium
         )
     }
