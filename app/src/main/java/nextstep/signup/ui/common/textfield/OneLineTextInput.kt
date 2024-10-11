@@ -1,6 +1,7 @@
 package nextstep.signup.ui.common.textfield
 
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -10,9 +11,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.unit.sp
-import nextstep.signup.ui.theme.FocusedColor
+import nextstep.signup.ui.theme.GreenLight
+import nextstep.signup.ui.theme.Typography
 
 @Composable
 fun OneLineTextInput(
@@ -31,13 +31,11 @@ fun OneLineTextInput(
         singleLine = true,
         visualTransformation = inputType.visualTransformation,
         keyboardOptions = inputType.keyboardOptions,
+        textStyle = Typography.bodyMedium,
         colors = TextFieldDefaults.colors(
-            focusedIndicatorColor = FocusedColor,
-            focusedLabelColor = FocusedColor,
+            focusedIndicatorColor = MaterialTheme.colorScheme.secondary,
+            focusedLabelColor = MaterialTheme.colorScheme.secondary,
         ),
-        textStyle = TextStyle(
-            fontSize = 16.sp,
-        )
     )
 }
 
@@ -45,6 +43,6 @@ fun OneLineTextInput(
 fun LabelText(label: String) {
     Text(
         text = label,
-        fontSize = 12.sp,
+        style = Typography.labelMedium,
     )
 }

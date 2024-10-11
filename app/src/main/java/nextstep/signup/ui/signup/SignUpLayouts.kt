@@ -1,14 +1,14 @@
-package nextstep.signup.ui.signup.composable.layout
+package nextstep.signup.ui.signup
 
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -19,22 +19,29 @@ import nextstep.signup.R
 import nextstep.signup.ui.common.button.StateButton
 import nextstep.signup.ui.common.textfield.InputType
 import nextstep.signup.ui.common.textfield.OneLineTextInput
-import nextstep.signup.ui.signup.composable.text.SignUpTitle
-import nextstep.signup.ui.theme.SignupTheme
+import nextstep.signup.ui.theme.SignUpTheme
+import nextstep.signup.ui.theme.Typography
 
 @Preview(showBackground = true)
 @Composable
 fun SignUpLayoutPreview() {
-    SignupTheme {
+    SignUpTheme {
         Surface(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(32.dp),
-            color = MaterialTheme.colorScheme.background
         ) {
             SignUpInteractionLayer {}
         }
     }
+}
+
+@Composable
+fun SignUpTitle() {
+    Text(
+        text = stringResource(id = R.string.signup_title),
+        style = Typography.titleLarge,
+    )
 }
 
 @Composable
@@ -47,19 +54,19 @@ fun SignUpTextFields() {
     ) {
         OneLineTextInput(
             label = stringResource(id = R.string.signup_username),
-            inputType = InputType.USERNAME
+            inputType = InputType.USERNAME,
         )
         OneLineTextInput(
             label = stringResource(id = R.string.signup_email),
-            inputType = InputType.EMAIL
+            inputType = InputType.EMAIL,
         )
         OneLineTextInput(
             label = stringResource(id = R.string.signup_password),
-            inputType = InputType.PASSWORD
+            inputType = InputType.PASSWORD,
         )
         OneLineTextInput(
             label = stringResource(id = R.string.signup_password_confirm),
-            inputType = InputType.PASSWORD
+            inputType = InputType.PASSWORD,
         )
     }
 }
@@ -70,7 +77,8 @@ fun SignUpInteractionLayer(
 ) {
     Column(
         modifier = Modifier
-            .fillMaxHeight(0.7f),
+            .fillMaxHeight(0.7f)
+            .padding(32.dp),
         verticalArrangement = Arrangement.SpaceEvenly,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
