@@ -2,7 +2,7 @@ package nextstep.signup.domain
 
 data class Email(
     val id: EmailId,
-    val domain: EmailDomain,
+    val domain: EmailDomain
 ) {
     fun isValid(): Boolean = id.isValid() && domain.isValid()
 
@@ -11,14 +11,14 @@ data class Email(
 
 @JvmInline
 value class EmailId(
-    val id: String,
+    val id: String
 ) {
     fun isValid(): Boolean = id.isNotBlank()
 }
 
 @JvmInline
 value class EmailDomain(
-    val domain: String,
+    val domain: String
 ) {
     fun isValid(): Boolean = domain.isNotBlank()
 
@@ -26,4 +26,3 @@ value class EmailDomain(
         val DEFAULT = EmailDomain("wooteco.com")
     }
 }
-

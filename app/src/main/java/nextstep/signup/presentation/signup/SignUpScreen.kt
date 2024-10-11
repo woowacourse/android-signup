@@ -57,7 +57,7 @@ fun SignUpScreen(initialSignUp: SignUp) {
             onValueChange = {
                 signUp = signUp.copy(
                     email = signUp.email.copy(
-                        id = EmailId(it),
+                        id = EmailId(it)
                     )
                 )
             },
@@ -77,7 +77,7 @@ fun SignUpScreen(initialSignUp: SignUp) {
                     )
                 )
             },
-            keyboardType = KeyboardType.Password,
+            keyboardType = KeyboardType.Password
         )
 
         SignUpTextField(
@@ -100,7 +100,7 @@ fun SignUpScreen(initialSignUp: SignUp) {
             modifier = Modifier.fillMaxWidth(),
             enable = {
                 signUp.isValid()
-            },
+            }
         )
     }
 }
@@ -112,6 +112,3 @@ private fun SignUpScreenPreview() {
         SignUpScreen(SignUp.INITIAL)
     }
 }
-
-
-

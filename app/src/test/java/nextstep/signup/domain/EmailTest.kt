@@ -33,5 +33,4 @@ class EmailTest {
         // then
         email.isValid() shouldBe true
     }
-
 }

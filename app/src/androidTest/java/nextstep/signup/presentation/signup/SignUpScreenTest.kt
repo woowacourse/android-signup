@@ -19,7 +19,7 @@ class SignUpScreenTest {
 
     // username 이 공백이면 회원가입 불가능
     @Test
-    fun test1() {
+    fun signup_is_enabled_when_signup_condition_is_not_satisfied() {
         // given
         composeTestRule.setContent {
             SignUpScreen(initialSignUp = SignUp.INITIAL)
@@ -29,9 +29,8 @@ class SignUpScreenTest {
         composeTestRule.onNode(hasText("Sign Up")).assertIsNotEnabled()
     }
 
-
     @Test
-    fun test2() {
+    fun signup_is_enabled_when_signup_condition_is_satisfied() {
         // given
         composeTestRule.setContent {
             SignUpScreen(

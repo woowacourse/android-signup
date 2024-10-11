@@ -17,11 +17,12 @@ class SignUpTest {
             passwordConfirm = "qwer"
         )
         val signUp = SignUp(
-            userName, mail, password
+            userName,
+            mail,
+            password
         )
 
         // then
         signUp.isValid() shouldBe true
     }
-
 }

@@ -18,7 +18,7 @@ import nextstep.signup.ui.theme.Typography
 fun SignUpButton(
     modifier: Modifier = Modifier,
     enable: () -> Boolean = { true },
-    text: String = stringResource(R.string.sign_up_button),
+    text: String = stringResource(R.string.sign_up_button)
 ) {
     val enabled = remember { mutableStateOf(true) }
     Button(
@@ -26,13 +26,13 @@ fun SignUpButton(
             enabled.value = !enabled.value
         },
         enabled = enable(),
-        modifier = modifier,
+        modifier = modifier
     ) {
         Text(
             text = text,
             style = Typography.labelLarge,
             color = Color.White,
-            textAlign = TextAlign.Center,
+            textAlign = TextAlign.Center
         )
     }
 }

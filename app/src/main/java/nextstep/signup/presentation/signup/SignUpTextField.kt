@@ -19,7 +19,7 @@ fun SignUpTextField(
     visualTransformation: VisualTransformation = VisualTransformation.None,
     value: String = "",
     onValueChange: (String) -> Unit = { },
-    keyboardType: KeyboardType = KeyboardType.Text,
+    keyboardType: KeyboardType = KeyboardType.Text
 ) {
     TextField(
         value = value,
@@ -29,8 +29,8 @@ fun SignUpTextField(
         modifier = modifier,
         visualTransformation = visualTransformation,
         keyboardOptions = KeyboardOptions(
-            keyboardType = keyboardType,
-        ),
+            keyboardType = keyboardType
+        )
     )
 }
 

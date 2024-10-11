@@ -9,24 +9,22 @@ class PasswordTest {
         // given
         val password = Password(
             password = "",
-            passwordConfirm = "",
+            passwordConfirm = ""
         )
 
         // then
         password.isValid() shouldBe false
     }
 
-
     @Test
     fun `공백이 아니고 비번과 비번 확인이 같다`() {
         // given
         val password = Password(
             password = "123",
-            passwordConfirm = "123",
+            passwordConfirm = "123"
         )
 
         // then
         password.isValid() shouldBe true
     }
-
 }

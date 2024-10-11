@@ -12,12 +12,12 @@ import nextstep.signup.ui.theme.Typography
 @Composable
 fun SignUpHeader(
     modifier: Modifier = Modifier,
-    text: String = stringResource(R.string.sign_up_header),
+    text: String = stringResource(R.string.sign_up_header)
 ) {
     Text(
         text = text,
         style = Typography.headlineLarge,
-        modifier = modifier,
+        modifier = modifier
     )
 }
 

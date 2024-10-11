@@ -32,6 +32,28 @@ Modifier는 기본적으로 빈 객체(Modifier)로 정의하는 것이 관례�
     * 외부에서 전달된 Modifier를 덮어쓰지 않고, 추가적인 동작을 결합해 유연하게 사용할 수 있도록 하기 위해.
 
 
+# Style guidelines for Jetpack Compose APIs
+
+영상 참고  [Designing scalable Compose APIs](https://developer.android.com/develop/ui/compose/api-guidelines)
+
+좋은 컴포즈 코드 -> more scalable, eaier to evolve with minumum friction, more consistent across Compose ecosystem, ... 
+
+Think and plan,
+Name and structure
+Verify and maintain
+
+Planning
+
+### Single component or layering?
+
+consistent requirement for more opinionated APIs -> Higher level API
+
+Defines a common surface and expectations -> Lower level API
+
+
+
+stateful vs stateless
+
 
 
 
