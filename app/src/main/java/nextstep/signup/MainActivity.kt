@@ -42,59 +42,64 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             SignupTheme {
-                Surface(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(
-                            start = 32.dp,
-                            top = 50.dp,
-                            end = 32.dp,
-                        ),
-                    color = MaterialTheme.colorScheme.background,
-                ) {
-                    var username by rememberSaveable { mutableStateOf("") }
-                    var email by rememberSaveable { mutableStateOf("") }
-                    var password by rememberSaveable { mutableStateOf("") }
-                    var passwordConfirm by rememberSaveable { mutableStateOf("") }
-
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                    ) {
-                        HeadLine(getString(R.string.sign_up_headline))
-                        Spacer(modifier = Modifier.height(36.dp))
-                        SignUpTextField(
-                            value = username,
-                            onValueChange = { username = it },
-                            label = getString(R.string.sign_up_username_label),
-                        )
-                        Spacer(modifier = Modifier.height(36.dp))
-                        SignUpTextField(
-                            value = email,
-                            onValueChange = { email = it },
-                            label = getString(R.string.sign_up_email_label),
-                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
-                        )
-                        Spacer(modifier = Modifier.height(36.dp))
-                        SignUpTextField(
-                            value = password,
-                            onValueChange = { password = it },
-                            label = getString(R.string.sign_up_password_label),
-                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                            visualTransformation = PasswordVisualTransformation()
-                        )
-                        Spacer(modifier = Modifier.height(36.dp))
-                        SignUpTextField(
-                            value = passwordConfirm,
-                            onValueChange = { passwordConfirm = it },
-                            label = getString(R.string.sign_up_password_confirm_label),
-                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                            visualTransformation = PasswordVisualTransformation()
-                        )
-                        Spacer(modifier = Modifier.height(42.dp))
-                        SignUpButton()
-                    }
-                }
+              SignUpScreen()
             }
+        }
+    }
+}
+
+@Composable
+fun SignUpScreen() {
+    Surface(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(
+                start = 32.dp,
+                top = 50.dp,
+                end = 32.dp,
+            ),
+        color = MaterialTheme.colorScheme.background,
+    ) {
+        var username by rememberSaveable { mutableStateOf("") }
+        var email by rememberSaveable { mutableStateOf("") }
+        var password by rememberSaveable { mutableStateOf("") }
+        var passwordConfirm by rememberSaveable { mutableStateOf("") }
+
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            HeadLine(stringResource(R.string.sign_up_headline))
+            Spacer(modifier = Modifier.height(36.dp))
+            SignUpTextField(
+                value = username,
+                onValueChange = { username = it },
+                label = stringResource(R.string.sign_up_username_label),
+            )
+            Spacer(modifier = Modifier.height(36.dp))
+            SignUpTextField(
+                value = email,
+                onValueChange = { email = it },
+                label = stringResource(R.string.sign_up_email_label),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
+            )
+            Spacer(modifier = Modifier.height(36.dp))
+            SignUpTextField(
+                value = password,
+                onValueChange = { password = it },
+                label = stringResource(R.string.sign_up_password_label),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                visualTransformation = PasswordVisualTransformation()
+            )
+            Spacer(modifier = Modifier.height(36.dp))
+            SignUpTextField(
+                value = passwordConfirm,
+                onValueChange = { passwordConfirm = it },
+                label = stringResource(R.string.sign_up_password_confirm_label),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                visualTransformation = PasswordVisualTransformation()
+            )
+            Spacer(modifier = Modifier.height(42.dp))
+            SignUpButton()
         }
     }
 }
