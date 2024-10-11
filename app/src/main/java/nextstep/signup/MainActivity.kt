@@ -4,33 +4,27 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import nextstep.signup.ui.theme.Blue50
-import nextstep.signup.ui.theme.BlueGray20
-import nextstep.signup.ui.theme.Gray50
+import nextstep.signup.ui.component.SingleLineTextField
+import nextstep.signup.ui.component.SubmitButton
+import nextstep.signup.ui.component.TitleText
 import nextstep.signup.ui.theme.SignupTheme
 
 class MainActivity : ComponentActivity() {
@@ -42,7 +36,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = Color.White
                 ) {
-                    SignUp()
+                    SignUpScreen()
                 }
             }
         }
@@ -50,22 +44,11 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun SignUp() {
-    val name = remember {
-        mutableStateOf("")
-    }
-
-    val email = remember {
-        mutableStateOf("")
-    }
-
-    val password = remember {
-        mutableStateOf("")
-    }
-
-    val passwordCheck = remember {
-        mutableStateOf("")
-    }
+fun SignUpScreen() {
+    val name = remember { mutableStateOf("") }
+    val email = remember { mutableStateOf("") }
+    val password = remember { mutableStateOf("") }
+    val passwordConfirm = remember { mutableStateOf("") }
     Column(
         modifier = Modifier.padding(horizontal = 32.dp),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -73,167 +56,63 @@ fun SignUp() {
 
         Spacer(Modifier.height(60.dp))
 
-        Text(
-            text = "Welcome to Compose \uD83D\uDE80",
-            fontSize = 26.sp,
-            color = Color.Black,
-            fontWeight = FontWeight.Bold,
-        )
+        TitleText(stringResource(R.string.sign_up_title))
 
         Spacer(Modifier.height(42.dp))
 
-        TextField(
-            value = name.value,
-            onValueChange = {
+        SingleLineTextField(
+            text = name.value,
+            onTextChange = {
                 name.value = it
             },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(53.dp),
-            colors = TextFieldDefaults.colors(
-                focusedLabelColor = Blue50,
-                unfocusedLabelColor = Gray50,
-                unfocusedContainerColor = BlueGray20,
-                focusedContainerColor = BlueGray20,
-                focusedIndicatorColor = Blue50,
-                unfocusedIndicatorColor = Gray50,
-            ),
-            placeholder = {
-                Text("Username")
-            },
-            label = {
-                Text("Username")
-            },
-            textStyle = TextStyle(
-                color = Gray50,
-                fontSize = 16.sp,
-            )
-
+            hint = stringResource(R.string.sign_up_input_user_name)
         )
 
         Spacer(Modifier.height(42.dp))
-        TextField(
-            value = email.value,
-            onValueChange = {
+
+        SingleLineTextField(
+            text = email.value,
+            onTextChange = {
                 email.value = it
             },
-            placeholder = {
-                Text("Email")
-            },
-            label = {
-                Text("Username")
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(53.dp),
-            colors = TextFieldDefaults.colors(
-                focusedLabelColor = Blue50,
-                unfocusedLabelColor = Gray50,
-                unfocusedContainerColor = BlueGray20,
-                focusedContainerColor = BlueGray20,
-                focusedIndicatorColor = Blue50,
-                unfocusedIndicatorColor = Gray50,
-            ),
-
-            textStyle = TextStyle(
-                color = Gray50,
-                fontSize = 16.sp,
-            )
-
+            hint = stringResource(R.string.sign_up_input_user_email),
+            keyBoardType = KeyboardType.Email
         )
+
         Spacer(Modifier.height(42.dp))
 
-        TextField(
-            value = password.value,
-            onValueChange = {
+        SingleLineTextField(
+            text = password.value,
+            onTextChange = {
                 password.value = it
             },
-            placeholder = {
-                Text("Password")
-            },
-            label = {
-                Text("Password")
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(53.dp),
-            colors = TextFieldDefaults.colors(
-                focusedLabelColor = Blue50,
-                unfocusedLabelColor = Gray50,
-                unfocusedContainerColor = BlueGray20,
-                focusedContainerColor = BlueGray20,
-                focusedIndicatorColor = Blue50,
-                unfocusedIndicatorColor = Gray50,
-            ),
-
-            textStyle = TextStyle(
-                color = Gray50,
-                fontSize = 16.sp,
-            )
-
+            hint = stringResource(R.string.sign_up_input_user_password),
+            keyBoardType = KeyboardType.Password
         )
         Spacer(Modifier.height(42.dp))
 
-        TextField(
-            value = passwordCheck.value,
-            onValueChange = {
-                passwordCheck.value = it
+        SingleLineTextField(
+            text = passwordConfirm.value,
+            onTextChange = {
+                passwordConfirm.value = it
             },
-            placeholder = {
-                Text("PasswordCheck")
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(53.dp),
-            colors = TextFieldDefaults.colors(
-                focusedLabelColor = Blue50,
-                unfocusedLabelColor = Gray50,
-                unfocusedContainerColor = BlueGray20,
-                focusedContainerColor = BlueGray20,
-                focusedIndicatorColor = Blue50,
-                unfocusedIndicatorColor = Gray50,
-            ),
-            label = {
-                Text("PasswordCheck")
-            },
-            textStyle = TextStyle(
-                color = Gray50,
-                fontSize = 16.sp,
-            )
-
+            hint = stringResource(R.string.sign_up_input_user_password_confirm),
+            keyBoardType = KeyboardType.Password
         )
         Spacer(Modifier.height(42.dp))
 
-        Button(
-            content = {
-                Text("Sign Up")
-            },
-            onClick = {},
-            contentPadding = PaddingValues(15.dp),
-            modifier = Modifier.fillMaxWidth(),
-            colors = ButtonColors(
-                containerColor = Blue50,
-                contentColor = Color.White,
-                disabledContentColor = Blue50,
-                disabledContainerColor = Color.White
-            )
-        )
+        SubmitButton({}, stringResource(R.string.sign_up_submit_btn))
+
     }
+
 }
 
 @Preview(
+    showSystemUi = true,
     showBackground = true,
     backgroundColor = 0xFFFFFFFF,
 )
 @Composable
-fun TestPreview() {
-    SignupTheme {
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colorScheme.background
-        ) {
-            SignUp()
-        }
-    }
-
+private fun SignUpPreview() {
+    SignUpScreen()
 }

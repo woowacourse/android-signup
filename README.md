@@ -12,5 +12,5 @@
 
 ## 프로그래밍 요구 사항
 - [x] viewModel, hilt 등을 사용하지 않는다.
-- [ ] 컴포저블 함수 분리
+- [x] 컴포저블 함수 분리
 - [x] Material3 Button, TextField 활용
