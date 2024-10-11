@@ -18,30 +18,15 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.signup.R
-import nextstep.signup.domain.Email
-import nextstep.signup.domain.EmailDomain
 import nextstep.signup.domain.EmailId
-import nextstep.signup.domain.Password
 import nextstep.signup.domain.SignUp
 import nextstep.signup.domain.UserName
 import nextstep.signup.ui.theme.SignupTheme
 
 @Composable
-fun SignUpScreen() {
+fun SignUpScreen(initialSignUp: SignUp) {
     var signUp by remember {
-        mutableStateOf(
-            SignUp(
-                userName = UserName(""),
-                email = Email(
-                    EmailId(""),
-                    EmailDomain("wooteco.com")
-                ),
-                password = Password(
-                    "",
-                    ""
-                )
-            )
-        )
+        mutableStateOf(initialSignUp)
     }
 
     Column(
@@ -124,7 +109,7 @@ fun SignUpScreen() {
 @Composable
 private fun SignUpScreenPreview() {
     SignupTheme {
-        SignUpScreen()
+        SignUpScreen(SignUp.INITIAL)
     }
 }
 

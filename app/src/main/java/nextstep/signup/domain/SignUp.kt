@@ -5,22 +5,21 @@ data class SignUp(
     val email: Email,
     val password: Password,
 ) {
-    constructor(
-        userName: String,
-        emailId: String,
-        emailDomain: String,
-        password: String,
-        passwordConfirm: String
-    ) : this(
-        UserName(userName),
-        Email(
-            EmailId(emailId),
-            EmailDomain(emailDomain)
-        ),
-        Password(password, passwordConfirm)
-    )
-
     fun isValid(): Boolean = userName.isValid() && email.isValid() && password.isValid()
+
+    companion object {
+        val INITIAL = SignUp(
+            userName = UserName(""),
+            email = Email(
+                EmailId(""),
+                EmailDomain("wooteco.com")
+            ),
+            password = Password(
+                "",
+                ""
+            )
+        )
+    }
 }
 
 private const val TAG = "SignUp"
