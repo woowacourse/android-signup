@@ -18,7 +18,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             SignupTheme {
                 SignUpSurfaceColumn {
-                    SignupTitle(Modifier.padding(top = 60.dp))
+                    SignupTitle(
+                        getString(R.string.welcome_to_compose),
+                        Modifier.padding(top = 60.dp)
+                    )
                     SignUpTextField(
                         Modifier.padding(top = 36.dp),
                         getString(R.string.user_name),

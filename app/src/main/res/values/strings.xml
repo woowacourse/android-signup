@@ -5,4 +5,5 @@
     <string name="email">Email</string>
     <string name="password_confirm">Password Confirm</string>
     <string name="sign_up">Sign Up</string>
+    <string name="welcome_to_compose">Welcome to Compose \uD83D\uDE80</string>
 </resources>

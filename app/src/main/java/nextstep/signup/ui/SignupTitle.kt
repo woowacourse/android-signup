@@ -10,9 +10,9 @@ import androidx.compose.ui.unit.sp
 import nextstep.signup.ui.theme.SignupTheme
 
 @Composable
-fun SignupTitle(modifier: Modifier = Modifier) {
+fun SignupTitle(title: String, modifier: Modifier = Modifier) {
     Text(
-        text = "Welcome to Compose \uD83D\uDE80",
+        text = title,
         modifier = modifier.wrapContentWidth(),
         fontSize = 26.sp,
         fontWeight = FontWeight.Bold,
@@ -24,6 +24,7 @@ fun SignupTitle(modifier: Modifier = Modifier) {
 fun SignupTitlePreview() {
     SignupTheme {
         SignupTitle(
+            "미리보기 텍스트",
             Modifier,
         )
     }
