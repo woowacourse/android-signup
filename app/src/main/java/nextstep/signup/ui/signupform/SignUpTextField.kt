@@ -26,6 +26,7 @@ fun SignUpTextField(
         label = { Text(text = label) },
         modifier = modifier.fillMaxWidth(),
         visualTransformation = visualTransformation,
+        singleLine = true,
     )
 }
 
