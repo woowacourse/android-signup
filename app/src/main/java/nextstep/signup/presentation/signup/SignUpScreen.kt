@@ -13,10 +13,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import nextstep.signup.R
 import nextstep.signup.ui.theme.SignupTheme
 
 @Composable
@@ -36,16 +38,15 @@ fun SignUpScreen() {
         SignUpHeader(
             modifier = Modifier.wrapContentSize()
         )
-
         SignUpTextField(
-            labelText = "Username",
+            labelText = stringResource(R.string.sign_up_user_name_label),
             value = userName,
             onValueChange = { userName = it },
             modifier = Modifier.fillMaxWidth()
         )
 
         SignUpTextField(
-            labelText = "Email",
+            labelText = stringResource(R.string.sign_up_email_label),
             value = email,
             onValueChange = { email = it },
             keyboardType = KeyboardType.Email,
@@ -53,7 +54,7 @@ fun SignUpScreen() {
         )
 
         SignUpTextField(
-            labelText = "Password",
+            labelText = stringResource(R.string.sign_up_password_label),
             visualTransformation = PasswordVisualTransformation(),
             value = password,
             modifier = Modifier.fillMaxWidth(),
@@ -62,7 +63,7 @@ fun SignUpScreen() {
         )
 
         SignUpTextField(
-            labelText = "Password Confirm",
+            labelText = stringResource(R.string.sign_up_password_confirm_label),
             visualTransformation = PasswordVisualTransformation(),
             value = passwordConfirmed,
             onValueChange = { passwordConfirmed = it },
@@ -72,6 +73,7 @@ fun SignUpScreen() {
         )
 
         SignUpButton(
+            text = stringResource(R.string.sign_up_button),
             modifier = Modifier.fillMaxWidth(),
             enable = {
                 notEmpty(email, userName, password, passwordConfirmed) && password == passwordConfirmed

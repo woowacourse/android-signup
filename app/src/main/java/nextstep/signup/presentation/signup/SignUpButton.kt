@@ -7,8 +7,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import nextstep.signup.R
 import nextstep.signup.ui.theme.SignupTheme
 import nextstep.signup.ui.theme.Typography
 
@@ -16,7 +18,7 @@ import nextstep.signup.ui.theme.Typography
 fun SignUpButton(
     modifier: Modifier = Modifier,
     enable: () -> Boolean = { true },
-    text: String = "Sign Up",
+    text: String = stringResource(R.string.sign_up_button),
 ) {
     val enabled = remember { mutableStateOf(true) }
     Button(
