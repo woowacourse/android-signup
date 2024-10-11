@@ -1,4 +1,4 @@
-package nextstep.signup.component
+package nextstep.signup.auth.component
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.text.KeyboardActions

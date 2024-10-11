@@ -1,4 +1,4 @@
-package nextstep.signup.state
+package nextstep.signup.auth.state
 
 data class SignUpFormState(
     val userName: String,
