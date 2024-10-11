@@ -42,11 +42,11 @@ class LayoutBasicsTest {
                 text = "안녕 난 컴포즈야~",
                 color = Color.Blue,
                 style =
-                    TextStyle(
-                        fontSize = 26.sp,
-                        fontWeight = FontWeight.Bold,
-                        fontFamily = FontFamily.SansSerif,
-                    ),
+                TextStyle(
+                    fontSize = 26.sp,
+                    fontWeight = FontWeight.Bold,
+                    fontFamily = FontFamily.SansSerif
+                )
             )
         }
 
@@ -61,7 +61,7 @@ class LayoutBasicsTest {
         // given
         composeTestRule.setContent {
             Column(
-                modifier = Modifier.testTag("이름"),
+                modifier = Modifier.testTag("이름")
             ) {
                 // 바꿔 보세요!
                 Text(text = "깜포즈", color = Color.Cyan)
@@ -89,7 +89,7 @@ class LayoutBasicsTest {
                     enabled.value = false
                 },
                 enabled = enabled.value,
-                modifier = Modifier.testTag("버튼"),
+                modifier = Modifier.testTag("버튼")
             ) {
                 Text(text = "클릭해주세요")
             }

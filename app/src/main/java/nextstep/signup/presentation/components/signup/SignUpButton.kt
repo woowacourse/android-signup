@@ -10,7 +10,7 @@ import androidx.compose.ui.graphics.Color
 
 @Composable
 fun SignUpButton(
-    text : String = "Sign Up",
+    text: String = "Sign Up"
 ) {
     Button(
         onClick = { /* Sign Up Logic */ },

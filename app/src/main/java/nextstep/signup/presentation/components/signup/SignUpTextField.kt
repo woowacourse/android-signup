@@ -27,7 +27,7 @@ fun SignUpTextField(
             focusedContainerColor = BlueGrey40,
             unfocusedContainerColor = BlueGrey40,
             errorContainerColor = Color.Red,
-            disabledContainerColor = PurpleGrey40,
+            disabledContainerColor = PurpleGrey40
         ),
         modifier =
         Modifier
