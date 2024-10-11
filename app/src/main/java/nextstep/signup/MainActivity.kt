@@ -9,6 +9,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -16,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,6 +30,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlinx.coroutines.launch
 import nextstep.signup.ui.theme.SignupTheme
 
 class MainActivity : ComponentActivity() {
@@ -75,49 +80,66 @@ fun SignUpScreen() {
         passwordConfirm
     )
 
+    val snackBarHostState = remember { SnackbarHostState() }
+    val coroutineScope = rememberCoroutineScope()
+
     Surface {
-        Column(modifier = Modifier.fillMaxWidth()) {
-            SignUpLabel()
-            SignUpForm(
-                userName = userName,
-                onUserNameChange = {
-                    userName = it
-                    userNameError = getUserNameError(it, usernameLengthError, usernameFormatError)
-                },
-                userNameError = userNameError,
+        Scaffold(snackbarHost = { SnackbarHost(hostState = snackBarHostState) }
+        ) { paddingValues ->
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(paddingValues)
+            ) {
+                SignUpLabel()
+                SignUpForm(
+                    userName = userName,
+                    onUserNameChange = {
+                        userName = it
+                        userNameError =
+                            getUserNameError(it, usernameLengthError, usernameFormatError)
+                    },
+                    userNameError = userNameError,
 
-                email = email,
-                onEmailChange = {
-                    email = it
-                    emailError = getEmailError(it, emailFormatError)
-                },
-                emailError = emailError,
+                    email = email,
+                    onEmailChange = {
+                        email = it
+                        emailError = getEmailError(it, emailFormatError)
+                    },
+                    emailError = emailError,
 
-                password = password,
-                onPasswordChange = {
-                    password = it
-                    passwordError = getPasswordError(it, passwordLengthError, passwordFormatError)
-                    passwordConfirmError =
-                        if (passwordConfirm.isNotEmpty() && passwordConfirm != it) {
+                    password = password,
+                    onPasswordChange = {
+                        password = it
+                        passwordError =
+                            getPasswordError(it, passwordLengthError, passwordFormatError)
+                        passwordConfirmError =
+                            if (passwordConfirm.isNotEmpty() && passwordConfirm != it) {
+                                passwordConfirmErrorString
+                            } else {
+                                ""
+                            }
+                    },
+                    passwordError = passwordError,
+
+                    passwordConfirm = passwordConfirm,
+                    onPasswordConfirmChange = {
+                        passwordConfirm = it
+                        passwordConfirmError = if (password != it) {
                             passwordConfirmErrorString
                         } else {
                             ""
                         }
-                },
-                passwordError = passwordError,
-
-                passwordConfirm = passwordConfirm,
-                onPasswordConfirmChange = {
-                    passwordConfirm = it
-                    passwordConfirmError = if (password != it) {
-                        passwordConfirmErrorString
-                    } else {
-                        ""
-                    }
-                },
-                passwordConfirmError = passwordConfirmError
-            )
-            SignUpButton(isButtonEnabled = isButtonEnabled)
+                    },
+                    passwordConfirmError = passwordConfirmError
+                )
+                SignUpButton(isButtonEnabled = isButtonEnabled,
+                    onSignUpSuccess = {
+                        coroutineScope.launch {
+                            snackBarHostState.showSnackbar(message = "회원가입 성공")
+                        }
+                    })
+            }
         }
     }
 }
@@ -215,9 +237,11 @@ fun SignUpForm(
 }
 
 @Composable
-fun SignUpButton(isButtonEnabled: Boolean) {
+fun SignUpButton(isButtonEnabled: Boolean, onSignUpSuccess: () -> Unit) {
     Button(
-        onClick = { /* something */ },
+        onClick = {
+            onSignUpSuccess()
+        },
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp),
