@@ -1,4 +1,4 @@
-package nextstep.signup.ui.signupform
+package nextstep.signup.ui.signup
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text

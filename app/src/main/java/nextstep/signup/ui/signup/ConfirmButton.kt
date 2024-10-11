@@ -1,6 +1,5 @@
-package nextstep.signup.ui.signupform
+package nextstep.signup.ui.signup
 
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text

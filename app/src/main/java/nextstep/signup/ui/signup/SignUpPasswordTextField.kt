@@ -1,4 +1,4 @@
-package nextstep.signup.ui.signupform
+package nextstep.signup.ui.signup
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
