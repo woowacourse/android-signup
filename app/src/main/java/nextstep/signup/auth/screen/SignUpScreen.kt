@@ -3,6 +3,7 @@ package nextstep.signup.auth.screen
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -23,23 +24,7 @@ import nextstep.signup.ui.interaction.clearFocusWith
 import nextstep.signup.ui.theme.SignupTheme
 
 @Composable
-fun SignUpScreen() {
-    // TODO: rememberSaveable 을 사용하여 회원가입 폼 상태를 저장한다.
-    val (formState, onChnageFormState) = remember {
-        mutableStateOf(SignUpFormState("", "", "", ""))
-    }
-    val onDoneSignUp = {
-        // TODO : Sign up 버튼을 클릭하면 회원가입 완료/실패 스낵바가 노출된다.
-    }
-    SignUpScreen(
-        signUpFormState = formState,
-        onSignUpFormStateChange = onChnageFormState,
-        onDoneSignUp = onDoneSignUp
-    )
-}
-
-@Composable
-private fun SignUpScreen(
+fun SignUpScreen(
     signUpFormState: SignUpFormState,
     onSignUpFormStateChange: (SignUpFormState) -> Unit,
     onDoneSignUp: () -> Unit,
@@ -54,9 +39,9 @@ private fun SignUpScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             SignUpTitle()
-            Spacer(modifier = Modifier.padding(25.dp))
+            Spacer(modifier = Modifier.height(25.dp))
             SignUpForm(signUpFormState, onSignUpFormStateChange, onDoneSignUp)
-            Spacer(modifier = Modifier.padding(16.dp))
+            Spacer(modifier = Modifier.height(16.dp))
             SignUpConfirmButton(onDoneSignUp, signUpFormState.enableSignUp)
         }
     }

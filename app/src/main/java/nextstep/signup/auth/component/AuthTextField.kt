@@ -8,6 +8,11 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusDirection
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.signup.ui.theme.SignupTheme
@@ -17,7 +22,46 @@ internal fun AuthTextField(
     modifier: Modifier = Modifier,
     label: String,
     text: String,
-    isError: (String) -> Boolean = { false },
+    isValid: (String) -> Boolean,
+    imeAction: ImeAction,
+    keyboardType: KeyboardType = KeyboardType.Text,
+    onTextChange: (String) -> Unit,
+    onNext: () -> Unit = {},
+    onDone: () -> Unit = {}
+) {
+    val focusManager = LocalFocusManager.current
+
+    AuthTextField(
+        modifier = modifier,
+        label = label,
+        text = text,
+        isValid = isValid,
+        keyboardOptions = KeyboardOptions(
+            imeAction = imeAction,
+            keyboardType = keyboardType
+        ),
+        keyboardActions = KeyboardActions(
+            onNext = {
+                focusManager.moveFocus(FocusDirection.Next)
+                onNext()
+            },
+            onDone = {
+                focusManager.clearFocus()
+                onDone()
+            }
+        ),
+        visualTransformation = if (keyboardType == KeyboardType.Password) PasswordVisualTransformation() else VisualTransformation.None,
+        onTextChange = onTextChange
+    )
+}
+
+
+@Composable
+internal fun AuthTextField(
+    modifier: Modifier = Modifier,
+    label: String,
+    text: String,
+    isValid: (String) -> Boolean = { true },
     errorMessage: String? = null,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
@@ -30,14 +74,14 @@ internal fun AuthTextField(
             value = text,
             onValueChange = onTextChange,
             label = { Text(label) },
-            isError = isError(text),
+            isError = isValid(text).not(),
             singleLine = true,
             visualTransformation = visualTransformation,
             keyboardOptions = keyboardOptions,
             keyboardActions = keyboardActions,
         )
-        val isInValid = isError(text) && errorMessage.isNullOrBlank().not()
-        if (isInValid) {
+        val shouldShowErrorMsg = isValid(text).not() && errorMessage.isNullOrBlank().not()
+        if (shouldShowErrorMsg) {
             Text(
                 text = errorMessage.orEmpty(),
                 style = MaterialTheme.typography.bodySmall,
@@ -46,6 +90,7 @@ internal fun AuthTextField(
         }
     }
 }
+
 
 @Preview(name = "onClearFocus")
 @Composable
@@ -79,7 +124,7 @@ private fun Preview3() {
             label = "ㅎㅇ",
             text = "나 오둥",
             onTextChange = {},
-            isError = { true },
+            isValid = { false },
         )
     }
 }
@@ -93,7 +138,7 @@ private fun Preview4() {
             text = "나 오둥",
             onTextChange = {},
             errorMessage = "오류가 발생했습니다.",
-            isError = { true },
+            isValid = { false },
         )
     }
 }
