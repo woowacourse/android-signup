@@ -17,7 +17,7 @@ import nextstep.signup.ui.theme.Gray20
 import nextstep.signup.ui.theme.Gray50
 
 @Composable
-fun SubmitButton(onClick: () -> Unit, text:String) {
+fun SubmitButton(onClick: () -> Unit, text: String) {
     Button(
         content = {
             Text(text, fontSize = 14.sp)
@@ -40,7 +40,7 @@ fun SubmitButton(onClick: () -> Unit, text:String) {
     backgroundColor = 0xFFFFFFFF
 )
 @Composable
-private fun SubmitButtonPreview(){
+private fun SubmitButtonPreview() {
     SubmitButton(
         onClick = {},
         text = "테스트"
