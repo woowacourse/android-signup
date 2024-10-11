@@ -15,4 +15,8 @@ data class SignUpFormState(
             email.isNotEmpty() &&
             password.isNotEmpty() &&
             confirmPassword.isNotEmpty()
+
+    companion object {
+        fun empty() = SignUpFormState("", "", "", "")
+    }
 }
