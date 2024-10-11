@@ -43,10 +43,21 @@ fun SignUpForm() {
         SignUpTextField(value = password, onValueChange = { password = it }, label = "Password")
 
         // Password Confirm Input
-        SignUpTextField(value = confirmPassword, onValueChange = { confirmPassword = it }, label = "Password Confirm")
+        SignUpTextField(
+            value = confirmPassword,
+            onValueChange = { confirmPassword = it },
+            label = "Password Confirm"
+        )
 
         // Sign Up Button
-        SignUpButton()
+        SignUpButton(
+            availability = (
+                {
+                    username.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty() &&
+                        password == confirmPassword
+                }
+                )
+        )
     }
 }
 

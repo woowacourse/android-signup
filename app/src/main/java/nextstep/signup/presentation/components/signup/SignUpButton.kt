@@ -7,15 +7,20 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import nextstep.signup.ui.theme.Blue50
 
 @Composable
 fun SignUpButton(
-    text: String = "Sign Up"
+    text: String = "Sign Up",
+    availability: () -> Boolean
 ) {
     Button(
-        onClick = { /* Sign Up Logic */ },
+        onClick = { /*TODO  Logic for after Sign Up*/ },
+        enabled = availability(),
         modifier = Modifier.fillMaxWidth(),
-        colors = ButtonDefaults.buttonColors(containerColor = Color.Blue)
+        colors = ButtonDefaults.buttonColors(
+            containerColor = Blue50
+        )
     ) {
         Text(text = text, color = Color.White)
     }
