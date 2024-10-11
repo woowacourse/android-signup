@@ -7,10 +7,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.signup.R
 
@@ -73,4 +78,44 @@ fun SignUpScreen(
             )
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun SignUpPreview() {
+    var email by remember { mutableStateOf("") }
+    var userName by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var passwordConfirm by remember { mutableStateOf("") }
+
+    SignUpScreen(
+        userName,
+        { userName = it },
+        email,
+        { email = it },
+        password,
+        { password = it },
+        passwordConfirm,
+        { passwordConfirm = it },
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun SignUpPreviewWithValue() {
+    var email by remember { mutableStateOf("salth6@naver.com") }
+    var userName by remember { mutableStateOf("빙티") }
+    var password by remember { mutableStateOf("password") }
+    var passwordConfirm by remember { mutableStateOf("password") }
+
+    SignUpScreen(
+        userName,
+        { userName = it },
+        email,
+        { email = it },
+        password,
+        { password = it },
+        passwordConfirm,
+        { passwordConfirm = it },
+    )
 }
