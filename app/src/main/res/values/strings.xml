@@ -5,4 +5,5 @@
     <string name="sign_up_email_label">Email</string>
     <string name="sign_up_password_label">Password</string>
     <string name="sign_up_password_confirm_label">Password Confirm</string>
+    <string name="sign_up_sign_up_label">Sign Up</string>
 </resources>
