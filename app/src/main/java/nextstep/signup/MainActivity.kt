@@ -26,6 +26,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nextstep.signup.ui.theme.SignupTheme
@@ -48,7 +50,7 @@ class MainActivity : ComponentActivity() {
                     var username by rememberSaveable { mutableStateOf("") }
                     var email by rememberSaveable { mutableStateOf("") }
                     var password by rememberSaveable { mutableStateOf("") }
-
+                    var passwordConfirm by rememberSaveable { mutableStateOf("") }
 
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
@@ -72,7 +74,16 @@ class MainActivity : ComponentActivity() {
                             value = password,
                             onValueChange = { password = it },
                             label = getString(R.string.sign_up_password_label),
-                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
+                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                            visualTransformation = PasswordVisualTransformation()
+                        )
+                        Spacer(modifier = Modifier.height(36.dp))
+                        SignUpTextField(
+                            value = passwordConfirm,
+                            onValueChange = { passwordConfirm = it },
+                            label = getString(R.string.sign_up_password_confirm_label),
+                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                            visualTransformation = PasswordVisualTransformation()
                         )
                     }
                 }
@@ -101,7 +112,8 @@ fun SignUpTextField(
     singleLine: Boolean = true,
     focusedLabelColor: Color = colorResource(id = R.color.blue50),
     focusedIndicatorColor: Color = colorResource(id = R.color.blue50),
-    cursorColor: Color = colorResource(id = R.color.blue50)
+    cursorColor: Color = colorResource(id = R.color.blue50),
+    visualTransformation: VisualTransformation = VisualTransformation.None
 ) {
     TextField(
         modifier = modifier.fillMaxWidth(),
@@ -114,6 +126,7 @@ fun SignUpTextField(
             focusedLabelColor = focusedLabelColor,
             focusedIndicatorColor = focusedIndicatorColor,
             cursorColor = cursorColor
-        )
+        ),
+        visualTransformation = visualTransformation
     )
 }
