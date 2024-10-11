@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.VisualTransformation
-import nextstep.signup.ui.theme.BlueGrey40
+import nextstep.signup.ui.theme.BlueGrey20
 import nextstep.signup.ui.theme.PurpleGrey40
 
 @Composable
@@ -24,8 +24,8 @@ fun SignUpTextField(
         label = { Text(text = label) },
         visualTransformation = visualTransformation,
         colors = TextFieldDefaults.colors(
-            focusedContainerColor = BlueGrey40,
-            unfocusedContainerColor = BlueGrey40,
+            focusedContainerColor = BlueGrey20,
+            unfocusedContainerColor = BlueGrey20,
             errorContainerColor = Color.Red,
             disabledContainerColor = PurpleGrey40
         ),
