@@ -9,7 +9,7 @@ enum class InputType(
     val visualTransformation: VisualTransformation,
     val keyboardOptions: KeyboardOptions,
 ) {
-    USERNAME(VisualTransformation.None, KeyboardOptions.Default),
-    EMAIL(VisualTransformation.None, KeyboardOptions(keyboardType = KeyboardType.Email)),
-    PASSWORD(PasswordVisualTransformation(), KeyboardOptions(keyboardType = KeyboardType.Password)),
+    Username(VisualTransformation.None, KeyboardOptions.Default),
+    Email(VisualTransformation.None, KeyboardOptions(keyboardType = KeyboardType.Email)),
+    Password(PasswordVisualTransformation(), KeyboardOptions(keyboardType = KeyboardType.Password)),
 }

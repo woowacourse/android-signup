@@ -54,19 +54,19 @@ fun SignUpTextFields() {
     ) {
         OneLineTextInput(
             label = stringResource(id = R.string.signup_username),
-            inputType = InputType.USERNAME,
+            inputType = InputType.Username,
         )
         OneLineTextInput(
             label = stringResource(id = R.string.signup_email),
-            inputType = InputType.EMAIL,
+            inputType = InputType.Email,
         )
         OneLineTextInput(
             label = stringResource(id = R.string.signup_password),
-            inputType = InputType.PASSWORD,
+            inputType = InputType.Password,
         )
         OneLineTextInput(
             label = stringResource(id = R.string.signup_password_confirm),
-            inputType = InputType.PASSWORD,
+            inputType = InputType.Password,
         )
     }
 }
