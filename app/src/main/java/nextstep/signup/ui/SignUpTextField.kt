@@ -22,35 +22,40 @@ fun SignUpTextField(
     modifier: Modifier = Modifier,
     hint: String,
     isPassword: Boolean,
+    enteredValue: String,
+    onValueChange: (String) -> Unit,
 ) {
-    var enteredValue by remember { mutableStateOf("") }
     TextField(
         value = enteredValue,
-        onValueChange = { enteredValue = it },
+        onValueChange = { onValueChange(it) },
         modifier = modifier.fillMaxWidth(),
         maxLines = 1,
         placeholder = { Text(text = hint) },
         label = { Text(text = hint) },
-        colors = TextFieldDefaults.colors(
-            focusedIndicatorColor = Blue50,
-            focusedLabelColor = Grey50,
-        ),
+        colors =
+            TextFieldDefaults.colors(
+                focusedIndicatorColor = Blue50,
+                focusedLabelColor = Grey50,
+            ),
         visualTransformation = setVisualTransformation(isPassword),
     )
 }
 
 @Composable
-private fun setVisualTransformation(isPassword: Boolean) =
-    if (isPassword) PasswordVisualTransformation() else VisualTransformation.None
+private fun setVisualTransformation(isPassword: Boolean) = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None
 
 @Preview(showBackground = true)
 @Composable
 fun SignUpTextFieldPreview() {
+    var value by remember { mutableStateOf("") }
     SignupTheme {
         SignUpTextField(
             Modifier,
-            "미리 보기 텍스트 필드",
+            "미리 보기 텍스트 힌트",
             true,
-        )
+            value,
+        ) {
+            value = "미리 보기 텍스트 값"
+        }
     }
 }
