@@ -26,10 +26,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             SignupTheme {
                 Surface(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(top = 56.dp, start = 32.dp, end = 32.dp),
-                    color = MaterialTheme.colorScheme.background
+                    modifier =
+                        Modifier
+                            .fillMaxSize()
+                            .padding(top = 56.dp, start = 32.dp, end = 32.dp),
+                    color = MaterialTheme.colorScheme.background,
                 ) {
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,

@@ -25,7 +25,9 @@ import androidx.compose.ui.unit.dp
 import nextstep.signup.ui.theme.Blue50
 
 @Composable
-fun TextView(@StringRes description: Int) {
+fun TextView(
+    @StringRes description: Int,
+) {
     Text(
         text = stringResource(id = description),
         style = MaterialTheme.typography.titleLarge,
@@ -36,7 +38,7 @@ fun TextView(@StringRes description: Int) {
 fun TextFieldView(
     paddingTop: Dp = 0.dp,
     @StringRes label: Int,
-    keyboardType: KeyboardType = KeyboardType.Text
+    keyboardType: KeyboardType = KeyboardType.Text,
 ) {
     var input by remember { mutableStateOf("") }
     Spacer(modifier = Modifier.padding(top = paddingTop))
@@ -46,7 +48,7 @@ fun TextFieldView(
         modifier = Modifier.fillMaxWidth(),
         label = { Text(text = stringResource(id = label)) },
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
-        colors = TextFieldDefaults.colors(focusedIndicatorColor = Blue50)
+        colors = TextFieldDefaults.colors(focusedIndicatorColor = Blue50),
     )
 }
 
@@ -60,7 +62,7 @@ fun ButtonView(
         onClick = {},
         modifier = Modifier.fillMaxWidth(),
         colors = ButtonDefaults.buttonColors(containerColor = Blue50),
-        contentPadding = PaddingValues(vertical =  15.dp)
+        contentPadding = PaddingValues(vertical = 15.dp),
     ) {
         Text(text = stringResource(id = description))
     }

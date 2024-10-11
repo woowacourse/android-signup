@@ -19,18 +19,19 @@ fun TextComposable() {
     Text(
         text = "안녕 난 컴포즈야~",
         color = Color.Blue,
-        style = TextStyle(
-            fontSize = 26.sp,
-            fontWeight = FontWeight.Bold,
-            fontFamily = FontFamily.SansSerif
-        ),
+        style =
+            TextStyle(
+                fontSize = 26.sp,
+                fontWeight = FontWeight.Bold,
+                fontFamily = FontFamily.SansSerif,
+            ),
     )
 }
 
 @Composable
 fun ColumnComposable() {
     Column(
-        modifier = Modifier.testTag("이름")
+        modifier = Modifier.testTag("이름"),
     ) {
         Text(text = "깜포즈", color = Color.Blue)
         Text(text = "킴포즈", color = Color.Cyan)
@@ -46,7 +47,7 @@ fun ButtonComposable() {
             enabled.value = false
         },
         enabled = enabled.value,
-        modifier = Modifier.testTag("버튼")
+        modifier = Modifier.testTag("버튼"),
     ) {
         Text("클릭해주세요")
     }

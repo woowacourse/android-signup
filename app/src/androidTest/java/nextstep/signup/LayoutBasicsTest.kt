@@ -12,12 +12,11 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.tooling.preview.Preview
-import nextstep.signup.ui.theme.SignupTheme
 import org.junit.Rule
 import org.junit.Test
 
 class LayoutBasicsTest {
-    @get: Rule
+    @get:Rule
     val composeTestRule = createComposeRule()
 
     @Test
@@ -51,9 +50,10 @@ class LayoutBasicsTest {
             ButtonComposable()
         }
 
-        val button = composeTestRule
-            .onNodeWithTag("버튼")
-            .performClick()
+        val button =
+            composeTestRule
+                .onNodeWithTag("버튼")
+                .performClick()
 
         button.assertIsNotEnabled()
     }
@@ -62,7 +62,7 @@ class LayoutBasicsTest {
 @Preview(showBackground = true)
 @Composable
 fun TextPreview() {
-   TextComposable()
+    TextComposable()
 }
 
 @Preview(showBackground = true)
