@@ -28,6 +28,14 @@ fun SignUpScreen(modifier: Modifier = Modifier) {
         val password = remember { mutableStateOf("") }
         val passwordConfirm = remember { mutableStateOf("") }
 
+        val isPasswordSame = password.value == passwordConfirm.value
+        val enabled =
+            userName.value.isNotBlank() &&
+                    email.value.isNotBlank() &&
+                    password.value.isNotBlank() &&
+                    passwordConfirm.value.isNotBlank() &&
+                    isPasswordSame
+
         Text(
             modifier = Modifier.padding(bottom = 42.dp),
             text = stringResource(id = R.string.welcome),
@@ -38,28 +46,29 @@ fun SignUpScreen(modifier: Modifier = Modifier) {
             modifier = Modifier.padding(bottom = 36.dp),
             label = stringResource(id = R.string.user_name),
             text = userName,
-            onValueChange = {userName.value = it},
+            onValueChange = { userName.value = it },
         )
         SignUpTextField(
             modifier = Modifier.padding(bottom = 36.dp),
             label = stringResource(id = R.string.email),
             text = email,
-            onValueChange = {email.value = it},
+            onValueChange = { email.value = it },
         )
         SignUpPasswordTextField(
             modifier = Modifier.padding(bottom = 36.dp),
             label = stringResource(id = R.string.password),
             text = password,
-            onValueChange = {password.value = it},
+            onValueChange = { password.value = it },
         )
         SignUpPasswordTextField(
             modifier = Modifier.padding(bottom = 42.dp),
             label = stringResource(id = R.string.password_confirm),
             text = passwordConfirm,
-            onValueChange = {passwordConfirm.value = it},
+            onValueChange = { passwordConfirm.value = it },
         )
         ConfirmButton(
             modifier = Modifier.fillMaxWidth(),
+            enabled = enabled,
             text = stringResource(id = R.string.signup),
         )
     }
