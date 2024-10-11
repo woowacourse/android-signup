@@ -3,4 +3,5 @@
     <string name="sign_up_headline">Welcome to Compose 🚀</string>
     <string name="sign_up_username_label">Username</string>
     <string name="sign_up_email_label">Email</string>
+    <string name="sign_up_password_label">Password</string>
 </resources>
