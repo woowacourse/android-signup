@@ -13,7 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import nextstep.signup.ui.theme.SignupTheme
 
 @Composable
-fun SignUpTextField(
+fun AuthTextField(
     modifier: Modifier = Modifier,
     label: String,
     text: String,
@@ -50,7 +50,7 @@ fun SignUpTextField(
 @Composable
 private fun Preview() {
     SignupTheme {
-        SignUpTextField(
+        AuthTextField(
             label = "ㅎㅇ",
             text = "나 오둥",
             onTextChange = {}
@@ -62,7 +62,7 @@ private fun Preview() {
 @Composable
 private fun Preview2() {
     SignupTheme {
-        SignUpTextField(
+        AuthTextField(
             label = "ㅎㅇ",
             text = "나 오둥",
             onTextChange = {}
@@ -74,7 +74,7 @@ private fun Preview2() {
 @Composable
 private fun Preview3() {
     SignupTheme {
-        SignUpTextField(
+        AuthTextField(
             label = "ㅎㅇ",
             text = "나 오둥",
             onTextChange = {},
@@ -87,7 +87,7 @@ private fun Preview3() {
 @Composable
 private fun Preview4() {
     SignupTheme {
-        SignUpTextField(
+        AuthTextField(
             label = "ㅎㅇ",
             text = "나 오둥",
             onTextChange = {},
