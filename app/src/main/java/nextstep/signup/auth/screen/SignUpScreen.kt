@@ -26,19 +26,18 @@ fun SignUpScreen() {
     val (formState, onChnageFormState) = remember {
         mutableStateOf(SignUpFormState("", "", "", ""))
     }
-    val onClickSignUp = {
-        // TODO : Sign up 버튼을 클릭하면 회원가입 완료 스낵바가 노출된다.
+    val onDoneSignUp = {
+        // TODO : Sign up 버튼을 클릭하면 회원가입 완료/실패 스낵바가 노출된다.
     }
     // TODO: 회원가입 버튼 활성화 조건
     val enableSignUp: Boolean = formState.userName.isNotEmpty() &&
             formState.email.isNotEmpty() &&
             formState.password.isNotEmpty() &&
             formState.confirmPassword.isNotEmpty()
-
     SignUpScreen(
         signUpFormState = formState,
         onSignUpFormStateChange = onChnageFormState,
-        onClickSignUp = onClickSignUp,
+        onDoneSignUp = onDoneSignUp,
         enableSignUp = enableSignUp
     )
 }
@@ -47,7 +46,7 @@ fun SignUpScreen() {
 private fun SignUpScreen(
     signUpFormState: SignUpFormState,
     onSignUpFormStateChange: (SignUpFormState) -> Unit,
-    onClickSignUp: () -> Unit,
+    onDoneSignUp: () -> Unit,
     enableSignUp: Boolean,
 ) {
     Surface {
@@ -61,9 +60,9 @@ private fun SignUpScreen(
         ) {
             SignUpTitle()
             Spacer(modifier = Modifier.padding(25.dp))
-            SignUpForm(signUpFormState, onSignUpFormStateChange)
+            SignUpForm(signUpFormState, onSignUpFormStateChange, onDoneSignUp)
             Spacer(modifier = Modifier.padding(16.dp))
-            SignUpConfirmButton(onClickSignUp, enableSignUp)
+            SignUpConfirmButton(onDoneSignUp, enableSignUp)
         }
     }
 }
@@ -76,7 +75,7 @@ private fun Preview() {
         SignUpScreen(
             signUpFormState = SignUpFormState("1", "2", "3", "4"),
             onSignUpFormStateChange = {},
-            onClickSignUp = {},
+            onDoneSignUp = {},
             enableSignUp = true,
         )
     }
