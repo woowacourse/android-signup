@@ -18,15 +18,26 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.signup.R
+import nextstep.signup.domain.Email
+import nextstep.signup.domain.EmailDomain
+import nextstep.signup.domain.EmailId
+import nextstep.signup.domain.Password
 import nextstep.signup.domain.SignUp
+import nextstep.signup.domain.UserName
 import nextstep.signup.ui.theme.SignupTheme
 
 @Composable
 fun SignUpScreen() {
-    var userName by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var passwordConfirmed by remember { mutableStateOf("") }
+    var userName by remember { mutableStateOf(UserName("")) }
+    var email by remember { mutableStateOf(Email(EmailId(""), EmailDomain("wooteco.com"))) }
+    var password by remember {
+        mutableStateOf(
+            Password(
+                "",
+                ""
+            )
+        )
+    }
 
     Column(
         modifier = Modifier
@@ -41,15 +52,21 @@ fun SignUpScreen() {
 
         SignUpTextField(
             labelText = stringResource(R.string.sign_up_user_name_label),
-            value = userName,
-            onValueChange = { userName = it },
+            value = userName.name,
+            onValueChange = {
+                userName = UserName(it)
+            },
             modifier = Modifier.fillMaxWidth()
         )
 
         SignUpTextField(
             labelText = stringResource(R.string.sign_up_email_label),
-            value = email,
-            onValueChange = { email = it },
+            value = email.whole(),
+            onValueChange = {
+                email = email.copy(
+                    id = EmailId(it)
+                )
+            },
             keyboardType = KeyboardType.Email,
             modifier = Modifier.fillMaxWidth()
         )
@@ -57,17 +74,25 @@ fun SignUpScreen() {
         SignUpTextField(
             labelText = stringResource(R.string.sign_up_password_label),
             visualTransformation = PasswordVisualTransformation(),
-            value = password,
+            value = password.password,
             modifier = Modifier.fillMaxWidth(),
-            onValueChange = { password = it },
+            onValueChange = {
+                password = password.copy(
+                    password = it
+                )
+            },
             keyboardType = KeyboardType.Password,
         )
 
         SignUpTextField(
             labelText = stringResource(R.string.sign_up_password_confirm_label),
             visualTransformation = PasswordVisualTransformation(),
-            value = passwordConfirmed,
-            onValueChange = { passwordConfirmed = it },
+            value = password.passwordConfirm,
+            onValueChange = {
+                password = password.copy(
+                    passwordConfirm = it
+                )
+            },
             keyboardType = KeyboardType.Password,
             modifier = Modifier.fillMaxWidth()
         )
@@ -76,7 +101,11 @@ fun SignUpScreen() {
             text = stringResource(R.string.sign_up_button),
             modifier = Modifier.fillMaxWidth(),
             enable = {
-                SignUp(userName, email, email, password, passwordConfirmed).isValid()
+                SignUp(
+                    userName = userName,
+                    email = email,
+                    password = password
+                ).isValid()
             },
         )
     }

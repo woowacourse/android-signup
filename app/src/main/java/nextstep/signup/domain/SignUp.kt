@@ -1,15 +1,10 @@
 package nextstep.signup.domain
 
-import android.util.Log
-
 data class SignUp(
     val userName: UserName,
     val email: Email,
     val password: Password,
 ) {
-    init {
-        Log.d(TAG, "init: created")
-    }
     constructor(
         userName: String,
         emailId: String,
@@ -18,7 +13,10 @@ data class SignUp(
         passwordConfirm: String
     ) : this(
         UserName(userName),
-        Email(EmailId(emailId), EmailDomain(emailDomain)),
+        Email(
+            EmailId(emailId),
+            EmailDomain(emailDomain)
+        ),
         Password(password, passwordConfirm)
     )
 
