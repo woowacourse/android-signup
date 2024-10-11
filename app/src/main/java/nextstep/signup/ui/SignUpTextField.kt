@@ -10,11 +10,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
-import nextstep.signup.R
+import nextstep.signup.ui.theme.Blue50
+import nextstep.signup.ui.theme.Grey50
 import nextstep.signup.ui.theme.SignupTheme
 
 @Composable
@@ -32,8 +32,8 @@ fun SignUpTextField(
         placeholder = { Text(text = hint) },
         label = { Text(text = hint) },
         colors = TextFieldDefaults.colors(
-            focusedIndicatorColor = colorResource(id = R.color.blue_50),
-            focusedLabelColor = colorResource(id = R.color.blue_50),
+            focusedIndicatorColor = Blue50,
+            focusedLabelColor = Grey50,
         ),
         visualTransformation = setVisualTransformation(isPassword),
     )
