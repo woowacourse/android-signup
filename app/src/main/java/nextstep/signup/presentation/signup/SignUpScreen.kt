@@ -2,7 +2,6 @@ package nextstep.signup.presentation.signup
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
@@ -19,6 +18,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.signup.R
+import nextstep.signup.domain.SignUp
 import nextstep.signup.ui.theme.SignupTheme
 
 @Composable
@@ -38,6 +38,7 @@ fun SignUpScreen() {
         SignUpHeader(
             modifier = Modifier.wrapContentSize()
         )
+
         SignUpTextField(
             labelText = stringResource(R.string.sign_up_user_name_label),
             value = userName,
@@ -69,27 +70,17 @@ fun SignUpScreen() {
             onValueChange = { passwordConfirmed = it },
             keyboardType = KeyboardType.Password,
             modifier = Modifier.fillMaxWidth()
-
         )
 
         SignUpButton(
             text = stringResource(R.string.sign_up_button),
             modifier = Modifier.fillMaxWidth(),
             enable = {
-                notEmpty(email, userName, password, passwordConfirmed) && password == passwordConfirmed
+                SignUp(userName, email, email, password, passwordConfirmed).isValid()
             },
         )
     }
 }
-
-private fun notEmpty(
-    email: String,
-    userName: String,
-    password: String,
-    passwordConfirmed: String
-) = email.isNotEmpty() && userName.isNotEmpty() &&
-        password.isNotEmpty() && passwordConfirmed.isNotEmpty()
-
 
 @Preview
 @Composable

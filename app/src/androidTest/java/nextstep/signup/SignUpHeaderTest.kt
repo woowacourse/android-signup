@@ -6,7 +6,7 @@ import nextstep.signup.presentation.signup.SignUpHeader
 import org.junit.Rule
 import org.junit.Test
 
-class SignUpScreenKtTest {
+class SignUpHeaderTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
