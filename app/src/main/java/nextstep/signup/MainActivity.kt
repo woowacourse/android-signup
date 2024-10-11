@@ -46,6 +46,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background,
                 ) {
                     var username by rememberSaveable { mutableStateOf("") }
+                    var email by rememberSaveable { mutableStateOf("") }
 
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
@@ -57,8 +58,14 @@ class MainActivity : ComponentActivity() {
                             onValueChange = { username = it },
                             label = getString(R.string.sign_up_username_label),
                         )
+                        Spacer(modifier = Modifier.height(36.dp))
+                        SignUpTextField(
+                            value = email,
+                            onValueChange = { email = it },
+                            label = getString(R.string.sign_up_email_label),
+                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
+                        )
                     }
-
                 }
             }
         }
