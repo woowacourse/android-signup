@@ -31,6 +31,7 @@ internal fun AuthTextField(
             onValueChange = onTextChange,
             label = { Text(label) },
             isError = isError(text),
+            singleLine = true,
             visualTransformation = visualTransformation,
             keyboardOptions = keyboardOptions,
             keyboardActions = keyboardActions,
