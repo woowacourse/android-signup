@@ -9,6 +9,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import nextstep.signup.ui.SignUpButton
 import nextstep.signup.ui.SignUpSurfaceColumn
@@ -32,34 +33,32 @@ class MainActivity : ComponentActivity() {
                         Modifier.padding(top = 60.dp),
                     )
                     SignUpTextField(
-                        Modifier.padding(top = 36.dp),
-                        getString(R.string.user_name),
-                        false,
-                        userName,
+                        modifier = Modifier.padding(top = 36.dp),
+                        hint = getString(R.string.user_name),
+                        value = userName,
                     ) {
                         userName = it
                     }
                     SignUpTextField(
-                        Modifier.padding(top = 36.dp),
-                        getString(R.string.email),
-                        false,
-                        email,
+                        modifier = Modifier.padding(top = 36.dp),
+                        hint = getString(R.string.email),
+                        value = email,
                     ) {
                         email = it
                     }
                     SignUpTextField(
-                        Modifier.padding(top = 36.dp),
-                        getString(R.string.password),
-                        true,
-                        password,
+                        modifier = Modifier.padding(top = 36.dp),
+                        hint = getString(R.string.password),
+                        value = password,
+                        visualTransformation = PasswordVisualTransformation(),
                     ) {
                         password = it
                     }
                     SignUpTextField(
-                        Modifier.padding(top = 36.dp),
-                        getString(R.string.password_confirm),
-                        true,
-                        passwordConfirm,
+                        modifier = Modifier.padding(top = 36.dp),
+                        hint = getString(R.string.password_confirm),
+                        value = passwordConfirm,
+                        visualTransformation = PasswordVisualTransformation(),
                     ) {
                         passwordConfirm = it
                     }

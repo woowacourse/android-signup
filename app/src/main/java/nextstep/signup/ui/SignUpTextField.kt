@@ -21,13 +21,13 @@ import nextstep.signup.ui.theme.SignupTheme
 fun SignUpTextField(
     modifier: Modifier = Modifier,
     hint: String,
-    isPassword: Boolean,
-    enteredValue: String,
+    value: String,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
     onValueChange: (String) -> Unit,
 ) {
     TextField(
-        value = enteredValue,
-        onValueChange = { onValueChange(it) },
+        value = value,
+        onValueChange = onValueChange,
         modifier = modifier.fillMaxWidth(),
         maxLines = 1,
         placeholder = { Text(text = hint) },
@@ -37,12 +37,9 @@ fun SignUpTextField(
                 focusedIndicatorColor = Blue50,
                 focusedLabelColor = Grey50,
             ),
-        visualTransformation = setVisualTransformation(isPassword),
+        visualTransformation = visualTransformation,
     )
 }
-
-@Composable
-private fun setVisualTransformation(isPassword: Boolean) = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None
 
 @Preview(showBackground = true)
 @Composable
@@ -51,11 +48,38 @@ fun SignUpTextFieldPreview() {
     SignupTheme {
         SignUpTextField(
             Modifier,
-            "미리 보기 텍스트 힌트",
-            true,
+            "텍스트 필드 힌트",
             value,
         ) {
-            value = "미리 보기 텍스트 값"
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun SignUpTextFieldPreviewWithoutMask() {
+    var value by remember { mutableStateOf("userPassword") }
+    SignupTheme {
+        SignUpTextField(
+            Modifier,
+            "텍스트 필드 힌트",
+            value,
+        ) {
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun SignUpTextFieldPreviewWithMask() {
+    var value by remember { mutableStateOf("미리 보기 텍스트 값") }
+    SignupTheme {
+        SignUpTextField(
+            Modifier,
+            "텍스트 필드 힌트",
+            value,
+            PasswordVisualTransformation(),
+        ) {
         }
     }
 }
