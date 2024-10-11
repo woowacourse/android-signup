@@ -1,5 +1,6 @@
 package nextstep.signup.presentation.signup
 
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -25,6 +26,9 @@ fun SignUpTextField(
         label = { Text(text = labelText) },
         modifier = modifier,
         visualTransformation = visualTransformation,
+        keyboardOptions = KeyboardOptions(
+            keyboardType = keyboardType,
+        ),
     )
 }
 
