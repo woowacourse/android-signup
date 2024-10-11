@@ -124,10 +124,20 @@ fun ButtonComposable() {
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview() {
+fun TextPreview() {
+    TextComposable("테스트용")
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ColumnPreview() {
     SignupTheme {
-//        TextComposable("테스트용")
-        ButtonComposable()
-//        ColumnComposable()
+        ColumnComposable()
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ButtonPreview() {
+    ButtonComposable()
 }
