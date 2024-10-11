@@ -40,13 +40,14 @@ fun SignUpForm() {
         SignUpTextField(value = email, onValueChange = { email = it }, label = "Email")
 
         // Password Input
-        SignUpTextField(value = password, onValueChange = { password = it }, label = "Password")
+        SignUpTextField(value = password, onValueChange = { password = it }, label = "Password", isPassword = true)
 
         // Password Confirm Input
         SignUpTextField(
             value = confirmPassword,
             onValueChange = { confirmPassword = it },
-            label = "Password Confirm"
+            label = "Password Confirm",
+            isPassword = true
         )
 
         // Sign Up Button
