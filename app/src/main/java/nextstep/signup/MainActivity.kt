@@ -26,17 +26,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import nextstep.signup.ui.theme.BlueGrey20
 import nextstep.signup.ui.theme.SignupTheme
+import nextstep.signup.ui.theme.Typography
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,11 +82,7 @@ fun Greeting(
 ) {
     Text(
         text = stringResource(stringRes),
-        style =
-            TextStyle(
-                fontWeight = FontWeight.Bold,
-                fontSize = 26.sp,
-            ),
+        style = Typography.titleLarge,
         textAlign = TextAlign.Center,
         modifier = Modifier.padding(0.dp, 42.dp),
     )
