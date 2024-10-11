@@ -13,7 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import nextstep.signup.ui.theme.SignupTheme
 
 @Composable
-fun AuthTextField(
+internal fun AuthTextField(
     modifier: Modifier = Modifier,
     label: String,
     text: String,
