@@ -3,7 +3,9 @@ package nextstep.signup.presentation.signup
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -26,17 +28,20 @@ fun SignUpScreen() {
 
     Column(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(20.dp),
+            .fillMaxWidth()
+            .padding(40.dp),
         verticalArrangement = Arrangement.spacedBy(24.dp, Alignment.CenterVertically),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        SignUpHeader()
+        SignUpHeader(
+            modifier = Modifier.wrapContentSize()
+        )
 
         SignUpTextField(
             labelText = "Username",
             value = userName,
             onValueChange = { userName = it },
+            modifier = Modifier.fillMaxWidth()
         )
 
         SignUpTextField(
@@ -44,12 +49,14 @@ fun SignUpScreen() {
             value = email,
             onValueChange = { email = it },
             keyboardType = KeyboardType.Email,
+            modifier = Modifier.fillMaxWidth()
         )
 
         SignUpTextField(
             labelText = "Password",
             visualTransformation = PasswordVisualTransformation(),
             value = password,
+            modifier = Modifier.fillMaxWidth(),
             onValueChange = { password = it },
             keyboardType = KeyboardType.Password,
         )
@@ -60,9 +67,12 @@ fun SignUpScreen() {
             value = passwordConfirmed,
             onValueChange = { passwordConfirmed = it },
             keyboardType = KeyboardType.Password,
+            modifier = Modifier.fillMaxWidth()
+
         )
 
         SignUpButton(
+            modifier = Modifier.fillMaxWidth(),
             enable = {
                 notEmpty(email, userName, password, passwordConfirmed) && password == passwordConfirmed
             },
