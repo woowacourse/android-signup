@@ -1,15 +1,7 @@
 package nextstep.signup
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertIsNotEnabled
@@ -20,33 +12,21 @@ import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.sp
 import org.junit.Rule
 import org.junit.Test
 
 class LayoutBasicsTest {
-
     @get:Rule
     val composeTestRule = createComposeRule()
+
+    private val checked: MutableState<Boolean> = mutableStateOf(false)
 
     @Test
     fun text() {
         // given
         val text = "안녕 난 컴포즈야~"
         composeTestRule.setContent {
-            Text(
-                // 바꿔 보세요!
-                text = "안녕 난 컴포즈야~",
-                color = Color.Blue,
-                style = TextStyle(
-                    fontSize = 26.sp,
-                    fontWeight = FontWeight.Bold,
-                    fontFamily = FontFamily.SansSerif
-                ),
-            )
+            TestText()
         }
 
         // then
@@ -59,14 +39,7 @@ class LayoutBasicsTest {
     fun column() {
         // given
         composeTestRule.setContent {
-            Column(
-                modifier = Modifier.testTag("이름")
-            ) {
-                // 바꿔 보세요!
-                Text(text = "깜포즈", color = Color.Cyan)
-                Text(text = "킴포즈", color = Color.Cyan)
-                Text(text = "끔포즈", color = Color.Yellow)
-            }
+            TestColumn()
         }
 
         // then
@@ -81,22 +54,16 @@ class LayoutBasicsTest {
     fun button() {
         // given
         composeTestRule.setContent {
-            var enabled by remember { mutableStateOf(true) }
-            Button(
-                onClick = {
-                    enabled = false
-                },
-                enabled = enabled,
-                modifier = Modifier.testTag("버튼")
-            ) {
-                Text(text = "클릭해주세요")
+            TestButton(enabled = checked.value) {
+                checked.value = !checked.value
             }
         }
 
         // when
-        val button = composeTestRule
-            .onNodeWithTag("버튼")
-            .performClick()
+        val button =
+            composeTestRule
+                .onNodeWithTag("버튼")
+                .performClick()
 
         // then
         button.assertIsNotEnabled()
