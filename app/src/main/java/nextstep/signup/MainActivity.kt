@@ -33,9 +33,9 @@ class MainActivity : ComponentActivity() {
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
                     ) {
-                        TextView(text = "Welcome to Compose 🚀")
+                        TextView(R.string.main_greeting)
                         TextFieldScreen()
-                        ButtonView(description = "Sign Up", paddingTop = 42.dp)
+                        ButtonView(R.string.main_sign_up, paddingTop = 42.dp)
                     }
                 }
             }
@@ -45,10 +45,10 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun TextFieldScreen() {
-    TextFieldView(paddingTop = 42.dp, label = "UserName")
-    TextFieldView(paddingTop = 36.dp, label = "Email")
-    TextFieldView(paddingTop = 36.dp, label = "Password")
-    TextFieldView(paddingTop = 36.dp, label = "Password Confirm")
+    TextFieldView(paddingTop = 42.dp, label = R.string.main_user_name)
+    TextFieldView(paddingTop = 36.dp, label = R.string.main_email)
+    TextFieldView(paddingTop = 36.dp, label = R.string.main_password)
+    TextFieldView(paddingTop = 36.dp, label = R.string.main_password_confirm)
 }
 
 @Preview(showBackground = true)
