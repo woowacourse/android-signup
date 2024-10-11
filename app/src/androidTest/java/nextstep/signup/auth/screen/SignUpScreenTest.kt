@@ -1,4 +1,4 @@
-package nextstep.signup
+package nextstep.signup.auth.screen
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -13,7 +13,7 @@ import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performImeAction
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.performTouchInput
-import nextstep.signup.auth.screen.SignUpScreen
+import nextstep.signup.R
 import nextstep.signup.auth.state.SignUpFormState
 import org.junit.Rule
 import org.junit.Test
