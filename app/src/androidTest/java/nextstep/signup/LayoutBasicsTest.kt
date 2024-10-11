@@ -5,7 +5,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
@@ -65,8 +64,9 @@ class LayoutBasicsTest {
     @Test
     fun button() {
         // given
+        val enabled = mutableStateOf(true)
         composeTestRule.setContent {
-            ButtonComposable()
+            ButtonComposable(enabled.value, { enabled.value = !enabled.value })
         }
 
         // when
@@ -109,13 +109,13 @@ fun ColumnComposable() {
 }
 
 @Composable
-fun ButtonComposable() {
-    val enabled = remember { mutableStateOf(true) }
+fun ButtonComposable(
+    enabled: Boolean,
+    onClickChanged: () -> Unit,
+) {
     Button(
-        onClick = {
-            enabled.value = !enabled.value
-        },
-        enabled = enabled.value,
+        onClick = { onClickChanged() },
+        enabled = enabled,
         modifier = Modifier.testTag("버튼"),
     ) {
         Text(text = "클릭해주세요")
@@ -139,5 +139,5 @@ fun ColumnPreview() {
 @Preview(showBackground = true)
 @Composable
 fun ButtonPreview() {
-    ButtonComposable()
+    ButtonComposable(true, { })
 }
