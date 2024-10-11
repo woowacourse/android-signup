@@ -11,6 +11,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -42,6 +43,7 @@ fun SignUpScreen() {
             labelText = "Email",
             value = email,
             onValueChange = { email = it },
+            keyboardType = KeyboardType.Email,
         )
 
         SignUpTextField(
@@ -49,6 +51,7 @@ fun SignUpScreen() {
             visualTransformation = PasswordVisualTransformation(),
             value = password,
             onValueChange = { password = it },
+            keyboardType = KeyboardType.Password,
         )
 
         SignUpTextField(
@@ -56,6 +59,7 @@ fun SignUpScreen() {
             visualTransformation = PasswordVisualTransformation(),
             value = passwordConfirmed,
             onValueChange = { passwordConfirmed = it },
+            keyboardType = KeyboardType.Password,
         )
 
         SignUpButton(
