@@ -64,6 +64,6 @@ fun SignUpForm() {
 
 @Preview(showBackground = true)
 @Composable
-fun Preview() {
+private fun SignUpFormPreview() {
     SignUpForm()
 }
