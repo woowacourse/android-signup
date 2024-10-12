@@ -3,6 +3,7 @@ package nextstep.signup
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -67,22 +68,20 @@ fun SignUpScreen() {
 
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(36.dp)
         ) {
             HeadLine(stringResource(R.string.sign_up_headline))
-            Spacer(modifier = Modifier.height(36.dp))
             SignUpTextField(
                 value = username,
                 onValueChange = { username = it },
                 label = stringResource(R.string.sign_up_username_label),
             )
-            Spacer(modifier = Modifier.height(36.dp))
             SignUpTextField(
                 value = email,
                 onValueChange = { email = it },
                 label = stringResource(R.string.sign_up_email_label),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
             )
-            Spacer(modifier = Modifier.height(36.dp))
             SignUpTextField(
                 value = password,
                 onValueChange = { password = it },
@@ -90,7 +89,6 @@ fun SignUpScreen() {
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                 visualTransformation = PasswordVisualTransformation()
             )
-            Spacer(modifier = Modifier.height(36.dp))
             SignUpTextField(
                 value = passwordConfirm,
                 onValueChange = { passwordConfirm = it },
@@ -98,7 +96,7 @@ fun SignUpScreen() {
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                 visualTransformation = PasswordVisualTransformation()
             )
-            Spacer(modifier = Modifier.height(42.dp))
+            Spacer(modifier = Modifier.height(6.dp))
             SignUpButton()
         }
     }
