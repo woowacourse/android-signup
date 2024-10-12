@@ -12,16 +12,19 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import nextstep.signup.R
+import nextstep.signup.domain.Email
+import nextstep.signup.domain.SignUp
+import nextstep.signup.domain.Username
 
 @Composable
-fun SignUpForm() {
-    var username by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var confirmPassword by remember { mutableStateOf("") }
-
+fun SignUpForm(
+    signUpData: SignUp,
+    onDataChange: (SignUp) -> Unit = {}
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -83,11 +86,8 @@ fun SignUpForm() {
         // Sign Up Button
         SignUpButton(
             availability = (
-                {
-                    username.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty() &&
-                        password == confirmPassword
-                }
-                )
+                    { signUpData.isValid() }
+                    )
         )
     }
 }
@@ -95,5 +95,7 @@ fun SignUpForm() {
 @Preview(showBackground = true)
 @Composable
 private fun SignUpFormPreview() {
-    SignUpForm()
+    SignUpForm(
+        SignUp.BLANK_SIGN_UP
+    )
 }
