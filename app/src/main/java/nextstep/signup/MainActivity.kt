@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
@@ -25,7 +26,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -49,44 +52,52 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun SignUpScreen() {
-    var userName by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var confirmPassword by remember { mutableStateOf("") }
-
     Column(
         modifier =
-            Modifier
-                .fillMaxSize()
-                .padding(16.dp),
+        Modifier
+            .fillMaxSize()
+            .padding(16.dp),
         verticalArrangement = Arrangement.Top,
     ) {
+        var userName by remember { mutableStateOf("") }
+        var email by remember { mutableStateOf("") }
+        var password by remember { mutableStateOf("") }
+        var confirmPassword by remember { mutableStateOf("") }
         TitleText("Welcome to Compose 🚀")
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        UserInputField(
+        InputField(
             label = "User Name",
             value = userName,
             onValueChange = { userName = it },
+            isPasswordInputField = false,
+            keyboardType = KeyboardType.Text,
         )
 
-        UserInputField(
+        InputField(
             label = "Email",
             value = email,
             onValueChange = { email = it },
+            isPasswordInputField = false,
+            keyboardType = KeyboardType.Email,
         )
 
-        PasswordInputField(
+
+        InputField(
             label = "Password",
             value = password,
             onValueChange = { password = it },
+            isPasswordInputField = true,
+            keyboardType = KeyboardType.Password,
         )
 
-        PasswordInputField(
+        InputField(
             label = "Password Confirm",
             value = confirmPassword,
             onValueChange = { confirmPassword = it },
+            isPasswordInputField = true,
+            keyboardType = KeyboardType.Password,
         )
 
         SignUpButton()
@@ -98,47 +109,41 @@ fun TitleText(text: String) {
     Text(
         text = text,
         style =
-            MaterialTheme.typography.titleLarge.copy(
-                fontWeight = FontWeight.Bold,
-            ),
+        MaterialTheme.typography.titleLarge.copy(
+            fontWeight = FontWeight.Bold,
+        ),
         modifier = Modifier.fillMaxWidth(),
         textAlign = TextAlign.Center,
     )
 }
 
 @Composable
-fun UserInputField(
+fun InputField(
     label: String,
     value: String,
     onValueChange: (String) -> Unit,
+    isPasswordInputField: Boolean,
+    keyboardType: KeyboardType,
 ) {
     TextField(
         value = value,
         onValueChange = onValueChange,
         label = { Text(label) },
         modifier =
-            Modifier
-                .fillMaxWidth()
-                .padding(bottom = 36.dp),
+        Modifier
+            .fillMaxWidth()
+            .padding(bottom = 36.dp),
+        keyboardOptions = KeyboardOptions(
+            keyboardType = keyboardType,
+        ),
+        visualTransformation = visualTransformation(isPasswordInputField)
     )
 }
 
 @Composable
-fun PasswordInputField(
-    label: String,
-    value: String,
-    onValueChange: (String) -> Unit,
-) {
-    TextField(
-        value = value,
-        onValueChange = onValueChange,
-        label = { Text(label) },
-        visualTransformation = PasswordVisualTransformation(),
-        modifier =
-            Modifier
-                .fillMaxWidth()
-                .padding(bottom = 36.dp),
-    )
+private fun visualTransformation(isPasswordInputField: Boolean): VisualTransformation {
+    return if (isPasswordInputField) PasswordVisualTransformation()
+    else VisualTransformation.None
 }
 
 @Composable
@@ -146,14 +151,14 @@ fun SignUpButton() {
     Button(
         onClick = {},
         modifier =
-            Modifier
-                .fillMaxWidth()
-                .height(60.dp),
+        Modifier
+            .fillMaxWidth()
+            .height(60.dp),
         colors =
-            ButtonDefaults.buttonColors(
-                containerColor = colorResource(R.color.blue_50),
-                contentColor = Color.White,
-            ),
+        ButtonDefaults.buttonColors(
+            containerColor = colorResource(R.color.blue_50),
+            contentColor = Color.White,
+        ),
     ) {
         Text(text = "Sign Up")
     }
