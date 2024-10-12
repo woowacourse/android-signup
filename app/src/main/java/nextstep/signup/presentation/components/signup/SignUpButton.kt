@@ -7,11 +7,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import nextstep.signup.R
 import nextstep.signup.ui.theme.Blue50
 
 @Composable
 fun SignUpButton(
-    text: String = "Sign Up",
     availability: () -> Boolean
 ) {
     Button(
@@ -22,6 +23,6 @@ fun SignUpButton(
             containerColor = Blue50
         )
     ) {
-        Text(text = text, color = Color.White)
+        Text(text = stringResource(R.string.sign_up_button), color = Color.White)
     }
 }
