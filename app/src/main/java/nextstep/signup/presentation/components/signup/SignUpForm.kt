@@ -34,22 +34,48 @@ fun SignUpForm() {
         SignUpGreeting()
 
         // Username Input
-        SignUpTextField(value = username, onValueChange = { username = it }, label = "Username")
+        SignUpTextField(value = signUpData.username.name,
+            onValueChange = {
+                onDataChange(
+                    signUpData.copy(
+                        username = Username(it)
+                    )
+                )
             }, label = stringResource(R.string.sign_up_form_username)
+        )
 
         // Email Input
-        SignUpTextField(value = email, onValueChange = { email = it }, label = "Email")
+        SignUpTextField(value = signUpData.email.email, onValueChange = {
+            onDataChange(
+                signUpData.copy(
+                    email = Email(it)
+                )
+            )
         }, label = stringResource(R.string.sign_up_form_email))
 
         // Password Input
-        SignUpTextField(value = password, onValueChange = { password = it }, label = "Password", isPassword = true)
+        SignUpTextField(value = signUpData.password.password, onValueChange = {
+            onDataChange(
+                signUpData.copy(
+                    password = signUpData.password.copy(
+                        password = it
+                    )
+                )
+            )
         }, label = stringResource(R.string.sign_up_form_password), isPassword = true)
 
         // Password Confirm Input
         SignUpTextField(
-            value = confirmPassword,
-            onValueChange = { confirmPassword = it },
-            label = "Password Confirm",
+            value = signUpData.password.passwordConfirm,
+            onValueChange = {
+                onDataChange(
+                    signUpData.copy(
+                        password = signUpData.password.copy(
+                            passwordConfirm = it
+                        )
+                    )
+                )
+            },
             label = stringResource(R.string.sign_up_form_password_confirm),
             isPassword = true
         )
