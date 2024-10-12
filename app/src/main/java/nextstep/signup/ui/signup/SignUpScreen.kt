@@ -50,14 +50,11 @@ fun SignUpScreen(modifier: Modifier = Modifier) {
             text = userName,
             onValueChange = { userName.value = it },
         )
-        SignUpTextField(
+        EmailTextField(
             modifier = Modifier.padding(bottom = 36.dp),
             label = stringResource(id = R.string.email),
             text = email,
             onValueChange = { email.value = it },
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Email
-            )
         )
         SignUpPasswordTextField(
             modifier = Modifier.padding(bottom = 36.dp),
