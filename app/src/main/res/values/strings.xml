@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Signup</string>
+
+    <!--activity_main    -->
+    <string name="title">Welcome to Compose 🚀</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="password_confirm">Password Confirm</string>
+    <string name="sign_up">Sign Up</string>
 </resources>

@@ -25,6 +25,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -63,12 +64,12 @@ fun SignUpScreen() {
         var email by remember { mutableStateOf("") }
         var password by remember { mutableStateOf("") }
         var confirmPassword by remember { mutableStateOf("") }
-        TitleText("Welcome to Compose 🚀")
+        TitleText(stringResource(R.string.title))
 
         Spacer(modifier = Modifier.height(16.dp))
 
         InputField(
-            label = "User Name",
+            label = stringResource(R.string.sign_up),
             value = userName,
             onValueChange = { userName = it },
             isPasswordInputField = false,
@@ -76,7 +77,7 @@ fun SignUpScreen() {
         )
 
         InputField(
-            label = "Email",
+            label = stringResource(R.string.email),
             value = email,
             onValueChange = { email = it },
             isPasswordInputField = false,
@@ -85,7 +86,7 @@ fun SignUpScreen() {
 
 
         InputField(
-            label = "Password",
+            label = stringResource(R.string.password),
             value = password,
             onValueChange = { password = it },
             isPasswordInputField = true,
@@ -93,14 +94,14 @@ fun SignUpScreen() {
         )
 
         InputField(
-            label = "Password Confirm",
+            label = stringResource(R.string.password_confirm),
             value = confirmPassword,
             onValueChange = { confirmPassword = it },
             isPasswordInputField = true,
             keyboardType = KeyboardType.Password,
         )
 
-        SignUpButton("sign up")
+        SignUpButton(stringResource(R.string.sign_up))
     }
 }
 
