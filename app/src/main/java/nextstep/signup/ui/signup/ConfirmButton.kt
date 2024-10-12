@@ -19,13 +19,14 @@ fun ConfirmButton(
     onClick: () -> Unit = {},
 ) {
     Button(
+        modifier = modifier,
         onClick = onClick,
         enabled = enabled,
     ) {
         Text(
+            modifier = modifier.padding(15.dp),
             text = text,
             fontSize = 14.sp,
-            modifier = modifier.padding(15.dp),
             textAlign = TextAlign.Center,
         )
     }
@@ -35,6 +36,9 @@ fun ConfirmButton(
 @Composable
 fun ConfirmButtonPreview() {
     SignupTheme {
-        ConfirmButton(text = "Preview")
+        ConfirmButton(
+            text = "Preview",
+            enabled = true
+        )
     }
 }
