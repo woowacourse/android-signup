@@ -10,7 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import nextstep.signup.ui.theme.SignupTheme
 
 @Composable
-fun SignUpPasswordTextField(
+fun PasswordTextField(
     modifier: Modifier = Modifier,
     label: String,
     text: MutableState<String>,
@@ -25,10 +25,10 @@ fun SignUpPasswordTextField(
 
 @Preview(showBackground = true)
 @Composable
-fun SignUpPasswordTextFieldPreview() {
+fun PasswordTextFieldPreview() {
     SignupTheme {
-        SignUpPasswordTextField(
-            label = "Preview",
+        PasswordTextField(
+            label = "Password",
             text = remember { mutableStateOf("") },
         )
     }
