@@ -42,7 +42,7 @@ class LayoutBasicTest {
 
         // then
         composeTestRule
-            .onNodeWithText(text)
+            .onNodeWithText("안녕 난 컴포즈야~")
             .assertExists()
     }
 
