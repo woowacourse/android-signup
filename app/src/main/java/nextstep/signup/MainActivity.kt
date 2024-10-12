@@ -100,7 +100,7 @@ fun SignUpScreen() {
             keyboardType = KeyboardType.Password,
         )
 
-        SignUpButton()
+        SignUpButton("sign up")
     }
 }
 
@@ -147,7 +147,9 @@ private fun visualTransformation(isPasswordInputField: Boolean): VisualTransform
 }
 
 @Composable
-fun SignUpButton() {
+fun SignUpButton(
+    buttonText: String,
+) {
     Button(
         onClick = {},
         modifier =
@@ -160,7 +162,7 @@ fun SignUpButton() {
             contentColor = Color.White,
         ),
     ) {
-        Text(text = "Sign Up")
+        Text(text = buttonText)
     }
 }
 
