@@ -7,8 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -37,14 +35,16 @@ fun SignUpForm(
         SignUpGreeting()
 
         // Username Input
-        SignUpTextField(value = signUpData.username.name,
+        SignUpTextField(
+            value = signUpData.username.name,
             onValueChange = {
                 onDataChange(
                     signUpData.copy(
                         username = Username(it)
                     )
                 )
-            }, label = stringResource(R.string.sign_up_form_username)
+            },
+            label = stringResource(R.string.sign_up_form_username)
         )
 
         // Email Input
@@ -86,8 +86,8 @@ fun SignUpForm(
         // Sign Up Button
         SignUpButton(
             availability = (
-                    { signUpData.isValid() }
-                    )
+                { signUpData.isValid() }
+                )
         )
     }
 }

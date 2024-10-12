@@ -6,12 +6,9 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import nextstep.signup.ui.theme.BlueGrey20
-import nextstep.signup.ui.theme.Purple80
-import nextstep.signup.ui.theme.PurpleGrey40
 
 @Composable
 fun SignUpTextField(
@@ -27,7 +24,7 @@ fun SignUpTextField(
         visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None,
         colors = TextFieldDefaults.colors(
             focusedContainerColor = BlueGrey20,
-            unfocusedContainerColor = BlueGrey20,
+            unfocusedContainerColor = BlueGrey20
         ),
         modifier =
         Modifier
