@@ -1,6 +1,9 @@
 package nextstep.signup.ui.signup
 
+import android.inputmethodservice.Keyboard
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -14,19 +17,20 @@ import nextstep.signup.ui.theme.SignupTheme
 
 @Composable
 fun SignUpTextField(
+    modifier: Modifier = Modifier,
     label: String,
     text: MutableState<String>,
     onValueChange: (String) -> Unit = {},
     visualTransformation: VisualTransformation = VisualTransformation.None,
-    modifier: Modifier = Modifier,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
 ) {
     TextField(
+        modifier = modifier.fillMaxWidth(),
         value = text.value,
         onValueChange = onValueChange,
         label = { Text(text = label) },
-        modifier = modifier.fillMaxWidth(),
         visualTransformation = visualTransformation,
-        singleLine = true,
+        keyboardOptions = keyboardOptions,
     )
 }
 
@@ -35,8 +39,8 @@ fun SignUpTextField(
 fun SignUpTextFieldPreview() {
     SignupTheme {
         SignUpTextField(
-            "Preview",
-            remember { mutableStateOf("") },
+            label = "Preview",
+            text = remember { mutableStateOf("") },
         )
     }
 }
