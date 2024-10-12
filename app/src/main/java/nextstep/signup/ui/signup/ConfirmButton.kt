@@ -1,5 +1,6 @@
 package nextstep.signup.ui.signup
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
@@ -22,9 +23,10 @@ fun ConfirmButton(
         modifier = modifier,
         onClick = onClick,
         enabled = enabled,
+        contentPadding = PaddingValues(15.dp)
     ) {
         Text(
-            modifier = modifier.padding(15.dp),
+            modifier = modifier,
             text = text,
             fontSize = 14.sp,
             textAlign = TextAlign.Center,
