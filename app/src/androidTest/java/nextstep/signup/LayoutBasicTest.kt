@@ -41,8 +41,8 @@ class LayoutBasicTest {
                 style = TextStyle(
                     fontSize = 26.sp,
                     fontWeight = FontWeight.Bold,
-                    fontFamily = FontFamily.SansSerif,
-                ),
+                    fontFamily = FontFamily.SansSerif
+                )
             )
         }
 

@@ -43,7 +43,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             SignupTheme {
-              SignUpScreen()
+                SignUpScreen()
             }
         }
     }
@@ -57,9 +57,9 @@ fun SignUpScreen() {
             .padding(
                 start = 32.dp,
                 top = 50.dp,
-                end = 32.dp,
+                end = 32.dp
             ),
-        color = MaterialTheme.colorScheme.background,
+        color = MaterialTheme.colorScheme.background
     ) {
         var username by rememberSaveable { mutableStateOf("") }
         var email by rememberSaveable { mutableStateOf("") }
@@ -74,7 +74,7 @@ fun SignUpScreen() {
             SignUpTextField(
                 value = username,
                 onValueChange = { username = it },
-                label = stringResource(R.string.sign_up_username_label),
+                label = stringResource(R.string.sign_up_username_label)
             )
             SignUpTextField(
                 value = email,
@@ -108,7 +108,7 @@ fun HeadLine(text: String) {
         text = text,
         color = Color.Black,
         fontSize = 26.sp,
-        fontWeight = FontWeight.Bold,
+        fontWeight = FontWeight.Bold
     )
 }
 
