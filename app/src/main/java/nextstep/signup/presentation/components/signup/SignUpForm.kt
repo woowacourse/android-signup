@@ -35,18 +35,22 @@ fun SignUpForm() {
 
         // Username Input
         SignUpTextField(value = username, onValueChange = { username = it }, label = "Username")
+            }, label = stringResource(R.string.sign_up_form_username)
 
         // Email Input
         SignUpTextField(value = email, onValueChange = { email = it }, label = "Email")
+        }, label = stringResource(R.string.sign_up_form_email))
 
         // Password Input
         SignUpTextField(value = password, onValueChange = { password = it }, label = "Password", isPassword = true)
+        }, label = stringResource(R.string.sign_up_form_password), isPassword = true)
 
         // Password Confirm Input
         SignUpTextField(
             value = confirmPassword,
             onValueChange = { confirmPassword = it },
             label = "Password Confirm",
+            label = stringResource(R.string.sign_up_form_password_confirm),
             isPassword = true
         )
 

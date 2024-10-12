@@ -3,4 +3,8 @@
 
     <string name="sign_up_greeting">Welcome to Compose 🚀</string>
     <string name="sign_up_button">Sign Up</string>
+    <string name="sign_up_form_username">Username</string>
+    <string name="sign_up_form_email">Email</string>
+    <string name="sign_up_form_password">Password</string>
+    <string name="sign_up_form_password_confirm">Password Confirm</string>
 </resources>
