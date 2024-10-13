@@ -1,8 +1,11 @@
 package nextstep.signup.domain
 
 data class Password(
-    val password: String,
-    val passwordConfirm: String
+    val value: String = "",
 ) {
-    fun isValid(): Boolean = password.isNotBlank() && password == passwordConfirm
+    fun isValid(): Boolean {
+        "^(?=.*[a-zA-Z])(?=.*[0-9]).{8,16}$".toRegex().let {
+            return it.matches(value)
+        }
+    }
 }

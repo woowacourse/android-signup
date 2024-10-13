@@ -2,10 +2,12 @@ package nextstep.signup.domain
 
 data class SignUp(
     val email: Email,
+    val username: Username,
     val password: Password,
-    val username: Username
+    val confirmPassword: Password,
+
 ) {
-    fun isValid(): Boolean = email.isValid() && password.isValid() && username.isValid()
+    fun isValid(): Boolean = email.isValid() && username.isValid() && password.isValid() && confirmPassword.isValid() && password == confirmPassword
 
     companion object {
         val BLANK_SIGN_UP = SignUp(
