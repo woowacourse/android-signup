@@ -17,6 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nextstep.signup.R
+import nextstep.signup.model.InputValidation
 import nextstep.signup.ui.theme.Blue50
 
 @Composable
@@ -25,6 +26,7 @@ fun CustomTextField(
     value: String,
     onValueChange: (String) -> Unit,
     @StringRes labelResId: Int,
+    inputValidation: InputValidation,
     visualTransformation: VisualTransformation = VisualTransformation.None,
 ) {
     TextField(
@@ -50,6 +52,11 @@ fun CustomTextField(
                 cursorColor = Blue50,
             ),
         visualTransformation = visualTransformation,
+        isError = inputValidation.isError,
+        supportingText = {
+            inputValidation.stringRes ?: return@TextField
+            Text(text = stringResource(id = inputValidation.stringRes))
+        },
     )
 }
 
@@ -61,6 +68,7 @@ fun CustomTextFieldPreview() {
         value = "",
         onValueChange = { },
         labelResId = R.string.username_input,
+        inputValidation = InputValidation(isError = false),
         visualTransformation = PasswordVisualTransformation(),
     )
 }
