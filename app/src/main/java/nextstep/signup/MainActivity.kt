@@ -61,7 +61,6 @@ fun SignUpScreen() {
         )
         Spacer(Modifier.height(42.dp))
 
-
         SingleLineTextField(
             text = name.value,
             onTextChange = {
