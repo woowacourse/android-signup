@@ -9,8 +9,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
+import nextstep.signup.ui.theme.Typography
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -21,7 +23,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.signup.ui.component.SingleLineTextField
 import nextstep.signup.ui.component.SubmitButton
-import nextstep.signup.ui.component.TitleText
 import nextstep.signup.ui.theme.SignupTheme
 
 class MainActivity : ComponentActivity() {
@@ -53,9 +54,12 @@ fun SignUpScreen() {
 
         Spacer(Modifier.height(60.dp))
 
-        TitleText(stringResource(R.string.sign_up_title))
-
+        Text(
+            text = stringResource(R.string.sign_up_title),
+            style = Typography.titleLarge
+        )
         Spacer(Modifier.height(42.dp))
+
 
         SingleLineTextField(
             text = name.value,
