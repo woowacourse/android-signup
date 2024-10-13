@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun TextViewTest(text: String) {
     Text(
-        text = "$text",
+        text = text,
         color = Color.Blue,
         style = TextStyle(
             fontSize = 26.sp,

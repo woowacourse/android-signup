@@ -13,7 +13,7 @@ fun FirstColumnTest(text: String) {
     Column(
         modifier = Modifier.testTag("이름")
     ) {
-        Text(text = "$text", color = Color.Gray)
+        Text(text = text, color = Color.Gray)
         Text(text = "킴포즈", color = Color.Cyan)
         Text(text = "끔포즈", color = Color.Yellow)
     }
