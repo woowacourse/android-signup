@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Surface
@@ -66,7 +67,8 @@ fun SignUpScreen() {
             onTextChange = {
                 name.value = it
             },
-            hint = stringResource(R.string.sign_up_input_user_name)
+            modifier = Modifier.fillMaxWidth(),
+            hint = stringResource(R.string.sign_up_input_user_name),
         )
 
         Spacer(Modifier.height(42.dp))
@@ -76,6 +78,7 @@ fun SignUpScreen() {
             onTextChange = {
                 email.value = it
             },
+            modifier = Modifier.fillMaxWidth(),
             hint = stringResource(R.string.sign_up_input_user_email),
             keyBoardType = KeyboardType.Email
         )
@@ -87,6 +90,7 @@ fun SignUpScreen() {
             onTextChange = {
                 password.value = it
             },
+            modifier = Modifier.fillMaxWidth(),
             hint = stringResource(R.string.sign_up_input_user_password),
             keyBoardType = KeyboardType.Password
         )
@@ -97,12 +101,17 @@ fun SignUpScreen() {
             onTextChange = {
                 passwordConfirm.value = it
             },
+            modifier = Modifier.fillMaxWidth(),
             hint = stringResource(R.string.sign_up_input_user_password_confirm),
             keyBoardType = KeyboardType.Password
         )
         Spacer(Modifier.height(42.dp))
 
-        SubmitButton(stringResource(R.string.sign_up_submit_btn)) {}
+        SubmitButton(
+            text = stringResource(R.string.sign_up_submit_btn),
+            onClick = {},
+            modifier = Modifier.fillMaxWidth()
+        )
     }
 }
 

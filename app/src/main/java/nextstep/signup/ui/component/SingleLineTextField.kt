@@ -24,15 +24,14 @@ fun SingleLineTextField(
     text: String,
     onTextChange: (String) -> Unit,
     hint: String,
+    modifier: Modifier = Modifier,
     keyBoardType: KeyboardType = KeyboardType.Text,
     visualTransformation: VisualTransformation = VisualTransformation.None,
 ) {
     TextField(
         value = text,
         onValueChange = onTextChange,
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(53.dp),
+        modifier = modifier,
         colors = TextFieldDefaults.colors(
             focusedLabelColor = Blue50,
             unfocusedLabelColor = Gray50,
