@@ -11,12 +11,10 @@ data class SignUp(
 
     companion object {
         val BLANK_SIGN_UP = SignUp(
-            email = Email(""),
-            password = Password(
-                "",
-                ""
-            ),
-            username = Username("")
+            email = Email(),
+            username = Username(),
+            password = Password(),
+            confirmPassword = Password(),
         )
     }
 }

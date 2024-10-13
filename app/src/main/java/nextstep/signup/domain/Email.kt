@@ -1,12 +1,12 @@
 package nextstep.signup.domain
 
 data class Email(
-    val email: String
+    val address: String = ""
 ) {
-    private val id: EmailId = EmailId(email.substringBefore("@"))
-    private val domain: EmailDomain = EmailDomain(email.substringAfter("@"))
+    private val id: EmailId = EmailId(address.substringBefore("@"))
+    private val domain: EmailDomain = EmailDomain(address.substringAfter("@"))
 
-    fun isValid(): Boolean = id.isValid() && domain.isValid() && email.contains("@")
+    fun isValid(): Boolean = id.isValid() && domain.isValid() && address.contains("@")
 }
 
 data class EmailId(

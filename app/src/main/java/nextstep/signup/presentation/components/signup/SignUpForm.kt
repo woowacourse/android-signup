@@ -6,8 +6,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -48,7 +46,7 @@ fun SignUpForm(
         )
 
         // Email Input
-        SignUpTextField(value = signUpData.email.email, onValueChange = {
+        SignUpTextField(value = signUpData.email.address, onValueChange = {
             onDataChange(
                 signUpData.copy(
                     email = Email(it)
@@ -57,11 +55,11 @@ fun SignUpForm(
         }, label = stringResource(R.string.sign_up_form_email))
 
         // Password Input
-        SignUpTextField(value = signUpData.password.password, onValueChange = {
+        SignUpTextField(value = signUpData.password.value, onValueChange = {
             onDataChange(
                 signUpData.copy(
                     password = signUpData.password.copy(
-                        password = it
+                        value = it
                     )
                 )
             )
@@ -69,12 +67,12 @@ fun SignUpForm(
 
         // Password Confirm Input
         SignUpTextField(
-            value = signUpData.password.passwordConfirm,
+            value = signUpData.confirmPassword.value,
             onValueChange = {
                 onDataChange(
                     signUpData.copy(
-                        password = signUpData.password.copy(
-                            passwordConfirm = it
+                        confirmPassword = signUpData.confirmPassword.copy(
+                            value = it
                         )
                     )
                 )
