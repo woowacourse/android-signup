@@ -17,11 +17,8 @@ import nextstep.signup.ui.theme.Gray20
 import nextstep.signup.ui.theme.Gray50
 
 @Composable
-fun SubmitButton(onClick: () -> Unit, text: String) {
+fun SubmitButton(text: String, onClick: () -> Unit) {
     Button(
-        content = {
-            Text(text, fontSize = 14.sp)
-        },
         shape = RoundedCornerShape(100.dp),
         onClick = onClick,
         contentPadding = PaddingValues(15.dp),
@@ -32,7 +29,9 @@ fun SubmitButton(onClick: () -> Unit, text: String) {
             disabledContentColor = Gray20,
             disabledContainerColor = Gray50
         )
-    )
+    ) {
+        Text(text, fontSize = 14.sp)
+    }
 }
 
 @Preview(

@@ -12,7 +12,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
-import nextstep.signup.ui.theme.Typography
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import nextstep.signup.ui.component.SingleLineTextField
 import nextstep.signup.ui.component.SubmitButton
 import nextstep.signup.ui.theme.SignupTheme
+import nextstep.signup.ui.theme.Typography
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -102,7 +102,7 @@ fun SignUpScreen() {
         )
         Spacer(Modifier.height(42.dp))
 
-        SubmitButton({}, stringResource(R.string.sign_up_submit_btn))
+        SubmitButton(stringResource(R.string.sign_up_submit_btn)) {}
     }
 }
 
