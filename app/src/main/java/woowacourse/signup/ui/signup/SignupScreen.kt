@@ -1,8 +1,6 @@
 package woowacourse.signup.ui.signup
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -17,13 +15,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -34,6 +30,11 @@ import woowacourse.signup.ui.theme.SignupTheme
 
 @Composable
 fun SignupScreen() {
+    var userName by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var passwordConfirm by remember { mutableStateOf("") }
+
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -44,22 +45,34 @@ fun SignupScreen() {
                 .padding(top = 60.dp)
                 .fillMaxWidth()
         )
-        SignUpInput(
+        SignUpTextField(
             modifier = Modifier.padding(top = 18.dp),
-            labelText = stringResource(id = R.string.username_input)
-        )
-        SignUpInput(
+            labelText = stringResource(id = R.string.username_input),
+            inputText = userName,
+        ) {
+            userName = it
+        }
+        SignUpTextField(
             labelText = stringResource(id = R.string.email_input),
-        )
-        SignUpInput(
+            inputText = email,
+        ) {
+            email = it
+        }
+        SignUpTextField(
             labelText = stringResource(id = R.string.password_input),
+            inputText = password,
             visualTransformation = PasswordVisualTransformation(),
-        )
-        SignUpInput(
+        ) {
+            password = it
+        }
+        SignUpTextField(
             modifier = Modifier.padding(bottom = 24.dp),
             labelText = stringResource(id = R.string.password_confirm_input),
+            inputText = passwordConfirm,
             visualTransformation = PasswordVisualTransformation(),
-        )
+        ) {
+            passwordConfirm = it
+        }
         SignUpButton(
             text = stringResource(id = R.string.sign_up_button),
         )
@@ -67,13 +80,13 @@ fun SignupScreen() {
 }
 
 @Composable
-private fun SignUpInput(
+private fun SignUpTextField(
     modifier: Modifier = Modifier,
     labelText: String,
+    inputText: String,
     visualTransformation: VisualTransformation = VisualTransformation.None,
+    onValueChange: (String) -> Unit,
 ) {
-    var input by remember { mutableStateOf("") }
-
     TextField(
         label = {
             Text(
@@ -81,8 +94,8 @@ private fun SignUpInput(
                 fontWeight = FontWeight.W400,
             )
         },
-        value = input,
-        onValueChange = { input = it },
+        value = inputText,
+        onValueChange = onValueChange,
         textStyle = TextStyle(
             fontSize = 16.sp,
             fontWeight = FontWeight.W400,
