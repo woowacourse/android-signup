@@ -1,1 +1,4 @@
-# android-signup# android-signup
+# 1단계 - 컴포즈 기초
+
+- 학습 테스트를 완성한다.
+
