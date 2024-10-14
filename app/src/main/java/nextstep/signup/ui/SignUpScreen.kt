@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -13,8 +14,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.signup.R
+import nextstep.signup.component.CustomButton
 import nextstep.signup.component.CustomTextField
 import nextstep.signup.component.TitleText
+import nextstep.signup.ui.theme.Blue50
 import nextstep.signup.ui.theme.SignupTheme
 
 @Composable
@@ -64,6 +67,14 @@ fun SignUpScreen() {
             onValueChange = { passwordCheck = it },
             labelResId = R.string.user_password_confirm,
             isPassword = true
+        )
+
+        Spacer(modifier = Modifier.height(42.dp))
+
+        CustomButton(
+            onClick = {},
+            titleResId = R.string.sign_up_button,
+            colors = ButtonDefaults.buttonColors(containerColor = Blue50)
         )
     }
 }
