@@ -13,13 +13,13 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun TitleText(
-    modifier: Modifier = Modifier.fillMaxWidth(),
+    modifier: Modifier = Modifier,
     @StringRes titleResId: Int,
     fontSize: Float = 26f,
     color: Color = Color.Black
 ) {
     Text(
-        modifier = modifier,
+        modifier = modifier.fillMaxWidth(),
         text = stringResource(id = titleResId),
         fontSize = fontSize.sp,
         color = color,
