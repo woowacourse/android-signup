@@ -28,7 +28,7 @@ class LayoutBasicsTest {
         // given
         val text = TestFixture.TEST_TEXT
         composeTestRule.setContent {
-            TestFixture.MakeTestText()
+            TestFixture.MakeTestText(text)
         }
 
         // then
@@ -81,7 +81,7 @@ class LayoutBasicsTest {
 )
 @Composable
 fun PreviewTextTest() {
-    TestFixture.MakeTestText()
+    TestFixture.MakeTestText(TestFixture.TEST_TEXT)
 }
 
 @Preview(

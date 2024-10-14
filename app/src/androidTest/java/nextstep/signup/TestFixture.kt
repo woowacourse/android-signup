@@ -21,9 +21,9 @@ object TestFixture {
     private const val BUTTON_MESSAGE = "클릭해주세요"
 
     @Composable
-    fun MakeTestText(){
+    fun MakeTestText(text: String){
         TextComponent(
-            text =  TEST_TEXT,
+            text =  text,
             color = Color.Blue,
         )
     }
