@@ -15,7 +15,7 @@
 
 ## step2 피드백
 
-- [ ] TextField 의 배경색을 피그마 시안에 맞도록
+- [x] TextField 의 배경색을 피그마 시안에 맞도록
 
 Color 설정
 
