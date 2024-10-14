@@ -24,9 +24,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import woowacourse.signup.R
-import woowacourse.signup.ui.theme.Typography
 import woowacourse.signup.ui.theme.Blue50
 import woowacourse.signup.ui.theme.SignupTheme
+import woowacourse.signup.ui.theme.Typography
 
 @Composable
 fun SignupScreen() {
@@ -36,14 +36,15 @@ fun SignupScreen() {
     var passwordConfirm by remember { mutableStateOf("") }
 
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize(),
     ) {
         Text(
             text = stringResource(id = R.string.sign_up_title),
             style = Typography.titleLarge,
-            modifier = Modifier
-                .padding(top = 60.dp)
-                .fillMaxWidth()
+            modifier =
+                Modifier
+                    .padding(top = 60.dp)
+                    .fillMaxWidth(),
         )
         SignUpTextField(
             modifier = Modifier.padding(top = 18.dp),
@@ -96,20 +97,23 @@ private fun SignUpTextField(
         },
         value = inputText,
         onValueChange = onValueChange,
-        textStyle = TextStyle(
-            fontSize = 16.sp,
-            fontWeight = FontWeight.W400,
-        ),
+        textStyle =
+            TextStyle(
+                fontSize = 16.sp,
+                fontWeight = FontWeight.W400,
+            ),
         singleLine = true,
-        colors = TextFieldDefaults.colors(
-            focusedIndicatorColor = Blue50,
-            focusedLabelColor = Blue50,
-            cursorColor = Blue50,
-        ),
+        colors =
+            TextFieldDefaults.colors(
+                focusedIndicatorColor = Blue50,
+                focusedLabelColor = Blue50,
+                cursorColor = Blue50,
+            ),
         visualTransformation = visualTransformation,
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(horizontal = 32.dp, vertical = 18.dp),
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .padding(horizontal = 32.dp, vertical = 18.dp),
     )
 }
 
@@ -122,19 +126,20 @@ private fun SignUpButton(
         onClick = {
             // TODO
         },
-        colors = ButtonDefaults.buttonColors(
-            containerColor = Blue50,
-        ),
+        colors =
+            ButtonDefaults.buttonColors(
+                containerColor = Blue50,
+            ),
         modifier =
-        modifier
-            .fillMaxWidth()
-            .padding(horizontal = 32.dp),
+            modifier
+                .fillMaxWidth()
+                .padding(horizontal = 32.dp),
     ) {
         Text(
             text = text,
             fontSize = 14.sp,
             fontWeight = FontWeight.W500,
-            modifier = Modifier.padding(vertical = 15.dp)
+            modifier = Modifier.padding(vertical = 15.dp),
         )
     }
 }

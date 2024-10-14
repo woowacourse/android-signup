@@ -37,11 +37,12 @@ class LayoutBasicsTest {
             Text(
                 text = text,
                 color = Color.Blue,
-                style = TextStyle(
-                    fontSize = 26.sp,
-                    fontWeight = FontWeight.Bold,
-                    fontFamily = FontFamily.SansSerif
-                ),
+                style =
+                    TextStyle(
+                        fontSize = 26.sp,
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = FontFamily.SansSerif,
+                    ),
             )
         }
 
@@ -56,7 +57,7 @@ class LayoutBasicsTest {
         // given
         composeTestRule.setContent {
             Column(
-                modifier = Modifier.testTag("이름")
+                modifier = Modifier.testTag("이름"),
             ) {
                 Text(text = "깜포즈", color = Color.Red)
                 Text(text = "킴포즈", color = Color.Cyan)
@@ -80,16 +81,17 @@ class LayoutBasicsTest {
             Button(
                 onClick = { enabled.value = !enabled.value },
                 enabled = enabled.value,
-                modifier = Modifier.testTag("버튼")
+                modifier = Modifier.testTag("버튼"),
             ) {
                 Text(text = "클릭해주세요")
             }
         }
 
         // when
-        val button = composeTestRule
-            .onNodeWithTag("버튼")
-            .performClick()
+        val button =
+            composeTestRule
+                .onNodeWithTag("버튼")
+                .performClick()
 
         // then
         button.assertIsNotEnabled()
