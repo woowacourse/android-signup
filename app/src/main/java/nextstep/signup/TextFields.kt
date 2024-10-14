@@ -18,13 +18,13 @@ fun PlainTextField(
     modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit,
-    label: String,
+    label: String
 ) {
     DefaultTextField(
         modifier = modifier,
         value = value,
         onValueChange = onValueChange,
-        label = label,
+        label = label
     )
 }
 
@@ -33,7 +33,7 @@ fun EmailTextField(
     modifier: Modifier = Modifier,
     email: String,
     onValueChange: (String) -> Unit,
-    label: String,
+    label: String
 ) {
     DefaultTextField(
         modifier = modifier,
@@ -49,7 +49,7 @@ fun PasswordTextField(
     modifier: Modifier = Modifier,
     password: String,
     onValueChange: (String) -> Unit,
-    label: String,
+    label: String
 ) {
     DefaultTextField(
         modifier = modifier,

@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 fun DefaultButton(
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues,
-    onClick: () -> Unit,
+    onClick: () -> Unit
 ) {
     Button(
         onClick = onClick,

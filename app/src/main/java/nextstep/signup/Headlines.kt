@@ -10,7 +10,7 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun HeadLine(
     modifier: Modifier = Modifier,
-    text: String,
+    text: String
 ) {
     Text(
         modifier = modifier,
