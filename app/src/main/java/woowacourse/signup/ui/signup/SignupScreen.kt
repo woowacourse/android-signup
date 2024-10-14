@@ -28,6 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import woowacourse.signup.R
+import woowacourse.signup.ui.theme.Typography
 import woowacourse.signup.ui.theme.Blue50
 import woowacourse.signup.ui.theme.SignupTheme
 
@@ -36,7 +37,13 @@ fun SignupScreen() {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
-        SignUpTitle()
+        Text(
+            text = stringResource(id = R.string.sign_up_title),
+            style = Typography.titleLarge,
+            modifier = Modifier
+                .padding(top = 60.dp)
+                .fillMaxWidth()
+        )
         SignUpInput(
             modifier = Modifier.padding(top = 18.dp),
             titleId = R.string.username_input
@@ -49,20 +56,6 @@ fun SignupScreen() {
         )
         SignUpButton()
     }
-}
-
-@Composable
-private fun SignUpTitle() {
-    Text(
-        text = stringResource(id = R.string.sign_up_title),
-        fontSize = 26.sp,
-        color = Color.Black,
-        fontWeight = FontWeight.W700,
-        textAlign = TextAlign.Center,
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 60.dp)
-    )
 }
 
 @Composable
