@@ -22,7 +22,7 @@ fun SingleLineTextField(
     text: String,
     onTextChange: (String) -> Unit,
     hint: String,
-    modifier: Modifier = Modifier.fillMaxWidth(),
+    modifier: Modifier = Modifier,
     keyBoardType: KeyboardType = KeyboardType.Text,
     visualTransformation: VisualTransformation = VisualTransformation.None,
 ) {

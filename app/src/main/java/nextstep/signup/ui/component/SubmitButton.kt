@@ -17,7 +17,7 @@ import nextstep.signup.ui.theme.Gray20
 import nextstep.signup.ui.theme.Gray50
 
 @Composable
-fun SubmitButton(text: String, onClick: () -> Unit, modifier: Modifier = Modifier.fillMaxWidth()) {
+fun SubmitButton(text: String, onClick: () -> Unit, modifier: Modifier = Modifier) {
     Button(
         shape = RoundedCornerShape(100.dp),
         onClick = onClick,
