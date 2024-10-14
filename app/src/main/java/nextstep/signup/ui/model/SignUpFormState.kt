@@ -48,7 +48,11 @@ data class SignUpFormState(
             }
 
     val formValid: Boolean
-        get() = usernameStatus == null && emailStatus == null && passwordStatus == null && passwordConfirmationStatus == null
+        get() =
+            usernameStatus == SignUpStatus.Success
+                    && emailStatus == SignUpStatus.Success
+                    && passwordStatus == SignUpStatus.Success
+                    && passwordConfirmationStatus == SignUpStatus.Success
 
     companion object {
         private const val USERNAME_REGEX = "^[a-zA-Z가-힣]+$"
