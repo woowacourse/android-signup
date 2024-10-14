@@ -46,13 +46,19 @@ fun SignupScreen() {
         )
         SignUpInput(
             modifier = Modifier.padding(top = 18.dp),
-            titleId = R.string.username_input
+            labelText = stringResource(id = R.string.username_input)
         )
-        SignUpInput(titleId = R.string.email_input)
-        SignUpInput(titleId = R.string.password_input, isPassword = true)
+        SignUpInput(
+            labelText = stringResource(id = R.string.email_input),
+        )
+        SignUpInput(
+            labelText = stringResource(id = R.string.password_input),
+            visualTransformation = PasswordVisualTransformation(),
+        )
         SignUpInput(
             modifier = Modifier.padding(bottom = 24.dp),
-            titleId = R.string.password_confirm_input, isPassword = true
+            labelText = stringResource(id = R.string.password_confirm_input),
+            visualTransformation = PasswordVisualTransformation(),
         )
         SignUpButton(
             text = stringResource(id = R.string.sign_up_button),
@@ -63,13 +69,18 @@ fun SignupScreen() {
 @Composable
 private fun SignUpInput(
     modifier: Modifier = Modifier,
-    @StringRes titleId: Int,
-    isPassword: Boolean = false,
+    labelText: String,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
 ) {
     var input by remember { mutableStateOf("") }
 
     TextField(
-        label = { SignUpInputLabel(titleId) },
+        label = {
+            Text(
+                text = labelText,
+                fontWeight = FontWeight.W400,
+            )
+        },
         value = input,
         onValueChange = { input = it },
         textStyle = TextStyle(
@@ -82,18 +93,10 @@ private fun SignUpInput(
             focusedLabelColor = Blue50,
             cursorColor = Blue50,
         ),
-        visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None,
+        visualTransformation = visualTransformation,
         modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 32.dp, vertical = 18.dp),
-    )
-}
-
-@Composable
-private fun SignUpInputLabel(@StringRes labelId: Int) {
-    Text(
-        text = stringResource(id = labelId),
-        fontWeight = FontWeight.W400,
     )
 }
 
