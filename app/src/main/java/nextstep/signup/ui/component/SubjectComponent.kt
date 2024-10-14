@@ -16,19 +16,19 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun SubjectComponent(
     subject: String,
-    emoji: String? = null,
+    emoji: String? = null
 ) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(top = 34.dp),
-        horizontalArrangement = Arrangement.Center,
+        horizontalArrangement = Arrangement.Center
     ) {
         Text(
             text = subject,
             fontSize = 26.sp,
             color = Color.Black,
-            fontWeight = FontWeight.Bold,
+            fontWeight = FontWeight.Bold
         )
         if (emoji != null) {
             Text(
@@ -48,6 +48,6 @@ fun SubjectComponent(
 fun PreviewSubjectComponent() {
     SubjectComponent(
         subject = "Welcome to Compose",
-        emoji = "🚀",
+        emoji = "🚀"
     )
 }

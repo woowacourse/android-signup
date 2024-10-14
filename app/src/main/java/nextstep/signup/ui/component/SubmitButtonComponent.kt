@@ -26,8 +26,8 @@ fun SubmitButtonComponent(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(100.dp),
         colors = ButtonDefaults.buttonColors(
-            containerColor = Blue50,
-        ),
+            containerColor = Blue50
+        )
     ) {
         Text(
             text = buttonText,

@@ -80,7 +80,7 @@ fun SignupScreen() {
                 password = newPassword
             },
             labelText = stringResource(R.string.password_label),
-            isPassword = true,
+            isPassword = true
         )
         TextFieldComponent(
             textValue = passwordConfirm,
@@ -88,7 +88,7 @@ fun SignupScreen() {
                 passwordConfirm = newPasswordConfirm
             },
             labelText = stringResource(R.string.password_confirm_label),
-            isPassword = true,
+            isPassword = true
         )
         Spacer(Modifier.height(24.dp))
         SubmitButtonComponent(

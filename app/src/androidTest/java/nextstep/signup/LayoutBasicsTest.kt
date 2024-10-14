@@ -17,7 +17,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import org.junit.Rule
 import org.junit.Test
 
-
 class LayoutBasicsTest {
 
     @get:Rule

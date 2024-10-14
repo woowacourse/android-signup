@@ -27,7 +27,7 @@ fun TextFieldComponent(
     textValue: String,
     onTextChange: (newText: String) -> Unit,
     labelText: String,
-    isPassword : Boolean = false,
+    isPassword: Boolean = false,
     visualTransformation: VisualTransformation = PasswordVisualTransformation(),
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default.copy(
         keyboardType = KeyboardType.Password
@@ -51,14 +51,14 @@ fun TextFieldComponent(
                 unfocusedContainerColor = BlueGray20,
                 focusedContainerColor = BlueGray20,
                 focusedIndicatorColor = Blue50,
-                unfocusedIndicatorColor = Color.Black,
+                unfocusedIndicatorColor = Color.Black
             ),
             textStyle = TextStyle(
                 color = Gray50,
-                fontSize = 16.sp,
+                fontSize = 16.sp
             ),
-            visualTransformation = if(isPassword) visualTransformation else VisualTransformation.None,
-            keyboardOptions = if(isPassword) keyboardOptions else KeyboardOptions.Default,
+            visualTransformation = if (isPassword) visualTransformation else VisualTransformation.None,
+            keyboardOptions = if (isPassword) keyboardOptions else KeyboardOptions.Default
         )
     }
 }
@@ -72,6 +72,6 @@ fun PreviewTextFieldComponent() {
     TextFieldComponent(
         textValue = "",
         onTextChange = {},
-        labelText = "",
+        labelText = ""
     )
 }

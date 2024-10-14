@@ -10,7 +10,6 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 
 object TestFixture {
@@ -21,18 +20,18 @@ object TestFixture {
     private const val BUTTON_MESSAGE = "클릭해주세요"
 
     @Composable
-    fun MakeTestText(text: String){
+    fun MakeTestText(text: String) {
         TextComponent(
-            text =  text,
-            color = Color.Blue,
+            text = text,
+            color = Color.Blue
         )
     }
 
     @Composable
     fun MakeTestButton(
         enabled: Boolean,
-        onChangeEnabled: () -> Unit,
-    ){
+        onChangeEnabled: () -> Unit
+    ) {
         ButtonComponent(
             enabled = enabled,
             onChangeEnabled = onChangeEnabled
@@ -40,7 +39,7 @@ object TestFixture {
     }
 
     @Composable
-    fun MakeColumnText(){
+    fun MakeColumnText() {
         Column(
             modifier = Modifier.testTag(TEST_TAG)
         ) {
@@ -52,7 +51,7 @@ object TestFixture {
     @Composable
     fun TextComponent(
         text: String,
-        color: Color,
+        color: Color
     ) {
         Text(
             text = text,
@@ -61,7 +60,7 @@ object TestFixture {
                 fontSize = 28.sp,
                 fontWeight = FontWeight.Bold,
                 fontFamily = FontFamily.SansSerif
-            ),
+            )
         )
     }
 
@@ -70,7 +69,7 @@ object TestFixture {
         enabled: Boolean,
         onChangeEnabled: () -> Unit,
         buttonTag: String = TEST_BUTTON_TAG,
-        buttonText: String = BUTTON_MESSAGE,
+        buttonText: String = BUTTON_MESSAGE
     ) {
         Button(
             onClick = {
