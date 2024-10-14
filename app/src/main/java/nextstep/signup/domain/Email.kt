@@ -12,11 +12,19 @@ data class Email(
 data class EmailId(
     val id: String
 ) {
-    fun isValid(): Boolean = id.isNotBlank()
+    fun isValid(): Boolean = id.matches(EMAIL_ID_REGEX.toRegex())
+
+    companion object {
+        private const val EMAIL_ID_REGEX = "^[a-zA-Z0-9._%+-]$"
+    }
 }
 
 data class EmailDomain(
     val domain: String
 ) {
-    fun isValid(): Boolean = domain.contains(".") && domain.isNotBlank()
+    fun isValid(): Boolean = domain.matches(EMAIL_DOMAIN_REGEX.toRegex())
+
+    companion object {
+        private const val EMAIL_DOMAIN_REGEX = "^[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$"
+    }
 }
