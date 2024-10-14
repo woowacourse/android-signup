@@ -12,14 +12,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -32,9 +29,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nextstep.signup.ui.theme.SignupTheme
@@ -71,87 +65,29 @@ fun SignUpScreen() {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(36.dp)
         ) {
-            HeadLine(stringResource(R.string.sign_up_headline))
-            DefaultTextField(
+            HeadLine(text = stringResource(R.string.sign_up_headline))
+            PlainTextField(
                 value = username,
                 onValueChange = { username = it },
-                label = stringResource(R.string.sign_up_username_label)
+                label = stringResource(id = R.string.sign_up_username_label)
             )
-            DefaultTextField(
-                value = email,
+            EmailTextField(
+                email = email,
                 onValueChange = { email = it },
                 label = stringResource(R.string.sign_up_email_label),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
             )
-            DefaultTextField(
-                value = password,
+            PasswordTextField(
+                password = password,
                 onValueChange = { password = it },
                 label = stringResource(R.string.sign_up_password_label),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                visualTransformation = PasswordVisualTransformation()
             )
-            DefaultTextField(
-                value = passwordConfirm,
+            PasswordTextField(
+                password = passwordConfirm,
                 onValueChange = { passwordConfirm = it },
                 label = stringResource(R.string.sign_up_password_confirm_label),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                visualTransformation = PasswordVisualTransformation()
             )
             Spacer(modifier = Modifier.height(6.dp))
-            DefaultButton {}
+            DefaultButton(contentPadding = PaddingValues(15.dp)) {}
         }
-    }
-}
-
-@Composable
-fun HeadLine(text: String) {
-    Text(
-        text = text,
-        color = Color.Black,
-        fontSize = 26.sp,
-        fontWeight = FontWeight.Bold
-    )
-}
-
-@Composable
-fun DefaultTextField(
-    modifier: Modifier = Modifier,
-    value: String,
-    onValueChange: (String) -> Unit,
-    label: String,
-    keyboardOptions: KeyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-    singleLine: Boolean = true,
-    focusedLabelColor: Color = colorResource(id = R.color.blue50),
-    focusedIndicatorColor: Color = colorResource(id = R.color.blue50),
-    cursorColor: Color = colorResource(id = R.color.blue50),
-    visualTransformation: VisualTransformation = VisualTransformation.None
-) {
-    TextField(
-        modifier = modifier.fillMaxWidth(),
-        value = value,
-        onValueChange = onValueChange,
-        label = { Text(text = label) },
-        singleLine = singleLine,
-        keyboardOptions = keyboardOptions,
-        colors = TextFieldDefaults.colors(
-            focusedLabelColor = focusedLabelColor,
-            focusedIndicatorColor = focusedIndicatorColor,
-            cursorColor = cursorColor
-        ),
-        visualTransformation = visualTransformation
-    )
-}
-
-@Composable
-fun DefaultButton(onClick: () -> Unit) {
-    Button(
-        onClick = onClick,
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(20.dp)),
-        colors = ButtonDefaults.buttonColors(colorResource(id = R.color.blue50)),
-        contentPadding = PaddingValues(15.dp)
-    ) {
-        Text(text = stringResource(id = R.string.sign_up_sign_up_label))
     }
 }
