@@ -21,5 +21,3 @@ data class SignUp(
         )
     }
 }
-
-private const val TAG = "SignUp"
