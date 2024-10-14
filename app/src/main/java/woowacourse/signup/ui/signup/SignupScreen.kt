@@ -54,7 +54,9 @@ fun SignupScreen() {
             modifier = Modifier.padding(bottom = 24.dp),
             titleId = R.string.password_confirm_input, isPassword = true
         )
-        SignUpButton()
+        SignUpButton(
+            text = stringResource(id = R.string.sign_up_button),
+        )
     }
 }
 
@@ -96,22 +98,24 @@ private fun SignUpInputLabel(@StringRes labelId: Int) {
 }
 
 @Composable
-private fun SignUpButton() {
+private fun SignUpButton(
+    text: String,
+    modifier: Modifier = Modifier,
+) {
     Button(
         onClick = {
             // TODO
         },
-        contentPadding = PaddingValues(0.dp),
         colors = ButtonDefaults.buttonColors(
             containerColor = Blue50,
         ),
         modifier =
-        Modifier
+        modifier
             .fillMaxWidth()
             .padding(horizontal = 32.dp),
     ) {
         Text(
-            text = stringResource(id = R.string.sign_up_button),
+            text = text,
             fontSize = 14.sp,
             fontWeight = FontWeight.W500,
             modifier = Modifier.padding(vertical = 15.dp)
