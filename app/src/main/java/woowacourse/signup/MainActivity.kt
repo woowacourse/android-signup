@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -39,11 +38,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             SignupTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                ) {
-                    SignUpLayout()
-                }
+                SignUpLayout()
             }
         }
     }
@@ -51,7 +46,9 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 private fun SignUpLayout() {
-    Column {
+    Column(
+        modifier = Modifier.fillMaxSize()
+    ) {
         SignUpTitle()
         SignUpInput(
             modifier = Modifier.padding(top = 18.dp),
