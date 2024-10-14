@@ -98,7 +98,7 @@ fun SignUpScreen() {
                 visualTransformation = PasswordVisualTransformation()
             )
             Spacer(modifier = Modifier.height(6.dp))
-            SignUpButton()
+            SignUpButton {}
         }
     }
 }
@@ -143,9 +143,9 @@ fun SignUpTextField(
 }
 
 @Composable
-fun SignUpButton() {
+fun SignUpButton(onClick: () -> Unit) {
     Button(
-        onClick = {},
+        onClick = onClick,
         modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(20.dp)),
