@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -147,9 +148,9 @@ fun SignUpButton() {
         onClick = {},
         modifier = Modifier
             .fillMaxWidth()
-            .height(50.dp)
             .clip(RoundedCornerShape(20.dp)),
-        colors = ButtonDefaults.buttonColors(colorResource(id = R.color.blue50))
+        colors = ButtonDefaults.buttonColors(colorResource(id = R.color.blue50)),
+        contentPadding = PaddingValues(15.dp)
     ) {
         Text(text = stringResource(id = R.string.sign_up_sign_up_label))
     }
