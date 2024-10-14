@@ -12,8 +12,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -21,6 +23,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import nextstep.signup.R
+import nextstep.signup.domain.SignUpInfo
 import nextstep.signup.ui.component.SingleLineTextField
 import nextstep.signup.ui.component.SubmitButton
 import nextstep.signup.ui.theme.SignupTheme
@@ -44,10 +48,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun SignUpScreen() {
-    val name = remember { mutableStateOf("") }
-    val email = remember { mutableStateOf("") }
-    val password = remember { mutableStateOf("") }
-    val passwordConfirm = remember { mutableStateOf("") }
+    var signUpInfo by remember { mutableStateOf(SignUpInfo()) }
     Column(
         modifier = Modifier.padding(horizontal = 32.dp),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -62,43 +63,47 @@ fun SignUpScreen() {
         Spacer(Modifier.height(42.dp))
 
         SingleLineTextField(
-            text = name.value,
+            text = signUpInfo.userName,
             onTextChange = {
-                name.value = it
+                signUpInfo = signUpInfo.copy(userName = it)
             },
-            hint = stringResource(R.string.sign_up_input_user_name),
+            isError = signUpInfo.isUserNameError(),
+            label = stringResource(signUpInfo.userNameMessage()),
         )
 
         Spacer(Modifier.height(42.dp))
 
         SingleLineTextField(
-            text = email.value,
+            text = signUpInfo.email,
             onTextChange = {
-                email.value = it
+                signUpInfo = signUpInfo.copy(email = it)
             },
-            hint = stringResource(R.string.sign_up_input_user_email),
+            isError = signUpInfo.isEmailError(),
+            label = stringResource(signUpInfo.emailMessage()),
             keyBoardType = KeyboardType.Email
         )
 
         Spacer(Modifier.height(42.dp))
 
         SingleLineTextField(
-            text = password.value,
+            text = signUpInfo.password,
             onTextChange = {
-                password.value = it
+                signUpInfo = signUpInfo.copy(password = it)
             },
             modifier = Modifier.fillMaxWidth(),
-            hint = stringResource(R.string.sign_up_input_user_password),
+            isError = signUpInfo.isPasswordError(),
+            label = stringResource(signUpInfo.passwordMessage()),
             keyBoardType = KeyboardType.Password
         )
         Spacer(Modifier.height(42.dp))
 
         SingleLineTextField(
-            text = passwordConfirm.value,
+            text = signUpInfo.passwordConfirm,
             onTextChange = {
-                passwordConfirm.value = it
+                signUpInfo = signUpInfo.copy(passwordConfirm = it)
             },
-            hint = stringResource(R.string.sign_up_input_user_password_confirm),
+            isError = signUpInfo.isPasswordConfirmError(),
+            label = stringResource(signUpInfo.passwordConfirmMessage()),
             keyBoardType = KeyboardType.Password
         )
         Spacer(Modifier.height(42.dp))

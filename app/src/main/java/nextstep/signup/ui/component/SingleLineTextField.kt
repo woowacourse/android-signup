@@ -21,15 +21,16 @@ import nextstep.signup.ui.theme.Gray50
 fun SingleLineTextField(
     text: String,
     onTextChange: (String) -> Unit,
-    hint: String,
     modifier: Modifier = Modifier,
+    isError: Boolean = false,
+    label: String = "",
     keyBoardType: KeyboardType = KeyboardType.Text,
     visualTransformation: VisualTransformation = VisualTransformation.None,
 ) {
     TextField(
         value = text,
         onValueChange = onTextChange,
-        modifier = modifier,
+        modifier = modifier.fillMaxWidth(),
         colors = TextFieldDefaults.colors(
             focusedLabelColor = Blue50,
             unfocusedLabelColor = Gray50,
@@ -38,12 +39,10 @@ fun SingleLineTextField(
             focusedIndicatorColor = Blue50,
             unfocusedIndicatorColor = Gray50,
         ),
+        isError = isError,
         singleLine = true,
-        placeholder = {
-            Text(text = hint)
-        },
         label = {
-            Text(text = hint)
+            Text(text = label, fontSize = 16.sp)
         },
         textStyle = TextStyle(
             color = Gray50,
@@ -63,5 +62,5 @@ fun SingleLineTextField(
 )
 @Composable
 private fun SingleLineTextFieldPreview() {
-    SingleLineTextField("테스트", {}, "테스트 힌트")
+    SingleLineTextField("테스트", {})
 }
