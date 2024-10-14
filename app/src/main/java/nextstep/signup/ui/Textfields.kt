@@ -22,12 +22,16 @@ fun PlainTextField(
     modifier: Modifier = Modifier,
     label: String,
     value: String,
+    isError: Boolean = false,
+    errorMessage: String? = null,
     onValueChange: (String) -> Unit,
 ) {
     DefaultTextField(
         modifier = modifier,
         label = label,
         value = value,
+        isError = isError,
+        errorMessage = errorMessage,
         onValueChange = onValueChange,
     )
 }
@@ -37,6 +41,8 @@ fun EmailTextField(
     modifier: Modifier = Modifier,
     label: String,
     value: String,
+    isError: Boolean = false,
+    errorMessage: String? = null,
     onValueChange: (String) -> Unit,
 ) {
     DefaultTextField(
@@ -44,6 +50,8 @@ fun EmailTextField(
         label = label,
         value = value,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+        isError = isError,
+        errorMessage = errorMessage,
         onValueChange = onValueChange,
     )
 }
@@ -53,6 +61,8 @@ fun PasswordTextField(
     modifier: Modifier = Modifier,
     label: String,
     value: String,
+    isError: Boolean = false,
+    errorMessage: String? = null,
     onValueChange: (String) -> Unit,
 ) {
     DefaultTextField(
@@ -61,6 +71,8 @@ fun PasswordTextField(
         value = value,
         visualTransformation = PasswordVisualTransformation(),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+        isError = isError,
+        errorMessage = errorMessage,
         onValueChange = onValueChange,
     )
 }
@@ -72,6 +84,8 @@ private fun DefaultTextField(
     value: String,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    isError: Boolean = false,
+    errorMessage: String? = null,
     onValueChange: (String) -> Unit,
 ) {
     TextField(
@@ -82,6 +96,12 @@ private fun DefaultTextField(
         keyboardOptions = keyboardOptions,
         label = { Text(text = label) },
         maxLines = 1,
+        isError = isError,
+        supportingText = {
+            if (isError && errorMessage != null) {
+                Text(text = errorMessage)
+            }
+        }
     )
 }
 
