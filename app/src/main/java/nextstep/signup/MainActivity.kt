@@ -32,6 +32,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import nextstep.signup.ui.theme.SignupTheme
 
@@ -58,7 +59,7 @@ fun SignUpScreen() {
         Modifier
             .fillMaxSize()
             .padding(16.dp),
-        verticalArrangement = Arrangement.Top,
+        verticalArrangement = Arrangement.Center,
     ) {
         var userName by remember { mutableStateOf("") }
         var email by remember { mutableStateOf("") }
@@ -74,6 +75,7 @@ fun SignUpScreen() {
             onValueChange = { userName = it },
             isPasswordInputField = false,
             keyboardType = KeyboardType.Text,
+            paddingBottom = 36.dp,
         )
 
         InputField(
@@ -82,6 +84,7 @@ fun SignUpScreen() {
             onValueChange = { email = it },
             isPasswordInputField = false,
             keyboardType = KeyboardType.Email,
+            paddingBottom = 36.dp,
         )
 
 
@@ -91,6 +94,7 @@ fun SignUpScreen() {
             onValueChange = { password = it },
             isPasswordInputField = true,
             keyboardType = KeyboardType.Password,
+            paddingBottom = 36.dp,
         )
 
         InputField(
@@ -99,6 +103,7 @@ fun SignUpScreen() {
             onValueChange = { confirmPassword = it },
             isPasswordInputField = true,
             keyboardType = KeyboardType.Password,
+            paddingBottom = 36.dp,
         )
 
         SignUpButton(stringResource(R.string.sign_up))
@@ -124,7 +129,8 @@ fun InputField(
     value: String,
     onValueChange: (String) -> Unit,
     isPasswordInputField: Boolean,
-    keyboardType: KeyboardType,
+    keyboardType: KeyboardType = KeyboardType.Text,
+    paddingBottom: Dp = 0.dp,
 ) {
     TextField(
         value = value,
@@ -133,7 +139,7 @@ fun InputField(
         modifier =
         Modifier
             .fillMaxWidth()
-            .padding(bottom = 36.dp),
+            .padding(bottom = paddingBottom),
         keyboardOptions = KeyboardOptions(
             keyboardType = keyboardType,
         ),
