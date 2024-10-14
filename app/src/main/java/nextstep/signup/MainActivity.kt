@@ -20,7 +20,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import nextstep.signup.ui.component.PasswordTextFieldComponent
 import nextstep.signup.ui.component.SubjectComponent
 import nextstep.signup.ui.component.SubmitButtonComponent
 import nextstep.signup.ui.component.TextFieldComponent
@@ -75,19 +74,21 @@ fun SignupScreen() {
             },
             labelText = stringResource(R.string.email_label)
         )
-        PasswordTextFieldComponent(
-            passwordValue = password,
+        TextFieldComponent(
+            textValue = password,
             onTextChange = { newPassword ->
                 password = newPassword
             },
-            labelText = stringResource(R.string.password_label)
+            labelText = stringResource(R.string.password_label),
+            isPassword = true,
         )
-        PasswordTextFieldComponent(
-            passwordValue = passwordConfirm,
+        TextFieldComponent(
+            textValue = passwordConfirm,
             onTextChange = { newPasswordConfirm ->
                 passwordConfirm = newPasswordConfirm
             },
-            labelText = stringResource(R.string.password_confirm_label)
+            labelText = stringResource(R.string.password_confirm_label),
+            isPassword = true,
         )
         Spacer(Modifier.height(24.dp))
         SubmitButtonComponent(
