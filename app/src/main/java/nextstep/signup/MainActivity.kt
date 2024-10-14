@@ -22,6 +22,10 @@ import nextstep.signup.ui.component.InputText
 import nextstep.signup.ui.component.TextButton
 import nextstep.signup.ui.component.TitleText
 import nextstep.signup.ui.theme.SignupTheme
+import nextstep.signup.ui.validateEmail
+import nextstep.signup.ui.validatePassword
+import nextstep.signup.ui.validatePasswordConfirm
+import nextstep.signup.ui.validateUserName
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,12 +57,24 @@ fun SignUpComponent() {
         var password: String by remember { mutableStateOf("") }
         var passwordConfirm: String by remember { mutableStateOf("") }
 
-        InputText(R.string.sign_up_user_name_title, userName, { userName = it })
-        InputText(R.string.sign_up_email_title, email, { email = it }, KeyboardType.Email)
+        InputText(
+            R.string.sign_up_user_name_title,
+            userName,
+            { userName = it },
+            { it.validateUserName() },
+        )
+        InputText(
+            R.string.sign_up_email_title,
+            email,
+            { email = it },
+            { it.validateEmail() },
+            KeyboardType.Email,
+        )
         InputText(
             R.string.sign_up_password_title,
             password,
             { password = it },
+            { it.validatePassword() },
             KeyboardType.Password,
             PasswordVisualTransformation(),
         )
@@ -66,6 +82,7 @@ fun SignUpComponent() {
             R.string.sign_up_password_confirm_title,
             passwordConfirm,
             { passwordConfirm = it },
+            { it.validatePasswordConfirm(password) },
             KeyboardType.Password,
             PasswordVisualTransformation(),
         )
