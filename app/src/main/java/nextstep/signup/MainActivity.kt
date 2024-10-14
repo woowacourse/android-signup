@@ -61,7 +61,7 @@ fun SignUpComponent() {
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun SignUpPreview() {
+private fun SignUpPreview() {
     SignupTheme {
         SignUpComponent()
     }
