@@ -9,6 +9,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
@@ -43,18 +47,29 @@ fun SignUpComponent() {
         verticalArrangement = Arrangement.Center,
     ) {
         TitleText(R.string.sign_up_title)
-        InputText(R.string.sign_up_user_name_title)
-        InputText(R.string.sign_up_email_title, KeyboardType.Email)
+
+        var userName: String by remember { mutableStateOf("") }
+        var email: String by remember { mutableStateOf("") }
+        var password: String by remember { mutableStateOf("") }
+        var passwordConfirm: String by remember { mutableStateOf("") }
+
+        InputText(R.string.sign_up_user_name_title, userName, { userName = it })
+        InputText(R.string.sign_up_email_title, email, { email = it }, KeyboardType.Email)
         InputText(
             R.string.sign_up_password_title,
+            password,
+            { password = it },
             KeyboardType.Password,
             PasswordVisualTransformation(),
         )
         InputText(
             R.string.sign_up_password_confirm_title,
+            passwordConfirm,
+            { passwordConfirm = it },
             KeyboardType.Password,
             PasswordVisualTransformation(),
         )
+
         TextButton(R.string.sign_up_button_title)
     }
 }

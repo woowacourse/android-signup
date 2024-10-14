@@ -9,28 +9,28 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import nextstep.signup.R
 import nextstep.signup.ui.theme.BlueGrey20
 
 @Composable
 fun InputText(
-    @StringRes stringRes: Int,
+    @StringRes title: Int,
+    content: String,
+    onContentChange: (String) -> Unit,
     keyBoardType: KeyboardType = KeyboardType.Text,
     visualTransformation: VisualTransformation = VisualTransformation.None,
 ) {
-    val title = stringResource(stringRes)
-    var contents: String by remember { mutableStateOf("") }
     TextField(
-        contents,
-        label = { Text(text = title) },
-        onValueChange = { contents = it },
+        value = content,
+        label = { Text(text = stringResource(title)) },
+        onValueChange = onContentChange,
         keyboardOptions = KeyboardOptions(keyboardType = keyBoardType),
         visualTransformation = visualTransformation,
         colors =
@@ -40,4 +40,10 @@ fun InputText(
             ),
     )
     Spacer(Modifier.height(36.dp))
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun InputTextPreview() {
+    InputText(R.string.sign_up_user_name_title, "", {})
 }
