@@ -1,5 +1,6 @@
 package nextstep.signup.ui.component
 
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -21,7 +22,7 @@ fun SingleLineTextField(
     text: String,
     onTextChange: (String) -> Unit,
     hint: String,
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier.fillMaxWidth(),
     keyBoardType: KeyboardType = KeyboardType.Text,
     visualTransformation: VisualTransformation = VisualTransformation.None,
 ) {

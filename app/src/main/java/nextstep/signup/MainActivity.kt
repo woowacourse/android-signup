@@ -66,7 +66,6 @@ fun SignUpScreen() {
             onTextChange = {
                 name.value = it
             },
-            modifier = Modifier.fillMaxWidth(),
             hint = stringResource(R.string.sign_up_input_user_name),
         )
 
@@ -77,7 +76,6 @@ fun SignUpScreen() {
             onTextChange = {
                 email.value = it
             },
-            modifier = Modifier.fillMaxWidth(),
             hint = stringResource(R.string.sign_up_input_user_email),
             keyBoardType = KeyboardType.Email
         )
@@ -100,7 +98,6 @@ fun SignUpScreen() {
             onTextChange = {
                 passwordConfirm.value = it
             },
-            modifier = Modifier.fillMaxWidth(),
             hint = stringResource(R.string.sign_up_input_user_password_confirm),
             keyBoardType = KeyboardType.Password
         )
@@ -109,7 +106,6 @@ fun SignUpScreen() {
         SubmitButton(
             text = stringResource(R.string.sign_up_submit_btn),
             onClick = {},
-            modifier = Modifier.fillMaxWidth()
         )
     }
 }

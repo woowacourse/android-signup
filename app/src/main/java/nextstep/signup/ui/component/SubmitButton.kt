@@ -1,6 +1,7 @@
 package nextstep.signup.ui.component
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
@@ -16,7 +17,7 @@ import nextstep.signup.ui.theme.Gray20
 import nextstep.signup.ui.theme.Gray50
 
 @Composable
-fun SubmitButton(text: String, onClick: () -> Unit, modifier: Modifier = Modifier) {
+fun SubmitButton(text: String, onClick: () -> Unit, modifier: Modifier = Modifier.fillMaxWidth()) {
     Button(
         shape = RoundedCornerShape(100.dp),
         onClick = onClick,
