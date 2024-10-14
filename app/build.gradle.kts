@@ -1,14 +1,15 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.ktlint)
 }
 
 android {
-    namespace = "nextstep.signup"
+    namespace = "woowacourse.signup"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "nextstep.signup"
+        applicationId = "woowacourse.signup"
         minSdk = 26
         targetSdk = 34
         versionCode = 1
@@ -25,7 +26,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
@@ -50,7 +51,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
