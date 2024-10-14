@@ -71,7 +71,7 @@ private fun SignUpFormTextFields(
 ) {
     Column(
         modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(36.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         val usernameErrorMessage = (signUpFormState.usernameStatus as? SignUpStatus.Error)?.message
         val emailErrorMessage = (signUpFormState.emailStatus as? SignUpStatus.Error)?.message
