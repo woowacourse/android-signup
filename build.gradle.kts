@@ -7,12 +7,6 @@ plugins {
 }
 
 allprojects{
-    tasks.withType<KotlinCompile>().configureEach {
-        kotlinOptions {
-            jvmTarget = "17"
-        }
-    }
-
     tasks.withType<Test> {
         useJUnitPlatform()
     }
