@@ -72,25 +72,25 @@ fun SignUpScreen() {
             verticalArrangement = Arrangement.spacedBy(36.dp)
         ) {
             HeadLine(stringResource(R.string.sign_up_headline))
-            SignUpTextField(
+            DefaultTextField(
                 value = username,
                 onValueChange = { username = it },
                 label = stringResource(R.string.sign_up_username_label)
             )
-            SignUpTextField(
+            DefaultTextField(
                 value = email,
                 onValueChange = { email = it },
                 label = stringResource(R.string.sign_up_email_label),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
             )
-            SignUpTextField(
+            DefaultTextField(
                 value = password,
                 onValueChange = { password = it },
                 label = stringResource(R.string.sign_up_password_label),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                 visualTransformation = PasswordVisualTransformation()
             )
-            SignUpTextField(
+            DefaultTextField(
                 value = passwordConfirm,
                 onValueChange = { passwordConfirm = it },
                 label = stringResource(R.string.sign_up_password_confirm_label),
@@ -98,7 +98,7 @@ fun SignUpScreen() {
                 visualTransformation = PasswordVisualTransformation()
             )
             Spacer(modifier = Modifier.height(6.dp))
-            SignUpButton {}
+            DefaultButton {}
         }
     }
 }
@@ -114,7 +114,7 @@ fun HeadLine(text: String) {
 }
 
 @Composable
-fun SignUpTextField(
+fun DefaultTextField(
     modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit,
@@ -143,7 +143,7 @@ fun SignUpTextField(
 }
 
 @Composable
-fun SignUpButton(onClick: () -> Unit) {
+fun DefaultButton(onClick: () -> Unit) {
     Button(
         onClick = onClick,
         modifier = Modifier
