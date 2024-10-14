@@ -1,8 +1,5 @@
-package woowacourse.signup
+package woowacourse.signup.ui.signup
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -30,22 +27,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import woowacourse.signup.R
 import woowacourse.signup.ui.theme.Blue50
 import woowacourse.signup.ui.theme.SignupTheme
 
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            SignupTheme {
-                SignUpLayout()
-            }
-        }
-    }
-}
-
 @Composable
-private fun SignUpLayout() {
+fun SignupScreen() {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -143,6 +130,6 @@ private fun SignUpButton() {
 @Composable
 private fun MainActivityPreview() {
     SignupTheme {
-        SignUpLayout()
+        SignupScreen()
     }
 }
