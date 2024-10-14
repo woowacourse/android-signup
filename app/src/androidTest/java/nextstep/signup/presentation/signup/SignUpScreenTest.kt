@@ -19,7 +19,7 @@ class SignUpScreenTest {
 
     // username 이 공백이면 회원가입 불가능
     @Test
-    fun signup_is_enabled_when_signup_condition_is_not_satisfied() {
+    fun signup_is_not_enabled_when_signup_condition_is_not_satisfied() {
         // given
         composeTestRule.setContent {
             SignUpScreen(initialSignUp = SignUp.INITIAL)
