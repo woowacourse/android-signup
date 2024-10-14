@@ -6,10 +6,12 @@ import androidx.activity.compose.setContent
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -30,15 +32,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import woowacourse.signup.ui.theme.Blue50
-import woowacourse.signup.ui.util.FillMaxTheme
-import woowacourse.signup.ui.util.Space
+import woowacourse.signup.ui.theme.SignupTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            FillMaxTheme {
-                SignUpLayout()
+            SignupTheme {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                ) {
+                    SignUpLayout()
+                }
             }
         }
     }
@@ -48,12 +53,16 @@ class MainActivity : ComponentActivity() {
 private fun SignUpLayout() {
     Column {
         SignUpTitle()
-        Space(dp = 18)
-        SignUpInput(titleId = R.string.username_input)
+        SignUpInput(
+            modifier = Modifier.padding(top = 18.dp),
+            titleId = R.string.username_input
+        )
         SignUpInput(titleId = R.string.email_input)
         SignUpInput(titleId = R.string.password_input, isPassword = true)
-        SignUpInput(titleId = R.string.password_confirm_input, isPassword = true)
-        Space(dp = 24)
+        SignUpInput(
+            modifier = Modifier.padding(bottom = 24.dp),
+            titleId = R.string.password_confirm_input, isPassword = true
+        )
         SignUpButton()
     }
 }
@@ -74,6 +83,7 @@ private fun SignUpTitle() {
 
 @Composable
 private fun SignUpInput(
+    modifier: Modifier = Modifier,
     @StringRes titleId: Int,
     isPassword: Boolean = false,
 ) {
@@ -94,7 +104,7 @@ private fun SignUpInput(
             cursorColor = Blue50,
         ),
         visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None,
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 32.dp, vertical = 18.dp),
     )
@@ -135,7 +145,7 @@ private fun SignUpButton() {
 @Preview(showBackground = true)
 @Composable
 private fun MainActivityPreview() {
-    FillMaxTheme {
+    SignupTheme {
         SignUpLayout()
     }
 }
