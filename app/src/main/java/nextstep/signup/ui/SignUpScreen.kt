@@ -40,7 +40,7 @@ fun SignUpScreen() {
         Spacer(modifier = Modifier.height(60.dp))
         TitleText(
             modifier = Modifier.fillMaxWidth(),
-            titleResId = R.string.sign_up_title,
+            titleResId = R.string.sign_up_title
         )
 
         Spacer(modifier = Modifier.height(4.dp))
@@ -48,7 +48,7 @@ fun SignUpScreen() {
         CustomTextField(
             value = user.name,
             onValueChange = { name = it },
-            labelResId = R.string.user_name,
+            labelResId = R.string.user_name
         )
 
         CustomTextField(
@@ -57,21 +57,21 @@ fun SignUpScreen() {
             labelResId = R.string.user_email,
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Email
-            ),
+            )
         )
 
         CustomTextField(
             value = user.password,
             onValueChange = { password = it },
             labelResId = R.string.user_password,
-            isPassword = true,
+            isPassword = true
         )
 
         CustomTextField(
             value = user.passwordCheck,
             onValueChange = { passwordCheck = it },
             labelResId = R.string.user_password_confirm,
-            isPassword = true,
+            isPassword = true
         )
 
         Spacer(modifier = Modifier.height(42.dp))
@@ -79,7 +79,7 @@ fun SignUpScreen() {
         CustomButton(
             onClick = {},
             titleResId = R.string.sign_up_button,
-            colors = ButtonDefaults.buttonColors(containerColor = Blue50),
+            colors = ButtonDefaults.buttonColors(containerColor = Blue50)
         )
     }
 }
