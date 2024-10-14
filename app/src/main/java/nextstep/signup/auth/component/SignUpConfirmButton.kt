@@ -15,14 +15,12 @@ import nextstep.signup.R
 import nextstep.signup.ui.theme.SignupTheme
 
 @Composable
-internal fun SignUpConfirmButton(
-    onClickSignUp: () -> Unit,
-    enableSignUp: Boolean
-) {
+internal fun SignUpConfirmButton(onClickSignUp: () -> Unit, enableSignUp: Boolean) {
     Button(
         modifier = Modifier
             .fillMaxWidth(),
-        onClick = { onClickSignUp() }, enabled = enableSignUp
+        onClick = { onClickSignUp() },
+        enabled = enableSignUp
     ) {
         Text(
             modifier = Modifier.padding(vertical = 6.dp),

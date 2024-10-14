@@ -30,6 +30,12 @@ internal fun AuthTextField(
     onDone: () -> Unit = {}
 ) {
     val focusManager = LocalFocusManager.current
+    val visualTransformation =
+        if (keyboardType == KeyboardType.Password) {
+            PasswordVisualTransformation()
+        } else {
+            VisualTransformation.None
+        }
 
     AuthTextField(
         modifier = modifier,
@@ -50,11 +56,10 @@ internal fun AuthTextField(
                 onDone()
             }
         ),
-        visualTransformation = if (keyboardType == KeyboardType.Password) PasswordVisualTransformation() else VisualTransformation.None,
+        visualTransformation = visualTransformation,
         onTextChange = onTextChange
     )
 }
-
 
 @Composable
 internal fun AuthTextField(
@@ -66,7 +71,7 @@ internal fun AuthTextField(
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
-    onTextChange: (String) -> Unit,
+    onTextChange: (String) -> Unit
 ) {
     Column {
         TextField(
@@ -78,7 +83,7 @@ internal fun AuthTextField(
             singleLine = true,
             visualTransformation = visualTransformation,
             keyboardOptions = keyboardOptions,
-            keyboardActions = keyboardActions,
+            keyboardActions = keyboardActions
         )
         val shouldShowErrorMsg = isValid(text).not() && errorMessage.isNullOrBlank().not()
         if (shouldShowErrorMsg) {
@@ -90,7 +95,6 @@ internal fun AuthTextField(
         }
     }
 }
-
 
 @Preview(name = "onClearFocus")
 @Composable
@@ -124,7 +128,7 @@ private fun Preview3() {
             label = "ㅎㅇ",
             text = "나 오둥",
             onTextChange = {},
-            isValid = { false },
+            isValid = { false }
         )
     }
 }
@@ -138,7 +142,7 @@ private fun Preview4() {
             text = "나 오둥",
             onTextChange = {},
             errorMessage = "오류가 발생했습니다.",
-            isValid = { false },
+            isValid = { false }
         )
     }
 }

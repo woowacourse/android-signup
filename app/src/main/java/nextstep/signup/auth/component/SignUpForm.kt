@@ -21,7 +21,6 @@ import nextstep.signup.R
 import nextstep.signup.auth.state.SignUpFormState
 import nextstep.signup.ui.theme.SignupTheme
 
-
 @Composable
 internal fun SignUpForm(
     signUpFormState: SignUpFormState,
@@ -105,7 +104,7 @@ private fun Preview() {
                         "",
                         "",
                         ""
-                    ),
+                    )
                 )
             }
             Column(Modifier.padding(32.dp)) {

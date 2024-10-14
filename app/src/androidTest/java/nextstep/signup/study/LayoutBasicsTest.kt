@@ -46,7 +46,7 @@ class LayoutBasicsTest {
                     fontSize = 26.sp,
                     fontWeight = FontWeight.Bold,
                     fontFamily = FontFamily.SansSerif
-                ),
+                )
             )
         }
 

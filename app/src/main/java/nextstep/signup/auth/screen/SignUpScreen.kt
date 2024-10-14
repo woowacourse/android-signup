@@ -27,7 +27,7 @@ import nextstep.signup.ui.theme.SignupTheme
 fun SignUpScreen(
     signUpFormState: SignUpFormState,
     onSignUpFormStateChange: (SignUpFormState) -> Unit,
-    onDoneSignUp: () -> Unit,
+    onDoneSignUp: () -> Unit
 ) {
     Surface {
         Column(
@@ -47,7 +47,6 @@ fun SignUpScreen(
     }
 }
 
-
 @Preview(showSystemUi = true)
 @Composable
 private fun Preview(
@@ -60,7 +59,7 @@ private fun Preview(
         SignUpScreen(
             signUpFormState = formState,
             onSignUpFormStateChange = onSignUpFormStateChange,
-            onDoneSignUp = {},
+            onDoneSignUp = {}
         )
     }
 }

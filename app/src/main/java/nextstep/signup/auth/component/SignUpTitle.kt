@@ -10,7 +10,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import nextstep.signup.R
 import nextstep.signup.ui.theme.SignupTheme
 
-
 @Composable
 internal fun SignUpTitle() {
     Text(
