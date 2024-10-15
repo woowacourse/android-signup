@@ -1,16 +1,11 @@
 package nextstep.signup.presentation.components.signup
 
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.test.assertIsEnabled
-import androidx.compose.ui.test.assertIsNotDisplayed
 import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
-import nextstep.signup.domain.SignUp
 import nextstep.signup.fixture.signUpFixture
-import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
 

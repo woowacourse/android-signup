@@ -2,7 +2,7 @@ package nextstep.signup.domain
 
 data class Email(
     val address: String = ""
-): ErrorHandler {
+) : ErrorHandler {
     private val id: EmailId = EmailId(address.substringBefore("@"))
     private val domain: EmailDomain = EmailDomain(address.substringAfter("@"))
 

@@ -11,7 +11,7 @@ import nextstep.signup.R
 
 @Composable
 fun SignUpGreeting(
-    text :String = stringResource(id = R.string.sign_up_greeting),
+    text: String = stringResource(id = R.string.sign_up_greeting),
     modifier: Modifier = Modifier
 ) {
     Text(

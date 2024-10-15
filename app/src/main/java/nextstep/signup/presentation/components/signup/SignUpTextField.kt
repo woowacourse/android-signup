@@ -32,7 +32,7 @@ fun SignUpTextField(
             colors = TextFieldDefaults.colors(
                 focusedContainerColor = BlueGrey20,
                 unfocusedContainerColor = BlueGrey20,
-                errorContainerColor = BlueGrey20,
+                errorContainerColor = BlueGrey20
             ),
             modifier = modifier
         )
