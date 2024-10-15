@@ -4,12 +4,11 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class SignUpFormState(
+data class UserForm(
     val username: String = "",
     val email: String = "",
     val password: String = "",
     val passwordConfirmation: String = "",
-    val completed: Boolean = false,
 ) : Parcelable {
     val usernameStatus: SignUpStatus
         get() =

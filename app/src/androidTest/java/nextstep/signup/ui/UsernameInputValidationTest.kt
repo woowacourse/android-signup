@@ -6,7 +6,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.test.junit4.createComposeRule
 import nextstep.signup.fixtures.nodeWithTextDoesNotExist
 import nextstep.signup.fixtures.nodeWithTextExists
-import nextstep.signup.ui.model.SignUpFormState
+import nextstep.signup.ui.model.UserForm
 import nextstep.signup.ui.model.SignUpStatus
 import org.junit.Before
 import org.junit.Rule
@@ -15,24 +15,24 @@ import org.junit.Test
 class UsernameInputValidationTest {
     @get:Rule
     val composeTestRule = createComposeRule()
-    private val signUpFormState = mutableStateOf(SignUpFormState())
+    private val userForm = mutableStateOf(UserForm())
 
     @Before
     fun setUp() {
-        signUpFormState.value = SignUpFormState()
+        userForm.value = UserForm()
         composeTestRule.setContent {
             PlainTextField(
                 label = "Username",
-                value = signUpFormState.value.username,
-                isError = signUpFormState.value.usernameStatus is SignUpStatus.Error,
+                value = userForm.value.username,
+                isError = userForm.value.usernameStatus is SignUpStatus.Error,
                 errorMessage =
-                    (signUpFormState.value.usernameStatus as? SignUpStatus.Error)?.message?.let {
+                    (userForm.value.usernameStatus as? SignUpStatus.Error)?.message?.let {
                         stringResource(
                             id = it,
                         )
                     },
                 onValueChange = {
-                    signUpFormState.value = signUpFormState.value.copy(username = it)
+                    userForm.value = userForm.value.copy(username = it)
                 },
             )
         }
@@ -48,7 +48,7 @@ class UsernameInputValidationTest {
             )
 
         // when
-        signUpFormState.changeUsernameValue("abcde")
+        userForm.changeUsernameValue("abcde")
 
         // then
         errorMessages.forEach { errorMessage ->
@@ -59,7 +59,7 @@ class UsernameInputValidationTest {
     @Test
     fun invalidUsername_lessThan2Characters_error() {
         // when
-        signUpFormState.changeUsernameValue(username = "a")
+        userForm.changeUsernameValue(username = "a")
 
         // then
         composeTestRule.nodeWithTextExists("이름은 2~5자여야 합니다.")
@@ -68,7 +68,7 @@ class UsernameInputValidationTest {
     @Test
     fun invalidUsername_moreThan5Characters_error() {
         // when
-        signUpFormState.changeUsernameValue(username = "abcdef")
+        userForm.changeUsernameValue(username = "abcdef")
 
         // then
         composeTestRule.nodeWithTextExists("이름은 2~5자여야 합니다.")
@@ -77,7 +77,7 @@ class UsernameInputValidationTest {
     @Test
     fun invalidUsername_containsNumbers_error() {
         // when
-        signUpFormState.changeUsernameValue(username = "abc13")
+        userForm.changeUsernameValue(username = "abc13")
 
         // then
         composeTestRule.nodeWithTextExists("이름에는 숫자나 기호가 포함될 수 없습니다.")
@@ -86,13 +86,13 @@ class UsernameInputValidationTest {
     @Test
     fun invalidUsername_containsSigns_error() {
         // when
-        signUpFormState.changeUsernameValue(username = "abc@#")
+        userForm.changeUsernameValue(username = "abc@#")
 
         // then
         composeTestRule.nodeWithTextExists("이름에는 숫자나 기호가 포함될 수 없습니다.")
     }
 
-    private fun MutableState<SignUpFormState>.changeUsernameValue(username: String) {
+    private fun MutableState<UserForm>.changeUsernameValue(username: String) {
         value = value.copy(username = username)
     }
 }

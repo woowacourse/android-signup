@@ -19,15 +19,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nextstep.signup.R
-import nextstep.signup.ui.model.SignUpFormState
+import nextstep.signup.ui.model.UserForm
 import nextstep.signup.ui.model.SignUpStatus
 import nextstep.signup.ui.theme.Typography
 
 @Composable
 fun SignUpForm(
     modifier: Modifier = Modifier,
-    signUpFormState: SignUpFormState,
-    onSignUpFormChange: (SignUpFormState) -> Unit,
+    userForm: UserForm,
+    onSignUpFormChange: (UserForm) -> Unit,
     onConfirm: () -> Unit,
 ) {
     val scrollState = rememberScrollState()
@@ -50,7 +50,7 @@ fun SignUpForm(
                 Modifier
                     .fillMaxWidth()
                     .padding(vertical = 40.dp),
-            signUpFormState = signUpFormState,
+            userForm = userForm,
             onSignUpFormChange = onSignUpFormChange,
         )
 
@@ -58,7 +58,7 @@ fun SignUpForm(
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(id = R.string.signup_button_signup),
             fontSize = 14.sp,
-            enabled = signUpFormState.formValid,
+            enabled = userForm.formValid,
             onClick = onConfirm,
         )
     }
@@ -67,60 +67,60 @@ fun SignUpForm(
 @Composable
 private fun SignUpFormTextFields(
     modifier: Modifier = Modifier,
-    signUpFormState: SignUpFormState,
-    onSignUpFormChange: (SignUpFormState) -> Unit,
+    userForm: UserForm,
+    onSignUpFormChange: (UserForm) -> Unit,
 ) {
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
-        val usernameErrorMessage = (signUpFormState.usernameStatus as? SignUpStatus.Error)?.message
-        val emailErrorMessage = (signUpFormState.emailStatus as? SignUpStatus.Error)?.message
-        val passwordErrorMessage = (signUpFormState.passwordStatus as? SignUpStatus.Error)?.message
+        val usernameErrorMessage = (userForm.usernameStatus as? SignUpStatus.Error)?.message
+        val emailErrorMessage = (userForm.emailStatus as? SignUpStatus.Error)?.message
+        val passwordErrorMessage = (userForm.passwordStatus as? SignUpStatus.Error)?.message
         val passwordConfirmationErrorMessage =
-            (signUpFormState.passwordConfirmationStatus as? SignUpStatus.Error)?.message
+            (userForm.passwordConfirmationStatus as? SignUpStatus.Error)?.message
 
         PlainTextField(
             modifier = Modifier.fillMaxWidth(),
             label = stringResource(id = R.string.signup_label_username),
-            value = signUpFormState.username,
-            isError = signUpFormState.usernameStatus is SignUpStatus.Error,
+            value = userForm.username,
+            isError = userForm.usernameStatus is SignUpStatus.Error,
             errorMessage = usernameErrorMessage?.let { stringResource(id = it) },
             onValueChange = { changedValue ->
-                onSignUpFormChange(signUpFormState.copy(username = changedValue))
+                onSignUpFormChange(userForm.copy(username = changedValue))
             },
         )
 
         EmailTextField(
             modifier = Modifier.fillMaxWidth(),
             label = stringResource(id = R.string.signup_label_email),
-            value = signUpFormState.email,
-            isError = signUpFormState.emailStatus is SignUpStatus.Error,
+            value = userForm.email,
+            isError = userForm.emailStatus is SignUpStatus.Error,
             errorMessage = emailErrorMessage?.let { stringResource(id = it) },
             onValueChange = { changedValue ->
-                onSignUpFormChange(signUpFormState.copy(email = changedValue))
+                onSignUpFormChange(userForm.copy(email = changedValue))
             },
         )
 
         PasswordTextField(
             modifier = Modifier.fillMaxWidth(),
             label = stringResource(id = R.string.signup_label_password),
-            value = signUpFormState.password,
-            isError = signUpFormState.passwordStatus is SignUpStatus.Error,
+            value = userForm.password,
+            isError = userForm.passwordStatus is SignUpStatus.Error,
             errorMessage = passwordErrorMessage?.let { stringResource(id = it) },
             onValueChange = { changedValue ->
-                onSignUpFormChange(signUpFormState.copy(password = changedValue))
+                onSignUpFormChange(userForm.copy(password = changedValue))
             },
         )
 
         PasswordTextField(
             modifier = Modifier.fillMaxWidth(),
             label = stringResource(id = R.string.signup_label_password_confirm),
-            value = signUpFormState.passwordConfirmation,
-            isError = signUpFormState.passwordConfirmationStatus is SignUpStatus.Error,
+            value = userForm.passwordConfirmation,
+            isError = userForm.passwordConfirmationStatus is SignUpStatus.Error,
             errorMessage = passwordConfirmationErrorMessage?.let { stringResource(id = it) },
             onValueChange = { changedValue ->
-                onSignUpFormChange(signUpFormState.copy(passwordConfirmation = changedValue))
+                onSignUpFormChange(userForm.copy(passwordConfirmation = changedValue))
             },
         )
     }
@@ -129,13 +129,13 @@ private fun SignUpFormTextFields(
 @Preview
 @Composable
 private fun SignUpFormPreview() {
-    var signUpForm: SignUpFormState by rememberSaveable {
-        mutableStateOf(SignUpFormState())
+    var signUpForm: UserForm by rememberSaveable {
+        mutableStateOf(UserForm())
     }
 
     SignUpForm(
         modifier = Modifier.fillMaxWidth(),
-        signUpFormState = signUpForm,
+        userForm = signUpForm,
         onSignUpFormChange = { changedValue -> signUpForm = changedValue },
         onConfirm = {},
     )

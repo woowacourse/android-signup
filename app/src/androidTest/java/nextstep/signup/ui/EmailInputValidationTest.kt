@@ -6,7 +6,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.test.junit4.createComposeRule
 import nextstep.signup.fixtures.nodeWithTextDoesNotExist
 import nextstep.signup.fixtures.nodeWithTextExists
-import nextstep.signup.ui.model.SignUpFormState
+import nextstep.signup.ui.model.UserForm
 import nextstep.signup.ui.model.SignUpStatus
 import org.junit.Before
 import org.junit.Rule
@@ -15,24 +15,24 @@ import org.junit.Test
 class EmailInputValidationTest {
     @get:Rule
     val composeTestRule = createComposeRule()
-    private val signUpFormState = mutableStateOf(SignUpFormState())
+    private val userForm = mutableStateOf(UserForm())
 
     @Before
     fun setUp() {
-        signUpFormState.value = SignUpFormState()
+        userForm.value = UserForm()
         composeTestRule.setContent {
             EmailTextField(
                 label = "Email",
-                value = signUpFormState.value.email,
-                isError = signUpFormState.value.emailStatus is SignUpStatus.Error,
+                value = userForm.value.email,
+                isError = userForm.value.emailStatus is SignUpStatus.Error,
                 errorMessage =
-                (signUpFormState.value.emailStatus as? SignUpStatus.Error)?.message?.let {
+                (userForm.value.emailStatus as? SignUpStatus.Error)?.message?.let {
                     stringResource(
                         id = it,
                     )
                 },
                 onValueChange = {
-                    signUpFormState.changeEmailValue(email = it)
+                    userForm.changeEmailValue(email = it)
                 },
             )
         }
@@ -44,7 +44,7 @@ class EmailInputValidationTest {
         val errorMessage = "이메일 형식이 올바르지 않습니다."
 
         // when
-        signUpFormState.changeEmailValue(email = "abcde@gmail.com")
+        userForm.changeEmailValue(email = "abcde@gmail.com")
 
         // then
         composeTestRule.nodeWithTextDoesNotExist(errorMessage)
@@ -58,12 +58,12 @@ class EmailInputValidationTest {
 
         // when & then
         invalidEmails.forEach {
-            signUpFormState.changeEmailValue(email = it)
+            userForm.changeEmailValue(email = it)
             composeTestRule.nodeWithTextExists(text = "이메일 형식이 올바르지 않습니다.")
         }
     }
 
-    private fun MutableState<SignUpFormState>.changeEmailValue(email: String) {
+    private fun MutableState<UserForm>.changeEmailValue(email: String) {
         value = value.copy(email = email)
     }
 }

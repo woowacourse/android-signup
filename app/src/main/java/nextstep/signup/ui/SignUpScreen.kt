@@ -7,7 +7,6 @@ import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -19,29 +18,27 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import kotlinx.coroutines.launch
 import nextstep.signup.R
-import nextstep.signup.ui.model.SignUpFormState
+import nextstep.signup.ui.model.UserForm
 
 @Composable
 fun SignUpScreen(modifier: Modifier = Modifier) {
-    var signUpForm: SignUpFormState by rememberSaveable { mutableStateOf(SignUpFormState()) }
+    var signUpForm: UserForm by rememberSaveable { mutableStateOf(UserForm()) }
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
 
     Scaffold(
         modifier = modifier.fillMaxSize(),
-        snackbarHost = {
-            SnackbarHost(snackbarHostState)
-        }
+        snackbarHost = { SnackbarHost(snackbarHostState) },
     ) { paddingValues ->
         SignUpForm(
             modifier =
             Modifier
                 .fillMaxSize()
                 .padding(paddingValues),
-            signUpFormState = signUpForm,
+            userForm = signUpForm,
             onSignUpFormChange = { changedValue ->
-                signUpForm = changedValue.copy(completed = changedValue.formValid)
+                signUpForm = changedValue
             },
             onConfirm = {
                 scope.launch {

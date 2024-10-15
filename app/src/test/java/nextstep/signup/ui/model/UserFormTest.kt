@@ -5,11 +5,11 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
-class SignUpFormStateTest {
+class UserFormTest {
     @Test
     fun emptyUsername_returnsEmptyStatus() {
         // given & when
-        val formState = SignUpFormState(username = "")
+        val formState = UserForm(username = "")
 
         // then
         assertEquals(SignUpStatus.Empty, formState.usernameStatus)
@@ -20,7 +20,7 @@ class SignUpFormStateTest {
         // given & when
         val invalidUsernames = listOf("a", "abcdef")
         invalidUsernames.forEach { username ->
-            val formState = SignUpFormState(username = username)
+            val formState = UserForm(username = username)
 
             // then
             assertEquals(SignUpStatus.Error.UsernameLength, formState.usernameStatus)
@@ -32,7 +32,7 @@ class SignUpFormStateTest {
         // given & when
         val invalidUsernames = listOf("abcd1", "abcd#", "ab1#")
         invalidUsernames.forEach { username ->
-            val formState = SignUpFormState(username = username)
+            val formState = UserForm(username = username)
 
             // then
             assertEquals(SignUpStatus.Error.UsernameNonCharacter, formState.usernameStatus)
@@ -42,7 +42,7 @@ class SignUpFormStateTest {
     @Test
     fun validUsername_returnsSuccessStatus() {
         // given & when
-        val formState = SignUpFormState(username = "abcde")
+        val formState = UserForm(username = "abcde")
 
         // then
         assertEquals(SignUpStatus.Success, formState.usernameStatus)
@@ -51,7 +51,7 @@ class SignUpFormStateTest {
     @Test
     fun emptyEmail_returnsEmptyStatus() {
         // given & when
-        val formState = SignUpFormState(email = "")
+        val formState = UserForm(email = "")
 
         // then
         assertEquals(SignUpStatus.Empty, formState.emailStatus)
@@ -62,7 +62,7 @@ class SignUpFormStateTest {
         // given & when
         val invalidEmails = listOf("kmkim", "kmkim@", "kmkim@kr", "kmkim@kr.")
         invalidEmails.forEach { username ->
-            val formState = SignUpFormState(email = username)
+            val formState = UserForm(email = username)
 
             // then
             assertEquals(SignUpStatus.Error.EmailFormat, formState.emailStatus)
@@ -72,7 +72,7 @@ class SignUpFormStateTest {
     @Test
     fun validEmail_returnsSuccessStatus() {
         // given & when
-        val formState = SignUpFormState(email = "kmkim@gmail.com")
+        val formState = UserForm(email = "kmkim@gmail.com")
 
         // then
         assertEquals(SignUpStatus.Success, formState.emailStatus)
@@ -81,7 +81,7 @@ class SignUpFormStateTest {
     @Test
     fun emptyPassword_returnsEmptyStatus() {
         // given & when
-        val formState = SignUpFormState(password = "")
+        val formState = UserForm(password = "")
 
         // then
         assertEquals(SignUpStatus.Empty, formState.passwordStatus)
@@ -93,7 +93,7 @@ class SignUpFormStateTest {
         val invalidPasswords = listOf("1234567", "12345678901234567")
 
         invalidPasswords.forEach { password ->
-            val formState = SignUpFormState(password = password)
+            val formState = UserForm(password = password)
 
             // then
             assertEquals(SignUpStatus.Error.PasswordLength, formState.passwordStatus)
@@ -105,7 +105,7 @@ class SignUpFormStateTest {
         // given & when
         val invalidPasswords = listOf("12345678", "abcdefgh", "!@#!@#!@")
         invalidPasswords.forEach { password ->
-            val formState = SignUpFormState(password = password)
+            val formState = UserForm(password = password)
 
             // then
             assertEquals(SignUpStatus.Error.PasswordFormat, formState.passwordStatus)
@@ -115,7 +115,7 @@ class SignUpFormStateTest {
     @Test
     fun validPassword_returnsSuccessStatus() {
         // given & when
-        val formState = SignUpFormState(password = "abcd1234")
+        val formState = UserForm(password = "abcd1234")
 
         // then
         assertEquals(SignUpStatus.Success, formState.passwordStatus)
@@ -124,7 +124,7 @@ class SignUpFormStateTest {
     @Test
     fun emptyPasswordConfirmation_returnsEmptyStatus() {
         // given & when
-        val formState = SignUpFormState(passwordConfirmation = "")
+        val formState = UserForm(passwordConfirmation = "")
 
         // then
         assertEquals(SignUpStatus.Empty, formState.passwordConfirmationStatus)
@@ -133,7 +133,7 @@ class SignUpFormStateTest {
     @Test
     fun passwordConfirmation_notEqualPassword_returnsPasswordConfirmationErrorStatus() {
         // given & when
-        val formState = SignUpFormState(password = "abcd1234", passwordConfirmation = "abcd1235")
+        val formState = UserForm(password = "abcd1234", passwordConfirmation = "abcd1235")
 
         // then
         assertEquals(SignUpStatus.Error.PasswordConfirmation, formState.passwordConfirmationStatus)
@@ -142,7 +142,7 @@ class SignUpFormStateTest {
     @Test
     fun validPasswordConfirmation_returnsSuccessStatus() {
         // given & when
-        val formState = SignUpFormState(password = "abcd1234", passwordConfirmation = "abcd1234")
+        val formState = UserForm(password = "abcd1234", passwordConfirmation = "abcd1234")
 
         // then
         assertEquals(SignUpStatus.Success, formState.passwordConfirmationStatus)
@@ -152,7 +152,7 @@ class SignUpFormStateTest {
     fun formValid_allValid_returnsTrue() {
         // given & when
         val formState =
-            SignUpFormState(
+            UserForm(
                 username = "abcde",
                 email = "kmkim@pengcook.com",
                 password = "abcd1234",
@@ -169,7 +169,7 @@ class SignUpFormStateTest {
     fun formValid_notAllValid_returnsFalse() {
         // given & when
         val formState =
-            SignUpFormState(
+            UserForm(
                 username = "abcde",
                 email = "kmkim@pengcook.com",
                 password = "abcd1234",
