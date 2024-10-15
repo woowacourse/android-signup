@@ -56,7 +56,7 @@ fun TextFieldScreen() {
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+private fun GreetingPreview() {
     SignupTheme {
         TextFieldScreen()
     }
