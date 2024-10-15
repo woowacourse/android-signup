@@ -11,7 +11,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-class SignUpButtonValidationTest {
+class ButtonOnSignUpValidationTest {
     @get:Rule
     val composeTestRule = createComposeRule()
     private val userForm = mutableStateOf(UserForm())
