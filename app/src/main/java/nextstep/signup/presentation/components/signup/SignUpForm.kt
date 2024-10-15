@@ -45,7 +45,7 @@ fun SignUpForm(
             },
             modifier = Modifier.fillMaxWidth(),
             label = stringResource(R.string.sign_up_form_username),
-            errorMessage = signUpData.username.errorMessage()?.message ?: ""
+            errorMessage = signUpData.username.errorMessage().message
         )
 
         // Email Input
@@ -60,7 +60,7 @@ fun SignUpForm(
             },
             modifier = Modifier.fillMaxWidth(),
             label = stringResource(R.string.sign_up_form_email),
-            errorMessage = signUpData.email.errorMessage()?.message ?: ""
+            errorMessage = signUpData.email.errorMessage().message
         )
 
         // Password Input
@@ -78,7 +78,7 @@ fun SignUpForm(
             modifier = Modifier.fillMaxWidth(),
             label = stringResource(R.string.sign_up_form_password),
             isPassword = true,
-            errorMessage = signUpData.password.errorMessage()?.message ?: ""
+            errorMessage = signUpData.password.errorMessage().message
         )
 
         // Password Confirm Input
@@ -96,7 +96,7 @@ fun SignUpForm(
             modifier = Modifier.fillMaxWidth(),
             label = stringResource(R.string.sign_up_form_password_confirm),
             isPassword = true,
-            errorMessage = signUpData.errorMessage()?.message ?: ""
+            errorMessage = signUpData.errorMessage().message
         )
 
         // Sign Up Button
