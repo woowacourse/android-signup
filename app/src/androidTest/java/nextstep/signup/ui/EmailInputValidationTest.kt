@@ -26,11 +26,11 @@ class EmailInputValidationTest {
                 value = signUpFormState.value.email,
                 isError = signUpFormState.value.emailStatus is SignUpStatus.Error,
                 errorMessage =
-                    (signUpFormState.value.emailStatus as? SignUpStatus.Error)?.message?.let {
-                        stringResource(
-                            id = it,
-                        )
-                    },
+                (signUpFormState.value.emailStatus as? SignUpStatus.Error)?.message?.let {
+                    stringResource(
+                        id = it,
+                    )
+                },
                 onValueChange = {
                     signUpFormState.changeEmailValue(email = it)
                 },
@@ -53,7 +53,8 @@ class EmailInputValidationTest {
     @Test
     fun invalidEmail_inappropriateFormat_error() {
         // given
-        val invalidEmails = listOf("kmkim", "kmkim@", "kmkim@kr", "kmkim@kr.")
+        val invalidEmails =
+            listOf("kmkim", "@gmail.com", "kmkim@", "kmkim@kr", "kmkim@kr.", "kmkim@co.k")
 
         // when & then
         invalidEmails.forEach {
