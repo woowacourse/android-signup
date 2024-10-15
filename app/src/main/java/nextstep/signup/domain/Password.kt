@@ -11,9 +11,10 @@ data class Password(
 
     fun errorMessage(): Error? = when {
         value.isBlank() -> null
+        value.isBlank() -> Error.NO_ERROR
         !isValidTextType() -> Error.INVALID_PASSWORD_TYPE
         !isValidLength() -> Error.INVALID_PASSWORD_LENGTH
-        else -> null
+        else -> Error.NO_ERROR
     }
 
     companion object {

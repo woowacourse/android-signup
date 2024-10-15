@@ -10,8 +10,9 @@ data class Email(
 
     fun errorMessage(): Error? = when {
         address.isBlank() -> null
+        address.isBlank() -> Error.NO_ERROR
         !isValid() -> Error.INVALID_EMAIL
-        else -> null
+        else -> Error.NO_ERROR
     }
 }
 

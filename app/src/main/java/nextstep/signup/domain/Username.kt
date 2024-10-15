@@ -11,9 +11,10 @@ data class Username(
 
     fun errorMessage(): Error? = when {
         name.isBlank() -> null
+        name.isBlank() -> Error.NO_ERROR
         !isValidLength() -> Error.INVALID_USERNAME_LENGTH
         !isValidTextType() -> Error.INVALID_USERNAME_TYPE
-        else -> null
+        else -> Error.NO_ERROR
     }
 
     companion object {

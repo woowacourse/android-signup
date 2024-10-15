@@ -10,8 +10,9 @@ data class SignUp(
 
     fun errorMessage(): Error? = when {
         confirmPassword.value.isBlank() -> null
+        confirmPassword.value.isBlank() -> Error.NO_ERROR
         !isValid() -> Error.INVALID_CONFIRM_PASSWORD
-        else -> null
+        else -> Error.NO_ERROR
     }
 
     companion object {
