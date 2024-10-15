@@ -25,9 +25,10 @@ fun DefaultButton(
         modifier = modifier,
         onClick = onClick,
         enabled = enabled,
-        colors = ButtonDefaults.buttonColors(
-            disabledContainerColor = Color.Gray,
-        ),
+        colors =
+            ButtonDefaults.buttonColors(
+                disabledContainerColor = Color.Gray,
+            ),
         contentPadding = PaddingValues(vertical = 16.dp),
     ) {
         Text(

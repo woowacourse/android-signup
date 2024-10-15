@@ -36,9 +36,9 @@ fun SignUpScreen(
     ) { paddingValues ->
         SignUpForm(
             modifier =
-            Modifier
-                .fillMaxSize()
-                .padding(paddingValues),
+                Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues),
             userForm = signUpForm,
             onSignUpFormChange = { changedValue ->
                 signUpForm = changedValue

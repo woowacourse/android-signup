@@ -6,8 +6,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.test.junit4.createComposeRule
 import nextstep.signup.fixtures.nodeWithTextDoesNotExist
 import nextstep.signup.fixtures.nodeWithTextExists
-import nextstep.signup.ui.model.UserForm
 import nextstep.signup.ui.model.SignUpStatus
+import nextstep.signup.ui.model.UserForm
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -26,11 +26,11 @@ class EmailInputValidationTest {
                 value = userForm.value.email,
                 isError = userForm.value.emailStatus is SignUpStatus.Error,
                 errorMessage =
-                (userForm.value.emailStatus as? SignUpStatus.Error)?.message?.let {
-                    stringResource(
-                        id = it,
-                    )
-                },
+                    (userForm.value.emailStatus as? SignUpStatus.Error)?.message?.let {
+                        stringResource(
+                            id = it,
+                        )
+                    },
                 onValueChange = {
                     userForm.changeEmailValue(email = it)
                 },

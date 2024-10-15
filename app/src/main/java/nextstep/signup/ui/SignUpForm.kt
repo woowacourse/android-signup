@@ -19,8 +19,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nextstep.signup.R
-import nextstep.signup.ui.model.UserForm
 import nextstep.signup.ui.model.SignUpStatus
+import nextstep.signup.ui.model.UserForm
 import nextstep.signup.ui.theme.Typography
 
 @Composable

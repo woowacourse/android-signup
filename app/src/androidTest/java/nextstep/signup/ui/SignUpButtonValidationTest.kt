@@ -23,7 +23,7 @@ class SignUpButtonValidationTest {
                 text = "Sign Up",
                 enabled = userForm.value.formValid,
                 onClick = {},
-                fontSize = 12.sp
+                fontSize = 12.sp,
             )
         }
     }
@@ -48,12 +48,13 @@ class SignUpButtonValidationTest {
     @Test
     fun formNotValid_buttonDisabled() {
         // when
-        userForm.value = UserForm(
-            username = "abcdef",
-            email = "kmkim@pengcook.c",
-            password = "abcd1234",
-            passwordConfirmation = "abcd1235",
-        )
+        userForm.value =
+            UserForm(
+                username = "abcdef",
+                email = "kmkim@pengcook.c",
+                password = "abcd1234",
+                passwordConfirmation = "abcd1235",
+            )
 
         // then
         composeTestRule
