@@ -8,7 +8,7 @@ value class Password(
 ) {
     fun validate(): InputValidation {
         if (value.isBlank()) return InputValidation(isError = false)
-        if (value.length !in 8..16) {
+        if (value.length !in MIN_PASSWORD_LENGTH..MAX_PASSWORD_LENGTH) {
             return InputValidation(stringRes = R.string.error_password_length, isError = true)
         }
         if (!value.matches(Regex(PASSWORD_REGEX))) {
@@ -27,5 +27,7 @@ value class Password(
 
     companion object {
         const val PASSWORD_REGEX = "^(?=.*[a-zA-Z])(?=.*[0-9]).{8,16}$"
+        const val MIN_PASSWORD_LENGTH = 8
+        const val MAX_PASSWORD_LENGTH = 16
     }
 }
