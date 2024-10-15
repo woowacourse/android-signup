@@ -7,6 +7,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -20,8 +24,11 @@ import nextstep.signup.domain.Username
 @Composable
 fun SignUpForm(
     signUpData: SignUp,
-    onDataChange: (SignUp) -> Unit = {}
+    onDataChange: (SignUp) -> Unit = {},
+    onClick: () -> Unit = {}
 ) {
+    var showSnackbar by remember { mutableStateOf(false) }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -104,8 +111,22 @@ fun SignUpForm(
             availability = (
                 { signUpData.isValid() }
                 ),
+            onClick = {
+                onClick()
+                showSnackbar = true
+            },
             modifier = Modifier.fillMaxWidth()
         )
+
+        if (showSnackbar) {
+            SignUpSnackbar(
+                message = "회원가입 완료",
+                onDismiss = {
+                    onDataChange(SignUp.BLANK_SIGN_UP)
+                    showSnackbar = false
+                }
+            )
+        }
     }
 }
 
