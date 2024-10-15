@@ -28,9 +28,11 @@ fun SignUpTextField(
             onValueChange = onValueChange,
             label = { Text(text = label) },
             visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None,
+            isError = !errorMessage.isNullOrEmpty(),
             colors = TextFieldDefaults.colors(
                 focusedContainerColor = BlueGrey20,
-                unfocusedContainerColor = BlueGrey20
+                unfocusedContainerColor = BlueGrey20,
+                errorContainerColor = BlueGrey20,
             ),
             modifier = modifier
         )
