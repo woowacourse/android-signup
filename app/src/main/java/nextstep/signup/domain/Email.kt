@@ -7,19 +7,25 @@ data class Email(
     private val domain: EmailDomain = EmailDomain(address.substringAfter("@"))
 
     fun isValid(): Boolean = id.isValid() && domain.isValid() && address.contains("@")
+
+    fun errorMessage(): Error? = when {
+        address.isBlank() -> null
+        !isValid() -> Error.INVALID_EMAIL
+        else -> null
+    }
 }
 
-data class EmailId(
+private data class EmailId(
     val id: String
 ) {
     fun isValid(): Boolean = id.matches(EMAIL_ID_REGEX.toRegex())
 
     companion object {
-        private const val EMAIL_ID_REGEX = "^[a-zA-Z0-9._%+-]$"
+        private const val EMAIL_ID_REGEX = "^[a-zA-Z0-9._%+-]+\$"
     }
 }
 
-data class EmailDomain(
+private data class EmailDomain(
     val domain: String
 ) {
     fun isValid(): Boolean = domain.matches(EMAIL_DOMAIN_REGEX.toRegex())

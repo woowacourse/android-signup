@@ -3,9 +3,21 @@ package nextstep.signup.domain
 data class Username(
     val name: String = ""
 ) {
-    fun isValid(): Boolean = name.matches(USERNAME_REGEX.toRegex())
+    fun isValid(): Boolean = isValidLength() && isValidTextType()
+
+    private fun isValidTextType(): Boolean = name.matches(USERNAME_REGEX_TEXT_TYPE.toRegex())
+
+    private fun isValidLength(): Boolean = name.matches(USERNAME_REGEX_LENGTH.toRegex())
+
+    fun errorMessage(): Error? = when {
+        name.isBlank() -> null
+        !isValidLength() -> Error.INVALID_USERNAME_LENGTH
+        !isValidTextType() -> Error.INVALID_USERNAME_TYPE
+        else -> null
+    }
 
     companion object {
-        private const val USERNAME_REGEX = "^[a-zA-Z가-힣]{2,5}$"
+        private const val USERNAME_REGEX_LENGTH = "^.{2,5}\$"
+        private const val USERNAME_REGEX_TEXT_TYPE = "^[a-zA-Z가-힣]*\$"
     }
 }
