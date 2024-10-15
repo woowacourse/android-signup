@@ -40,7 +40,6 @@ class EmailTest {
         val email = Email("@")
 
         assertFalse(email.isValid())
-
     }
 
     @Test

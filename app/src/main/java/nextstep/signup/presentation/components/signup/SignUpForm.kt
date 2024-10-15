@@ -20,7 +20,7 @@ import nextstep.signup.domain.Username
 @Composable
 fun SignUpForm(
     signUpData: SignUp,
-    onDataChange: (SignUp) -> Unit = {},
+    onDataChange: (SignUp) -> Unit = {}
 ) {
     Column(
         modifier = Modifier
@@ -50,7 +50,8 @@ fun SignUpForm(
 
         // Email Input
         SignUpTextField(
-            value = signUpData.email.address, onValueChange = {
+            value = signUpData.email.address,
+            onValueChange = {
                 onDataChange(
                     signUpData.copy(
                         email = Email(it)
@@ -64,7 +65,8 @@ fun SignUpForm(
 
         // Password Input
         SignUpTextField(
-            value = signUpData.password.value, onValueChange = {
+            value = signUpData.password.value,
+            onValueChange = {
                 onDataChange(
                     signUpData.copy(
                         password = signUpData.password.copy(
@@ -100,8 +102,8 @@ fun SignUpForm(
         // Sign Up Button
         SignUpButton(
             availability = (
-                    { signUpData.isValid() }
-                    ),
+                { signUpData.isValid() }
+                ),
             modifier = Modifier.fillMaxWidth()
         )
     }

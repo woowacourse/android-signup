@@ -1,6 +1,9 @@
 package nextstep.signup.domain
 
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class PasswordTest {
@@ -8,7 +11,7 @@ class PasswordTest {
     @Test
     fun `valid when contains eng and number and length is between 8-16`() {
         // given
-        val password= Password("Abcdef1234!")
+        val password = Password("Abcdef1234!")
 
         // when
         val result = password.isValid()
@@ -64,7 +67,6 @@ class PasswordTest {
         // when
         val result1 = password1.isValid()
         val result2 = password2.isValid()
-
 
         // then
         assertFalse(result1)

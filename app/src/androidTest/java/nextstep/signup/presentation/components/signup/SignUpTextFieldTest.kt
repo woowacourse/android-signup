@@ -2,16 +2,11 @@ package nextstep.signup.presentation.components.signup
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
-import androidx.compose.ui.test.performTextInput
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import nextstep.signup.domain.Email
 import nextstep.signup.domain.Error
-import nextstep.signup.domain.SignUp
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -23,28 +18,27 @@ class SignUpTextFieldTest {
     val composeTestRule = createComposeRule()
     private val email = mutableStateOf(Email())
 
+    @Test
+    fun SignUpTextField의_label과_value값을_정상적으로_표시된다() {
+        email.value = Email("test@example.com")
 
-   @Test
-   fun SignUpTextField의_label과_value값을_정상적으로_표시된다() {
-       email.value = Email("test@example.com")
+        composeTestRule.setContent {
+            SignUpTextField(
+                value = email.value.address,
+                onValueChange = {},
+                label = "Email",
+                errorMessage = email.value.errorMessage()?.message ?: ""
+            )
+        }
 
-       composeTestRule.setContent {
-           SignUpTextField(
-               value = email.value.address,
-               onValueChange = {},
-               label = "Email",
-               errorMessage = email.value.errorMessage()?.message ?: ""
-           )
-       }
+        composeTestRule
+            .onNodeWithText("test@example.com")
+            .assertExists()
 
-       composeTestRule
-           .onNodeWithText("test@example.com")
-           .assertExists()
-
-         composeTestRule
-              .onNodeWithText("Email")
-              .assertExists()
-   }
+        composeTestRule
+            .onNodeWithText("Email")
+            .assertExists()
+    }
 
     // 에러메세지가 보여지지 않는 경우
     @Test
@@ -65,10 +59,8 @@ class SignUpTextFieldTest {
             .assertDoesNotExist()
     }
 
-
     @Test
-    fun 에러메세지가_존재하면_에러메세지를_보여준다 () {
-
+    fun 에러메세지가_존재하면_에러메세지를_보여준다() {
         composeTestRule.setContent {
             SignUpTextField(
                 value = "",

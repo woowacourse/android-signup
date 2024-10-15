@@ -1,6 +1,6 @@
 package nextstep.signup.domain
 
-enum class Error(val code : Int, val message : String) {
+enum class Error(val code: Int, val message: String) {
     INVALID_USERNAME_LENGTH(100, "이름은 2자 이상 5자 이하이여야 합니다."),
     INVALID_USERNAME_TYPE(101, "이름에는 숫자나 기호가 포함될 수 없습니다."),
     INVALID_EMAIL(200, "이메일 형식이 올바르지 않습니다."),
