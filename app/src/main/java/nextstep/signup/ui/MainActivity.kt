@@ -22,7 +22,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.signup.R
-import nextstep.signup.domain.SignUpInfo
 import nextstep.signup.ui.component.SingleLineTextField
 import nextstep.signup.ui.component.SubmitButton
 import nextstep.signup.ui.theme.SignupTheme

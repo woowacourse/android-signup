@@ -1,4 +1,4 @@
-package nextstep.signup.domain
+package nextstep.signup.ui
 
 import androidx.annotation.StringRes
 import nextstep.signup.R
