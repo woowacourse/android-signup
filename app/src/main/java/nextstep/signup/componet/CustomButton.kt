@@ -24,6 +24,7 @@ fun CustomButton(
     shape: RoundedCornerShape = RoundedCornerShape(8.dp),
     buttonColors: ButtonColors = ButtonDefaults.buttonColors(),
     @StringRes titleResId: Int,
+    enabled: Boolean = true,
     onClick: () -> Unit,
 ) {
     Button(
@@ -31,6 +32,7 @@ fun CustomButton(
         onClick = onClick,
         shape = shape,
         colors = buttonColors,
+        enabled = enabled,
     ) {
         Text(
             text = stringResource(id = titleResId),

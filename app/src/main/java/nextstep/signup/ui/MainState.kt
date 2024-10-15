@@ -9,4 +9,15 @@ data class MainState(
     val email: Email = Email(),
     val password: Password = Password(),
     val passwordConfirm: Password = Password(),
-)
+) {
+    val signUpEnabled: Boolean
+        get() =
+            username.value.isNotBlank() &&
+                email.value.isNotBlank() &&
+                password.value.isNotBlank() &&
+                passwordConfirm.value.isNotBlank() &&
+                !username.validate().isError &&
+                !email.validate().isError &&
+                !password.validate().isError &&
+                !passwordConfirm.validateConfirmation(password).isError
+}
