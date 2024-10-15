@@ -1,6 +1,8 @@
 package nextstep.signup.ui.model
 
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class SignUpFormStateTest {
@@ -149,12 +151,13 @@ class SignUpFormStateTest {
     @Test
     fun formValid_allValid_returnsTrue() {
         // given & when
-        val formState = SignUpFormState(
-            username = "abcde",
-            email = "kmkim@pengcook.com",
-            password = "abcd1234",
-            passwordConfirmation = "abcd1234"
-        )
+        val formState =
+            SignUpFormState(
+                username = "abcde",
+                email = "kmkim@pengcook.com",
+                password = "abcd1234",
+                passwordConfirmation = "abcd1234",
+            )
 
         val result = formState.formValid
 
@@ -165,12 +168,13 @@ class SignUpFormStateTest {
     @Test
     fun formValid_notAllValid_returnsFalse() {
         // given & when
-        val formState = SignUpFormState(
-            username = "abcde",
-            email = "kmkim@pengcook.com",
-            password = "abcd1234",
-            passwordConfirmation = "abcd1235"
-        )
+        val formState =
+            SignUpFormState(
+                username = "abcde",
+                email = "kmkim@pengcook.com",
+                password = "abcd1234",
+                passwordConfirmation = "abcd1235",
+            )
 
         val result = formState.formValid
 

@@ -25,11 +25,12 @@ class EmailInputValidationTest {
                 label = "Email",
                 value = signUpFormState.value.email,
                 isError = signUpFormState.value.emailStatus is SignUpStatus.Error,
-                errorMessage = (signUpFormState.value.emailStatus as? SignUpStatus.Error)?.message?.let {
-                    stringResource(
-                        id = it
-                    )
-                },
+                errorMessage =
+                    (signUpFormState.value.emailStatus as? SignUpStatus.Error)?.message?.let {
+                        stringResource(
+                            id = it,
+                        )
+                    },
                 onValueChange = {
                     signUpFormState.changeEmailValue(email = it)
                 },

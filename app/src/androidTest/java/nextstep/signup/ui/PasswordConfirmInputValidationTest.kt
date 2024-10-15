@@ -25,11 +25,12 @@ class PasswordConfirmInputValidationTest {
                 label = "Password Confirmation",
                 value = signUpFormState.value.passwordConfirmation,
                 isError = signUpFormState.value.passwordConfirmationStatus is SignUpStatus.Error,
-                errorMessage = (signUpFormState.value.passwordConfirmationStatus as? SignUpStatus.Error)?.message?.let {
-                    stringResource(
-                        id = it
-                    )
-                },
+                errorMessage =
+                    (signUpFormState.value.passwordConfirmationStatus as? SignUpStatus.Error)?.message?.let {
+                        stringResource(
+                            id = it,
+                        )
+                    },
                 onValueChange = {
                     signUpFormState.changePasswordConfirmationValue(passwordConfirmation = it)
                 },

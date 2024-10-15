@@ -34,9 +34,9 @@ fun SignUpForm(
 
     Column(
         modifier =
-        modifier
-            .verticalScroll(scrollState)
-            .padding(horizontal = 32.dp, vertical = 60.dp),
+            modifier
+                .verticalScroll(scrollState)
+                .padding(horizontal = 32.dp, vertical = 60.dp),
     ) {
         Text(
             modifier = Modifier.fillMaxWidth(),
@@ -47,9 +47,9 @@ fun SignUpForm(
 
         SignUpFormTextFields(
             modifier =
-            Modifier
-                .fillMaxWidth()
-                .padding(vertical = 40.dp),
+                Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 40.dp),
             signUpFormState = signUpFormState,
             onSignUpFormChange = onSignUpFormChange,
         )

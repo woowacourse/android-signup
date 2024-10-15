@@ -25,11 +25,12 @@ class PasswordInputValidationTest {
                 label = "Password",
                 value = signUpFormState.value.password,
                 isError = signUpFormState.value.passwordStatus is SignUpStatus.Error,
-                errorMessage = (signUpFormState.value.passwordStatus as? SignUpStatus.Error)?.message?.let {
-                    stringResource(
-                        id = it
-                    )
-                },
+                errorMessage =
+                    (signUpFormState.value.passwordStatus as? SignUpStatus.Error)?.message?.let {
+                        stringResource(
+                            id = it,
+                        )
+                    },
                 onValueChange = {
                     signUpFormState.changePasswordValue(password = it)
                 },
@@ -40,10 +41,11 @@ class PasswordInputValidationTest {
     @Test
     fun validPassword_success() {
         // given
-        val errorMessages = listOf(
-            "비밀번호는 8~16자여야 합니다.",
-            "비밀번호는 영문과 숫자를 포함해야 합니다.",
-        )
+        val errorMessages =
+            listOf(
+                "비밀번호는 8~16자여야 합니다.",
+                "비밀번호는 영문과 숫자를 포함해야 합니다.",
+            )
 
         // when
         signUpFormState.changePasswordValue(password = "aaaaaa12")

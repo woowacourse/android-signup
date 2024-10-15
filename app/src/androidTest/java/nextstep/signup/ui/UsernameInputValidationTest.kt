@@ -13,7 +13,6 @@ import org.junit.Rule
 import org.junit.Test
 
 class UsernameInputValidationTest {
-
     @get:Rule
     val composeTestRule = createComposeRule()
     private val signUpFormState = mutableStateOf(SignUpFormState())
@@ -26,11 +25,12 @@ class UsernameInputValidationTest {
                 label = "Username",
                 value = signUpFormState.value.username,
                 isError = signUpFormState.value.usernameStatus is SignUpStatus.Error,
-                errorMessage = (signUpFormState.value.usernameStatus as? SignUpStatus.Error)?.message?.let {
-                    stringResource(
-                        id = it
-                    )
-                },
+                errorMessage =
+                    (signUpFormState.value.usernameStatus as? SignUpStatus.Error)?.message?.let {
+                        stringResource(
+                            id = it,
+                        )
+                    },
                 onValueChange = {
                     signUpFormState.value = signUpFormState.value.copy(username = it)
                 },
@@ -41,10 +41,11 @@ class UsernameInputValidationTest {
     @Test
     fun validUsername_success() {
         // given
-        val errorMessages = listOf(
-            "이름은 2~5자여야 합니다.",
-            "이름에는 숫자나 기호가 포함될 수 없습니다.",
-        )
+        val errorMessages =
+            listOf(
+                "이름은 2~5자여야 합니다.",
+                "이름에는 숫자나 기호가 포함될 수 없습니다.",
+            )
 
         // when
         signUpFormState.changeUsernameValue("abcde")

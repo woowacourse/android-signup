@@ -1,9 +1,7 @@
 package nextstep.signup.ui.model
 
 import android.os.Parcelable
-import androidx.annotation.StringRes
 import kotlinx.parcelize.Parcelize
-import nextstep.signup.R
 
 @Parcelize
 data class SignUpFormState(
@@ -49,10 +47,10 @@ data class SignUpFormState(
 
     val formValid: Boolean
         get() =
-            usernameStatus == SignUpStatus.Success
-                    && emailStatus == SignUpStatus.Success
-                    && passwordStatus == SignUpStatus.Success
-                    && passwordConfirmationStatus == SignUpStatus.Success
+            usernameStatus == SignUpStatus.Success &&
+                emailStatus == SignUpStatus.Success &&
+                passwordStatus == SignUpStatus.Success &&
+                passwordConfirmationStatus == SignUpStatus.Success
 
     companion object {
         private const val USERNAME_REGEX = "^[a-zA-Z가-힣]+$"
