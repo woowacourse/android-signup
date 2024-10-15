@@ -10,7 +10,7 @@ data class SignUpState(
     val password: Password = Password(),
     val passwordConfirm: Password = Password(),
 ) {
-    val signUpEnabled: Boolean
+    val enabled: Boolean
         get() =
             username.value.isNotBlank() &&
                 email.value.isNotBlank() &&

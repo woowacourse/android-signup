@@ -78,7 +78,7 @@ fun MainScreen() {
             shape = RoundedCornerShape(100.dp),
             buttonColors = ButtonDefaults.buttonColors(containerColor = Blue50),
             titleResId = R.string.sign_up_button,
-            enabled = signUpState.signUpEnabled,
+            enabled = signUpState.enabled,
             onClick = {},
         )
     }

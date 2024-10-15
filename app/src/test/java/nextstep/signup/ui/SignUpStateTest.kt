@@ -20,7 +20,7 @@ class SignUpStateTest {
             )
 
         // then
-        assertFalse(state.signUpEnabled)
+        assertFalse(state.enabled)
     }
 
     @Test
@@ -35,7 +35,7 @@ class SignUpStateTest {
             )
 
         // then
-        assertFalse(stateWithEmailBlank.signUpEnabled)
+        assertFalse(stateWithEmailBlank.enabled)
     }
 
     @Test
@@ -50,7 +50,7 @@ class SignUpStateTest {
             )
 
         // then
-        assertFalse(stateWithPasswordBlank.signUpEnabled)
+        assertFalse(stateWithPasswordBlank.enabled)
     }
 
     @Test
@@ -65,7 +65,7 @@ class SignUpStateTest {
             )
 
         // then
-        assertFalse(invalidEmailState.signUpEnabled)
+        assertFalse(invalidEmailState.enabled)
     }
 
     @Test
@@ -80,7 +80,7 @@ class SignUpStateTest {
             )
 
         // then
-        assertFalse(passwordMismatchState.signUpEnabled)
+        assertFalse(passwordMismatchState.enabled)
     }
 
     @Test
@@ -95,6 +95,6 @@ class SignUpStateTest {
             )
 
         // then
-        assertTrue(validState.signUpEnabled)
+        assertTrue(validState.enabled)
     }
 }
