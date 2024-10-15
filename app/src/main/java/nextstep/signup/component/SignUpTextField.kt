@@ -8,8 +8,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import nextstep.signup.R
 
 @Composable
 fun SignUpTextField(
@@ -29,7 +31,7 @@ fun SignUpTextField(
 
 @Composable
 fun VisualTransformation(label: String): VisualTransformation {
-    return when (label.contains("Password")) {
+    return when (label.contains(stringResource(R.string.input_hint_password), ignoreCase = true)) {
         true -> PasswordVisualTransformation()
         else -> VisualTransformation.None
     }
