@@ -14,10 +14,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import nextstep.signup.component.SignUpEmailTextField
+import nextstep.signup.component.SignUpPasswordConfirmTextField
+import nextstep.signup.component.SignUpPasswordTextField
 import nextstep.signup.component.SignUpSubmitButton
-import nextstep.signup.component.SignUpTextField
 import nextstep.signup.component.SignUpTitle
+import nextstep.signup.component.SignUpUsernameTextField
 import nextstep.signup.ui.theme.SignupTheme
 
 class MainActivity : ComponentActivity() {
@@ -40,8 +44,6 @@ class MainActivity : ComponentActivity() {
 fun SignUpScreen(
     modifier: Modifier = Modifier
 ) {
-    val labels = textFieldLabels()
-
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -51,14 +53,35 @@ fun SignUpScreen(
     ) {
         SignUpTitle(title = stringResource(R.string.sign_up_title))
 
-        for (label in labels) {
-            SignUpTextField(
-                modifier = modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 20.dp),
-                label = label
-            )
-        }
+        SignUpUsernameTextField(
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(vertical = 20.dp),
+            username = "",
+            onUsernameChange = { }
+        )
+
+        SignUpEmailTextField(
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(vertical = 20.dp),
+            email = ""
+        )
+
+        SignUpPasswordTextField(
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(vertical = 20.dp),
+            password = ""
+        )
+
+        SignUpPasswordConfirmTextField(
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(vertical = 20.dp),
+            passwordConfirm = ""
+        )
+
 
         SignUpSubmitButton(
             modifier = modifier
@@ -70,12 +93,10 @@ fun SignUpScreen(
     }
 }
 
+@Preview(showBackground = true)
 @Composable
-private fun textFieldLabels(): List<String> {
-    return listOf(
-        stringResource(R.string.input_hint_username),
-        stringResource(R.string.input_hint_email),
-        stringResource(R.string.input_hint_password),
-        stringResource(R.string.input_hint_password_confirm)
-    )
+fun SignUpScreenPreview() {
+    SignupTheme {
+        SignUpScreen()
+    }
 }
