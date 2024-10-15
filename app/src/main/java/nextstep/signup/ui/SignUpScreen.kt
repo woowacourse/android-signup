@@ -46,30 +46,34 @@ fun SignUpScreen(
                 Modifier.padding(top = 60.dp),
             )
             SignUpTextField(
-                modifier = Modifier.padding(top = 36.dp),
-                hint = stringResource(R.string.user_name),
                 value = userName,
+                hint = stringResource(R.string.user_name),
+                modifier = Modifier.padding(top = 36.dp),
                 onValueChange = onUserNameChanged,
+                getErrorMessage = { getUserNameErrorMessage(userName) },
             )
             SignUpTextField(
-                modifier = Modifier.padding(top = 36.dp),
-                hint = stringResource(R.string.email),
                 value = email,
+                hint = stringResource(R.string.email),
+                modifier = Modifier.padding(top = 36.dp),
                 onValueChange = onEmailChanged,
+                getErrorMessage = { validate(email) },
             )
             SignUpTextField(
-                modifier = Modifier.padding(top = 36.dp),
-                hint = stringResource(R.string.password),
                 value = password,
+                hint = stringResource(R.string.password),
+                modifier = Modifier.padding(top = 36.dp),
                 visualTransformation = PasswordVisualTransformation(),
                 onValueChange = onPasswordChanged,
+                getErrorMessage = { validate(password) },
             )
             SignUpTextField(
-                modifier = Modifier.padding(top = 36.dp),
-                hint = stringResource(R.string.password_confirm),
                 value = passwordConfirm,
+                hint = stringResource(R.string.password_confirm),
+                modifier = Modifier.padding(top = 36.dp),
                 visualTransformation = PasswordVisualTransformation(),
                 onValueChange = onPasswordConfirmChanged,
+                getErrorMessage = { validate(passwordConfirm) },
             )
             SignUpButton(
                 Modifier
@@ -78,6 +82,20 @@ fun SignUpScreen(
             )
         }
     }
+}
+
+@Composable
+fun getUserNameErrorMessage(userName: String): String {
+    val usernameRegex = "^[a-zA-Z가-힣].{1,4}$"
+    return if (userName.matches(Regex(usernameRegex))) {
+        stringResource(id = R.string.empty)
+    } else {
+        stringResource(id = R.string.error_message_user_name)
+    }
+}
+
+fun validate(text: String): String {
+    return ""
 }
 
 @Preview(showBackground = true)
