@@ -25,11 +25,9 @@ import androidx.compose.ui.unit.dp
 import nextstep.signup.ui.theme.Blue50
 
 @Composable
-fun TextView(
-    @StringRes description: Int,
-) {
+fun TextView(description: String) {
     Text(
-        text = stringResource(id = description),
+        text = description,
         style = MaterialTheme.typography.titleLarge,
     )
 }
