@@ -58,6 +58,7 @@ fun SignUpForm(
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(id = R.string.signup_button_signup),
             fontSize = 14.sp,
+            enabled = signUpFormState.formValid,
             onClick = onConfirm,
         )
     }

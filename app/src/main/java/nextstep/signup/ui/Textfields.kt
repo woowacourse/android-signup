@@ -31,7 +31,7 @@ fun PlainTextField(
         label = label,
         value = value,
         isError = isError,
-        errorMessage = errorMessage,
+        message = errorMessage,
         onValueChange = onValueChange,
     )
 }
@@ -51,7 +51,7 @@ fun EmailTextField(
         value = value,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
         isError = isError,
-        errorMessage = errorMessage,
+        message = errorMessage,
         onValueChange = onValueChange,
     )
 }
@@ -72,7 +72,7 @@ fun PasswordTextField(
         visualTransformation = PasswordVisualTransformation(),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
         isError = isError,
-        errorMessage = errorMessage,
+        message = errorMessage,
         onValueChange = onValueChange,
     )
 }
@@ -85,7 +85,7 @@ private fun DefaultTextField(
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     isError: Boolean = false,
-    errorMessage: String? = null,
+    message: String? = null,
     onValueChange: (String) -> Unit,
 ) {
     TextField(
@@ -98,8 +98,8 @@ private fun DefaultTextField(
         maxLines = 1,
         isError = isError,
         supportingText = {
-            if (isError && errorMessage != null) {
-                Text(text = errorMessage)
+            if (isError && message != null) {
+                Text(text = message)
             }
         },
     )

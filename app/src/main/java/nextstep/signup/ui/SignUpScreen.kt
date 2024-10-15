@@ -21,12 +21,14 @@ fun SignUpScreen(modifier: Modifier = Modifier) {
     ) { paddingValues ->
         SignUpForm(
             modifier =
-                Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues),
+            Modifier
+                .fillMaxSize()
+                .padding(paddingValues),
             signUpFormState = signUpForm,
-            onSignUpFormChange = { changedValue -> signUpForm = changedValue },
-            onConfirm = { /* To-Be Implemented */ },
+            onSignUpFormChange = { changedValue ->
+                signUpForm = changedValue.copy(completed = changedValue.formValid)
+            },
+            onConfirm = {},
         )
     }
 }
