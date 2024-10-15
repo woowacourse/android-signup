@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -19,14 +20,14 @@ import nextstep.signup.domain.Username
 @Composable
 fun SignUpForm(
     signUpData: SignUp,
-    onDataChange: (SignUp) -> Unit = {}
+    onDataChange: (SignUp) -> Unit = {},
 ) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(horizontal = 24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(40.dp)
+        verticalArrangement = Arrangement.spacedBy(32.dp)
     ) {
         Spacer(modifier = Modifier.padding(top = 80.dp))
 
@@ -42,28 +43,41 @@ fun SignUpForm(
                     )
                 )
             },
-            label = stringResource(R.string.sign_up_form_username)
+            modifier = Modifier.fillMaxWidth(),
+            label = stringResource(R.string.sign_up_form_username),
+            errorMessage = signUpData.username.errorMessage()?.message ?: ""
         )
 
         // Email Input
-        SignUpTextField(value = signUpData.email.address, onValueChange = {
-            onDataChange(
-                signUpData.copy(
-                    email = Email(it)
-                )
-            )
-        }, label = stringResource(R.string.sign_up_form_email))
-
-        // Password Input
-        SignUpTextField(value = signUpData.password.value, onValueChange = {
-            onDataChange(
-                signUpData.copy(
-                    password = signUpData.password.copy(
-                        value = it
+        SignUpTextField(
+            value = signUpData.email.address, onValueChange = {
+                onDataChange(
+                    signUpData.copy(
+                        email = Email(it)
                     )
                 )
-            )
-        }, label = stringResource(R.string.sign_up_form_password), isPassword = true)
+            },
+            modifier = Modifier.fillMaxWidth(),
+            label = stringResource(R.string.sign_up_form_email),
+            errorMessage = signUpData.email.errorMessage()?.message ?: ""
+        )
+
+        // Password Input
+        SignUpTextField(
+            value = signUpData.password.value, onValueChange = {
+                onDataChange(
+                    signUpData.copy(
+                        password = signUpData.password.copy(
+                            value = it
+                        )
+                    )
+                )
+            },
+            modifier = Modifier.fillMaxWidth(),
+            label = stringResource(R.string.sign_up_form_password),
+            isPassword = true,
+            errorMessage = signUpData.password.errorMessage()?.message ?: ""
+        )
 
         // Password Confirm Input
         SignUpTextField(
@@ -77,15 +91,18 @@ fun SignUpForm(
                     )
                 )
             },
+            modifier = Modifier.fillMaxWidth(),
             label = stringResource(R.string.sign_up_form_password_confirm),
-            isPassword = true
+            isPassword = true,
+            errorMessage = signUpData.errorMessage()?.message ?: ""
         )
 
         // Sign Up Button
         SignUpButton(
             availability = (
-                { signUpData.isValid() }
-                )
+                    { signUpData.isValid() }
+                    ),
+            modifier = Modifier.fillMaxWidth()
         )
     }
 }

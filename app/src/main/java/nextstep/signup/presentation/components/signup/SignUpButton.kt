@@ -13,12 +13,13 @@ import nextstep.signup.ui.theme.Blue50
 
 @Composable
 fun SignUpButton(
-    availability: () -> Boolean
+    availability: () -> Boolean,
+    modifier: Modifier = Modifier
 ) {
     Button(
         onClick = { /*TODO  Logic for after Sign Up*/ },
         enabled = availability(),
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier,
         colors = ButtonDefaults.buttonColors(
             containerColor = Blue50
         )
