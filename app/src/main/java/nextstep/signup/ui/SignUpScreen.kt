@@ -65,7 +65,7 @@ fun SignUpScreen(
                 modifier = Modifier.padding(top = 36.dp),
                 visualTransformation = PasswordVisualTransformation(),
                 onValueChange = onPasswordChanged,
-                getErrorMessage = { validate(password) },
+                getErrorMessage = { getPasswordErrorMessage(password) },
             )
             SignUpTextField(
                 value = passwordConfirm,
@@ -73,7 +73,7 @@ fun SignUpScreen(
                 modifier = Modifier.padding(top = 36.dp),
                 visualTransformation = PasswordVisualTransformation(),
                 onValueChange = onPasswordConfirmChanged,
-                getErrorMessage = { validate(passwordConfirm) },
+                getErrorMessage = { getPasswordConfirmErrorMessage(passwordConfirm, password) },
             )
             SignUpButton(
                 Modifier
@@ -107,8 +107,29 @@ fun getEmailErrorMessage(email: String): String {
     }
 }
 
-fun validate(text: String): String {
-    return ""
+@Composable
+fun getPasswordErrorMessage(password: String): String {
+    val passwordLengthRegex = "^.{8,16}$"
+    val passwordRegex = "^(?=.*[a-zA-Z])(?=.*[0-9]).+$"
+    return if (!password.matches(Regex(passwordRegex))) {
+        stringResource(id = R.string.error_message_password)
+    } else if (!password.matches(Regex(passwordLengthRegex))) {
+        stringResource(id = R.string.error_message_password_length)
+    } else {
+        stringResource(id = R.string.empty)
+    }
+}
+
+@Composable
+fun getPasswordConfirmErrorMessage(
+    passwordConfirm: String,
+    password: String,
+): String {
+    return if (passwordConfirm != password) {
+        stringResource(id = R.string.error_message_password_confirm)
+    } else {
+        stringResource(id = R.string.empty)
+    }
 }
 
 @Preview(showBackground = true)
