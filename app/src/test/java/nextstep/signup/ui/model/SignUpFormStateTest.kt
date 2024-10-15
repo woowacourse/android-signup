@@ -5,7 +5,7 @@ import org.junit.Test
 
 class SignUpFormStateTest {
     @Test
-    fun `emptyUsername_returnsEmptyStatus`() {
+    fun emptyUsername_returnsEmptyStatus() {
         // given & when
         val formState = SignUpFormState(username = "")
 
@@ -14,7 +14,7 @@ class SignUpFormStateTest {
     }
 
     @Test
-    fun `invalidUsername_invalidLength_returnsUsernameLengthErrorStatus`() {
+    fun invalidUsername_invalidLength_returnsUsernameLengthErrorStatus() {
         // given & when
         val invalidUsernames = listOf("a", "abcdef")
         invalidUsernames.forEach { username ->
@@ -26,7 +26,7 @@ class SignUpFormStateTest {
     }
 
     @Test
-    fun `invalidUsername_containsNumberSign_returnsUsernameNonCharacterErrorStatus`() {
+    fun invalidUsername_containsNumberSign_returnsUsernameNonCharacterErrorStatus() {
         // given & when
         val invalidUsernames = listOf("abcd1", "abcd#", "ab1#")
         invalidUsernames.forEach { username ->
@@ -38,7 +38,7 @@ class SignUpFormStateTest {
     }
 
     @Test
-    fun `validUsername_returnsSuccessStatus`() {
+    fun validUsername_returnsSuccessStatus() {
         // given & when
         val formState = SignUpFormState(username = "abcde")
 
@@ -47,7 +47,7 @@ class SignUpFormStateTest {
     }
 
     @Test
-    fun `emptyEmail_returnsEmptyStatus`() {
+    fun emptyEmail_returnsEmptyStatus() {
         // given & when
         val formState = SignUpFormState(email = "")
 
@@ -56,10 +56,10 @@ class SignUpFormStateTest {
     }
 
     @Test
-    fun `invalidEmail_inappropriateForm_returnsEmailFormatErrorStatus`() {
+    fun invalidEmail_inappropriateForm_returnsEmailFormatErrorStatus() {
         // given & when
-        val invalidUsernames = listOf("kmkim", "kmkim@", "kmkim@kr", "kmkim@kr.")
-        invalidUsernames.forEach { username ->
+        val invalidEmails = listOf("kmkim", "kmkim@", "kmkim@kr", "kmkim@kr.")
+        invalidEmails.forEach { username ->
             val formState = SignUpFormState(email = username)
 
             // then
@@ -68,7 +68,7 @@ class SignUpFormStateTest {
     }
 
     @Test
-    fun `validEmail_returnsSuccessStatus`() {
+    fun validEmail_returnsSuccessStatus() {
         // given & when
         val formState = SignUpFormState(email = "kmkim@gmail.com")
 
@@ -77,7 +77,7 @@ class SignUpFormStateTest {
     }
 
     @Test
-    fun `emptyPassword_returnsEmptyStatus`() {
+    fun emptyPassword_returnsEmptyStatus() {
         // given & when
         val formState = SignUpFormState(password = "")
 
@@ -86,7 +86,7 @@ class SignUpFormStateTest {
     }
 
     @Test
-    fun `invalidPassword_invalidLength_returnsPasswordLengthErrorStatus`() {
+    fun invalidPassword_invalidLength_returnsPasswordLengthErrorStatus() {
         // given & when
         val invalidPasswords = listOf("1234567", "12345678901234567")
 
@@ -99,7 +99,7 @@ class SignUpFormStateTest {
     }
 
     @Test
-    fun `invalidPassword_containsNoAlphabetNumber_returnsPasswordFormatErrorStatus`() {
+    fun invalidPassword_containsNoAlphabetNumber_returnsPasswordFormatErrorStatus() {
         // given & when
         val invalidPasswords = listOf("12345678", "abcdefgh", "!@#!@#!@")
         invalidPasswords.forEach { password ->
@@ -111,7 +111,7 @@ class SignUpFormStateTest {
     }
 
     @Test
-    fun `validPassword_returnsSuccessStatus`() {
+    fun validPassword_returnsSuccessStatus() {
         // given & when
         val formState = SignUpFormState(password = "abcd1234")
 
@@ -120,7 +120,7 @@ class SignUpFormStateTest {
     }
 
     @Test
-    fun `emptyPasswordConfirmation_returnsEmptyStatus`() {
+    fun emptyPasswordConfirmation_returnsEmptyStatus() {
         // given & when
         val formState = SignUpFormState(passwordConfirmation = "")
 
@@ -129,7 +129,7 @@ class SignUpFormStateTest {
     }
 
     @Test
-    fun `passwordConfirmation_notEqualPassword_returnsPasswordConfirmationErrorStatus`() {
+    fun passwordConfirmation_notEqualPassword_returnsPasswordConfirmationErrorStatus() {
         // given & when
         val formState = SignUpFormState(password = "abcd1234", passwordConfirmation = "abcd1235")
 
@@ -138,7 +138,7 @@ class SignUpFormStateTest {
     }
 
     @Test
-    fun `validPasswordConfirmation_returnsSuccessStatus`() {
+    fun validPasswordConfirmation_returnsSuccessStatus() {
         // given & when
         val formState = SignUpFormState(password = "abcd1234", passwordConfirmation = "abcd1234")
 
@@ -147,7 +147,7 @@ class SignUpFormStateTest {
     }
 
     @Test
-    fun `formValid_allValid_returnsTrue`() {
+    fun formValid_allValid_returnsTrue() {
         // given & when
         val formState = SignUpFormState(
             username = "abcde",
@@ -163,7 +163,7 @@ class SignUpFormStateTest {
     }
 
     @Test
-    fun `formValid_notAllValid_returnsFalse`() {
+    fun formValid_notAllValid_returnsFalse() {
         // given & when
         val formState = SignUpFormState(
             username = "abcde",
