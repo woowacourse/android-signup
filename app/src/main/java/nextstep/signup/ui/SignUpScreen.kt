@@ -21,8 +21,11 @@ import nextstep.signup.R
 import nextstep.signup.ui.model.UserForm
 
 @Composable
-fun SignUpScreen(modifier: Modifier = Modifier) {
-    var signUpForm: UserForm by rememberSaveable { mutableStateOf(UserForm()) }
+fun SignUpScreen(
+    modifier: Modifier = Modifier,
+    userForm: UserForm = UserForm(),
+) {
+    var signUpForm: UserForm by rememberSaveable { mutableStateOf(userForm) }
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
