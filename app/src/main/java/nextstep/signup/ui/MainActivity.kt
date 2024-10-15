@@ -15,7 +15,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -39,7 +38,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = Color.White
                 ) {
-                    SignUpScreen()
+                    val (signUpInfo, onChange) = remember { mutableStateOf(SignUpInfo()) }
+
+                    SignUpScreen(signUpInfo, onChange)
                 }
             }
         }
@@ -47,8 +48,10 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun SignUpScreen() {
-    var signUpInfo by remember { mutableStateOf(SignUpInfo()) }
+fun SignUpScreen(
+    signUpInfo: SignUpInfo,
+    onChangeSignUpInfo: (SignUpInfo) -> Unit,
+) {
     Column(
         modifier = Modifier.padding(horizontal = 32.dp),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -65,7 +68,7 @@ fun SignUpScreen() {
         SingleLineTextField(
             text = signUpInfo.userName,
             onTextChange = {
-                signUpInfo = signUpInfo.copy(userName = it)
+                onChangeSignUpInfo(signUpInfo.copy(userName = it))
             },
             isError = signUpInfo.isUserNameError(),
             label = stringResource(signUpInfo.userNameMessage()),
@@ -76,7 +79,7 @@ fun SignUpScreen() {
         SingleLineTextField(
             text = signUpInfo.email,
             onTextChange = {
-                signUpInfo = signUpInfo.copy(email = it)
+                onChangeSignUpInfo(signUpInfo.copy(email = it))
             },
             isError = signUpInfo.isEmailError(),
             label = stringResource(signUpInfo.emailMessage()),
@@ -88,7 +91,7 @@ fun SignUpScreen() {
         SingleLineTextField(
             text = signUpInfo.password,
             onTextChange = {
-                signUpInfo = signUpInfo.copy(password = it)
+                onChangeSignUpInfo(signUpInfo.copy(password = it))
             },
             modifier = Modifier.fillMaxWidth(),
             isError = signUpInfo.isPasswordError(),
@@ -100,7 +103,7 @@ fun SignUpScreen() {
         SingleLineTextField(
             text = signUpInfo.passwordConfirm,
             onTextChange = {
-                signUpInfo = signUpInfo.copy(passwordConfirm = it)
+                onChangeSignUpInfo(signUpInfo.copy(passwordConfirm = it))
             },
             isError = signUpInfo.isPasswordConfirmError(),
             label = stringResource(signUpInfo.passwordConfirmMessage()),
@@ -122,5 +125,6 @@ fun SignUpScreen() {
 )
 @Composable
 private fun SignUpPreview() {
-    SignUpScreen()
+    val (signUpInfo, onSignUpInfoChange) = remember { mutableStateOf(SignUpInfo()) }
+    SignUpScreen(signUpInfo, onSignUpInfoChange)
 }
