@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -71,7 +70,8 @@ fun SignUpScreen(
                 onChangeSignUpInfo(signUpInfo.copy(userName = it))
             },
             isError = signUpInfo.isUserNameError(),
-            label = stringResource(signUpInfo.userNameMessage()),
+            errorMessage = signUpInfo.userNameErrorMessage(),
+            label = R.string.sign_up_input_user_name
         )
 
         Spacer(Modifier.height(42.dp))
@@ -82,8 +82,9 @@ fun SignUpScreen(
                 onChangeSignUpInfo(signUpInfo.copy(email = it))
             },
             isError = signUpInfo.isEmailError(),
-            label = stringResource(signUpInfo.emailMessage()),
-            keyBoardType = KeyboardType.Email
+            errorMessage = signUpInfo.emailErrorMessage(),
+            label = R.string.sign_up_input_user_email,
+            keyBoardType = KeyboardType.Email,
         )
 
         Spacer(Modifier.height(42.dp))
@@ -95,7 +96,8 @@ fun SignUpScreen(
             },
             modifier = Modifier.fillMaxWidth(),
             isError = signUpInfo.isPasswordError(),
-            label = stringResource(signUpInfo.passwordMessage()),
+            errorMessage = signUpInfo.passwordErrorMessage(),
+            label = R.string.sign_up_input_user_password,
             keyBoardType = KeyboardType.Password
         )
         Spacer(Modifier.height(42.dp))
@@ -106,7 +108,8 @@ fun SignUpScreen(
                 onChangeSignUpInfo(signUpInfo.copy(passwordConfirm = it))
             },
             isError = signUpInfo.isPasswordConfirmError(),
-            label = stringResource(signUpInfo.passwordConfirmMessage()),
+            errorMessage = signUpInfo.passwordConfirmMessage(),
+            label = R.string.sign_up_input_user_password_confirm,
             keyBoardType = KeyboardType.Password
         )
         Spacer(Modifier.height(42.dp))

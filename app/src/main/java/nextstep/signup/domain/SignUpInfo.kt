@@ -14,31 +14,31 @@ data class SignUpInfo(
         (!userName.matches(USERNAME_REGEX) || userName.length !in USER_NAME_RANGE) && userName != INITIAL_TEXT
 
     @StringRes
-    fun userNameMessage(): Int = when {
-        userName == INITIAL_TEXT -> R.string.sign_up_input_user_name
+    fun userNameErrorMessage(): Int? = when {
+        userName == INITIAL_TEXT -> null
         !userName.matches(USERNAME_REGEX) -> R.string.sign_up_user_name_regex_error
         userName.length !in USER_NAME_RANGE -> R.string.sign_up_user_name_length_error
-        else -> R.string.sign_up_input_user_name
+        else -> null
     }
 
     fun isEmailError(): Boolean = !email.matches(EMAIL_REGEX) && email != INITIAL_TEXT
 
     @StringRes
-    fun emailMessage(): Int = when {
-        email == INITIAL_TEXT -> R.string.sign_up_input_user_email
+    fun emailErrorMessage(): Int? = when {
+        email == INITIAL_TEXT -> null
         !email.matches(EMAIL_REGEX) -> R.string.sign_up_email_error
-        else -> R.string.sign_up_input_user_email
+        else -> null
     }
 
     fun isPasswordError(): Boolean =
         (!password.matches(PASSWORD_REGEX) || password.length !in PASSWORD_RANGE) && password != INITIAL_TEXT
 
     @StringRes
-    fun passwordMessage(): Int = when {
-        password == INITIAL_TEXT -> R.string.sign_up_input_user_password
+    fun passwordErrorMessage(): Int? = when {
+        password == INITIAL_TEXT -> null
         !password.matches(PASSWORD_REGEX) -> R.string.sign_up_password_regex_error
         password.length !in PASSWORD_RANGE -> R.string.sign_up_password_length_error
-        else -> R.string.sign_up_input_user_password
+        else -> null
     }
 
 
@@ -46,10 +46,10 @@ data class SignUpInfo(
         password != passwordConfirm && passwordConfirm != INITIAL_TEXT
 
     @StringRes
-    fun passwordConfirmMessage(): Int = when {
-        passwordConfirm == INITIAL_TEXT -> R.string.sign_up_input_user_password_confirm
+    fun passwordConfirmMessage(): Int? = when {
+        passwordConfirm == INITIAL_TEXT -> null
         password != passwordConfirm -> R.string.sign_up_password_confirm_error
-        else -> R.string.sign_up_input_user_password_confirm
+        else -> null
     }
 
 

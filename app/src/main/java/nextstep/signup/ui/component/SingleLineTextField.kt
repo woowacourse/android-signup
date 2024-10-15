@@ -1,5 +1,6 @@
 package nextstep.signup.ui.component
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Text
@@ -7,6 +8,7 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -16,6 +18,7 @@ import androidx.compose.ui.unit.sp
 import nextstep.signup.ui.theme.Blue50
 import nextstep.signup.ui.theme.BlueGray20
 import nextstep.signup.ui.theme.Gray50
+import nextstep.signup.ui.theme.RED
 
 @Composable
 fun SingleLineTextField(
@@ -23,7 +26,10 @@ fun SingleLineTextField(
     onTextChange: (String) -> Unit,
     modifier: Modifier = Modifier,
     isError: Boolean = false,
-    label: String = "",
+    @StringRes
+    label: Int? = null,
+    @StringRes
+    errorMessage: Int? = null,
     keyBoardType: KeyboardType = KeyboardType.Text,
     visualTransformation: VisualTransformation = VisualTransformation.None,
 ) {
@@ -42,12 +48,19 @@ fun SingleLineTextField(
         isError = isError,
         singleLine = true,
         label = {
-            Text(text = label, fontSize = 16.sp)
+            label?.let {
+                Text(text = stringResource(it), fontSize = 16.sp)
+            }
         },
         textStyle = TextStyle(
             color = Gray50,
             fontSize = 16.sp,
         ),
+        supportingText = {
+            errorMessage?.let {
+                Text(text = stringResource(it), fontSize = 12.sp, color = RED)
+            }
+        },
         keyboardOptions = KeyboardOptions(
             keyboardType = keyBoardType,
         ),
