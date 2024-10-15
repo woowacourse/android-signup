@@ -2,14 +2,13 @@ package nextstep.signup.domain
 
 data class Email(
     val address: String = ""
-) {
+): ErrorHandler {
     private val id: EmailId = EmailId(address.substringBefore("@"))
     private val domain: EmailDomain = EmailDomain(address.substringAfter("@"))
 
     fun isValid(): Boolean = id.isValid() && domain.isValid() && address.contains("@")
 
-    fun errorMessage(): Error? = when {
-        address.isBlank() -> null
+    override fun errorMessage(): Error = when {
         address.isBlank() -> Error.NO_ERROR
         !isValid() -> Error.INVALID_EMAIL
         else -> Error.NO_ERROR

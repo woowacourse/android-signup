@@ -5,11 +5,10 @@ data class SignUp(
     val username: Username,
     val password: Password,
     val confirmPassword: Password
-) {
+): ErrorHandler {
     fun isValid(): Boolean = email.isValid() && username.isValid() && password.isValid() && confirmPassword.isValid() && password == confirmPassword
 
-    fun errorMessage(): Error? = when {
-        confirmPassword.value.isBlank() -> null
+    override fun errorMessage(): Error = when {
         confirmPassword.value.isBlank() -> Error.NO_ERROR
         !isValid() -> Error.INVALID_CONFIRM_PASSWORD
         else -> Error.NO_ERROR

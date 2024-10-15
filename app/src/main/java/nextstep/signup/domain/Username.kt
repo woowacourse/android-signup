@@ -2,15 +2,14 @@ package nextstep.signup.domain
 
 data class Username(
     val name: String = ""
-) {
+): ErrorHandler {
     fun isValid(): Boolean = isValidLength() && isValidTextType()
 
     private fun isValidTextType(): Boolean = name.matches(USERNAME_REGEX_TEXT_TYPE.toRegex())
 
     private fun isValidLength(): Boolean = name.matches(USERNAME_REGEX_LENGTH.toRegex())
 
-    fun errorMessage(): Error? = when {
-        name.isBlank() -> null
+    override fun errorMessage(): Error = when {
         name.isBlank() -> Error.NO_ERROR
         !isValidLength() -> Error.INVALID_USERNAME_LENGTH
         !isValidTextType() -> Error.INVALID_USERNAME_TYPE
