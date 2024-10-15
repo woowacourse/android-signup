@@ -32,9 +32,9 @@ fun SignUpScreen(
 ) {
     Surface(
         modifier =
-        Modifier
-            .fillMaxSize()
-            .padding(horizontal = 32.dp),
+            Modifier
+                .fillMaxSize()
+                .padding(horizontal = 32.dp),
         color = MaterialTheme.colorScheme.background,
     ) {
         Column(
@@ -57,7 +57,7 @@ fun SignUpScreen(
                 hint = stringResource(R.string.email),
                 modifier = Modifier.padding(top = 36.dp),
                 onValueChange = onEmailChanged,
-                getErrorMessage = { validate(email) },
+                getErrorMessage = { getEmailErrorMessage(email) },
             )
             SignUpTextField(
                 value = password,
@@ -86,11 +86,24 @@ fun SignUpScreen(
 
 @Composable
 fun getUserNameErrorMessage(userName: String): String {
-    val usernameRegex = "^[a-zA-Z가-힣].{1,4}$"
-    return if (userName.matches(Regex(usernameRegex))) {
+    val usernameLengthRegex = "^.{2,5}$"
+    val usernameRegex = "^[a-zA-Z가-힣]+$"
+    return if (!userName.matches(Regex(usernameRegex))) {
+        stringResource(id = R.string.error_message_user_name)
+    } else if (!userName.matches(Regex(usernameLengthRegex))) {
+        stringResource(id = R.string.error_message_user_name_length)
+    } else {
+        stringResource(id = R.string.empty)
+    }
+}
+
+@Composable
+fun getEmailErrorMessage(email: String): String {
+    val emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$"
+    return if (email.matches(Regex(emailRegex))) {
         stringResource(id = R.string.empty)
     } else {
-        stringResource(id = R.string.error_message_user_name)
+        stringResource(id = R.string.error_message_email)
     }
 }
 
