@@ -7,4 +7,5 @@
     <string name="sign_up_form_email">Email</string>
     <string name="sign_up_form_password">Password</string>
     <string name="sign_up_form_password_confirm">Password Confirm</string>
+    <string name="sign_up_form_username_error">이름은 2~5자여야합니다.</string>
 </resources>
