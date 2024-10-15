@@ -32,9 +32,9 @@ fun SignUpScreen(
 ) {
     Surface(
         modifier =
-            Modifier
-                .fillMaxSize()
-                .padding(horizontal = 32.dp),
+        Modifier
+            .fillMaxSize()
+            .padding(horizontal = 32.dp),
         color = MaterialTheme.colorScheme.background,
     ) {
         Column(
