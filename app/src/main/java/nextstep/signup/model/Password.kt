@@ -8,11 +8,11 @@ value class Password(
 ) {
     fun validate(): InputValidation {
         if (value.isBlank()) return InputValidation(isError = false)
-        if (!value.matches(Regex(PASSWORD_REGEX))) {
-            return InputValidation(stringRes = R.string.error_password_requirements, isError = true)
-        }
         if (value.length !in 8..16) {
             return InputValidation(stringRes = R.string.error_password_length, isError = true)
+        }
+        if (!value.matches(Regex(PASSWORD_REGEX))) {
+            return InputValidation(stringRes = R.string.error_password_requirements, isError = true)
         }
         return InputValidation(isError = false)
     }
