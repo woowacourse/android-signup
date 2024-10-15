@@ -4,7 +4,7 @@ import nextstep.signup.model.Email
 import nextstep.signup.model.Password
 import nextstep.signup.model.UserName
 
-data class MainState(
+data class SignUpState(
     val username: UserName = UserName(),
     val email: Email = Email(),
     val password: Password = Password(),

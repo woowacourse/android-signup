@@ -27,7 +27,7 @@ import nextstep.signup.ui.theme.Blue50
 
 @Composable
 fun MainScreen() {
-    var mainState by remember { mutableStateOf(MainState()) }
+    var signUpState by remember { mutableStateOf(SignUpState()) }
 
     Column {
         Spacer(modifier = Modifier.height(60.dp))
@@ -39,37 +39,37 @@ fun MainScreen() {
         Spacer(modifier = Modifier.height(18.dp))
         CustomTextField(
             modifier = Modifier.padding(horizontal = 32.dp, vertical = 18.dp),
-            value = mainState.username.value,
-            onValueChange = { value -> mainState = mainState.copy(username = UserName(value)) },
+            value = signUpState.username.value,
+            onValueChange = { value -> signUpState = signUpState.copy(username = UserName(value)) },
             labelResId = R.string.username_input,
-            inputValidation = mainState.username.validate(),
+            inputValidation = signUpState.username.validate(),
         )
         CustomTextField(
             modifier = Modifier.padding(horizontal = 32.dp, vertical = 18.dp),
-            value = mainState.email.value,
-            onValueChange = { value -> mainState = mainState.copy(email = Email(value)) },
+            value = signUpState.email.value,
+            onValueChange = { value -> signUpState = signUpState.copy(email = Email(value)) },
             labelResId = R.string.email_input,
-            inputValidation = mainState.email.validate(),
+            inputValidation = signUpState.email.validate(),
         )
         CustomTextField(
             modifier = Modifier.padding(horizontal = 32.dp, vertical = 18.dp),
-            value = mainState.password.value,
+            value = signUpState.password.value,
             onValueChange = { value ->
-                mainState = mainState.copy(password = Password(value))
+                signUpState = signUpState.copy(password = Password(value))
             },
             labelResId = R.string.password_input,
             visualTransformation = PasswordVisualTransformation(),
-            inputValidation = mainState.password.validate(),
+            inputValidation = signUpState.password.validate(),
         )
         CustomTextField(
             modifier = Modifier.padding(horizontal = 32.dp, vertical = 18.dp),
-            value = mainState.passwordConfirm.value,
+            value = signUpState.passwordConfirm.value,
             onValueChange = { value ->
-                mainState = mainState.copy(passwordConfirm = Password(value))
+                signUpState = signUpState.copy(passwordConfirm = Password(value))
             },
             labelResId = R.string.password_confirm_input,
             visualTransformation = PasswordVisualTransformation(),
-            inputValidation = mainState.passwordConfirm.validateConfirmation(mainState.password),
+            inputValidation = signUpState.passwordConfirm.validateConfirmation(signUpState.password),
         )
 
         Spacer(modifier = Modifier.height(24.dp))
@@ -78,7 +78,7 @@ fun MainScreen() {
             shape = RoundedCornerShape(100.dp),
             buttonColors = ButtonDefaults.buttonColors(containerColor = Blue50),
             titleResId = R.string.sign_up_button,
-            enabled = mainState.signUpEnabled,
+            enabled = signUpState.signUpEnabled,
             onClick = {},
         )
     }
