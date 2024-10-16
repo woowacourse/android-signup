@@ -27,6 +27,7 @@ import nextstep.signup.ui.component.SignUpTextField
 import nextstep.signup.ui.model.Email
 import nextstep.signup.ui.model.Password
 import nextstep.signup.ui.model.PasswordConfirm
+import nextstep.signup.ui.model.SignUpState
 import nextstep.signup.ui.model.UserName
 
 @Composable
@@ -43,6 +44,14 @@ fun SignUpScreen() {
         var email by rememberSaveable { mutableStateOf(Email()) }
         var password by rememberSaveable { mutableStateOf(Password()) }
         var passwordConfirm by rememberSaveable { mutableStateOf(PasswordConfirm()) }
+
+        val signUpState =
+            SignUpState(
+                userName = userName,
+                email = email,
+                password = password,
+                passwordConfirm = passwordConfirm,
+            )
 
         SignUpHeaderText(
             modifier =
@@ -129,6 +138,7 @@ fun SignUpScreen() {
                     .padding(start = 32.dp, end = 32.dp),
             text = stringResource(R.string.sign_up_button_label),
             onclick = {},
+            enabled = signUpState.isEnable(),
         )
 
         Spacer(modifier = Modifier.padding(bottom = 36.dp))

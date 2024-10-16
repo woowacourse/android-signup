@@ -13,12 +13,14 @@ fun SignUpButton(
     modifier: Modifier = Modifier,
     text: String,
     onclick: () -> Unit,
+    enabled: Boolean,
 ) {
     Button(
         modifier = modifier,
         onClick = {
             onclick()
         },
+        enabled = enabled,
         colors =
             ButtonDefaults.buttonColors(
                 containerColor = Blue50,
