@@ -74,30 +74,47 @@ private fun SignUpInputBox() {
 @Composable
 private fun UserNameComposable() {
     var userName by remember { mutableStateOf("") }
-    TextFieldComponent(userName, onValueChange = { userName = it }, label = R.string.main_user_name)
+    TextFieldComponent(
+        newValue = userName,
+        onValueChange = { userName = it },
+        label = R.string.main_user_name,
+    )
     Spacer(modifier = Modifier.size(36.dp))
 }
 
 @Composable
 private fun EmailComposable() {
     var email by remember { mutableStateOf("") }
-    TextFieldComponent(email, onValueChange = { email = it }, label = R.string.main_email, keyboardType = KeyboardType.Email)
+    TextFieldComponent(
+        newValue = email,
+        onValueChange = { email = it },
+        label = R.string.main_email,
+        keyboardType = KeyboardType.Email,
+    )
     Spacer(modifier = Modifier.size(36.dp))
 }
 
 @Composable
 private fun PasswordComposable() {
     var password by remember { mutableStateOf("") }
-    TextFieldComponent(password, onValueChange = { password = it }, label = R.string.main_password, keyboardType = KeyboardType.Password)
+    TextFieldComponent(
+        newValue = password,
+        onValueChange = { password = it },
+        label = R.string.main_password,
+        keyboardType = KeyboardType.Password,
+    )
     Spacer(modifier = Modifier.size(36.dp))
 }
 
 @Composable
 private fun PasswordConfirmComposable() {
     var passwordConfirm by remember { mutableStateOf("") }
-    TextFieldComponent(passwordConfirm, onValueChange = {
-        passwordConfirm = it
-    }, label = R.string.main_password_confirm, keyboardType = KeyboardType.Password)
+    TextFieldComponent(
+        newValue = passwordConfirm,
+        onValueChange = { passwordConfirm = it },
+        label = R.string.main_password_confirm,
+        keyboardType = KeyboardType.Password,
+    )
     Spacer(modifier = Modifier.size(42.dp))
 }
 
