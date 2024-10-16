@@ -17,19 +17,17 @@ fun StateButton(
     text: String,
     onClick: () -> Unit,
 ) {
-    SignUpTheme {
-        Button(
-            modifier = Modifier
-                .fillMaxWidth()
-                .requiredHeight(50.dp),
-            onClick = { onClick() },
-        ) {
-            Text(
-                text = text,
-                style = Typography.bodyMedium,
-                fontWeight = FontWeight.Bold,
-            )
-        }
+    Button(
+        modifier = Modifier
+            .fillMaxWidth()
+            .requiredHeight(50.dp),
+        onClick = { onClick() },
+    ) {
+        Text(
+            text = text,
+            style = Typography.bodyMedium,
+            fontWeight = FontWeight.Bold,
+        )
     }
 }
 
