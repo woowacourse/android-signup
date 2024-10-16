@@ -24,22 +24,26 @@ import nextstep.signup.R
 import nextstep.signup.ui.component.SignUpButton
 import nextstep.signup.ui.component.SignUpHeaderText
 import nextstep.signup.ui.component.SignUpTextField
+import nextstep.signup.ui.model.Email
+import nextstep.signup.ui.model.SignUpInformation
 import nextstep.signup.ui.model.UserName
 
-val EMAIL_REGEX = Regex("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")
 val PASSWORD_REGEX = Regex("^(?=.*[a-zA-Z])(?=.*[0-9]).{8,16}$")
 
 @Composable
 fun SignUpScreen() {
     Column(
-        modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()),
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top,
     ) {
-        var userName by rememberSaveable { mutableStateOf(UserName()) }
-        var email by rememberSaveable { mutableStateOf("") }
         var password by rememberSaveable { mutableStateOf("") }
         var passwordConfirm by rememberSaveable { mutableStateOf("") }
+
+        var signUpInformation by rememberSaveable { mutableStateOf(SignUpInformation()) }
 
         SignUpHeaderText(
             modifier =
@@ -61,12 +65,12 @@ fun SignUpScreen() {
                         .fillMaxWidth()
                         .padding(bottom = 36.dp),
                 label = stringResource(R.string.username_label),
-                value = userName.text,
-                onValueChange = { text ->
-                    userName = userName.copy(text = text)
+                value = signUpInformation.userName.text,
+                onValueChange = { value ->
+                    signUpInformation = signUpInformation.copy(userName = UserName(text = value))
                 },
-                isValid = userName.isValid(),
-                errorMessage = userName.errorMessage(),
+                isValid = signUpInformation.userName.isValid(),
+                errorMessage = signUpInformation.userName.errorMessage(),
             )
             SignUpTextField(
                 modifier =
@@ -74,12 +78,12 @@ fun SignUpScreen() {
                         .fillMaxWidth()
                         .padding(bottom = 36.dp),
                 label = stringResource(R.string.email_label),
-                value = email,
-                onValueChange = { input ->
-                    email = input
+                value = signUpInformation.email.text,
+                onValueChange = { value ->
+                    signUpInformation = signUpInformation.copy(email = Email(text = value))
                 },
-                isValid = email.matches(EMAIL_REGEX),
-                errorMessage = "hi",
+                isValid = signUpInformation.email.isValid(),
+                errorMessage = signUpInformation.email.errorMessage(),
                 keyboardType = KeyboardType.Email,
             )
             SignUpTextField(
