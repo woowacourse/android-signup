@@ -9,12 +9,13 @@ import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun CustomTextField(
+fun CustomPasswordTextField(
     modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit,
@@ -34,13 +35,14 @@ fun CustomTextField(
         },
         keyboardOptions = keyboardOptions,
         singleLine = true,
+        visualTransformation = PasswordVisualTransformation()
     )
 }
 
 @Preview
 @Composable
 private fun CustomTextFieldPreview() {
-    CustomTextField(
+    CustomPasswordTextField(
         value = "",
         onValueChange = {},
         labelResId = 0

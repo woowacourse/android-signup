@@ -17,6 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.signup.R
 import nextstep.signup.component.CustomButton
+import nextstep.signup.component.CustomPasswordTextField
 import nextstep.signup.component.CustomTextField
 import nextstep.signup.component.TitleText
 import nextstep.signup.ui.theme.Blue50
@@ -60,18 +61,16 @@ fun SignUpScreen() {
             )
         )
 
-        CustomTextField(
+        CustomPasswordTextField(
             value = user.password,
             onValueChange = { password = it },
             labelResId = R.string.user_password,
-            isPassword = true
         )
 
-        CustomTextField(
+        CustomPasswordTextField(
             value = user.passwordConfirm,
             onValueChange = { passwordConfirm = it },
             labelResId = R.string.user_password_confirm,
-            isPassword = true
         )
 
         Spacer(modifier = Modifier.height(42.dp))
