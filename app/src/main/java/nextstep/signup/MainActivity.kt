@@ -1,7 +1,6 @@
 package nextstep.signup
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.StringRes
@@ -28,7 +27,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -53,23 +51,7 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     private fun SignUpScreen() {
-        var userName by remember { mutableStateOf(TextFieldValue("")) }
-        var email by remember { mutableStateOf(TextFieldValue("")) }
-        var password by remember { mutableStateOf(TextFieldValue("")) }
-        var confirmedPassword by remember { mutableStateOf(TextFieldValue("")) }
-
-        var isUserNameValid by remember { mutableStateOf(false) }
-        var isEmailValid by remember { mutableStateOf(false) }
-        var isPasswordValid by remember { mutableStateOf(false) }
-        var isConfirmedPasswordValid by remember { mutableStateOf(false) }
-
-        val isFormValid =
-            isSignUpEnabled(
-                isUserNameValid,
-                isEmailValid,
-                isPasswordValid,
-                isConfirmedPasswordValid,
-            )
+        var signUpInfo by remember { mutableStateOf(SignUpInfo()) }
 
         Column(
             modifier = Modifier.padding(horizontal = 33.0.dp),
@@ -77,61 +59,38 @@ class MainActivity : ComponentActivity() {
             SignUpTitle(R.string.signup_title)
             SignUpField(
                 R.string.signup_username_label,
-                textValue = userName,
-                onValueChange = { userName = it },
-                validateField = {
-                    val result = SignupFieldValidation.isValidUserName(it)
-                    isUserNameValid = result.isValid
-                    result
-                },
+                value = signUpInfo.userName,
+                validationResult = signUpInfo.userNameValidation,
+                onValueChange = { signUpInfo = signUpInfo.copy(userName = it) },
             )
             SignUpField(
                 R.string.signup_email_label,
-                textValue = email,
-                onValueChange = { email = it },
-                validateField = {
-                    val result = SignupFieldValidation.isValidEmail(it)
-                    isEmailValid = result.isValid
-                    result
-                },
+                value = signUpInfo.email,
+                validationResult = signUpInfo.emailValidation,
+                onValueChange = { signUpInfo = signUpInfo.copy(email = it) },
             )
 
             SignUpField(
                 R.string.signup_password_label,
-                textValue = password,
-                onValueChange = { password = it },
-                validateField = {
-                    val result = SignupFieldValidation.isValidPassword(it)
-                    isPasswordValid = result.isValid
-                    result
-                },
+                value = signUpInfo.password,
+                validationResult = signUpInfo.passwordValidation,
+                onValueChange = { signUpInfo = signUpInfo.copy(password = it) },
                 hidden = true,
             )
 
             SignUpField(
                 R.string.signup_password_confirm_label,
-                textValue = confirmedPassword,
-                onValueChange = { confirmedPassword = it },
-                validateField = {
-                    val result = SignupFieldValidation.isValidConfirmedPassword(password.text, it)
-                    isConfirmedPasswordValid = result.isValid
-                    result
-                },
+                value = signUpInfo.confirmedPassword,
+                validationResult = signUpInfo.confirmedPasswordValidation,
+                onValueChange = { signUpInfo = signUpInfo.copy(confirmedPassword = it) },
                 hidden = true,
             )
             SignUpButton(
                 R.string.signup_button,
-                enabled = isFormValid,
+                enabled = signUpInfo.signUpInfoValidation,
             )
         }
     }
-
-    private fun isSignUpEnabled(
-        isUserNameValid: Boolean,
-        isEmailValid: Boolean,
-        isPasswordValid: Boolean,
-        isConfirmedPasswordValid: Boolean,
-    ) = isUserNameValid && isEmailValid && isPasswordValid && isConfirmedPasswordValid
 
     @Composable
     fun SignUpTitle(
@@ -152,18 +111,16 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun SignUpField(
         @StringRes labelId: Int,
-        textValue: TextFieldValue,
-        onValueChange: (TextFieldValue) -> Unit,
+        value: String,
+        validationResult: ValidationResult,
+        onValueChange: (String) -> Unit,
         modifier: Modifier = Modifier,
-        validateField: ((String) -> ValidationResult)? = null,
         hidden: Boolean = false,
     ) {
-        val validationResult =
-            validateField?.invoke(textValue.text) ?: ValidationResult(isValid = true)
         val textColor = if (validationResult.isValid) Blue50 else Color.Red
 
         TextField(
-            value = textValue,
+            value = value,
             onValueChange = { onValueChange(it) },
             supportingText = {
                 Text(
@@ -197,7 +154,6 @@ class MainActivity : ComponentActivity() {
         enabled: Boolean,
         modifier: Modifier = Modifier,
     ) {
-        Log.e("seogi", "$enabled")
         Button(
             onClick = {},
             enabled = enabled,
