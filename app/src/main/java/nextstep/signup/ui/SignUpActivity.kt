@@ -1,4 +1,4 @@
-package nextstep.signup.ui.signup
+package nextstep.signup.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

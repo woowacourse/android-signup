@@ -1,4 +1,4 @@
-package nextstep.signup.ui.signup
+package nextstep.signup.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,7 +12,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,6 +24,10 @@ import nextstep.signup.R
 import nextstep.signup.ui.component.SignUpButton
 import nextstep.signup.ui.component.SignUpHeaderText
 import nextstep.signup.ui.component.SignUpTextField
+import nextstep.signup.ui.model.UserName
+
+val EMAIL_REGEX = Regex("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")
+val PASSWORD_REGEX = Regex("^(?=.*[a-zA-Z])(?=.*[0-9]).{8,16}$")
 
 @Composable
 fun SignUpScreen() {
@@ -32,10 +36,10 @@ fun SignUpScreen() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top,
     ) {
-        var userName by remember { mutableStateOf("") }
-        var email by remember { mutableStateOf("") }
-        var password by remember { mutableStateOf("") }
-        var passwordConfirm by remember { mutableStateOf("") }
+        var userName by rememberSaveable { mutableStateOf(UserName()) }
+        var email by rememberSaveable { mutableStateOf("") }
+        var password by rememberSaveable { mutableStateOf("") }
+        var passwordConfirm by rememberSaveable { mutableStateOf("") }
 
         SignUpHeaderText(
             modifier =
@@ -45,7 +49,7 @@ fun SignUpScreen() {
                     top = 84.dp,
                     bottom = 42.dp,
                 ),
-            text = stringResource(R.string.sign_up_greeting),
+            text = stringResource(R.string.sign_up_header),
         )
 
         Column(
@@ -57,10 +61,12 @@ fun SignUpScreen() {
                         .fillMaxWidth()
                         .padding(bottom = 36.dp),
                 label = stringResource(R.string.username_label),
-                value = userName,
-                onValueChange = { input ->
-                    userName = input
+                value = userName.text,
+                onValueChange = { text ->
+                    userName = userName.copy(text = text)
                 },
+                isValid = userName.isValid(),
+                errorMessage = userName.errorMessage(),
             )
             SignUpTextField(
                 modifier =
@@ -72,6 +78,8 @@ fun SignUpScreen() {
                 onValueChange = { input ->
                     email = input
                 },
+                isValid = email.matches(EMAIL_REGEX),
+                errorMessage = "hi",
                 keyboardType = KeyboardType.Email,
             )
             SignUpTextField(
@@ -84,6 +92,8 @@ fun SignUpScreen() {
                 onValueChange = { input ->
                     password = input
                 },
+                isValid = password.matches(PASSWORD_REGEX),
+                errorMessage = "hi",
                 keyboardType = KeyboardType.Password,
                 visualTransformation = PasswordVisualTransformation(),
             )
@@ -97,6 +107,8 @@ fun SignUpScreen() {
                 onValueChange = { input ->
                     passwordConfirm = input
                 },
+                isValid = password.matches(PASSWORD_REGEX),
+                errorMessage = "hi",
                 keyboardType = KeyboardType.Password,
                 visualTransformation = PasswordVisualTransformation(),
             )
