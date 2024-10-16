@@ -1,6 +1,7 @@
 package nextstep.signup.ui.model
 
 import android.os.Parcelable
+import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -10,43 +11,43 @@ data class UserForm(
     val password: String = "",
     val passwordConfirmation: String = "",
 ) : Parcelable {
-    val usernameStatus: SignUpStatus
-        get() =
-            when {
-                username.isEmpty() -> SignUpStatus.Empty
-                username.length !in 2..5 -> SignUpStatus.Error.UsernameLength
-                username.matches(Regex(USERNAME_REGEX)) -> SignUpStatus.Success
-                else -> SignUpStatus.Error.UsernameNonCharacter
-            }
+    @IgnoredOnParcel
+    val usernameStatus: SignUpStatus =
+        when {
+            username.isEmpty() -> SignUpStatus.Empty
+            username.length !in 2..5 -> SignUpStatus.Error.UsernameLength
+            username.matches(Regex(USERNAME_REGEX)) -> SignUpStatus.Success
+            else -> SignUpStatus.Error.UsernameNonCharacter
+        }
 
-    val emailStatus: SignUpStatus
-        get() =
-            when {
-                email.isEmpty() -> SignUpStatus.Empty
-                email.matches(Regex(EMAIL_REGEX)) -> SignUpStatus.Success
-                else -> SignUpStatus.Error.EmailFormat
-            }
+    @IgnoredOnParcel
+    val emailStatus: SignUpStatus =
+        when {
+            email.isEmpty() -> SignUpStatus.Empty
+            email.matches(Regex(EMAIL_REGEX)) -> SignUpStatus.Success
+            else -> SignUpStatus.Error.EmailFormat
+        }
 
-    val passwordStatus: SignUpStatus
-        get() =
-            when {
-                password.isEmpty() -> SignUpStatus.Empty
-                password.length !in 8..16 -> SignUpStatus.Error.PasswordLength
-                password.matches(Regex(PASSWORD_REGEX)) -> SignUpStatus.Success
-                else -> SignUpStatus.Error.PasswordFormat
-            }
+    @IgnoredOnParcel
+    val passwordStatus: SignUpStatus =
+        when {
+            password.isEmpty() -> SignUpStatus.Empty
+            password.length !in 8..16 -> SignUpStatus.Error.PasswordLength
+            password.matches(Regex(PASSWORD_REGEX)) -> SignUpStatus.Success
+            else -> SignUpStatus.Error.PasswordFormat
+        }
 
-    val passwordConfirmationStatus: SignUpStatus
-        get() =
-            when {
-                passwordConfirmation.isEmpty() -> SignUpStatus.Empty
-                password == passwordConfirmation -> SignUpStatus.Success
-                else -> SignUpStatus.Error.PasswordConfirmation
-            }
+    @IgnoredOnParcel
+    val passwordConfirmationStatus: SignUpStatus =
+        when {
+            passwordConfirmation.isEmpty() -> SignUpStatus.Empty
+            password == passwordConfirmation -> SignUpStatus.Success
+            else -> SignUpStatus.Error.PasswordConfirmation
+        }
 
-    val formValid: Boolean
-        get() =
-            usernameStatus == SignUpStatus.Success &&
+    @IgnoredOnParcel
+    val formValid: Boolean =
+        usernameStatus == SignUpStatus.Success &&
                 emailStatus == SignUpStatus.Success &&
                 passwordStatus == SignUpStatus.Success &&
                 passwordConfirmationStatus == SignUpStatus.Success
