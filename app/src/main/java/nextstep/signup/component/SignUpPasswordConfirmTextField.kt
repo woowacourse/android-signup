@@ -15,6 +15,7 @@ internal fun SignUpPasswordConfirmTextField(
     modifier: Modifier = Modifier,
     password: String,
     passwordConfirm: String,
+    onPasswordConfirmChange: (String) -> Unit,
 ) {
     val validationResult =
         PasswordConfirm(
@@ -29,8 +30,9 @@ internal fun SignUpPasswordConfirmTextField(
     TextField(
         modifier = modifier,
         value = passwordConfirm,
-        onValueChange = { },
+        onValueChange = { onPasswordConfirmChange(it) },
         label = { Text(stringResource(R.string.input_hint_password_confirm)) },
+        singleLine = true,
         supportingText = { if (supportingText.isNotEmpty()) Text(text = supportingText) },
         visualTransformation = PasswordVisualTransformation(),
         isError = supportingText.isNotEmpty()

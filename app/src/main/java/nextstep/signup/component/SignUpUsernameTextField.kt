@@ -27,6 +27,7 @@ internal fun SignUpUsernameTextField(
         value = username,
         onValueChange = { onUsernameChange(it) },
         label = { Text(stringResource(R.string.input_hint_username)) },
+        singleLine = true,
         supportingText = { if (supportingText.isNotEmpty()) Text(text = supportingText) },
         isError = supportingText.isNotEmpty()
     )

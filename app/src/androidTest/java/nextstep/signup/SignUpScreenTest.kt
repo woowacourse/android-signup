@@ -61,8 +61,9 @@ class SignUpScreenTest {
 
     @Test
     fun password_필드에_비밀번호를_입력하면_입력된_비밀번호가_노출되지않는다() {
+        var username by mutableStateOf("")
         composeTestRule.setContent {
-            SignUpPasswordTextField(password = "3188")
+            SignUpPasswordTextField(password = "3188", onPasswordChange = {username = it})
         }
 
         composeTestRule

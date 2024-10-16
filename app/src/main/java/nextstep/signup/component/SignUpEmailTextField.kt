@@ -12,7 +12,8 @@ import nextstep.signup.domain.validation.ValidationResult
 @Composable
 internal fun SignUpEmailTextField(
     modifier: Modifier = Modifier,
-    email: String
+    email: String,
+    onEmailChange: (String) -> Unit,
 ) {
     val validationResult = Email(email).validationResult()
     val supportingText = when (validationResult) {
@@ -22,8 +23,9 @@ internal fun SignUpEmailTextField(
     TextField(
         modifier = modifier,
         value = email,
-        onValueChange = { },
+        onValueChange = { onEmailChange(it) },
         label = { Text(stringResource(R.string.input_hint_email)) },
+        singleLine = true,
         supportingText = { if (supportingText.isNotEmpty()) Text(text = supportingText) },
         isError = supportingText.isNotEmpty()
     )

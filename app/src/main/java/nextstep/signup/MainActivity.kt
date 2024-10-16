@@ -11,6 +11,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -44,6 +48,11 @@ class MainActivity : ComponentActivity() {
 fun SignUpScreen(
     modifier: Modifier = Modifier
 ) {
+    var username by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var passwordConfirm by remember { mutableStateOf("") }
+
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -57,29 +66,33 @@ fun SignUpScreen(
             modifier = modifier
                 .fillMaxWidth()
                 .padding(vertical = 20.dp),
-            username = "",
-            onUsernameChange = { }
+            username = username,
+            onUsernameChange = { username = it }
         )
 
         SignUpEmailTextField(
             modifier = modifier
                 .fillMaxWidth()
                 .padding(vertical = 20.dp),
-            email = ""
+            email = email,
+            onEmailChange = { email = it }
         )
 
         SignUpPasswordTextField(
             modifier = modifier
                 .fillMaxWidth()
                 .padding(vertical = 20.dp),
-            password = ""
+            password = password,
+            onPasswordChange = { password = it }
         )
 
         SignUpPasswordConfirmTextField(
             modifier = modifier
                 .fillMaxWidth()
                 .padding(vertical = 20.dp),
-            passwordConfirm = ""
+            password = password,
+            passwordConfirm = passwordConfirm,
+            onPasswordConfirmChange = { passwordConfirm = it }
         )
 
 
