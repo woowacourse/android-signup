@@ -1,8 +1,6 @@
 package nextstep.signup.domain
 
 import io.kotest.assertions.throwables.shouldThrowWithMessage
-import io.kotest.matchers.shouldBe
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
@@ -23,5 +21,19 @@ class PasswordTest {
         }
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = ["012345678", "876543210"])
+    fun `패스워드가 숫자를 포함하지 않으면 유효하지 않다`(password: String) {
+        shouldThrowWithMessage<IllegalArgumentException>(message = "password must contain at least one English or number") {
+            Password(password = password)
+        }
+    }
 
+    @ParameterizedTest
+    @ValueSource(strings = ["abcdefghi", "jklmnopqrset"])
+    fun `패스워드가 영문을 포함하지 않으면 유효하지 않다`(password: String) {
+        shouldThrowWithMessage<IllegalArgumentException>(message = "password must contain at least one English or number") {
+            Password(password = password)
+        }
+    }
 }
