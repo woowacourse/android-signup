@@ -115,6 +115,7 @@ fun SignUpScreen(
 
         SubmitButton(
             text = stringResource(R.string.sign_up_submit_btn),
+            enabled = signUpInfo.isValidSignUpInfo(),
             onClick = {},
         )
     }

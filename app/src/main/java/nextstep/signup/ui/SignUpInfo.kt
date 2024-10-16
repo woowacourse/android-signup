@@ -52,6 +52,16 @@ data class SignUpInfo(
         else -> null
     }
 
+    fun isValidSignUpInfo(): Boolean =
+        !isAnyInputError()
+                && !isAnyInputEmpty()
+
+    private fun isAnyInputError(): Boolean =
+        isUserNameError() || isEmailError() || isPasswordError() || isPasswordConfirmError()
+
+    private fun isAnyInputEmpty(): Boolean =
+        userName == INITIAL_TEXT || email == INITIAL_TEXT || password == INITIAL_TEXT || passwordConfirm == INITIAL_TEXT
+
 
     companion object {
         private const val INITIAL_TEXT = ""

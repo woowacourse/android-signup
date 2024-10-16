@@ -1,6 +1,8 @@
 package nextstep.signup
 
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.test.assertIsEnabled
+import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import nextstep.signup.ui.SignUpInfo
@@ -128,9 +130,38 @@ class SignUpScreenTest {
         signUpInfo.value =
             signUpInfo.value.copy(password = "test1234", passwordConfirm = "test5678")
 
-        // them
+        // then
         composeTestRule.onNodeWithText(PASSWORD_CONFIRM_ERROR).assertExists()
 
+    }
+
+    @Test
+    fun 모든_정보가_올바르게_입력되면_버튼이_활성화된다() {
+        // when
+        signUpInfo.value = signUpInfo.value.copy(
+            userName = "bari",
+            email = "test@gmail.com",
+            password = "test1234",
+            passwordConfirm = "test1234"
+        )
+
+        // then
+        composeTestRule.onNodeWithText("Sign Up").assertIsEnabled()
+
+    }
+
+    @Test
+    fun 하나라도_입력이_올바르지_않으면_버튼이_비활성화_된다() {
+        // when
+        signUpInfo.value = signUpInfo.value.copy(
+            userName = "bari",
+            email = "test",
+            password = "test1234",
+            passwordConfirm = "test1234"
+        )
+
+        // then
+        composeTestRule.onNodeWithText("Sign Up").assertIsNotEnabled()
     }
 
     companion object {
