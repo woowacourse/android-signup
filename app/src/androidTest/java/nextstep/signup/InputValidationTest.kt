@@ -44,7 +44,6 @@ class InputValidationTest {
             .assertDoesNotExist()
     }
 
-
     @Test
     fun username_with_exactly_5_characters_shows_no_error() {
         // given

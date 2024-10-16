@@ -1,6 +1,5 @@
 package nextstep.signup.ui
 
-
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -30,7 +29,6 @@ import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
 import nextstep.signup.R
 import nextstep.signup.ui.theme.SignupTheme
-
 
 @Composable
 fun SignUpScreen() {
@@ -137,15 +135,20 @@ private fun canClickedButton(
     passwordConfirm: String
 ): Boolean {
     val isButtonEnabled = remember(
-        userNameError, emailError, passwordError, passwordConfirmError,
-        userName, email, password, passwordConfirm
+        userNameError,
+        emailError,
+        passwordError,
+        passwordConfirmError,
+        userName,
+        email,
+        password,
+        passwordConfirm
     ) {
         userNameError.isEmpty() && emailError.isEmpty() && passwordError.isEmpty() && passwordConfirmError.isEmpty() &&
-                userName.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty() && passwordConfirm.isNotEmpty()
+            userName.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty() && passwordConfirm.isNotEmpty()
     }
     return isButtonEnabled
 }
-
 
 @Composable
 fun SignUpLabel() {
