@@ -3,7 +3,6 @@ package nextstep.signup
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
-import androidx.compose.ui.text.input.TextFieldValue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -11,15 +10,15 @@ import org.junit.Test
 class EmailInputValidationTest {
     @get:Rule
     val composeTestRule = createComposeRule()
-    private val email = mutableStateOf(TextFieldValue(""))
+    private val signUpInfo = mutableStateOf(SignUpInfo())
 
     @Before
     fun setup() {
         composeTestRule.setContent {
             FakeSignUpField(
-                textValue = email.value,
-                onValueChange = { email.value = it },
-                validateField = { SignupFieldValidation.isValidEmail(it) },
+                value = signUpInfo.value.email,
+                onValueChange = { signUpInfo.value = signUpInfo.value.copy(email = it) },
+                validationResult = signUpInfo.value.emailValidation
             )
         }
     }
@@ -27,7 +26,7 @@ class EmailInputValidationTest {
     @Test
     fun `이메일_형식이_올바를_경우_에러메시지가_노출되지_않는다`() {
         // when
-        email.value = TextFieldValue("seogi@seogida.com")
+        signUpInfo.value = SignUpInfo(email = "seogi@seogida.com")
 
         // then
         composeTestRule
@@ -38,7 +37,7 @@ class EmailInputValidationTest {
     @Test
     fun `이메일_형식이_올바지_않을_경우_에러메시지가_노출된다_1`() {
         // when
-        email.value = TextFieldValue("seogi@seogida")
+        signUpInfo.value = SignUpInfo(email = "seogi@seogida")
 
         // then
         composeTestRule
@@ -49,7 +48,7 @@ class EmailInputValidationTest {
     @Test
     fun `이메일_형식이_올바지_않을_경우_에러메시지가_노출된다_2`() {
         // when
-        email.value = TextFieldValue("seogi.com")
+        signUpInfo.value = SignUpInfo(email = "seogi.com")
 
         // then
         composeTestRule

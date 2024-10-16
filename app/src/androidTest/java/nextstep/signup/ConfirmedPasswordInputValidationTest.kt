@@ -3,7 +3,6 @@ package nextstep.signup
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
-import androidx.compose.ui.text.input.TextFieldValue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -11,20 +10,17 @@ import org.junit.Test
 class ConfirmedPasswordInputValidationTest {
     @get:Rule
     val composeTestRule = createComposeRule()
-    private val confirmedPassword = mutableStateOf(TextFieldValue(""))
+    private val signUpInfo = mutableStateOf(SignUpInfo(password = "password123"))
 
     @Before
     fun setup() {
         composeTestRule.setContent {
             FakeSignUpField(
-                textValue = confirmedPassword.value,
-                onValueChange = { confirmedPassword.value = it },
-                validateField = {
-                    SignupFieldValidation.isValidConfirmedPassword(
-                        password = "password123",
-                        it,
-                    )
+                value = signUpInfo.value.confirmedPassword,
+                onValueChange = {
+                    signUpInfo.value = signUpInfo.value.copy(confirmedPassword = it)
                 },
+                validationResult = signUpInfo.value.confirmedPasswordValidation
             )
         }
     }
@@ -32,7 +28,7 @@ class ConfirmedPasswordInputValidationTest {
     @Test
     fun `비밀번호_재입력_시_입력한_비밀번호와_일치해야_한다`() {
         // when
-        confirmedPassword.value = TextFieldValue("password123")
+        signUpInfo.value = signUpInfo.value.copy(confirmedPassword = "password123")
 
         // then
         composeTestRule
@@ -43,7 +39,7 @@ class ConfirmedPasswordInputValidationTest {
     @Test
     fun `비밀번호_재입력_시_입력한_비밀번호와_일치하지_않으면_에러메시지가_노출된다`() {
         // when
-        confirmedPassword.value = TextFieldValue("passward123")
+        signUpInfo.value = signUpInfo.value.copy(confirmedPassword = "passward123")
 
         // then
         composeTestRule

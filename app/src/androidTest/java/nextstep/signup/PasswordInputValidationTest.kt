@@ -3,7 +3,6 @@ package nextstep.signup
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
-import androidx.compose.ui.text.input.TextFieldValue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -11,15 +10,15 @@ import org.junit.Test
 class PasswordInputValidationTest {
     @get:Rule
     val composeTestRule = createComposeRule()
-    private val password = mutableStateOf(TextFieldValue(""))
+    private val signUpInfo = mutableStateOf(SignUpInfo())
 
     @Before
     fun setup() {
         composeTestRule.setContent {
             FakeSignUpField(
-                textValue = password.value,
-                onValueChange = { password.value = it },
-                validateField = { SignupFieldValidation.isValidPassword(it) },
+                value = signUpInfo.value.password,
+                onValueChange = { signUpInfo.value = signUpInfo.value.copy(password = it) },
+                validationResult = signUpInfo.value.passwordValidation
             )
         }
     }
@@ -27,7 +26,7 @@ class PasswordInputValidationTest {
     @Test
     fun `비밀번호는_8에서_16자여야_한다`() {
         // when
-        password.value = TextFieldValue("abcdefg123")
+        signUpInfo.value = SignUpInfo(password = "abcdefg123")
 
         // then
         composeTestRule
@@ -38,7 +37,7 @@ class PasswordInputValidationTest {
     @Test
     fun `비밀번호가_8에서_16자가_아니면_에러메시지가_노출된다_1`() {
         // when
-        password.value = TextFieldValue("abc4567")
+        signUpInfo.value = SignUpInfo(password = "abc4567")
 
         // then
         composeTestRule
@@ -49,7 +48,7 @@ class PasswordInputValidationTest {
     @Test
     fun `비밀번호가_8에서_16자가_아니면_에러메시지가_노출된다_2`() {
         // when
-        password.value = TextFieldValue("abcdefghijklmn123")
+        signUpInfo.value = SignUpInfo(password = "abcdefghijklmn123")
 
         // then
         composeTestRule
@@ -60,7 +59,7 @@ class PasswordInputValidationTest {
     @Test
     fun `비밀번호는_영문과_숫자를_포함해야_한다`() {
         // when
-        password.value = TextFieldValue("abcdefg123")
+        signUpInfo.value = SignUpInfo(password = "abcdefg123")
 
         // then
         composeTestRule
@@ -71,7 +70,7 @@ class PasswordInputValidationTest {
     @Test
     fun `비밀번호는_영문과_숫자를_포함하지_않으면_에러메시지가_노출된다_1`() {
         // when
-        password.value = TextFieldValue("abcdefghi")
+        signUpInfo.value = SignUpInfo(password = "abcdefghi")
 
         // then
         composeTestRule
@@ -82,7 +81,7 @@ class PasswordInputValidationTest {
     @Test
     fun `비밀번호는_영문과_숫자를_포함하지_않으면_에러메시지가_노출된다_2`() {
         // when
-        password.value = TextFieldValue("123456789")
+        signUpInfo.value = SignUpInfo(password = "123456789")
 
         // then
         composeTestRule

@@ -3,7 +3,6 @@ package nextstep.signup
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
-import androidx.compose.ui.text.input.TextFieldValue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -11,15 +10,15 @@ import org.junit.Test
 class UserNameInputValidationTest {
     @get:Rule
     val composeTestRule = createComposeRule()
-    private val userName = mutableStateOf(TextFieldValue(""))
+    private val signUpInfo = mutableStateOf(SignUpInfo())
 
     @Before
     fun setup() {
         composeTestRule.setContent {
             FakeSignUpField(
-                textValue = userName.value,
-                onValueChange = { userName.value = it },
-                validateField = { SignupFieldValidation.isValidUserName(it) },
+                value = signUpInfo.value.password,
+                onValueChange = { signUpInfo.value = signUpInfo.value.copy(userName = it) },
+                validationResult = signUpInfo.value.userNameValidation
             )
         }
     }
@@ -27,7 +26,7 @@ class UserNameInputValidationTest {
     @Test
     fun `사용자_이름은_2에서_5자여야_한다`() {
         // when
-        userName.value = TextFieldValue("남서기")
+        signUpInfo.value = SignUpInfo(userName = "남서기")
 
         // then
         composeTestRule
@@ -38,7 +37,7 @@ class UserNameInputValidationTest {
     @Test
     fun `사용자_이름이_2에서_5자가_아니면_에러메시지가_노출된다_1`() {
         // when
-        userName.value = TextFieldValue("남")
+        signUpInfo.value = SignUpInfo(userName = "남")
 
         // then
         composeTestRule
@@ -49,7 +48,7 @@ class UserNameInputValidationTest {
     @Test
     fun `사용자_이름이_2에서_5자가_아니면_에러메시지가_노출된다_2`() {
         // when
-        userName.value = TextFieldValue("남서기입니다")
+        signUpInfo.value = SignUpInfo(userName = "남서기입니다")
 
         // then
         composeTestRule
@@ -60,7 +59,7 @@ class UserNameInputValidationTest {
     @Test
     fun `사용자_이름은_숫자나_기호가_아닌_문자로_구성되어야_한다`() {
         // when
-        userName.value = TextFieldValue("abcde")
+        signUpInfo.value = SignUpInfo(userName = "abcde")
 
         // then
         composeTestRule
@@ -71,7 +70,7 @@ class UserNameInputValidationTest {
     @Test
     fun `사용자_이름에_숫자나_기호가_있으면_에러메시지가_노출된다_1`() {
         // when
-        userName.value = TextFieldValue("abcd1")
+        signUpInfo.value = SignUpInfo(userName = "abcd1")
 
         // then
         composeTestRule
@@ -82,7 +81,7 @@ class UserNameInputValidationTest {
     @Test
     fun `사용자_이름에_숫자나_기호가_있으면_에러메시지가_노출된다_2`() {
         // when
-        userName.value = TextFieldValue("@bcde")
+        signUpInfo.value = SignUpInfo(userName = "@bcde")
 
         // then
         composeTestRule
