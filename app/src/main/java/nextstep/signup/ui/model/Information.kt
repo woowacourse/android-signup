@@ -1,7 +1,7 @@
 package nextstep.signup.ui.model
 
 sealed class Information(
-    open val value: String,
+    open val text: String,
 ) {
     abstract fun isValid(): Boolean
 

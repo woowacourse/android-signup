@@ -5,8 +5,8 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Password(
-    override val value: String = DEFAULT_TEXT,
-) : Information(value),
+    override val text: String = DEFAULT_TEXT,
+) : Information(text),
     Parcelable {
     override fun isValid(): Boolean = validLength() && validPattern()
 
@@ -17,9 +17,9 @@ data class Password(
             else -> DEFAULT_ERROR_MESSAGE
         }
 
-    private fun validLength(): Boolean = value.length in MIN_LENGTH..MAX_LENGTH
+    private fun validLength(): Boolean = text.length in MIN_LENGTH..MAX_LENGTH
 
-    private fun validPattern(): Boolean = value.matches(Regex(PATTERN))
+    private fun validPattern(): Boolean = text.matches(Regex(PATTERN))
 
     companion object {
         private const val MIN_LENGTH = 8
