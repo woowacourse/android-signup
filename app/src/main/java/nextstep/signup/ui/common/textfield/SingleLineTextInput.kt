@@ -20,7 +20,6 @@ fun LabelText(label: String) {
     )
 }
 
-
 @Composable
 fun SingleLineTextInput(
     modifier: Modifier = Modifier,
@@ -43,9 +42,10 @@ fun SingleLineTextInput(
         visualTransformation = inputType.visualTransformation,
         keyboardOptions = inputType.keyboardOptions,
         textStyle = Typography.bodyMedium,
-        colors = TextFieldDefaults.colors(
-            focusedIndicatorColor = MaterialTheme.colorScheme.secondary,
-            focusedLabelColor = MaterialTheme.colorScheme.secondary,
-        ),
+        colors =
+            TextFieldDefaults.colors(
+                focusedIndicatorColor = MaterialTheme.colorScheme.secondary,
+                focusedLabelColor = MaterialTheme.colorScheme.secondary,
+            ),
     )
 }

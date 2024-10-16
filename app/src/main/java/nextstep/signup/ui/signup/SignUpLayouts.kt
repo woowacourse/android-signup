@@ -31,13 +31,10 @@ fun SignUpTitle() {
 }
 
 @Composable
-fun SignUpInteractionLayer(
-    onButtonClicked: () -> Unit,
-) {
+fun SignUpInteractionLayer(onButtonClicked: () -> Unit) {
     val childModifier = Modifier.fillMaxWidth()
     Column(
-        modifier = Modifier
-            .fillMaxHeight(0.8f),
+        modifier = Modifier.fillMaxHeight(0.8f),
         verticalArrangement = Arrangement.SpaceEvenly,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
@@ -75,13 +72,12 @@ fun SignUpInteractionLayer(
 }
 
 @Composable
-fun SignUpLayout(
-    onButtonClicked: () -> Unit,
-) {
+fun SignUpLayout(onButtonClicked: () -> Unit) {
     Column(
-        modifier = Modifier
-            .fillMaxHeight(0.7f)
-            .padding(32.dp),
+        modifier =
+            Modifier
+                .fillMaxHeight(0.7f)
+                .padding(32.dp),
         verticalArrangement = Arrangement.SpaceEvenly,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
@@ -97,9 +93,10 @@ fun SignUpLayout(
 fun SignUpLayoutPreview() {
     SignUpTheme {
         Surface(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(32.dp),
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .padding(32.dp),
         ) {
             SignUpInteractionLayer {}
         }

@@ -28,7 +28,6 @@ import org.junit.Rule
 import org.junit.Test
 
 class LayoutBasicsTest {
-
     @get:Rule
     val composeTestRule = createComposeRule()
 
@@ -40,11 +39,12 @@ class LayoutBasicsTest {
             Text(
                 text = "안녕 난 컴포즈야~",
                 color = Color.Blue,
-                style = TextStyle(
-                    fontSize = 26.sp,
-                    fontWeight = FontWeight.Bold,
-                    fontFamily = FontFamily.SansSerif
-                ),
+                style =
+                    TextStyle(
+                        fontSize = 26.sp,
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = FontFamily.SansSerif,
+                    ),
             )
         }
 
@@ -60,7 +60,7 @@ class LayoutBasicsTest {
         // given
         composeTestRule.setContent {
             Column(
-                modifier = Modifier.testTag("이름")
+                modifier = Modifier.testTag("이름"),
             ) {
                 Text(text = "컴포즈", color = Color.Cyan)
                 Text(text = "킴포즈", color = Color.Cyan)
@@ -86,16 +86,17 @@ class LayoutBasicsTest {
                     enabled.value = enabled.value.not()
                 },
                 enabled = enabled.value,
-                modifier = Modifier.testTag("버튼")
+                modifier = Modifier.testTag("버튼"),
             ) {
                 Text(text = "클릭해주세요")
             }
         }
 
         // when
-        val button = composeTestRule
-            .onNodeWithTag("버튼")
-            .performClick()
+        val button =
+            composeTestRule
+                .onNodeWithTag("버튼")
+                .performClick()
 
         // then
         button.assertIsNotEnabled()
@@ -111,15 +112,14 @@ class LayoutBasicsTest {
                     enabled.value = enabled.value.not()
                 },
                 enabled = enabled.value,
-                modifier = Modifier.testTag("버튼")
+                modifier = Modifier.testTag("버튼"),
             ) {
                 Text(text = "클릭하지 말아주세요")
             }
         }
 
         // when
-        val button = composeTestRule
-            .onNodeWithTag("버튼")
+        val button = composeTestRule.onNodeWithTag("버튼")
 
         // then
         button.assertIsEnabled()

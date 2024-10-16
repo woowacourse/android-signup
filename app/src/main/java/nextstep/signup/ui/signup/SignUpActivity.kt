@@ -20,8 +20,7 @@ class SignUpActivity : ComponentActivity() {
         setContent {
             SignUpTheme {
                 Surface(
-                    modifier = Modifier
-                        .fillMaxSize(),
+                    modifier = Modifier.fillMaxSize(),
                 ) {
                     SignUpLayout(
                         onButtonClicked = { onSignUpClicked() },
@@ -40,12 +39,13 @@ class SignUpActivity : ComponentActivity() {
 @Composable
 fun SignUpPreview() {
     SignUpTheme(
-        darkTheme = true
+        darkTheme = true,
     ) {
         Surface(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(32.dp),
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .padding(32.dp),
         ) {
             SignUpLayout(
                 onButtonClicked = { },
