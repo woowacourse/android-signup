@@ -2,10 +2,13 @@ package nextstep.signup.ui.signup
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -25,7 +28,7 @@ import nextstep.signup.ui.component.SignUpTextField
 @Composable
 fun SignUpScreen() {
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top,
     ) {
@@ -37,16 +40,16 @@ fun SignUpScreen() {
         SignUpHeaderText(
             modifier =
                 Modifier.padding(
-                    start = 34.dp,
-                    end = 34.dp,
-                    top = 112.dp,
+                    start = 28.dp,
+                    end = 28.dp,
+                    top = 84.dp,
                     bottom = 42.dp,
                 ),
             text = stringResource(R.string.sign_up_greeting),
         )
 
         Column(
-            modifier = Modifier.padding(start = 32.dp, end = 32.dp),
+            modifier = Modifier.padding(start = 28.dp, end = 28.dp),
         ) {
             SignUpTextField(
                 modifier =
@@ -88,7 +91,7 @@ fun SignUpScreen() {
                 modifier =
                     Modifier
                         .fillMaxWidth()
-                        .padding(bottom = 42.dp),
+                        .padding(bottom = 36.dp),
                 label = stringResource(R.string.password_confirm_label),
                 value = passwordConfirm,
                 onValueChange = { input ->
@@ -108,5 +111,7 @@ fun SignUpScreen() {
             text = stringResource(R.string.sign_up_button_label),
             onclick = {},
         )
+
+        Spacer(modifier = Modifier.padding(bottom = 36.dp))
     }
 }
