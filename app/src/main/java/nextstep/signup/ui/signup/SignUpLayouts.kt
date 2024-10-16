@@ -45,21 +45,25 @@ fun SignUpInteractionLayer(
         SingleLineTextInput(
             modifier = childModifier,
             label = stringResource(id = R.string.signup_username),
+            onValueChange = { it },
             inputType = InputType.Username,
         )
         SingleLineTextInput(
             modifier = childModifier,
             label = stringResource(id = R.string.signup_email),
+            onValueChange = { it },
             inputType = InputType.Email,
         )
         SingleLineTextInput(
             modifier = childModifier,
             label = stringResource(id = R.string.signup_password),
+            onValueChange = { it },
             inputType = InputType.Password,
         )
         SingleLineTextInput(
             modifier = childModifier,
             label = stringResource(id = R.string.signup_password_confirm),
+            onValueChange = { it },
             inputType = InputType.Password,
         )
         StateButton(

@@ -13,16 +13,29 @@ import androidx.compose.ui.Modifier
 import nextstep.signup.ui.theme.Typography
 
 @Composable
+fun LabelText(label: String) {
+    Text(
+        text = label,
+        style = Typography.labelMedium,
+    )
+}
+
+
+@Composable
 fun SingleLineTextInput(
     modifier: Modifier = Modifier,
+    onValueChange: (String) -> String,
     label: String,
     inputType: InputType,
 ) {
     var value by rememberSaveable { mutableStateOf("") }
+
     TextField(
         modifier = modifier,
         value = value,
-        onValueChange = { value = it },
+        onValueChange = {
+            value = onValueChange(it)
+        },
         label = {
             LabelText(label = label)
         },
@@ -34,13 +47,5 @@ fun SingleLineTextInput(
             focusedIndicatorColor = MaterialTheme.colorScheme.secondary,
             focusedLabelColor = MaterialTheme.colorScheme.secondary,
         ),
-    )
-}
-
-@Composable
-fun LabelText(label: String) {
-    Text(
-        text = label,
-        style = Typography.labelMedium,
     )
 }
