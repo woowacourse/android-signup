@@ -14,13 +14,12 @@ import nextstep.signup.ui.theme.Typography
 
 @Composable
 fun StateButton(
+    modifier: Modifier = Modifier,
     text: String,
     onClick: () -> Unit,
 ) {
     Button(
-        modifier = Modifier
-            .fillMaxWidth()
-            .requiredHeight(50.dp),
+        modifier = modifier,
         onClick = { onClick() },
     ) {
         Text(
@@ -35,6 +34,6 @@ fun StateButton(
 @Composable
 fun ButtonPreview() {
     SignUpTheme {
-        StateButton("dlrjqhkfk~") {}
+        StateButton(text = "dlrjqhkfk~") {}
     }
 }

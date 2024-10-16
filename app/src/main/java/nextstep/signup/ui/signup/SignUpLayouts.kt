@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -89,7 +90,10 @@ fun SignUpInteractionLayer(
             label = stringResource(id = R.string.signup_password_confirm),
             inputType = InputType.Password,
         )
-        StateButton(text = stringResource(id = R.string.signup_signup)) {
+        StateButton(
+            modifier = childModifier.requiredHeight(50.dp),
+            text = stringResource(id = R.string.signup_signup),
+        ) {
             onButtonClicked()
         }
     }
