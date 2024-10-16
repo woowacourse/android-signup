@@ -177,7 +177,7 @@ class MainActivity : ComponentActivity() {
 
     @Preview(showBackground = true)
     @Composable
-    private fun GreetingPreview() {
+    private fun SignUpPreview() {
         SignupTheme {
             Surface(
                 modifier = Modifier.fillMaxSize(),
