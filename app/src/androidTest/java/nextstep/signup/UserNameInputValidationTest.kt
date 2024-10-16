@@ -3,6 +3,7 @@ package nextstep.signup
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
+import nextstep.signup.fixtures.FakeSignUpField
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
