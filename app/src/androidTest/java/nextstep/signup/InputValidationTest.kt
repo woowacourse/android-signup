@@ -3,6 +3,7 @@ package nextstep.signup
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
+import nextstep.signup.component.SignUpEmailTextField
 import nextstep.signup.component.SignUpUsernameTextField
 import org.junit.Before
 import org.junit.Rule
@@ -12,11 +13,13 @@ class InputValidationTest {
     @get:Rule
     val composeTestRule = createComposeRule()
     private val username = mutableStateOf("")
+    private val email = mutableStateOf("")
 
     @Before
     fun setup() {
         composeTestRule.setContent {
             SignUpUsernameTextField(username = username.value) {}
+            SignUpEmailTextField(email = email.value) {}
         }
     }
 
@@ -76,6 +79,39 @@ class InputValidationTest {
         // then
         composeTestRule
             .onNodeWithText(ERROR_USERNAME_FORMAT)
+            .assertExists()
+    }
+
+    @Test
+    fun 이메일은_이메일의_형식을_지켜야한다() {
+        // given
+        email.value = "kshyun0724@naver.com"
+
+        // then
+        composeTestRule
+            .onNodeWithText(ERROR_EMAIL_FORMAT)
+            .assertDoesNotExist()
+    }
+
+    @Test
+    fun 이메일_형식이_올바르지_않으면_에러메시지가_노출된다_1() {
+        // given
+        email.value = "kshyun0724naver.com"
+
+        // then
+        composeTestRule
+            .onNodeWithText(ERROR_EMAIL_FORMAT)
+            .assertExists()
+    }
+
+    @Test
+    fun 이메일_형식이_올바르지_않으면_에러메시지가_노출된다_2() {
+        // given
+        email.value = "kshyun0724@navercom"
+
+        // then
+        composeTestRule
+            .onNodeWithText(ERROR_EMAIL_FORMAT)
             .assertExists()
     }
 
