@@ -1,6 +1,5 @@
 package nextstep.signup.componet
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,11 +15,11 @@ import nextstep.signup.R
 @Composable
 fun CustomText(
     modifier: Modifier = Modifier,
-    @StringRes titleResId: Int,
+    title: String,
 ) {
     Text(
         modifier = modifier,
-        text = stringResource(id = titleResId),
+        text = title,
         fontSize = 26.sp,
         color = Color.Black,
         fontWeight = FontWeight.W700,
@@ -33,6 +32,6 @@ fun CustomText(
 fun CustomTextPreview() {
     CustomText(
         modifier = Modifier.fillMaxWidth(),
-        titleResId = R.string.sign_up_title,
+        title = stringResource(id = R.string.sign_up_title),
     )
 }
