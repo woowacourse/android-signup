@@ -25,10 +25,9 @@ import nextstep.signup.ui.component.SignUpButton
 import nextstep.signup.ui.component.SignUpHeaderText
 import nextstep.signup.ui.component.SignUpTextField
 import nextstep.signup.ui.model.Email
+import nextstep.signup.ui.model.Password
 import nextstep.signup.ui.model.SignUpInformation
 import nextstep.signup.ui.model.UserName
-
-val PASSWORD_REGEX = Regex("^(?=.*[a-zA-Z])(?=.*[0-9]).{8,16}$")
 
 @Composable
 fun SignUpScreen() {
@@ -40,7 +39,6 @@ fun SignUpScreen() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top,
     ) {
-        var password by rememberSaveable { mutableStateOf("") }
         var passwordConfirm by rememberSaveable { mutableStateOf("") }
 
         var signUpInformation by rememberSaveable { mutableStateOf(SignUpInformation()) }
@@ -65,42 +63,45 @@ fun SignUpScreen() {
                         .fillMaxWidth()
                         .padding(bottom = 36.dp),
                 label = stringResource(R.string.username_label),
-                value = signUpInformation.userName.text,
+                value = signUpInformation.userName.value,
                 onValueChange = { value ->
-                    signUpInformation = signUpInformation.copy(userName = UserName(text = value))
+                    signUpInformation = signUpInformation.copy(userName = UserName(value = value))
                 },
                 isValid = signUpInformation.userName.isValid(),
                 errorMessage = signUpInformation.userName.errorMessage(),
             )
+
             SignUpTextField(
                 modifier =
                     Modifier
                         .fillMaxWidth()
                         .padding(bottom = 36.dp),
                 label = stringResource(R.string.email_label),
-                value = signUpInformation.email.text,
+                value = signUpInformation.email.value,
                 onValueChange = { value ->
-                    signUpInformation = signUpInformation.copy(email = Email(text = value))
+                    signUpInformation = signUpInformation.copy(email = Email(value = value))
                 },
                 isValid = signUpInformation.email.isValid(),
                 errorMessage = signUpInformation.email.errorMessage(),
                 keyboardType = KeyboardType.Email,
             )
+
             SignUpTextField(
                 modifier =
                     Modifier
                         .fillMaxWidth()
                         .padding(bottom = 36.dp),
                 label = stringResource(R.string.password_label),
-                value = password,
-                onValueChange = { input ->
-                    password = input
+                value = signUpInformation.password.value,
+                onValueChange = { value ->
+                    signUpInformation = signUpInformation.copy(password = Password(value = value))
                 },
-                isValid = password.matches(PASSWORD_REGEX),
-                errorMessage = "hi",
+                isValid = signUpInformation.password.isValid(),
+                errorMessage = signUpInformation.password.errorMessage(),
                 keyboardType = KeyboardType.Password,
                 visualTransformation = PasswordVisualTransformation(),
             )
+
             SignUpTextField(
                 modifier =
                     Modifier
@@ -111,7 +112,7 @@ fun SignUpScreen() {
                 onValueChange = { input ->
                     passwordConfirm = input
                 },
-                isValid = password.matches(PASSWORD_REGEX),
+                isValid = true,
                 errorMessage = "hi",
                 keyboardType = KeyboardType.Password,
                 visualTransformation = PasswordVisualTransformation(),

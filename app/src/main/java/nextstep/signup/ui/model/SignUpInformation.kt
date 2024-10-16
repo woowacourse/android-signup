@@ -7,4 +7,5 @@ import kotlinx.parcelize.Parcelize
 data class SignUpInformation(
     val userName: UserName = UserName(),
     val email: Email = Email(),
+    val password: Password = Password(),
 ) : Parcelable

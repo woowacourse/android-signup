@@ -1,7 +1,9 @@
 package nextstep.signup.ui.model
 
-sealed interface Information {
-    fun isValid(): Boolean
+sealed class Information(
+    open val value: String,
+) {
+    abstract fun isValid(): Boolean
 
-    fun errorMessage(): String
+    abstract fun errorMessage(): String
 }

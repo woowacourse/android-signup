@@ -5,8 +5,8 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Email(
-    val text: String = DEFAULT_TEXT,
-) : Information,
+    override val value: String = DEFAULT_TEXT,
+) : Information(value),
     Parcelable {
     override fun isValid(): Boolean = validPattern()
 
@@ -16,7 +16,7 @@ data class Email(
             else -> DEFAULT_ERROR_MESSAGE
         }
 
-    private fun validPattern(): Boolean = text.matches(Regex(PATTERN))
+    private fun validPattern(): Boolean = value.matches(Regex(PATTERN))
 
     companion object {
         private const val PATTERN = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$"
