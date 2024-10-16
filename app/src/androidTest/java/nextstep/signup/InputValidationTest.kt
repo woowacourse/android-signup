@@ -4,6 +4,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import nextstep.signup.component.SignUpEmailTextField
+import nextstep.signup.component.SignUpPasswordConfirmTextField
+import nextstep.signup.component.SignUpPasswordTextField
 import nextstep.signup.component.SignUpUsernameTextField
 import org.junit.Before
 import org.junit.Rule
@@ -14,12 +16,19 @@ class InputValidationTest {
     val composeTestRule = createComposeRule()
     private val username = mutableStateOf("")
     private val email = mutableStateOf("")
+    private val password = mutableStateOf("")
+    private val passwordConfirm = mutableStateOf("")
 
     @Before
     fun setup() {
         composeTestRule.setContent {
             SignUpUsernameTextField(username = username.value) {}
             SignUpEmailTextField(email = email.value) {}
+            SignUpPasswordTextField(password = password.value) {}
+            SignUpPasswordConfirmTextField(
+                password = password.value,
+                passwordConfirm = passwordConfirm.value
+            ) {}
         }
     }
 
@@ -112,6 +121,63 @@ class InputValidationTest {
         // then
         composeTestRule
             .onNodeWithText(ERROR_EMAIL_FORMAT)
+            .assertExists()
+    }
+
+    @Test
+    fun 비밀번호는_8에서_16자여야_한다() {
+        // given
+        password.value = "12345678"
+
+        // then
+        composeTestRule
+            .onNodeWithText(ERROR_PASSWORD_LENGTH)
+            .assertDoesNotExist()
+    }
+
+    @Test
+    fun 비밀번호는_영문과_숫자를_포함해야한다() {
+        // given
+        password.value = "1234567a"
+
+        // then
+        composeTestRule
+            .onNodeWithText(ERROR_PASSWORD_FORMAT)
+            .assertDoesNotExist()
+    }
+
+    @Test
+    fun 비밀번호_형식이_올바르지_않으면_에러메시지가_노출된다() {
+        // given
+        password.value = "12345678"
+
+        // then
+        composeTestRule
+            .onNodeWithText(ERROR_PASSWORD_FORMAT)
+            .assertExists()
+    }
+
+    @Test
+    fun 비밀번호와_비밀번호확인은_일치해야한다() {
+        // given
+        password.value = "1234567a"
+        passwordConfirm.value = "1234567a"
+
+        // then
+        composeTestRule
+            .onNodeWithText(ERROR_PASSWORD_CONFIRM)
+            .assertDoesNotExist()
+    }
+
+    @Test
+    fun 비밀번호와_비밀번호확인이_다르면_에러메시지가_노출된다() {
+        // given
+        password.value = "1234567a"
+        passwordConfirm.value = "1234567b"
+
+        // then
+        composeTestRule
+            .onNodeWithText(ERROR_PASSWORD_CONFIRM)
             .assertExists()
     }
 
