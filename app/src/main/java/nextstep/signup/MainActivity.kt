@@ -95,7 +95,7 @@ class MainActivity : ComponentActivity() {
     }
 
     @Composable
-    fun SignUpTitle(
+    private fun SignUpTitle(
         @StringRes titleId: Int,
         modifier: Modifier = Modifier,
     ) {
@@ -111,7 +111,7 @@ class MainActivity : ComponentActivity() {
     }
 
     @Composable
-    fun SignUpField(
+    private fun SignUpField(
         @StringRes labelId: Int,
         value: String,
         validationResult: ValidationResult,
@@ -151,7 +151,7 @@ class MainActivity : ComponentActivity() {
     }
 
     @Composable
-    fun SignUpButton(
+    private fun SignUpButton(
         @StringRes textId: Int,
         enabled: Boolean,
         modifier: Modifier = Modifier,
@@ -177,7 +177,7 @@ class MainActivity : ComponentActivity() {
 
     @Preview(showBackground = true)
     @Composable
-    fun GreetingPreview() {
+    private fun GreetingPreview() {
         SignupTheme {
             Surface(
                 modifier = Modifier.fillMaxSize(),

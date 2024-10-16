@@ -20,7 +20,7 @@ class EmailInputValidationTest {
             FakeSignUpField(
                 value = signUpInfo.value.email,
                 onValueChange = { signUpInfo.value = signUpInfo.value.copy(email = it) },
-                validationResult = signUpInfo.value.emailValidation
+                validationResult = signUpInfo.value.emailValidation,
             )
         }
     }

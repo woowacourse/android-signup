@@ -20,7 +20,7 @@ class UserNameInputValidationTest {
             FakeSignUpField(
                 value = signUpInfo.value.password,
                 onValueChange = { signUpInfo.value = signUpInfo.value.copy(userName = it) },
-                validationResult = signUpInfo.value.userNameValidation
+                validationResult = signUpInfo.value.userNameValidation,
             )
         }
     }

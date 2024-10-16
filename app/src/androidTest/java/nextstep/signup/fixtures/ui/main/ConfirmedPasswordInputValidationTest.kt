@@ -22,7 +22,7 @@ class ConfirmedPasswordInputValidationTest {
                 onValueChange = {
                     signUpInfo.value = signUpInfo.value.copy(confirmedPassword = it)
                 },
-                validationResult = signUpInfo.value.confirmedPasswordValidation
+                validationResult = signUpInfo.value.confirmedPasswordValidation,
             )
         }
     }
