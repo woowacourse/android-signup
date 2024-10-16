@@ -31,9 +31,9 @@ fun InputField(
 
     TextField(
         value = value,
-        onValueChange = { newValue ->
-            onValueChange(newValue)
-            errorMessage = errorMessage(newValue)
+        onValueChange = { input ->
+            onValueChange(input)
+            errorMessage = errorMessageOf(input)
         },
         label = { Text(label) },
         modifier =
@@ -43,7 +43,7 @@ fun InputField(
             KeyboardOptions(
                 keyboardType = keyboardType,
             ),
-        visualTransformation = visualTransformation(isPasswordInputField),
+        visualTransformation = visualTransformationOf(isPasswordInputField),
     )
 
     Text(
@@ -54,14 +54,14 @@ fun InputField(
     )
 }
 
-private fun errorMessage(newValue: String): String {
-    return when (!newValue.matches(USERNAME_REGEX.toRegex())) {
+private fun errorMessageOf(input: String): String {
+    return when (!input.matches(USERNAME_REGEX.toRegex())) {
         true -> INVALID_USERNAME_FORMAT_MESSAGE
         false -> NO_ERROR_MESSAGE
     }
 }
 
-private fun visualTransformation(isPasswordInputField: Boolean): VisualTransformation {
+private fun visualTransformationOf(isPasswordInputField: Boolean): VisualTransformation {
     return when (isPasswordInputField) {
         true -> PasswordVisualTransformation()
         false -> VisualTransformation.None
