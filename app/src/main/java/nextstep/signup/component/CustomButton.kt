@@ -1,10 +1,7 @@
 package nextstep.signup.component
 
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
@@ -20,16 +17,16 @@ import androidx.compose.ui.unit.sp
 fun CustomButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
+    buttonHeight: Int = 50,
     shapes: RoundedCornerShape = RoundedCornerShape(25.dp),
     colors: ButtonColors = ButtonDefaults.buttonColors(),
     buttonText: String
 ) {
     Button(
-        onClick = onClick,
         modifier = modifier
             .fillMaxWidth()
-            .height(50.dp)
-            .padding(start = 32.dp, top = 0.dp, end = 32.dp, bottom = 0.dp),
+            .height(buttonHeight.dp),
+        onClick = onClick,
         shape = shapes,
         colors = colors
     ) {

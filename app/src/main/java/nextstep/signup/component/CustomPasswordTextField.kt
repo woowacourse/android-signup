@@ -1,7 +1,6 @@
 package nextstep.signup.component
 
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -9,7 +8,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 
 @Composable
 fun CustomPasswordTextField(
@@ -21,8 +19,7 @@ fun CustomPasswordTextField(
 ) {
     TextField(
         modifier = modifier
-            .fillMaxWidth()
-            .padding(start = 32.dp, top = 36.dp, end = 32.dp, bottom = 0.dp),
+            .fillMaxWidth(),
         value = value,
         onValueChange = onValueChange,
         label = {

@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.runtime.Composable
@@ -38,21 +39,24 @@ fun SignUpScreen() {
         passwordConfirm = passwordConfirm
     )
 
-    Column {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 32.dp, end = 32.dp)
+    ) {
         Spacer(modifier = Modifier.height(60.dp))
         TitleText(
-            modifier = Modifier.fillMaxWidth(),
             title = stringResource(R.string.sign_up_title)
         )
 
-        Spacer(modifier = Modifier.height(4.dp))
-
+        Spacer(modifier = Modifier.height(40.dp))
         CustomTextField(
             value = user.name,
             onValueChange = { name = it },
             label = stringResource(R.string.user_name)
         )
 
+        Spacer(modifier = Modifier.height(36.dp))
         CustomTextField(
             value = user.email,
             onValueChange = { email = it },
@@ -62,12 +66,14 @@ fun SignUpScreen() {
             )
         )
 
+        Spacer(modifier = Modifier.height(36.dp))
         CustomPasswordTextField(
             value = user.password,
             onValueChange = { password = it },
             label = stringResource(R.string.user_password)
         )
 
+        Spacer(modifier = Modifier.height(36.dp))
         CustomPasswordTextField(
             value = user.passwordConfirm,
             onValueChange = { passwordConfirm = it },
@@ -75,7 +81,6 @@ fun SignUpScreen() {
         )
 
         Spacer(modifier = Modifier.height(42.dp))
-
         CustomButton(
             onClick = {},
             buttonText = stringResource(R.string.sign_up_button),
