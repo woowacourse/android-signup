@@ -17,8 +17,8 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun CustomButton(
-    onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    onClick: () -> Unit,
     shapes: RoundedCornerShape = RoundedCornerShape(25.dp),
     colors: ButtonColors = ButtonDefaults.buttonColors(),
     @StringRes titleResId: Int
