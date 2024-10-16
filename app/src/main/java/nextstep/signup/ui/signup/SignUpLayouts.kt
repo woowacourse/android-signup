@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import nextstep.signup.R
 import nextstep.signup.ui.common.button.StateButton
 import nextstep.signup.ui.common.textfield.InputType
-import nextstep.signup.ui.common.textfield.OneLineTextInput
+import nextstep.signup.ui.common.textfield.SingleLineTextInput
 import nextstep.signup.ui.theme.SignUpTheme
 import nextstep.signup.ui.theme.Typography
 
@@ -52,19 +52,19 @@ fun SignUpTextFields() {
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        OneLineTextInput(
+        SingleLineTextInput(
             label = stringResource(id = R.string.signup_username),
             inputType = InputType.Username,
         )
-        OneLineTextInput(
+        SingleLineTextInput(
             label = stringResource(id = R.string.signup_email),
             inputType = InputType.Email,
         )
-        OneLineTextInput(
+        SingleLineTextInput(
             label = stringResource(id = R.string.signup_password),
             inputType = InputType.Password,
         )
-        OneLineTextInput(
+        SingleLineTextInput(
             label = stringResource(id = R.string.signup_password_confirm),
             inputType = InputType.Password,
         )

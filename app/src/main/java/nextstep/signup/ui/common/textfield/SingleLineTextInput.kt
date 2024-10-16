@@ -11,11 +11,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import nextstep.signup.ui.theme.GreenLight
 import nextstep.signup.ui.theme.Typography
 
 @Composable
-fun OneLineTextInput(
+fun SingleLineTextInput(
     label: String,
     inputType: InputType,
 ) {
