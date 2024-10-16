@@ -15,7 +15,8 @@ private val DarkColorScheme =
         primary = Blue20,
         secondary = BlueGrey10,
         tertiary = SkyBlue10,
-        surfaceVariant = BlueGrey20,
+        surfaceVariant = Grey40,
+        onSurfaceVariant = Blue50,
     )
 
 private val LightColorScheme =
@@ -24,6 +25,7 @@ private val LightColorScheme =
         secondary = BlueGrey20,
         tertiary = SkyBlue50,
         surfaceVariant = BlueGrey20,
+        onSurfaceVariant = Grey40,
     )
 
 @Composable
