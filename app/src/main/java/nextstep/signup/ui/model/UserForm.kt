@@ -52,6 +52,56 @@ data class UserForm(
                 passwordStatus == SignUpStatus.Success &&
                 passwordConfirmationStatus == SignUpStatus.Success
 
+    fun hasError(field: FormField): Boolean {
+        return when (field) {
+            FormField.USERNAME -> usernameStatus is SignUpStatus.Error
+            FormField.EMAIL -> emailStatus is SignUpStatus.Error
+            FormField.PASSWORD -> passwordStatus is SignUpStatus.Error
+            FormField.PASSWORD_CONFIRMATION -> passwordConfirmationStatus is SignUpStatus.Error
+        }
+    }
+
+    fun errorMessageResourceOf(field: FormField): Int? {
+        return when (field) {
+            FormField.USERNAME -> usernameErrorMessageResource(usernameStatus)
+            FormField.EMAIL -> emailErrorMessageResource(emailStatus)
+            FormField.PASSWORD -> passwordErrorMessageResource(passwordStatus)
+            FormField.PASSWORD_CONFIRMATION -> passwordConfirmationErrorMessageResource(
+                passwordConfirmationStatus
+            )
+        }
+    }
+
+    private fun passwordConfirmationErrorMessageResource(passwordConfirmationStatus: SignUpStatus): Int? =
+        when (passwordConfirmationStatus) {
+            is SignUpStatus.Error.PasswordConfirmation -> passwordConfirmationStatus.message
+            else -> null
+        }
+
+    private fun passwordErrorMessageResource(passwordStatus: SignUpStatus): Int? =
+        when (passwordStatus) {
+            is SignUpStatus.Error.PasswordLength -> passwordStatus.message
+            is SignUpStatus.Error.PasswordFormat -> passwordStatus.message
+            else -> null
+        }
+
+    private fun emailErrorMessageResource(emailStatus: SignUpStatus) =
+        when (emailStatus) {
+            is SignUpStatus.Error.EmailFormat -> emailStatus.message
+            else -> null
+        }
+
+    private fun usernameErrorMessageResource(usernameStatus: SignUpStatus): Int? =
+        when (usernameStatus) {
+            is SignUpStatus.Error.UsernameLength -> usernameStatus.message
+            is SignUpStatus.Error.UsernameNonCharacter -> usernameStatus.message
+            else -> null
+        }
+
+    enum class FormField {
+        USERNAME, EMAIL, PASSWORD, PASSWORD_CONFIRMATION
+    }
+
     companion object {
         private const val USERNAME_REGEX = "^[a-zA-Z가-힣]+$"
         private const val EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$"

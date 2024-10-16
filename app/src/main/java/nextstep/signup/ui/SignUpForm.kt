@@ -34,9 +34,9 @@ fun SignUpForm(
 
     Column(
         modifier =
-            modifier
-                .verticalScroll(scrollState)
-                .padding(horizontal = 32.dp, vertical = 60.dp),
+        modifier
+            .verticalScroll(scrollState)
+            .padding(horizontal = 32.dp, vertical = 60.dp),
     ) {
         Text(
             modifier = Modifier.fillMaxWidth(),
@@ -47,9 +47,9 @@ fun SignUpForm(
 
         SignUpFormTextFields(
             modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 40.dp),
+            Modifier
+                .fillMaxWidth()
+                .padding(vertical = 40.dp),
             userForm = userForm,
             onSignUpFormChange = onSignUpFormChange,
         )
@@ -74,18 +74,18 @@ private fun SignUpFormTextFields(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
-        val usernameErrorMessage = (userForm.usernameStatus as? SignUpStatus.Error)?.message
-        val emailErrorMessage = (userForm.emailStatus as? SignUpStatus.Error)?.message
-        val passwordErrorMessage = (userForm.passwordStatus as? SignUpStatus.Error)?.message
-        val passwordConfirmationErrorMessage =
-            (userForm.passwordConfirmationStatus as? SignUpStatus.Error)?.message
+        val usernameErrorMessageId = userForm.errorMessageResourceOf(UserForm.FormField.USERNAME)
+        val emailErrorMessageId = userForm.errorMessageResourceOf(UserForm.FormField.EMAIL)
+        val passwordErrorMessageId = userForm.errorMessageResourceOf(UserForm.FormField.PASSWORD)
+        val passwordConfirmationErrorMessageId =
+            userForm.errorMessageResourceOf(UserForm.FormField.PASSWORD_CONFIRMATION)
 
         PlainTextField(
             modifier = Modifier.fillMaxWidth(),
             label = stringResource(id = R.string.signup_label_username),
             value = userForm.username,
-            isError = userForm.usernameStatus is SignUpStatus.Error,
-            errorMessage = usernameErrorMessage?.let { stringResource(id = it) },
+            isError = userForm.hasError(UserForm.FormField.USERNAME),
+            errorMessage = usernameErrorMessageId?.let { stringResource(id = it) },
             onValueChange = { changedValue ->
                 onSignUpFormChange(userForm.copy(username = changedValue))
             },
@@ -95,8 +95,8 @@ private fun SignUpFormTextFields(
             modifier = Modifier.fillMaxWidth(),
             label = stringResource(id = R.string.signup_label_email),
             value = userForm.email,
-            isError = userForm.emailStatus is SignUpStatus.Error,
-            errorMessage = emailErrorMessage?.let { stringResource(id = it) },
+            isError = userForm.hasError(UserForm.FormField.EMAIL),
+            errorMessage = emailErrorMessageId?.let { stringResource(id = it) },
             onValueChange = { changedValue ->
                 onSignUpFormChange(userForm.copy(email = changedValue))
             },
@@ -106,8 +106,8 @@ private fun SignUpFormTextFields(
             modifier = Modifier.fillMaxWidth(),
             label = stringResource(id = R.string.signup_label_password),
             value = userForm.password,
-            isError = userForm.passwordStatus is SignUpStatus.Error,
-            errorMessage = passwordErrorMessage?.let { stringResource(id = it) },
+            isError = userForm.hasError(UserForm.FormField.PASSWORD),
+            errorMessage = passwordErrorMessageId?.let { stringResource(id = it) },
             onValueChange = { changedValue ->
                 onSignUpFormChange(userForm.copy(password = changedValue))
             },
@@ -117,8 +117,8 @@ private fun SignUpFormTextFields(
             modifier = Modifier.fillMaxWidth(),
             label = stringResource(id = R.string.signup_label_password_confirm),
             value = userForm.passwordConfirmation,
-            isError = userForm.passwordConfirmationStatus is SignUpStatus.Error,
-            errorMessage = passwordConfirmationErrorMessage?.let { stringResource(id = it) },
+            isError = userForm.hasError(UserForm.FormField.PASSWORD_CONFIRMATION),
+            errorMessage = passwordConfirmationErrorMessageId?.let { stringResource(id = it) },
             onValueChange = { changedValue ->
                 onSignUpFormChange(userForm.copy(passwordConfirmation = changedValue))
             },

@@ -1,5 +1,6 @@
 package nextstep.signup.ui.model
 
+import nextstep.signup.R
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
@@ -180,5 +181,120 @@ class UserFormTest {
 
         // then
         assertFalse(result)
+    }
+
+    @Test
+    fun hasError_usernameError_returnsTrue() {
+        // given & when
+        val formState = UserForm(username = "a")
+        val result = formState.hasError(UserForm.FormField.USERNAME)
+
+        // then
+        assertTrue(result)
+    }
+
+    @Test
+    fun hasError_emailError_returnsTrue() {
+        // given & when
+        val formState = UserForm(email = "kmkim@pengcook")
+        val result = formState.hasError(UserForm.FormField.EMAIL)
+
+        // then
+        assertTrue(result)
+    }
+
+    @Test
+    fun hasError_passwordError_returnsTrue() {
+        // given & when
+        val formState = UserForm(password = "abcdefgh")
+        val result = formState.hasError(UserForm.FormField.PASSWORD)
+
+        // then
+        assertTrue(result)
+    }
+
+    @Test
+    fun hasError_passwordConfirmationError_returnsTrue() {
+        // given & when
+        val formState = UserForm(password = "abc12345", passwordConfirmation = "abc12346")
+        val result = formState.hasError(UserForm.FormField.PASSWORD_CONFIRMATION)
+
+        // then
+        assertTrue(result)
+    }
+
+    @Test
+    fun hasError_noError_returnsFalse() {
+        // given & when
+        val formState = UserForm(
+            username = "abcde",
+            email = "kmkim@pengcook.com",
+            password = "abcd1234",
+            passwordConfirmation = "abcd1234"
+        )
+        val result = formState.hasError(UserForm.FormField.USERNAME)
+
+        // then
+        assertFalse(result)
+    }
+
+    @Test
+    fun errorMessageResourceOf_invalidUsernameLength_returnsUsernameLengthErrorMessage() {
+        // given & when
+        val formState = UserForm(username = "a")
+        val result = formState.errorMessageResourceOf(UserForm.FormField.USERNAME)
+
+        // then
+        assertEquals(R.string.error_username_length, result)
+    }
+
+    @Test
+    fun errorMessageResourceOf_invalidUsernameNonCharacter_returnsUsernameNonCharacterErrorMessage() {
+        // given & when
+        val formState = UserForm(username = "abcd#")
+        val result = formState.errorMessageResourceOf(UserForm.FormField.USERNAME)
+
+        // then
+        assertEquals(R.string.error_username_non_character, result)
+    }
+
+    @Test
+    fun errorMessageResourceOf_invalidEmailFormat_returnsEmailFormatErrorMessage() {
+        // given & when
+        val formState = UserForm(email = "kmkim@pengcook")
+        val result = formState.errorMessageResourceOf(UserForm.FormField.EMAIL)
+
+        // then
+        assertEquals(R.string.error_email_format, result)
+    }
+
+    @Test
+    fun errorMessageResourceOf_invalidPasswordLength_returnsPasswordLengthErrorMessage() {
+        // given & when
+        val formState = UserForm(password = "kmk4567")
+        val result = formState.errorMessageResourceOf(UserForm.FormField.PASSWORD)
+
+        // then
+        assertEquals(R.string.error_password_length, result)
+    }
+
+    @Test
+    fun errorMessageResourceOf_invalidPasswordFormat_returnsPasswordFormatErrorMessage() {
+        // given & when
+        val formState = UserForm(password = "abcdefgh")
+        val result = formState.errorMessageResourceOf(UserForm.FormField.PASSWORD)
+
+        // then
+        assertEquals(R.string.error_password_format, result)
+    }
+
+    @Test
+    fun errorMessageResourceOf_invalidPasswordConfirmation_returnsPasswordConfirmationErrorMessage() {
+        // given & when
+        val formState = UserForm(password = "abc12345", passwordConfirmation = "abc12346")
+        val result = formState.errorMessageResourceOf(UserForm.FormField.PASSWORD_CONFIRMATION)
+
+        // then
+        assertEquals(R.string.error_password_confirmation, result)
     }
 }
