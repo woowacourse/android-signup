@@ -18,14 +18,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
+import nextstep.signup.model.Email
+import nextstep.signup.model.Password
+import nextstep.signup.model.PasswordConfirm
+import nextstep.signup.model.UserName
 import nextstep.signup.ui.component.InputText
 import nextstep.signup.ui.component.TextButton
 import nextstep.signup.ui.component.TitleText
 import nextstep.signup.ui.theme.SignupTheme
-import nextstep.signup.ui.validateEmail
-import nextstep.signup.ui.validatePassword
-import nextstep.signup.ui.validatePasswordConfirm
-import nextstep.signup.ui.validateUserName
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,37 +52,47 @@ fun SignUpComponent() {
     ) {
         TitleText(R.string.sign_up_title)
 
-        var userName: String by remember { mutableStateOf("") }
-        var email: String by remember { mutableStateOf("") }
-        var password: String by remember { mutableStateOf("") }
-        var passwordConfirm: String by remember { mutableStateOf("") }
+        var userName: UserName by remember { mutableStateOf(UserName("")) }
+        var email: Email by remember { mutableStateOf(Email("")) }
+        var password: Password by remember { mutableStateOf(Password("")) }
+        var passwordConfirm: PasswordConfirm by remember {
+            mutableStateOf(
+                PasswordConfirm(
+                    content = "",
+                    password = password.content,
+                ),
+            )
+        }
+        val isValid = false
 
         InputText(
             R.string.sign_up_user_name_title,
+            userName.content,
+            { userName = userName.copy(content = it) },
             userName,
-            { userName = it },
-            { it.validateUserName() },
         )
         InputText(
             R.string.sign_up_email_title,
+            email.content,
+            { email = email.copy(content = it) },
             email,
-            { email = it },
-            { it.validateEmail() },
-            KeyboardType.Email,
         )
         InputText(
             R.string.sign_up_password_title,
+            password.content,
+            {
+                password = password.copy(content = it)
+                passwordConfirm = passwordConfirm.copy(password = it)
+            },
             password,
-            { password = it },
-            { it.validatePassword() },
             KeyboardType.Password,
             PasswordVisualTransformation(),
         )
         InputText(
             R.string.sign_up_password_confirm_title,
+            passwordConfirm.content,
+            { passwordConfirm = passwordConfirm.copy(content = it) },
             passwordConfirm,
-            { passwordConfirm = it },
-            { it.validatePasswordConfirm(password) },
             KeyboardType.Password,
             PasswordVisualTransformation(),
         )

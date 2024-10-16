@@ -20,8 +20,8 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.signup.R
-import nextstep.signup.ui.ValidationResult
-import nextstep.signup.ui.ValidationResult.Companion.DEFAULT_RESULT
+import nextstep.signup.model.InputValidator
+import nextstep.signup.model.UserName
 import nextstep.signup.ui.theme.BlueGrey20
 
 @Composable
@@ -29,11 +29,10 @@ fun InputText(
     @StringRes title: Int,
     content: String,
     onContentChange: (String) -> Unit,
-    validate: (String) -> ValidationResult = { DEFAULT_RESULT },
+    inputValidator: InputValidator,
     keyBoardType: KeyboardType = KeyboardType.Text,
     visualTransformation: VisualTransformation = VisualTransformation.None,
 ) {
-    val (isError, errorMessage) = if (content.isNotEmpty()) validate(content) else DEFAULT_RESULT
     TextField(
         value = content,
         label = { Text(text = stringResource(title)) },
@@ -45,8 +44,14 @@ fun InputText(
                 unfocusedContainerColor = BlueGrey20,
                 focusedContainerColor = BlueGrey20,
             ),
-        isError = isError,
-        supportingText = { errorMessage?.let { Text(it) } },
+        isError = if (content.isNotEmpty()) !inputValidator.isValid() else false,
+        supportingText = {
+            if (content.isNotEmpty()) {
+                inputValidator.getErrorMessage()?.let { Text(it) }
+            } else {
+                null
+            }
+        },
     )
     Spacer(Modifier.height(36.dp))
 }
@@ -54,6 +59,11 @@ fun InputText(
 @Preview(showBackground = true)
 @Composable
 private fun InputTextPreview() {
-    var userName: String by remember { mutableStateOf("") }
-    InputText(R.string.sign_up_user_name_title, userName, { userName = it })
+    var userName: UserName by remember { mutableStateOf(UserName("")) }
+    InputText(
+        R.string.sign_up_user_name_title,
+        userName.content,
+        { userName = userName.copy(content = it) },
+        userName,
+    )
 }
