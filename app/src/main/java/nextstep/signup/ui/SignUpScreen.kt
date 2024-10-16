@@ -12,6 +12,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -41,7 +42,7 @@ fun SignUpScreen() {
         Spacer(modifier = Modifier.height(60.dp))
         TitleText(
             modifier = Modifier.fillMaxWidth(),
-            titleResId = R.string.sign_up_title
+            title = stringResource(R.string.sign_up_title)
         )
 
         Spacer(modifier = Modifier.height(4.dp))
@@ -49,13 +50,13 @@ fun SignUpScreen() {
         CustomTextField(
             value = user.name,
             onValueChange = { name = it },
-            labelResId = R.string.user_name
+            label = stringResource(R.string.user_name)
         )
 
         CustomTextField(
             value = user.email,
             onValueChange = { email = it },
-            labelResId = R.string.user_email,
+            label = stringResource(R.string.user_email),
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Email
             )
@@ -64,13 +65,13 @@ fun SignUpScreen() {
         CustomPasswordTextField(
             value = user.password,
             onValueChange = { password = it },
-            labelResId = R.string.user_password,
+            label = stringResource(R.string.user_password)
         )
 
         CustomPasswordTextField(
             value = user.passwordConfirm,
             onValueChange = { passwordConfirm = it },
-            labelResId = R.string.user_password_confirm,
+            label = stringResource(R.string.user_password_confirm)
         )
 
         Spacer(modifier = Modifier.height(42.dp))
