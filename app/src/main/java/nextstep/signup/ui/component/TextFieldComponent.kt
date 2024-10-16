@@ -10,6 +10,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
+import nextstep.signup.R
 import nextstep.signup.ui.theme.Blue50
 
 @Composable
@@ -27,5 +29,15 @@ fun TextFieldComponent(
         label = { Text(text = stringResource(id = label)) },
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
         colors = TextFieldDefaults.colors(focusedIndicatorColor = Blue50),
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun TextFieldPreview() {
+    TextFieldComponent(
+        newValue = "",
+        onValueChange = {},
+        label = R.string.main_user_name,
     )
 }
