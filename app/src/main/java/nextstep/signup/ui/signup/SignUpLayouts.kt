@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Surface
@@ -52,22 +53,7 @@ fun SignUpTextFields() {
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        SingleLineTextInput(
-            label = stringResource(id = R.string.signup_username),
-            inputType = InputType.Username,
-        )
-        SingleLineTextInput(
-            label = stringResource(id = R.string.signup_email),
-            inputType = InputType.Email,
-        )
-        SingleLineTextInput(
-            label = stringResource(id = R.string.signup_password),
-            inputType = InputType.Password,
-        )
-        SingleLineTextInput(
-            label = stringResource(id = R.string.signup_password_confirm),
-            inputType = InputType.Password,
-        )
+
     }
 }
 
@@ -75,6 +61,7 @@ fun SignUpTextFields() {
 fun SignUpInteractionLayer(
     onButtonClicked: () -> Unit,
 ) {
+    val childModifier = Modifier.fillMaxWidth()
     Column(
         modifier = Modifier
             .fillMaxHeight(0.7f)
@@ -82,7 +69,26 @@ fun SignUpInteractionLayer(
         verticalArrangement = Arrangement.SpaceEvenly,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        SignUpTextFields()
+        SingleLineTextInput(
+            modifier = childModifier,
+            label = stringResource(id = R.string.signup_username),
+            inputType = InputType.Username,
+        )
+        SingleLineTextInput(
+            modifier = childModifier,
+            label = stringResource(id = R.string.signup_email),
+            inputType = InputType.Email,
+        )
+        SingleLineTextInput(
+            modifier = childModifier,
+            label = stringResource(id = R.string.signup_password),
+            inputType = InputType.Password,
+        )
+        SingleLineTextInput(
+            modifier = childModifier,
+            label = stringResource(id = R.string.signup_password_confirm),
+            inputType = InputType.Password,
+        )
         StateButton(text = stringResource(id = R.string.signup_signup)) {
             onButtonClicked()
         }

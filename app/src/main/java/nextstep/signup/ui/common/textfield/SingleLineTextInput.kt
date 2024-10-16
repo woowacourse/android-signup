@@ -15,13 +15,13 @@ import nextstep.signup.ui.theme.Typography
 
 @Composable
 fun SingleLineTextInput(
+    modifier: Modifier = Modifier,
     label: String,
     inputType: InputType,
 ) {
     var value by rememberSaveable { mutableStateOf("") }
     TextField(
-        modifier = Modifier
-            .fillMaxWidth(),
+        modifier = modifier,
         value = value,
         onValueChange = { value = it },
         label = {
