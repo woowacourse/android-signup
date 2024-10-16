@@ -2,9 +2,7 @@ package nextstep.signup.ui
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -20,7 +18,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import nextstep.signup.ui.theme.Blue50
 
@@ -34,12 +31,10 @@ fun TextComponent(description: String) {
 
 @Composable
 fun TextFieldComponent(
-    paddingTop: Dp = 0.dp,
     @StringRes label: Int,
     keyboardType: KeyboardType = KeyboardType.Text,
 ) {
     var input by remember { mutableStateOf("") }
-    Spacer(modifier = Modifier.padding(top = paddingTop))
     TextField(
         value = input,
         onValueChange = { input = it },
@@ -53,9 +48,7 @@ fun TextFieldComponent(
 @Composable
 fun ButtonComponent(
     @StringRes description: Int,
-    paddingTop: Dp,
 ) {
-    Spacer(modifier = Modifier.padding(top = paddingTop))
     Button(
         onClick = {},
         modifier = Modifier.fillMaxWidth(),

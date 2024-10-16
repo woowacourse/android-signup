@@ -4,8 +4,10 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -46,11 +48,21 @@ fun SignUpScreen() {
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         TextComponent(stringResource(R.string.main_greeting))
-        TextFieldComponent(paddingTop = 42.dp, label = R.string.main_user_name)
-        TextFieldComponent(paddingTop = 36.dp, label = R.string.main_email, keyboardType = KeyboardType.Email)
-        TextFieldComponent(paddingTop = 36.dp, label = R.string.main_password, keyboardType = KeyboardType.Password)
-        TextFieldComponent(paddingTop = 36.dp, label = R.string.main_password_confirm, keyboardType = KeyboardType.Password)
-        ButtonComponent(R.string.main_sign_up, paddingTop = 42.dp)
+        Spacer(modifier = Modifier.size(42.dp))
+
+        TextFieldComponent(label = R.string.main_user_name)
+        Spacer(modifier = Modifier.size(36.dp))
+
+        TextFieldComponent(label = R.string.main_email, keyboardType = KeyboardType.Email)
+        Spacer(modifier = Modifier.size(36.dp))
+
+        TextFieldComponent(label = R.string.main_password, keyboardType = KeyboardType.Password)
+        Spacer(modifier = Modifier.size(36.dp))
+
+        TextFieldComponent(label = R.string.main_password_confirm, keyboardType = KeyboardType.Password)
+        Spacer(modifier = Modifier.size(42.dp))
+
+        ButtonComponent(R.string.main_sign_up)
     }
 }
 
