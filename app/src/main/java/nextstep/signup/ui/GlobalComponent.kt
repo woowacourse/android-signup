@@ -20,15 +20,20 @@ import androidx.compose.ui.unit.dp
 import nextstep.signup.ui.theme.Blue50
 
 @Composable
-fun TextComponent(description: String) {
+fun TextComponent(
+    modifier: Modifier = Modifier,
+    description: String,
+) {
     Text(
         text = description,
+        modifier = modifier,
         style = MaterialTheme.typography.titleLarge,
     )
 }
 
 @Composable
 fun TextFieldComponent(
+    modifier: Modifier = Modifier,
     newValue: String,
     onValueChange: (String) -> Unit,
     @StringRes label: Int,
@@ -37,7 +42,7 @@ fun TextFieldComponent(
     TextField(
         value = newValue,
         onValueChange = { onValueChange(newValue) },
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         label = { Text(text = stringResource(id = label)) },
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
         colors = TextFieldDefaults.colors(focusedIndicatorColor = Blue50),
@@ -46,11 +51,12 @@ fun TextFieldComponent(
 
 @Composable
 fun ButtonComponent(
+    modifier: Modifier = Modifier,
     @StringRes description: Int,
 ) {
     Button(
         onClick = {},
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         colors = ButtonDefaults.buttonColors(containerColor = Blue50),
         contentPadding = PaddingValues(vertical = 15.dp),
     ) {

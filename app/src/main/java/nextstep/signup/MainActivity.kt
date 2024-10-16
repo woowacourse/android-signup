@@ -53,13 +53,13 @@ fun SignUpScreen() {
     ) {
         SignUpGreeting()
         SignUpInputBox()
-        ButtonComponent(R.string.main_sign_up)
+        ButtonComponent(description = R.string.main_sign_up)
     }
 }
 
 @Composable
 private fun SignUpGreeting() {
-    TextComponent(stringResource(R.string.main_greeting))
+    TextComponent(description = stringResource(R.string.main_greeting))
     Spacer(modifier = Modifier.size(42.dp))
 }
 
