@@ -6,17 +6,25 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import nextstep.signup.R
+import nextstep.signup.domain.validation.Email
+import nextstep.signup.domain.validation.ValidationResult
 
 @Composable
 internal fun SignUpEmailTextField(
     modifier: Modifier = Modifier,
     email: String
 ) {
+    val validationResult = Email(email).validationResult()
+    val supportingText = when (validationResult) {
+        ValidationResult.INVALID_FORMAT -> stringResource(R.string.error_email_format)
+        else -> ""
+    }
     TextField(
         modifier = modifier,
         value = email,
         onValueChange = { },
         label = { Text(stringResource(R.string.input_hint_email)) },
-        supportingText = { },
+        supportingText = { if (supportingText.isNotEmpty()) Text(text = supportingText) },
+        isError = supportingText.isNotEmpty()
     )
 }
