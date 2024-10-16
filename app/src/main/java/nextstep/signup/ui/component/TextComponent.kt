@@ -1,4 +1,4 @@
-package nextstep.signup.ui
+package nextstep.signup.ui.component
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
