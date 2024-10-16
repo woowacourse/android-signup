@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createComposeRule
@@ -34,7 +35,7 @@ class CustomTextFieldTest {
                 onValueChange = { value ->
                     signUpState = signUpState.copy(username = UserName(value))
                 },
-                labelResId = R.string.username_input,
+                label = stringResource(R.string.username_input),
                 inputValidation = signUpState.username.validate(),
             )
         }

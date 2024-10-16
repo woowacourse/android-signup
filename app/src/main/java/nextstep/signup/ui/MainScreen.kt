@@ -13,6 +13,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -33,7 +34,7 @@ fun MainScreen() {
         Spacer(modifier = Modifier.height(60.dp))
         CustomText(
             modifier = Modifier.fillMaxWidth(),
-            titleResId = R.string.sign_up_title,
+            title = stringResource(R.string.sign_up_title),
         )
 
         Spacer(modifier = Modifier.height(18.dp))
@@ -41,14 +42,14 @@ fun MainScreen() {
             modifier = Modifier.padding(horizontal = 32.dp, vertical = 18.dp),
             value = signUpState.username.value,
             onValueChange = { value -> signUpState = signUpState.copy(username = UserName(value)) },
-            labelResId = R.string.username_input,
+            label = stringResource(id = R.string.username_input),
             inputValidation = signUpState.username.validate(),
         )
         CustomTextField(
             modifier = Modifier.padding(horizontal = 32.dp, vertical = 18.dp),
             value = signUpState.email.value,
             onValueChange = { value -> signUpState = signUpState.copy(email = Email(value)) },
-            labelResId = R.string.email_input,
+            label = stringResource(id = R.string.email_input),
             inputValidation = signUpState.email.validate(),
         )
         CustomTextField(
@@ -57,7 +58,7 @@ fun MainScreen() {
             onValueChange = { value ->
                 signUpState = signUpState.copy(password = Password(value))
             },
-            labelResId = R.string.password_input,
+            label = stringResource(id = R.string.password_input),
             visualTransformation = PasswordVisualTransformation(),
             inputValidation = signUpState.password.validate(),
         )
@@ -67,7 +68,7 @@ fun MainScreen() {
             onValueChange = { value ->
                 signUpState = signUpState.copy(passwordConfirm = Password(value))
             },
-            labelResId = R.string.password_confirm_input,
+            label = stringResource(id = R.string.password_confirm_input),
             visualTransformation = PasswordVisualTransformation(),
             inputValidation = signUpState.passwordConfirm.validateConfirmation(signUpState.password),
         )
@@ -77,7 +78,7 @@ fun MainScreen() {
             modifier = Modifier.padding(horizontal = 32.dp),
             shape = RoundedCornerShape(100.dp),
             buttonColors = ButtonDefaults.buttonColors(containerColor = Blue50),
-            titleResId = R.string.sign_up_button,
+            buttonTitle = stringResource(R.string.sign_up_button),
             enabled = signUpState.enabled,
             onClick = {},
         )

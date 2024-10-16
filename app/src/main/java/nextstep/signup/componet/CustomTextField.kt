@@ -1,6 +1,5 @@
 package nextstep.signup.componet
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
@@ -25,7 +24,7 @@ fun CustomTextField(
     modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit,
-    @StringRes labelResId: Int,
+    label: String,
     inputValidation: InputValidation,
     visualTransformation: VisualTransformation = VisualTransformation.None,
 ) {
@@ -33,7 +32,7 @@ fun CustomTextField(
         modifier = modifier.fillMaxWidth(),
         label = {
             Text(
-                text = stringResource(id = labelResId),
+                text = label,
                 fontWeight = FontWeight.W400,
             )
         },
@@ -67,7 +66,7 @@ fun CustomTextFieldPreview() {
         modifier = Modifier.padding(horizontal = 32.dp, vertical = 18.dp),
         value = "",
         onValueChange = { },
-        labelResId = R.string.username_input,
+        label = stringResource(R.string.username_input),
         inputValidation = InputValidation(isError = false),
         visualTransformation = PasswordVisualTransformation(),
     )

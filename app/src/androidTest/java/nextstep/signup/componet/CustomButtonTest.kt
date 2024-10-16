@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createComposeRule
@@ -29,7 +30,7 @@ class CustomButtonTest {
         composeTestRule.setContent {
             CustomButton(
                 modifier = Modifier.testTag(tag),
-                titleResId = R.string.sign_up_button,
+                buttonTitle = stringResource(R.string.sign_up_button),
                 enabled = enabled,
                 onClick = { isClicked = true },
             )
