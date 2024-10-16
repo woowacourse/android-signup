@@ -12,8 +12,6 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -31,13 +29,14 @@ fun TextComponent(description: String) {
 
 @Composable
 fun TextFieldComponent(
+    newValue: String,
+    onValueChange: (String) -> Unit,
     @StringRes label: Int,
     keyboardType: KeyboardType = KeyboardType.Text,
 ) {
-    var input by remember { mutableStateOf("") }
     TextField(
-        value = input,
-        onValueChange = { input = it },
+        value = newValue,
+        onValueChange = { onValueChange(newValue) },
         modifier = Modifier.fillMaxWidth(),
         label = { Text(text = stringResource(id = label)) },
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType),

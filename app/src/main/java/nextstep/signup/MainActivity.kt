@@ -11,6 +11,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -47,23 +51,54 @@ fun SignUpScreen() {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        TextComponent(stringResource(R.string.main_greeting))
-        Spacer(modifier = Modifier.size(42.dp))
-
-        TextFieldComponent(label = R.string.main_user_name)
-        Spacer(modifier = Modifier.size(36.dp))
-
-        TextFieldComponent(label = R.string.main_email, keyboardType = KeyboardType.Email)
-        Spacer(modifier = Modifier.size(36.dp))
-
-        TextFieldComponent(label = R.string.main_password, keyboardType = KeyboardType.Password)
-        Spacer(modifier = Modifier.size(36.dp))
-
-        TextFieldComponent(label = R.string.main_password_confirm, keyboardType = KeyboardType.Password)
-        Spacer(modifier = Modifier.size(42.dp))
-
+        SignUpGreeting()
+        SignUpInputBox()
         ButtonComponent(R.string.main_sign_up)
     }
+}
+
+@Composable
+private fun SignUpGreeting() {
+    TextComponent(stringResource(R.string.main_greeting))
+    Spacer(modifier = Modifier.size(42.dp))
+}
+
+@Composable
+private fun SignUpInputBox() {
+    UserNameComposable()
+    EmailComposable()
+    PasswordComposable()
+    PasswordConfirmComposable()
+}
+
+@Composable
+private fun UserNameComposable() {
+    var userName by remember { mutableStateOf("") }
+    TextFieldComponent(userName, onValueChange = { userName = it }, label = R.string.main_user_name)
+    Spacer(modifier = Modifier.size(36.dp))
+}
+
+@Composable
+private fun EmailComposable() {
+    var email by remember { mutableStateOf("") }
+    TextFieldComponent(email, onValueChange = { email = it }, label = R.string.main_email, keyboardType = KeyboardType.Email)
+    Spacer(modifier = Modifier.size(36.dp))
+}
+
+@Composable
+private fun PasswordComposable() {
+    var password by remember { mutableStateOf("") }
+    TextFieldComponent(password, onValueChange = { password = it }, label = R.string.main_password, keyboardType = KeyboardType.Password)
+    Spacer(modifier = Modifier.size(36.dp))
+}
+
+@Composable
+private fun PasswordConfirmComposable() {
+    var passwordConfirm by remember { mutableStateOf("") }
+    TextFieldComponent(passwordConfirm, onValueChange = {
+        passwordConfirm = it
+    }, label = R.string.main_password_confirm, keyboardType = KeyboardType.Password)
+    Spacer(modifier = Modifier.size(42.dp))
 }
 
 @Preview(showBackground = true)
