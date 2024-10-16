@@ -15,7 +15,7 @@ data class UserForm(
     val usernameStatus: SignUpStatus =
         when {
             username.isEmpty() -> SignUpStatus.Empty
-            username.length !in 2..5 -> SignUpStatus.Error.UsernameLength
+            username.length !in VALID_USERNAME_LENGTH -> SignUpStatus.Error.UsernameLength
             username.matches(Regex(USERNAME_REGEX)) -> SignUpStatus.Success
             else -> SignUpStatus.Error.UsernameNonCharacter
         }
@@ -32,7 +32,7 @@ data class UserForm(
     val passwordStatus: SignUpStatus =
         when {
             password.isEmpty() -> SignUpStatus.Empty
-            password.length !in 8..16 -> SignUpStatus.Error.PasswordLength
+            password.length !in VALID_PASSWORD_LENGTH -> SignUpStatus.Error.PasswordLength
             password.matches(Regex(PASSWORD_REGEX)) -> SignUpStatus.Success
             else -> SignUpStatus.Error.PasswordFormat
         }
@@ -56,5 +56,8 @@ data class UserForm(
         private const val USERNAME_REGEX = "^[a-zA-Z가-힣]+$"
         private const val EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$"
         private const val PASSWORD_REGEX = "^(?=.*[a-zA-Z])(?=.*[0-9]).{8,16}$"
+
+        private val VALID_USERNAME_LENGTH = 2..5
+        private val VALID_PASSWORD_LENGTH = 8..16
     }
 }
