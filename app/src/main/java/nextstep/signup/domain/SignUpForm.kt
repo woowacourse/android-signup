@@ -12,45 +12,45 @@ data class SignUpForm(
 ) : Parcelable {
     val isValidForm: Boolean
         get() {
-            return (validateUserName() == 0) &&
-                (validateEmail() == 0) &&
-                (validatePassword() == 0) &&
-                (validatePasswordConfirm() == 0)
+            return (validateUserName() == ValidationState.VALID) &&
+                (validateEmail() == ValidationState.VALID) &&
+                (validatePassword() == ValidationState.VALID) &&
+                (validatePasswordConfirm() == ValidationState.VALID)
         }
 
-    private fun validateUserName(): Int {
+    private fun validateUserName(): ValidationState {
         return if (!userName.matches(Regex(USER_NAME_FORMAT_REGEX))) {
-            ERROR_FORMAT
+            ValidationState.FORMAT_ERROR
         } else if (!userName.matches(Regex(USER_NAME_LENGTH_REGEX))) {
-            ERROR_LENGTH
+            ValidationState.LENGTH_ERROR
         } else {
-            VALID
+            ValidationState.VALID
         }
     }
 
-    private fun validateEmail(): Int {
+    private fun validateEmail(): ValidationState {
         return if (email.matches(Regex(EMAIL_FORMAT_REGEX))) {
-            VALID
+            ValidationState.VALID
         } else {
-            ERROR_FORMAT
+            ValidationState.FORMAT_ERROR
         }
     }
 
-    private fun validatePassword(): Int {
+    private fun validatePassword(): ValidationState {
         return if (!password.matches(Regex(PASSWORD_FORMAT_REGEX))) {
-            ERROR_FORMAT
+            ValidationState.FORMAT_ERROR
         } else if (!password.matches(Regex(PASSWORD_LENGTH_REGEX))) {
-            ERROR_LENGTH
+            ValidationState.LENGTH_ERROR
         } else {
-            VALID
+            ValidationState.VALID
         }
     }
 
-    private fun validatePasswordConfirm(): Int {
+    private fun validatePasswordConfirm(): ValidationState {
         return if (passwordConfirm != password) {
-            ERROR_FORMAT
+            ValidationState.FORMAT_ERROR
         } else {
-            VALID
+            ValidationState.VALID
         }
     }
 
@@ -60,10 +60,6 @@ data class SignUpForm(
         const val EMAIL_FORMAT_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$"
         const val PASSWORD_LENGTH_REGEX = "^.{8,16}$"
         const val PASSWORD_FORMAT_REGEX = "^(?=.*[a-zA-Z])(?=.*[0-9]).+$"
-
-        const val VALID = 0
-        const val ERROR_FORMAT = 1
-        const val ERROR_LENGTH = 2
 
         val emptySignUpForm = SignUpForm("", "", "", "")
     }
