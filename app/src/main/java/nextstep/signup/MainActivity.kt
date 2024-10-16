@@ -33,13 +33,7 @@ class MainActivity : ComponentActivity() {
                             .padding(top = 56.dp, start = 32.dp, end = 32.dp),
                     color = MaterialTheme.colorScheme.background,
                 ) {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                    ) {
-                        TextView(stringResource(R.string.main_greeting))
-                        TextFieldScreen()
-                        ButtonView(R.string.main_sign_up, paddingTop = 42.dp)
-                    }
+                    SignUpScreen()
                 }
             }
         }
@@ -47,17 +41,23 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun TextFieldScreen() {
-    TextFieldView(paddingTop = 42.dp, label = R.string.main_user_name)
-    TextFieldView(paddingTop = 36.dp, label = R.string.main_email, keyboardType = KeyboardType.Email)
-    TextFieldView(paddingTop = 36.dp, label = R.string.main_password, keyboardType = KeyboardType.Password)
-    TextFieldView(paddingTop = 36.dp, label = R.string.main_password_confirm, keyboardType = KeyboardType.Password)
+fun SignUpScreen() {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        TextView(stringResource(R.string.main_greeting))
+        TextFieldView(paddingTop = 42.dp, label = R.string.main_user_name)
+        TextFieldView(paddingTop = 36.dp, label = R.string.main_email, keyboardType = KeyboardType.Email)
+        TextFieldView(paddingTop = 36.dp, label = R.string.main_password, keyboardType = KeyboardType.Password)
+        TextFieldView(paddingTop = 36.dp, label = R.string.main_password_confirm, keyboardType = KeyboardType.Password)
+        ButtonView(R.string.main_sign_up, paddingTop = 42.dp)
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
 private fun GreetingPreview() {
     SignupTheme {
-        TextFieldScreen()
+        SignUpScreen()
     }
 }
