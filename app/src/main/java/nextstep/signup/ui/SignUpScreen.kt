@@ -27,13 +27,13 @@ fun SignUpScreen() {
     var name by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    var passwordCheck by remember { mutableStateOf("") }
+    var passwordConfirm by remember { mutableStateOf("") }
 
     val user = User(
         name = name,
         email = email,
         password = password,
-        passwordCheck = passwordCheck
+        passwordConfirm = passwordConfirm
     )
 
     Column {
@@ -68,8 +68,8 @@ fun SignUpScreen() {
         )
 
         CustomTextField(
-            value = user.passwordCheck,
-            onValueChange = { passwordCheck = it },
+            value = user.passwordConfirm,
+            onValueChange = { passwordConfirm = it },
             labelResId = R.string.user_password_confirm,
             isPassword = true
         )
