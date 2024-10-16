@@ -1,12 +1,10 @@
 package nextstep.signup.ui.signup
 
-
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.material3.Surface
@@ -24,38 +22,12 @@ import nextstep.signup.ui.common.textfield.SingleLineTextInput
 import nextstep.signup.ui.theme.SignUpTheme
 import nextstep.signup.ui.theme.Typography
 
-@Preview(showBackground = true)
-@Composable
-fun SignUpLayoutPreview() {
-    SignUpTheme {
-        Surface(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(32.dp),
-        ) {
-            SignUpInteractionLayer {}
-        }
-    }
-}
-
 @Composable
 fun SignUpTitle() {
     Text(
         text = stringResource(id = R.string.signup_title),
         style = Typography.titleLarge,
     )
-}
-
-@Composable
-fun SignUpTextFields() {
-    Column(
-        modifier = Modifier
-            .heightIn(min = 350.dp, max = 640.dp),
-        verticalArrangement = Arrangement.SpaceBetween,
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-
-    }
 }
 
 @Composable
@@ -112,6 +84,20 @@ fun SignUpLayout(
         SignUpTitle()
         SignUpInteractionLayer {
             onButtonClicked()
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun SignUpLayoutPreview() {
+    SignUpTheme {
+        Surface(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(32.dp),
+        ) {
+            SignUpInteractionLayer {}
         }
     }
 }
