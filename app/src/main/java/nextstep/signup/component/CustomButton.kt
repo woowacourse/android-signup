@@ -1,9 +1,10 @@
 package nextstep.signup.component
 
-import androidx.annotation.StringRes
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
@@ -11,7 +12,6 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -22,7 +22,7 @@ fun CustomButton(
     onClick: () -> Unit,
     shapes: RoundedCornerShape = RoundedCornerShape(25.dp),
     colors: ButtonColors = ButtonDefaults.buttonColors(),
-    @StringRes titleResId: Int
+    buttonText: String
 ) {
     Button(
         onClick = onClick,
@@ -34,7 +34,7 @@ fun CustomButton(
         colors = colors
     ) {
         Text(
-            text = stringResource(id = titleResId),
+            text = buttonText,
             fontSize = 14.sp
         )
     }
@@ -45,6 +45,6 @@ fun CustomButton(
 private fun CustomButtonPreview() {
     CustomButton(
         onClick = {},
-        titleResId = 0
+        buttonText = "Button"
     )
 }

@@ -78,7 +78,7 @@ fun SignUpScreen() {
 
         CustomButton(
             onClick = {},
-            titleResId = R.string.sign_up_button,
+            buttonText = stringResource(R.string.sign_up_button),
             colors = ButtonDefaults.buttonColors(containerColor = Blue50)
         )
     }
