@@ -21,6 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.signup.R
 import nextstep.signup.domain.SignUpForm
+import nextstep.signup.domain.ValidationState
 
 @Composable
 fun SignUpScreen(
@@ -29,9 +30,9 @@ fun SignUpScreen(
 ) {
     Surface(
         modifier =
-        Modifier
-            .fillMaxSize()
-            .padding(horizontal = 32.dp),
+            Modifier
+                .fillMaxSize()
+                .padding(horizontal = 32.dp),
         color = MaterialTheme.colorScheme.background,
     ) {
         Column(
@@ -47,14 +48,14 @@ fun SignUpScreen(
                 value = signUpForm.userName,
                 hint = stringResource(R.string.user_name),
                 onValueChange = { onSignUpFormChanged(signUpForm.copy(userName = it)) },
-                getErrorMessage = { getUserNameErrorMessage(signUpForm.userName) },
+                getErrorMessage = { getUserNameErrorMessage(signUpForm.validateUserName()) },
             )
             Spacer(modifier = Modifier.height(36.dp))
             SignUpTextField(
                 value = signUpForm.email,
                 hint = stringResource(R.string.email),
                 onValueChange = { onSignUpFormChanged(signUpForm.copy(email = it)) },
-                getErrorMessage = { getEmailErrorMessage(signUpForm.email) },
+                getErrorMessage = { getEmailErrorMessage(signUpForm.validateEmail()) },
             )
             Spacer(modifier = Modifier.height(36.dp))
             SignUpTextField(
@@ -62,7 +63,7 @@ fun SignUpScreen(
                 hint = stringResource(R.string.password),
                 visualTransformation = PasswordVisualTransformation(),
                 onValueChange = { onSignUpFormChanged(signUpForm.copy(password = it)) },
-                getErrorMessage = { getPasswordErrorMessage(signUpForm.password) },
+                getErrorMessage = { getPasswordErrorMessage(signUpForm.validatePassword()) },
             )
             Spacer(modifier = Modifier.height(36.dp))
             SignUpTextField(
@@ -72,8 +73,7 @@ fun SignUpScreen(
                 onValueChange = { onSignUpFormChanged(signUpForm.copy(passwordConfirm = it)) },
                 getErrorMessage = {
                     getPasswordConfirmErrorMessage(
-                        signUpForm.password,
-                        signUpForm.passwordConfirm,
+                        signUpForm.validatePasswordConfirm(),
                     )
                 },
             )
@@ -87,50 +87,36 @@ fun SignUpScreen(
 }
 
 @Composable
-fun getUserNameErrorMessage(userName: String): String {
-    val usernameLengthRegex = "^.{2,5}$"
-    val usernameRegex = "^[a-zA-Z가-힣]+$"
-    return if (!userName.matches(Regex(usernameRegex))) {
-        stringResource(id = R.string.error_message_user_name)
-    } else if (!userName.matches(Regex(usernameLengthRegex))) {
-        stringResource(id = R.string.error_message_user_name_length)
-    } else {
-        stringResource(id = R.string.empty)
+fun getUserNameErrorMessage(usernameState: ValidationState): String {
+    return when (usernameState) {
+        ValidationState.VALID -> stringResource(id = R.string.empty)
+        ValidationState.FORMAT_ERROR -> stringResource(id = R.string.format_error_message_user_name)
+        ValidationState.LENGTH_ERROR -> stringResource(id = R.string.length_error_message_user_name)
     }
 }
 
 @Composable
-fun getEmailErrorMessage(email: String): String {
-    val emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$"
-    return if (email.matches(Regex(emailRegex))) {
-        stringResource(id = R.string.empty)
-    } else {
-        stringResource(id = R.string.error_message_email)
+fun getEmailErrorMessage(emailState: ValidationState): String {
+    return when (emailState) {
+        ValidationState.FORMAT_ERROR -> stringResource(id = R.string.format_error_message_email)
+        else -> stringResource(id = R.string.empty)
     }
 }
 
 @Composable
-fun getPasswordErrorMessage(password: String): String {
-    val passwordLengthRegex = "^.{8,16}$"
-    val passwordRegex = "^(?=.*[a-zA-Z])(?=.*[0-9]).+$"
-    return if (!password.matches(Regex(passwordRegex))) {
-        stringResource(id = R.string.error_message_password)
-    } else if (!password.matches(Regex(passwordLengthRegex))) {
-        stringResource(id = R.string.error_message_password_length)
-    } else {
-        stringResource(id = R.string.empty)
+fun getPasswordErrorMessage(passwordState: ValidationState): String {
+    return when (passwordState) {
+        ValidationState.VALID -> stringResource(id = R.string.empty)
+        ValidationState.FORMAT_ERROR -> stringResource(id = R.string.format_error_message_password)
+        ValidationState.LENGTH_ERROR -> stringResource(id = R.string.length_error_message_password)
     }
 }
 
 @Composable
-fun getPasswordConfirmErrorMessage(
-    passwordConfirm: String,
-    password: String,
-): String {
-    return if (passwordConfirm != password) {
-        stringResource(id = R.string.error_message_password_confirm)
-    } else {
-        stringResource(id = R.string.empty)
+fun getPasswordConfirmErrorMessage(passwordState: ValidationState): String {
+    return when (passwordState) {
+        ValidationState.FORMAT_ERROR -> stringResource(id = R.string.format_error_message_password_confirm)
+        else -> stringResource(id = R.string.empty)
     }
 }
 

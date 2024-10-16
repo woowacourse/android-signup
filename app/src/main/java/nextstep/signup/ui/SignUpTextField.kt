@@ -114,7 +114,7 @@ fun InvalidSignUpTextFieldPreview() {
             modifier = Modifier,
             hint = "텍스트 필드 힌트",
             visualTransformation = PasswordVisualTransformation(),
-            getErrorMessage = { getUserNameErrorMessage(value) },
+            getErrorMessage = { "에러 메시지" },
         ) {
         }
     }

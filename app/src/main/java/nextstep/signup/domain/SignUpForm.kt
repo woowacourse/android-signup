@@ -18,7 +18,7 @@ data class SignUpForm(
                 (validatePasswordConfirm() == ValidationState.VALID)
         }
 
-    private fun validateUserName(): ValidationState {
+    fun validateUserName(): ValidationState {
         return if (!userName.matches(Regex(USER_NAME_FORMAT_REGEX))) {
             ValidationState.FORMAT_ERROR
         } else if (!userName.matches(Regex(USER_NAME_LENGTH_REGEX))) {
@@ -28,7 +28,7 @@ data class SignUpForm(
         }
     }
 
-    private fun validateEmail(): ValidationState {
+    fun validateEmail(): ValidationState {
         return if (email.matches(Regex(EMAIL_FORMAT_REGEX))) {
             ValidationState.VALID
         } else {
@@ -36,7 +36,7 @@ data class SignUpForm(
         }
     }
 
-    private fun validatePassword(): ValidationState {
+    fun validatePassword(): ValidationState {
         return if (!password.matches(Regex(PASSWORD_FORMAT_REGEX))) {
             ValidationState.FORMAT_ERROR
         } else if (!password.matches(Regex(PASSWORD_LENGTH_REGEX))) {
@@ -46,7 +46,7 @@ data class SignUpForm(
         }
     }
 
-    private fun validatePasswordConfirm(): ValidationState {
+    fun validatePasswordConfirm(): ValidationState {
         return if (passwordConfirm != password) {
             ValidationState.FORMAT_ERROR
         } else {
