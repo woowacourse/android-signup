@@ -16,8 +16,10 @@ import nextstep.signup.ui.theme.SignupTheme
 fun SignUpButton(
     modifier: Modifier = Modifier,
     title: String,
+    isEnabled: Boolean,
 ) {
     Button(
+        enabled = isEnabled,
         modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(100.dp),
         colors = ButtonDefaults.buttonColors(containerColor = Blue50),
@@ -27,13 +29,26 @@ fun SignUpButton(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun SignUpButtonPreview() {
     SignupTheme {
         SignUpButton(
             Modifier,
             "미리 보기 버튼",
+            true,
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun SignUpButtonDisEnabledPreview() {
+    SignupTheme {
+        SignUpButton(
+            Modifier,
+            "미리 보기 버튼",
+            false,
         )
     }
 }
