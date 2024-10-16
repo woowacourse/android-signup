@@ -37,8 +37,7 @@ fun SignUpInteractionLayer(
     val childModifier = Modifier.fillMaxWidth()
     Column(
         modifier = Modifier
-            .fillMaxHeight(0.7f)
-            .padding(32.dp),
+            .fillMaxHeight(0.8f),
         verticalArrangement = Arrangement.SpaceEvenly,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
@@ -81,7 +80,8 @@ fun SignUpLayout(
 ) {
     Column(
         modifier = Modifier
-            .fillMaxHeight(0.7f),
+            .fillMaxHeight(0.7f)
+            .padding(32.dp),
         verticalArrangement = Arrangement.SpaceEvenly,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
