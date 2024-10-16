@@ -63,7 +63,7 @@ fun SignUpComponent() {
                 ),
             )
         }
-        val isValid = false
+        val isValid = listOf(userName, email, password, passwordConfirm).all { it.isValid() }
 
         InputText(
             R.string.sign_up_user_name_title,
@@ -97,7 +97,7 @@ fun SignUpComponent() {
             PasswordVisualTransformation(),
         )
 
-        TextButton(R.string.sign_up_button_title)
+        TextButton(R.string.sign_up_button_title, isValid)
     }
 }
 
