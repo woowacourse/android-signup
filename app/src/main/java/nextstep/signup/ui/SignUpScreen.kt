@@ -2,7 +2,9 @@ package nextstep.signup.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -27,45 +29,45 @@ fun SignUpScreen(
 ) {
     Surface(
         modifier =
-            Modifier
-                .fillMaxSize()
-                .padding(horizontal = 32.dp),
+        Modifier
+            .fillMaxSize()
+            .padding(horizontal = 32.dp),
         color = MaterialTheme.colorScheme.background,
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top,
         ) {
+            Spacer(modifier = Modifier.height(60.dp))
             SignupTitle(
                 stringResource(R.string.welcome_to_compose),
-                Modifier.padding(top = 60.dp),
             )
+            Spacer(modifier = Modifier.height(36.dp))
             SignUpTextField(
                 value = signUpForm.userName,
                 hint = stringResource(R.string.user_name),
-                modifier = Modifier.padding(top = 36.dp),
                 onValueChange = { onSignUpFormChanged(signUpForm.copy(userName = it)) },
                 getErrorMessage = { getUserNameErrorMessage(signUpForm.userName) },
             )
+            Spacer(modifier = Modifier.height(36.dp))
             SignUpTextField(
                 value = signUpForm.email,
                 hint = stringResource(R.string.email),
-                modifier = Modifier.padding(top = 36.dp),
                 onValueChange = { onSignUpFormChanged(signUpForm.copy(email = it)) },
                 getErrorMessage = { getEmailErrorMessage(signUpForm.email) },
             )
+            Spacer(modifier = Modifier.height(36.dp))
             SignUpTextField(
                 value = signUpForm.password,
                 hint = stringResource(R.string.password),
-                modifier = Modifier.padding(top = 36.dp),
                 visualTransformation = PasswordVisualTransformation(),
                 onValueChange = { onSignUpFormChanged(signUpForm.copy(password = it)) },
                 getErrorMessage = { getPasswordErrorMessage(signUpForm.password) },
             )
+            Spacer(modifier = Modifier.height(36.dp))
             SignUpTextField(
                 value = signUpForm.passwordConfirm,
                 hint = stringResource(R.string.password_confirm),
-                modifier = Modifier.padding(top = 36.dp),
                 visualTransformation = PasswordVisualTransformation(),
                 onValueChange = { onSignUpFormChanged(signUpForm.copy(passwordConfirm = it)) },
                 getErrorMessage = {
@@ -75,10 +77,8 @@ fun SignUpScreen(
                     )
                 },
             )
+            Spacer(modifier = Modifier.height(42.dp))
             SignUpButton(
-                modifier =
-                    Modifier
-                        .padding(top = 42.dp),
                 title = stringResource(R.string.sign_up),
                 isEnabled = signUpForm.isValidForm,
             )
