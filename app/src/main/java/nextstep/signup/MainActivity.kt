@@ -15,9 +15,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import nextstep.signup.ui.ButtonView
-import nextstep.signup.ui.TextFieldView
-import nextstep.signup.ui.TextView
+import nextstep.signup.ui.ButtonComponent
+import nextstep.signup.ui.TextComponent
+import nextstep.signup.ui.TextFieldComponent
 import nextstep.signup.ui.theme.SignupTheme
 
 class MainActivity : ComponentActivity() {
@@ -45,12 +45,12 @@ fun SignUpScreen() {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        TextView(stringResource(R.string.main_greeting))
-        TextFieldView(paddingTop = 42.dp, label = R.string.main_user_name)
-        TextFieldView(paddingTop = 36.dp, label = R.string.main_email, keyboardType = KeyboardType.Email)
-        TextFieldView(paddingTop = 36.dp, label = R.string.main_password, keyboardType = KeyboardType.Password)
-        TextFieldView(paddingTop = 36.dp, label = R.string.main_password_confirm, keyboardType = KeyboardType.Password)
-        ButtonView(R.string.main_sign_up, paddingTop = 42.dp)
+        TextComponent(stringResource(R.string.main_greeting))
+        TextFieldComponent(paddingTop = 42.dp, label = R.string.main_user_name)
+        TextFieldComponent(paddingTop = 36.dp, label = R.string.main_email, keyboardType = KeyboardType.Email)
+        TextFieldComponent(paddingTop = 36.dp, label = R.string.main_password, keyboardType = KeyboardType.Password)
+        TextFieldComponent(paddingTop = 36.dp, label = R.string.main_password_confirm, keyboardType = KeyboardType.Password)
+        ButtonComponent(R.string.main_sign_up, paddingTop = 42.dp)
     }
 }
 

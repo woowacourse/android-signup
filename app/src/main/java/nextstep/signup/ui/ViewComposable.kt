@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import nextstep.signup.ui.theme.Blue50
 
 @Composable
-fun TextView(description: String) {
+fun TextComponent(description: String) {
     Text(
         text = description,
         style = MaterialTheme.typography.titleLarge,
@@ -33,7 +33,7 @@ fun TextView(description: String) {
 }
 
 @Composable
-fun TextFieldView(
+fun TextFieldComponent(
     paddingTop: Dp = 0.dp,
     @StringRes label: Int,
     keyboardType: KeyboardType = KeyboardType.Text,
@@ -51,7 +51,7 @@ fun TextFieldView(
 }
 
 @Composable
-fun ButtonView(
+fun ButtonComponent(
     @StringRes description: Int,
     paddingTop: Dp,
 ) {
