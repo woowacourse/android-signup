@@ -1,4 +1,4 @@
-package nextstep.signup
+package nextstep.signup.ui.model
 
 data class SignUpInfo(
     val userName: String = "",
