@@ -14,8 +14,9 @@ import woowacourse.signup.ui.theme.Blue50
 
 @Composable
 fun SignupButton(
-    text: String,
     modifier: Modifier = Modifier,
+    text: String,
+    enabled: Boolean,
     onClick: () -> Unit = {},
 ) {
     Button(
@@ -26,14 +27,14 @@ fun SignupButton(
             ),
         modifier =
             modifier
-                .fillMaxWidth()
-                .padding(horizontal = 32.dp),
+                .fillMaxWidth(),
+        enabled = enabled,
     ) {
         Text(
             text = text,
             fontSize = 14.sp,
             fontWeight = FontWeight.W500,
-            modifier = Modifier.padding(vertical = 15.dp),
+            modifier = Modifier.padding(vertical = 10.dp),
         )
     }
 }

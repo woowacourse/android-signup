@@ -34,6 +34,8 @@ fun SignupScreen() {
     var password by remember { mutableStateOf(PasswordUiModel()) }
     var passwordConfirm by remember { mutableStateOf(PasswordConfirmUiModel()) }
 
+    val buttonEnabled = !(userName.isError() || email.isError() || password.isError() || passwordConfirm.isError(password))
+
     Column(
         modifier =
         Modifier
@@ -87,8 +89,9 @@ fun SignupScreen() {
             passwordConfirm = PasswordConfirmUiModel(it)
         }
         SignupButton(
-            modifier = Modifier.padding(32.dp),
+            modifier = Modifier.padding(top = 22.dp),
             text = stringResource(id = R.string.sign_up_button),
+            enabled = buttonEnabled,
         )
     }
 }
