@@ -23,10 +23,10 @@ class PasswordConfirmTest {
         val confirmPassword = "password"
 
         // when
-        val passwordConfirm = PasswordConfirm.from(password, confirmPassword)
+        val passwordConfirm = PasswordConfirm.validate(password, confirmPassword)
 
         // then
-        passwordConfirm.shouldBeTypeOf<PasswordConfirmResult.Success>()
+        passwordConfirm.shouldBeTypeOf<PasswordConfirmValidateResult.Success>()
     }
 
     @Test
@@ -48,9 +48,9 @@ class PasswordConfirmTest {
         val confirmPassword = "password1"
 
         // when
-        val passwordConfirm = PasswordConfirm.from(password, confirmPassword)
+        val passwordConfirm = PasswordConfirm.validate(password, confirmPassword)
 
         // then
-        passwordConfirm.shouldBeTypeOf<PasswordConfirmResult.InValid>()
+        passwordConfirm.shouldBeTypeOf<PasswordConfirmValidateResult.InValid>()
     }
 }

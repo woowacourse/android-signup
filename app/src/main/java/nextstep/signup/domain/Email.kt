@@ -15,18 +15,18 @@ value class Email(val value: String) {
             return matches(EMAIL_REGEX.toRegex())
         }
 
-        fun from(email: String): EmailResult {
+        fun validate(email: String): EmailValidateResult {
             return when {
-                email.isBlank() -> EmailResult.InvalidBlank
-                email.isValidEmailFormat().not() -> EmailResult.InvalidEmailFormat
-                else -> EmailResult.Success(email)
+                email.isBlank() -> EmailValidateResult.InvalidBlank
+                email.isValidEmailFormat().not() -> EmailValidateResult.InvalidEmailFormat
+                else -> EmailValidateResult.Success
             }
         }
     }
 }
 
-sealed interface EmailResult {
-    data class Success(val email: String) : EmailResult
-    data object InvalidBlank : EmailResult
-    data object InvalidEmailFormat : EmailResult
+sealed interface EmailValidateResult {
+    data object Success : EmailValidateResult
+    data object InvalidBlank : EmailValidateResult
+    data object InvalidEmailFormat : EmailValidateResult
 }

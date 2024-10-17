@@ -10,17 +10,17 @@ data class PasswordConfirm(val value: String, private val password: String) {
             return password == confirmPassword
         }
 
-        fun from(password: String, confirmPassword: String): PasswordConfirmResult {
+        fun validate(password: String, confirmPassword: String): PasswordConfirmValidateResult {
             return if (isValid(password, confirmPassword)) {
-                PasswordConfirmResult.Success(PasswordConfirm(confirmPassword, password))
+                PasswordConfirmValidateResult.Success
             } else {
-                PasswordConfirmResult.InValid
+                PasswordConfirmValidateResult.InValid
             }
         }
     }
 }
 
-sealed interface PasswordConfirmResult {
-    data class Success(val passwordConfirm: PasswordConfirm) : PasswordConfirmResult
-    data object InValid : PasswordConfirmResult
+sealed interface PasswordConfirmValidateResult {
+    data object Success : PasswordConfirmValidateResult
+    data object InValid : PasswordConfirmValidateResult
 }

@@ -33,12 +33,12 @@ class EmailTest {
     @ParameterizedTest
     @ValueSource(strings = ["test@example.com", "user@domain.org", "my.email@domain.co"])
     fun `이메일 결과 생성`(validEmail: String) {
-        Email.from(validEmail).shouldBeTypeOf<EmailResult.Success>()
+        Email.validate(validEmail).shouldBeTypeOf<EmailValidateResult.Success>()
     }
 
     @ParameterizedTest
     @ValueSource(strings = ["testexample.com", "user@domainorg", "myemaildomain.co"])
     fun `이메일 양식에 맞지 않으면 유효하지 않은 결과 반환`(invalidEmail: String) {
-        Email.from(invalidEmail).shouldBeTypeOf<EmailResult.InvalidEmailFormat>()
+        Email.validate(invalidEmail).shouldBeTypeOf<EmailValidateResult.InvalidEmailFormat>()
     }
 }

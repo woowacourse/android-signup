@@ -26,22 +26,22 @@ value class UserName(val value: String) {
             return matches(NAME_REGEX.toRegex())
         }
 
-        fun from(name: String): UserNameResult {
+        fun validate(name: String): UserNameValidateResult {
             return when {
-                name.isBlank() -> UserNameResult.InvalidBlank
-                name.isInLength().not() -> UserNameResult.InvalidOutOfLength
-                name.hasNumber() -> UserNameResult.InvalidContainNumber
-                name.hasSpecialCharacter() -> UserNameResult.InvalidContainSpecialCharacter
-                else -> UserNameResult.Success(UserName(name))
+                name.isBlank() -> UserNameValidateResult.InvalidBlank
+                name.isInLength().not() -> UserNameValidateResult.InvalidOutOfLength
+                name.hasNumber() -> UserNameValidateResult.InvalidContainNumber
+                name.hasSpecialCharacter() -> UserNameValidateResult.InvalidContainSpecialCharacter
+                else -> UserNameValidateResult.Success
             }
         }
     }
 }
 
-sealed interface UserNameResult {
-    data class Success(val userName: UserName) : UserNameResult
-    data object InvalidBlank : UserNameResult
-    data object InvalidContainNumber : UserNameResult
-    data object InvalidContainSpecialCharacter : UserNameResult
-    data object InvalidOutOfLength : UserNameResult
+sealed interface UserNameValidateResult {
+    data object Success : UserNameValidateResult
+    data object InvalidBlank : UserNameValidateResult
+    data object InvalidContainNumber : UserNameValidateResult
+    data object InvalidContainSpecialCharacter : UserNameValidateResult
+    data object InvalidOutOfLength : UserNameValidateResult
 }

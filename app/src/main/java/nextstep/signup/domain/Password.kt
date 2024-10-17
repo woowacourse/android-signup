@@ -20,23 +20,23 @@ value class Password(val value: String) {
         private fun String.hasNumber() = this.contains(NUMBER_EXIST)
         private fun String.hasLength() = this.length in MIN_LENGTH..MAX_LENGTH
 
-        fun from(password: String): PasswordResult {
+        fun validate(password: String): PasswordValidateResult {
             return when {
-                password.isBlank() -> PasswordResult.InValidBlank
-                password.hasAlpha().not() -> PasswordResult.InValidNotContainAlpha
-                password.hasNumber().not() -> PasswordResult.InValidNotContainNumber
-                password.hasLength().not() -> PasswordResult.InValidNotInLength
-                else -> PasswordResult.Success(Password(password))
+                password.isBlank() -> PasswordValidateResult.InValidBlank
+                password.hasAlpha().not() -> PasswordValidateResult.InValidNotContainAlpha
+                password.hasNumber().not() -> PasswordValidateResult.InValidNotContainNumber
+                password.hasLength().not() -> PasswordValidateResult.InValidNotInLength
+                else -> PasswordValidateResult.Success
             }
         }
     }
 }
 
 
-sealed interface PasswordResult {
-    data class Success(val password: Password) : PasswordResult
-    data object InValidBlank : PasswordResult
-    data object InValidNotContainAlpha : PasswordResult
-    data object InValidNotContainNumber : PasswordResult
-    data object InValidNotInLength : PasswordResult
+sealed interface PasswordValidateResult {
+    data object Success : PasswordValidateResult
+    data object InValidBlank : PasswordValidateResult
+    data object InValidNotContainAlpha : PasswordValidateResult
+    data object InValidNotContainNumber : PasswordValidateResult
+    data object InValidNotInLength : PasswordValidateResult
 }

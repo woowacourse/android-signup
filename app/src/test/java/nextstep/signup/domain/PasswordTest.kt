@@ -24,7 +24,7 @@ class PasswordTest {
     @ParameterizedTest
     @ValueSource(strings = ["Valid123!", "Passw0rd!"])
     fun `비밀번호는 영문, 숫자 조합 8 ~ 16 자리 만족하는 경우 성공 반환`(password: String) {
-        Password.from(password).shouldBeTypeOf<PasswordResult.Success>()
+        Password.validate(password).shouldBeTypeOf<PasswordValidateResult.Success>()
     }
 
     @ParameterizedTest
@@ -38,18 +38,18 @@ class PasswordTest {
     @ParameterizedTest
     @ValueSource(strings = ["ValidPass!", "NoNumberPass!"])
     fun `숫자가 없으면 유효하지 않음`(password: String) {
-        Password.from(password).shouldBeTypeOf<PasswordResult.InValidNotContainNumber>()
+        Password.validate(password).shouldBeTypeOf<PasswordValidateResult.InValidNotContainNumber>()
     }
 
     @ParameterizedTest
     @ValueSource(strings = ["하이@3211", "1234123!"])
     fun `영어 없으면 유효하지 않음`(password: String) {
-        Password.from(password).shouldBeTypeOf<PasswordResult.InValidNotContainAlpha>()
+        Password.validate(password).shouldBeTypeOf<PasswordValidateResult.InValidNotContainAlpha>()
     }
 
     @ParameterizedTest
     @ValueSource(strings = ["short1@", "longpasswordtoolong123!"])
     fun `8 ~ 16 길이가 이니면 유효하지 않음`(password: String) {
-        Password.from(password).shouldBeTypeOf<PasswordResult.InValidNotInLength>()
+        Password.validate(password).shouldBeTypeOf<PasswordValidateResult.InValidNotInLength>()
     }
 }
