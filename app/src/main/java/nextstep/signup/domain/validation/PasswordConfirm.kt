@@ -2,7 +2,7 @@ package nextstep.signup.domain.validation
 
 data class PasswordConfirm(
     private val password: String = DEFAULT_PASSWORD,
-    private val passwordConfirm: String = DEFAULT_PASSWORD_CONFIRM,
+    private val passwordConfirm: String = DEFAULT_PASSWORD_CONFIRM
 ) {
     fun validationResult(): ValidationResult {
         return when {

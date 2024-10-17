@@ -13,7 +13,7 @@ import nextstep.signup.domain.validation.ValidationResult
 internal fun SignUpEmailTextField(
     modifier: Modifier = Modifier,
     email: String,
-    onEmailChange: (String) -> Unit,
+    onEmailChange: (String) -> Unit
 ) {
     val validationResult = Email(email).validationResult()
     val supportingText = when (validationResult) {

@@ -1,6 +1,5 @@
 package nextstep.signup.domain.validation
 
-
 data class Email(private val email: String = DEFAULT_EMAIL) {
     private val regex = Regex(EMAIL_REGEX)
 

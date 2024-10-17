@@ -14,7 +14,7 @@ import nextstep.signup.domain.validation.ValidationResult
 internal fun SignUpPasswordTextField(
     modifier: Modifier = Modifier,
     password: String,
-    onPasswordChange: (String) -> Unit,
+    onPasswordChange: (String) -> Unit
 ) {
     val validationResult = Password(password).validationResult()
     val supportingText = when (validationResult) {

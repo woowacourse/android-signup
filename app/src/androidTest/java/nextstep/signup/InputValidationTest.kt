@@ -26,7 +26,6 @@ class InputValidationTest {
     private val password = mutableStateOf("")
     private val passwordConfirm = mutableStateOf("")
 
-
     @Test
     fun 사용자가_이름을_입력하기_전에는_에러가_노출되지_않는다() {
         // given

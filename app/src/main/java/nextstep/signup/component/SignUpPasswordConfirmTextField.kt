@@ -15,7 +15,7 @@ internal fun SignUpPasswordConfirmTextField(
     modifier: Modifier = Modifier,
     password: String,
     passwordConfirm: String,
-    onPasswordConfirmChange: (String) -> Unit,
+    onPasswordConfirmChange: (String) -> Unit
 ) {
     val validationResult =
         PasswordConfirm(

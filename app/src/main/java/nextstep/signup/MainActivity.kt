@@ -125,7 +125,6 @@ fun SignUpScreen(
                 onPasswordConfirmChange = { passwordConfirm = it }
             )
 
-
             SignUpSubmitButton(
                 modifier = modifier
                     .fillMaxWidth()

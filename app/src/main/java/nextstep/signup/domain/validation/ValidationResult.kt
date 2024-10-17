@@ -5,5 +5,5 @@ enum class ValidationResult {
     SUCCESS,
     INVALID_FORMAT,
     INVALID_LENGTH,
-    INVALID_MATCH,
+    INVALID_MATCH
 }
