@@ -1,4 +1,4 @@
-package nextstep.signup.component
+package nextstep.signup.presentation.component
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme

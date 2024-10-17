@@ -1,4 +1,4 @@
-package nextstep.signup.component
+package nextstep.signup.presentation.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

@@ -1,4 +1,4 @@
-package nextstep.signup
+package nextstep.signup.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -7,8 +7,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import nextstep.signup.component.SignUpScreen
-import nextstep.signup.ui.theme.SignupTheme
+import nextstep.signup.presentation.component.SignUpScreen
+import nextstep.signup.presentation.theme.SignupTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

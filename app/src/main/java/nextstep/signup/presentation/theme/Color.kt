@@ -1,4 +1,4 @@
-package nextstep.signup.ui.theme
+package nextstep.signup.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 
