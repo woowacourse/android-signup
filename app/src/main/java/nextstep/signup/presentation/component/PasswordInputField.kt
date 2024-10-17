@@ -14,19 +14,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nextstep.signup.R
-import nextstep.signup.model.InputFieldType
-import nextstep.signup.model.PasswordInputFieldType
-import nextstep.signup.model.inputvalidity.EmailInputValidity
+import nextstep.signup.model.fieldtype.PasswordInputFieldType
 import nextstep.signup.model.inputvalidity.InputValidity
 import nextstep.signup.model.inputvalidity.PasswordConfirmInputValidity
 import nextstep.signup.model.inputvalidity.PasswordInputValidity
-import nextstep.signup.model.inputvalidity.UsernameInputValidity
 
 var password: String = ""
 var passwordConfirm: String = ""
@@ -54,7 +49,6 @@ fun PasswordInputField(
             when (type) {
                 PasswordInputFieldType.PASSWORD -> password = input
                 PasswordInputFieldType.PASSWORD_CONFIRM -> passwordConfirm = input
-                else -> {}
             }
         },
         label = { Text(label) },

@@ -17,8 +17,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.signup.R
-import nextstep.signup.model.InputFieldType
-import nextstep.signup.model.PasswordInputFieldType
+import nextstep.signup.model.fieldtype.InputFieldType
+import nextstep.signup.model.fieldtype.PasswordInputFieldType
 
 @Composable
 fun SignUpScreen() {

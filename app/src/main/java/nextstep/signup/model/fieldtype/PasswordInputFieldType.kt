@@ -1,4 +1,4 @@
-package nextstep.signup.model
+package nextstep.signup.model.fieldtype
 
 enum class PasswordInputFieldType {
     PASSWORD,
