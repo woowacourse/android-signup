@@ -1,5 +1,6 @@
 package nextstep.signup.presentation.component
 
+import android.util.Log
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
@@ -43,13 +44,13 @@ fun PasswordInputField(
             .fillMaxWidth(),
         value = value,
         onValueChange = { input ->
-            inputValidity = validityOf(type, input)
-            val submitValidity = submitValidityOf(type, input, inputValidity)
-            onValueChange(input, submitValidity)
             when (type) {
                 PasswordInputFieldType.PASSWORD -> password = input
                 PasswordInputFieldType.PASSWORD_CONFIRM -> passwordConfirm = input
             }
+            inputValidity = validityOf(type, input)
+            val isSubmitOk = isSubmitOk(type, input, inputValidity)
+            onValueChange(input, isSubmitOk)
         },
         label = { Text(label) },
         keyboardOptions =
@@ -97,11 +98,12 @@ private fun validityOf(
     }
 }
 
-private fun submitValidityOf(
+private fun isSubmitOk(
     type: PasswordInputFieldType,
     input: String,
     inputValidity: InputValidity,
 ): Boolean {
+    Log.d("alsong", "$inputValidity")
     return when (type) {
         PasswordInputFieldType.PASSWORD -> input.isNotEmpty() && inputValidity == PasswordInputValidity.NO_ERROR
         PasswordInputFieldType.PASSWORD_CONFIRM -> input.isNotEmpty() && inputValidity == PasswordConfirmInputValidity.NO_ERROR

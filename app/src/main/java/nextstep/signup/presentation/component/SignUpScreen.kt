@@ -30,9 +30,9 @@ fun SignUpScreen() {
     var isUserNameValid by remember { mutableStateOf(false) }
     var isEmailValid by remember { mutableStateOf(false) }
     var isPasswordValid by remember { mutableStateOf(false) }
-    var isConfirmPasswordValid by remember { mutableStateOf(false) }
+    var isPasswordConfirmValid by remember { mutableStateOf(false) }
 
-    val isFormValid = isUserNameValid && isEmailValid && isPasswordValid && isConfirmPasswordValid
+    val isFormValid = isUserNameValid && isEmailValid && isPasswordValid && isPasswordConfirmValid
 
     Column(
         modifier =
@@ -86,7 +86,7 @@ fun SignUpScreen() {
             value = confirmPassword,
             onValueChange = { inputPassword, validity ->
                 confirmPassword = inputPassword
-                isConfirmPasswordValid = validity
+                isPasswordConfirmValid = validity
             },
             keyboardType = KeyboardType.Password,
             paddingBottom = 36.dp,

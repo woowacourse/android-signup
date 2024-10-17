@@ -42,8 +42,8 @@ fun InputField(
         value = value,
         onValueChange = { input ->
             inputValidity = validityOf(type, input)
-            val submitValidity = submitValidityOf(type, input, inputValidity)
-            onValueChange(input, submitValidity)
+            val isSubmitOk = isSubmitOk(type, input, inputValidity)
+            onValueChange(input, isSubmitOk)
         },
         label = { Text(label) },
         keyboardOptions =
@@ -83,7 +83,7 @@ private fun validityOf(
     }
 }
 
-private fun submitValidityOf(
+private fun isSubmitOk(
     type: InputFieldType,
     input: String,
     inputValidity: InputValidity,
