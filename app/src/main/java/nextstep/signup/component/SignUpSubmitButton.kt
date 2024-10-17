@@ -12,10 +12,10 @@ import nextstep.signup.R
 
 @Composable
 fun SignUpSubmitButton(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     text: String,
     onClick: () -> Unit,
-    enabled : Boolean = false,
+    enabled: Boolean = false,
 ) {
     Button(
         modifier = modifier,
