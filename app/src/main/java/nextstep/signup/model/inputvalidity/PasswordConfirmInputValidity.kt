@@ -6,15 +6,18 @@ enum class PasswordConfirmInputValidity : InputValidity {
     ;
 
     companion object {
+        var password: String = ""
+        var passwordConfirm: String = ""
+
         fun of(input: String): PasswordConfirmInputValidity {
             return when {
-                isNotMatch(input) -> DOES_NOT_MATCH
+                doesNotMatch(input) -> DOES_NOT_MATCH
                 else -> NO_ERROR
             }
         }
 
-        private fun isNotMatch(input: String): Boolean {
-            return true
+        private fun doesNotMatch(input: String): Boolean {
+            return password != passwordConfirm
         }
     }
 }

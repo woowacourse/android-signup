@@ -21,10 +21,9 @@ import nextstep.signup.R
 import nextstep.signup.model.fieldtype.PasswordInputFieldType
 import nextstep.signup.model.inputvalidity.InputValidity
 import nextstep.signup.model.inputvalidity.PasswordConfirmInputValidity
+import nextstep.signup.model.inputvalidity.PasswordConfirmInputValidity.Companion.password
+import nextstep.signup.model.inputvalidity.PasswordConfirmInputValidity.Companion.passwordConfirm
 import nextstep.signup.model.inputvalidity.PasswordInputValidity
-
-var password: String = ""
-var passwordConfirm: String = ""
 
 @Composable
 fun PasswordInputField(
