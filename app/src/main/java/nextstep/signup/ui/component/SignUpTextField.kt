@@ -5,8 +5,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
@@ -19,6 +17,8 @@ fun SignUpTextField(
     label: String,
     value: String,
     onValueChange: (String) -> Unit,
+    isValid: Boolean,
+    errorMessage: String,
     keyboardType: KeyboardType = KeyboardType.Text,
     visualTransformation: VisualTransformation = VisualTransformation.None,
 ) {
@@ -27,6 +27,8 @@ fun SignUpTextField(
         label = { Text(label) },
         value = value,
         onValueChange = onValueChange,
+        isError = value.isNotEmpty() && !isValid,
+        supportingText = { if (value.isNotEmpty()) Text(errorMessage) },
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
         visualTransformation = visualTransformation,
         colors =
