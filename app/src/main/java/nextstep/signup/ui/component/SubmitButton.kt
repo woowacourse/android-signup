@@ -29,7 +29,7 @@ fun SubmitButton(
         contentPadding = PaddingValues(15.dp),
         modifier = modifier.fillMaxWidth(),
         enabled = enabled,
-        colors = ButtonColors(
+         colors = ButtonColors(
             containerColor = Blue50,
             contentColor = Color.White,
             disabledContentColor = Gray50,

@@ -9,11 +9,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -21,6 +23,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.launch
 import nextstep.signup.R
 import nextstep.signup.ui.component.SingleLineTextField
 import nextstep.signup.ui.component.SubmitButton
@@ -50,6 +53,14 @@ fun SignUpScreen(
     signUpInfo: SignUpInfo,
     onChangeSignUpInfo: (SignUpInfo) -> Unit,
 ) {
+
+    val snackbarHostState = remember {
+        SnackbarHostState()
+    }
+
+    val coroutineScope = rememberCoroutineScope()
+
+
     Column(
         modifier = Modifier.padding(horizontal = 32.dp),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -113,10 +124,8 @@ fun SignUpScreen(
         )
         Spacer(Modifier.height(42.dp))
 
-        SubmitButton(
-            text = stringResource(R.string.sign_up_submit_btn),
-            enabled = signUpInfo.isValidSignUpInfo(),
-            onClick = {},
+        SignUpButton(
+            enable = signUpInfo.isValidSignUpInfo(),
         )
     }
 }
