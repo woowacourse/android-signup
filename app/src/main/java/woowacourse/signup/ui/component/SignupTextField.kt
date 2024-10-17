@@ -25,10 +25,10 @@ fun SignupTextField(
     isError: Boolean,
     errorText: String,
     visualTransformation: VisualTransformation = VisualTransformation.None,
-    onValueChange: (String) -> Unit,
+    onValueChange: (String) -> Unit = {},
 ) {
     val textFieldColor = if (isError) Color.Red else Blue50
-    val supportingText = if (inputValue.isBlank()) "" else errorText
+    val supportingText = if (inputValue.isBlank() || !isError) "" else errorText
     Column {
         TextField(
             label = {
