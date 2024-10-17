@@ -12,11 +12,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import nextstep.signup.R
+import nextstep.signup.model.UsernameInputResult
 
 @Composable
 fun InputField(
@@ -27,39 +31,38 @@ fun InputField(
     keyboardType: KeyboardType = KeyboardType.Text,
     paddingBottom: Dp = 0.dp,
 ) {
-    var errorMessage by remember { mutableStateOf(NO_ERROR_MESSAGE) }
+    var errorType by remember { mutableStateOf(UsernameInputResult.NO_ERROR) }
 
     TextField(
         value = value,
         onValueChange = { input ->
             onValueChange(input)
-            errorMessage = errorMessageOf(input)
+            errorType = UsernameInputResult.of(input)
         },
         label = { Text(label) },
         modifier =
-            Modifier
-                .fillMaxWidth(),
+        Modifier
+            .fillMaxWidth(),
         keyboardOptions =
-            KeyboardOptions(
-                keyboardType = keyboardType,
-            ),
+        KeyboardOptions(
+            keyboardType = keyboardType,
+        ),
         visualTransformation = visualTransformationOf(isPasswordInputField),
     )
 
     Text(
-        text = errorMessage,
+        modifier = Modifier.padding(
+            start = 16.dp,
+            top = 4.dp,
+            bottom = paddingBottom
+        ),
+        text = errorMessageOf(errorType),
+        fontSize = 12.sp,
         color = MaterialTheme.colorScheme.error,
         style = MaterialTheme.typography.bodySmall,
-        modifier = Modifier.padding(bottom = paddingBottom),
     )
 }
 
-private fun errorMessageOf(input: String): String {
-    return when (!input.matches(USERNAME_REGEX.toRegex())) {
-        true -> INVALID_USERNAME_FORMAT_MESSAGE
-        false -> NO_ERROR_MESSAGE
-    }
-}
 
 private fun visualTransformationOf(isPasswordInputField: Boolean): VisualTransformation {
     return when (isPasswordInputField) {
@@ -68,7 +71,11 @@ private fun visualTransformationOf(isPasswordInputField: Boolean): VisualTransfo
     }
 }
 
-private const val USERNAME_REGEX = "^[a-zA-Z가-힣]+$"
-private const val NO_ERROR_MESSAGE = ""
-private const val INVALID_USERNAME_FORMAT_MESSAGE = "이름에는 숫자나 기호가 포함될 수 없습니다."
-private const val INVALID_USERNAME_LENGTH_MESSAGE = "이름은 2~5자여야 합니다."
+@Composable
+fun errorMessageOf(result: UsernameInputResult): String {
+    return when (result) {
+        UsernameInputResult.INVALID_FORMAT -> stringResource(R.string.invalid_format)
+        UsernameInputResult.INVALID_LENGTH -> stringResource(R.string.invalid_length)
+        UsernameInputResult.NO_ERROR -> stringResource(R.string.no_error)
+    }
+}
