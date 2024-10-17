@@ -1,4 +1,4 @@
-package nextstep.signup.model.inputresult
+package nextstep.signup.model.inputvalidity
 
 enum class UsernameInputValidity : InputValidity {
     INVALID_FORMAT,

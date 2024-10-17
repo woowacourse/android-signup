@@ -21,11 +21,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nextstep.signup.R
 import nextstep.signup.model.InputFieldType
-import nextstep.signup.model.inputresult.EmailInputValidity
-import nextstep.signup.model.inputresult.InputValidity
-import nextstep.signup.model.inputresult.PasswordConfirmInputValidity
-import nextstep.signup.model.inputresult.PasswordInputValidity
-import nextstep.signup.model.inputresult.UsernameInputValidity
+import nextstep.signup.model.inputvalidity.EmailInputValidity
+import nextstep.signup.model.inputvalidity.InputValidity
+import nextstep.signup.model.inputvalidity.PasswordConfirmInputValidity
+import nextstep.signup.model.inputvalidity.PasswordInputValidity
+import nextstep.signup.model.inputvalidity.UsernameInputValidity
 
 var password: String = ""
 var passwordConfirm: String = ""
