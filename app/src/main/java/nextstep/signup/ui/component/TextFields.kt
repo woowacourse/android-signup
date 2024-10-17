@@ -48,8 +48,6 @@ fun InputText(
         supportingText = {
             if (content.isNotEmpty()) {
                 inputValidator.getErrorMessage()?.let { Text(it) }
-            } else {
-                null
             }
         },
     )
@@ -67,5 +65,4 @@ private fun InputTextPreview() {
         { userName = userName.copy(content = it) },
         userName,
     )
-
 }
