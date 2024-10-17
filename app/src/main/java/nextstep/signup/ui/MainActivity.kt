@@ -1,4 +1,4 @@
-package nextstep.signup
+package nextstep.signup.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,8 +22,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import nextstep.signup.R
 import nextstep.signup.ui.component.SingleLineTextField
-import nextstep.signup.ui.component.SubmitButton
 import nextstep.signup.ui.theme.SignupTheme
 import nextstep.signup.ui.theme.Typography
 
@@ -35,7 +36,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = Color.White
                 ) {
-                    SignUpScreen()
+                    val (signUpInfo, onChange) = remember { mutableStateOf(SignUpInfo()) }
+
+                    SignUpScreen(signUpInfo, onChange)
                 }
             }
         }
@@ -43,16 +46,19 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun SignUpScreen() {
-    val name = remember { mutableStateOf("") }
-    val email = remember { mutableStateOf("") }
-    val password = remember { mutableStateOf("") }
-    val passwordConfirm = remember { mutableStateOf("") }
+fun SignUpScreen(
+    signUpInfo: SignUpInfo,
+    onChangeSignUpInfo: (SignUpInfo) -> Unit,
+) {
+
+    val snackbarHostState = remember {
+        SnackbarHostState()
+    }
+
     Column(
         modifier = Modifier.padding(horizontal = 32.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
         Spacer(Modifier.height(60.dp))
 
         Text(
@@ -62,50 +68,57 @@ fun SignUpScreen() {
         Spacer(Modifier.height(42.dp))
 
         SingleLineTextField(
-            text = name.value,
+            text = signUpInfo.userName,
             onTextChange = {
-                name.value = it
+                onChangeSignUpInfo(signUpInfo.copy(userName = it))
             },
-            hint = stringResource(R.string.sign_up_input_user_name),
+            isError = signUpInfo.isUserNameError(),
+            errorMessage = signUpInfo.userNameErrorMessage(),
+            label = R.string.sign_up_input_user_name
         )
 
         Spacer(Modifier.height(42.dp))
 
         SingleLineTextField(
-            text = email.value,
+            text = signUpInfo.email,
             onTextChange = {
-                email.value = it
+                onChangeSignUpInfo(signUpInfo.copy(email = it))
             },
-            hint = stringResource(R.string.sign_up_input_user_email),
-            keyBoardType = KeyboardType.Email
+            isError = signUpInfo.isEmailError(),
+            errorMessage = signUpInfo.emailErrorMessage(),
+            label = R.string.sign_up_input_user_email,
+            keyBoardType = KeyboardType.Email,
         )
 
         Spacer(Modifier.height(42.dp))
 
         SingleLineTextField(
-            text = password.value,
+            text = signUpInfo.password,
             onTextChange = {
-                password.value = it
+                onChangeSignUpInfo(signUpInfo.copy(password = it))
             },
             modifier = Modifier.fillMaxWidth(),
-            hint = stringResource(R.string.sign_up_input_user_password),
+            isError = signUpInfo.isPasswordError(),
+            errorMessage = signUpInfo.passwordErrorMessage(),
+            label = R.string.sign_up_input_user_password,
             keyBoardType = KeyboardType.Password
         )
         Spacer(Modifier.height(42.dp))
 
         SingleLineTextField(
-            text = passwordConfirm.value,
+            text = signUpInfo.passwordConfirm,
             onTextChange = {
-                passwordConfirm.value = it
+                onChangeSignUpInfo(signUpInfo.copy(passwordConfirm = it))
             },
-            hint = stringResource(R.string.sign_up_input_user_password_confirm),
+            isError = signUpInfo.isPasswordConfirmError(),
+            errorMessage = signUpInfo.passwordConfirmMessage(),
+            label = R.string.sign_up_input_user_password_confirm,
             keyBoardType = KeyboardType.Password
         )
         Spacer(Modifier.height(42.dp))
 
-        SubmitButton(
-            text = stringResource(R.string.sign_up_submit_btn),
-            onClick = {},
+        SignUpButton(
+            enable = signUpInfo.isValidSignUpInfo(),
         )
     }
 }
@@ -117,5 +130,6 @@ fun SignUpScreen() {
 )
 @Composable
 private fun SignUpPreview() {
-    SignUpScreen()
+    val (signUpInfo, onSignUpInfoChange) = remember { mutableStateOf(SignUpInfo()) }
+    SignUpScreen(signUpInfo, onSignUpInfoChange)
 }
