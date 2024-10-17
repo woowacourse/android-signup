@@ -27,15 +27,11 @@ import nextstep.signup.model.inputvalidity.PasswordConfirmInputValidity
 import nextstep.signup.model.inputvalidity.PasswordInputValidity
 import nextstep.signup.model.inputvalidity.UsernameInputValidity
 
-var password: String = ""
-var passwordConfirm: String = ""
-
 @Composable
 fun InputField(
     label: String,
     value: String,
     onValueChange: (String) -> Unit,
-    isPasswordInputField: Boolean,
     keyboardType: KeyboardType = KeyboardType.Text,
     paddingBottom: Dp = 0.dp,
     type: InputFieldType,
@@ -51,18 +47,12 @@ fun InputField(
         onValueChange = { input ->
             onValueChange(input)
             inputValidity = validityOf(type, input)
-            when (type) {
-                InputFieldType.PASSWORD -> password = input
-                InputFieldType.PASSWORD_CONFIRM -> passwordConfirm = input
-                else -> {}
-            }
         },
         label = { Text(label) },
         keyboardOptions =
             KeyboardOptions(
                 keyboardType = keyboardType,
             ),
-        visualTransformation = visualTransformationOf(isPasswordInputField),
     )
 
     Text(
@@ -72,11 +62,7 @@ fun InputField(
                 top = 4.dp,
                 bottom = paddingBottom,
             ),
-        text =
-            when (type) {
-                InputFieldType.PASSWORD_CONFIRM -> passwordConfirmErrorMessage(password, passwordConfirm)
-                else -> errorMessageOf(type, inputValidity)
-            },
+        text = errorMessageOf(type, inputValidity),
         fontSize = 12.sp,
         color = MaterialTheme.colorScheme.error,
         style = MaterialTheme.typography.bodySmall,
@@ -87,8 +73,6 @@ private fun initInputValidity(type: InputFieldType): InputValidity {
     return when (type) {
         InputFieldType.USER_NAME -> UsernameInputValidity.NO_ERROR
         InputFieldType.EMAIL -> EmailInputValidity.NO_ERROR
-        InputFieldType.PASSWORD -> PasswordInputValidity.NO_ERROR
-        InputFieldType.PASSWORD_CONFIRM -> PasswordConfirmInputValidity.NO_ERROR
     }
 }
 
@@ -99,8 +83,6 @@ private fun validityOf(
     return when (type) {
         InputFieldType.USER_NAME -> UsernameInputValidity.of(input)
         InputFieldType.EMAIL -> EmailInputValidity.of(input)
-        InputFieldType.PASSWORD -> PasswordInputValidity.of(input)
-        InputFieldType.PASSWORD_CONFIRM -> PasswordConfirmInputValidity.of(input)
     }
 }
 
@@ -121,22 +103,6 @@ private fun emailErrorMessageOf(validity: EmailInputValidity): String {
     }
 }
 
-@Composable
-private fun passwordErrorMessageOf(validity: PasswordInputValidity): String {
-    return when (validity) {
-        PasswordInputValidity.INVALID_FORMAT -> stringResource(R.string.invalid_password_format)
-        PasswordInputValidity.INVALID_LENGTH -> stringResource(R.string.invalid_password_length)
-        PasswordInputValidity.NO_ERROR -> stringResource(R.string.no_error)
-    }
-}
-
-@Composable
-private fun passwordConfirmErrorMessageOf(validity: PasswordConfirmInputValidity): String {
-    return when (validity) {
-        PasswordConfirmInputValidity.DOES_NOT_MATCH -> stringResource(R.string.password_confirm_does_not_match)
-        PasswordConfirmInputValidity.NO_ERROR -> stringResource(R.string.no_error)
-    }
-}
 
 @Composable
 private fun errorMessageOf(
@@ -146,25 +112,5 @@ private fun errorMessageOf(
     return when (type) {
         InputFieldType.USER_NAME -> usernameErrorMessageOf(validity as UsernameInputValidity)
         InputFieldType.EMAIL -> emailErrorMessageOf(validity as EmailInputValidity)
-        InputFieldType.PASSWORD -> passwordErrorMessageOf(validity as PasswordInputValidity)
-        InputFieldType.PASSWORD_CONFIRM -> passwordConfirmErrorMessageOf(validity as PasswordConfirmInputValidity)
-    }
-}
-
-@Composable
-private fun passwordConfirmErrorMessage(
-    password: String,
-    passwordConfirm: String,
-): String {
-    return when (password == passwordConfirm) {
-        true -> stringResource(R.string.no_error)
-        false -> stringResource(R.string.password_confirm_does_not_match)
-    }
-}
-
-private fun visualTransformationOf(isPasswordInputField: Boolean): VisualTransformation {
-    return when (isPasswordInputField) {
-        true -> PasswordVisualTransformation()
-        false -> VisualTransformation.None
     }
 }

@@ -18,6 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.signup.R
 import nextstep.signup.model.InputFieldType
+import nextstep.signup.model.PasswordInputFieldType
 
 @Composable
 fun SignUpScreen() {
@@ -40,7 +41,6 @@ fun SignUpScreen() {
             label = stringResource(R.string.sign_up),
             value = userName,
             onValueChange = { userName = it },
-            isPasswordInputField = false,
             keyboardType = KeyboardType.Text,
             paddingBottom = 36.dp,
             type = InputFieldType.USER_NAME,
@@ -50,30 +50,27 @@ fun SignUpScreen() {
             label = stringResource(R.string.email),
             value = email,
             onValueChange = { email = it },
-            isPasswordInputField = false,
             keyboardType = KeyboardType.Email,
             paddingBottom = 36.dp,
             type = InputFieldType.EMAIL,
         )
 
-        InputField(
+        PasswordInputField(
             label = stringResource(R.string.password),
             value = password,
             onValueChange = { password = it },
-            isPasswordInputField = true,
             keyboardType = KeyboardType.Password,
             paddingBottom = 36.dp,
-            type = InputFieldType.PASSWORD,
+            type = PasswordInputFieldType.PASSWORD,
         )
 
-        InputField(
+        PasswordInputField(
             label = stringResource(R.string.password_confirm),
             value = confirmPassword,
             onValueChange = { confirmPassword = it },
-            isPasswordInputField = true,
             keyboardType = KeyboardType.Password,
             paddingBottom = 36.dp,
-            type = InputFieldType.PASSWORD_CONFIRM,
+            type = PasswordInputFieldType.PASSWORD_CONFIRM,
         )
 
         SignUpButton(stringResource(R.string.sign_up))
