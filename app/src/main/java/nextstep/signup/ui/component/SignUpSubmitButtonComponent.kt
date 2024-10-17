@@ -14,24 +14,32 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import nextstep.signup.ui.model.SignUpState
 import nextstep.signup.ui.theme.Blue50
+import nextstep.signup.ui.theme.Gray50
 
 @Composable
-fun SubmitButtonComponent(
+fun SignUpSubmitButtonComponent(
+    signUpStates : List<SignUpState>,
     buttonText: String,
     onButtonClick: () -> Unit
 ) {
+    val isValid = signUpStates.all { signUpState ->
+        signUpState == SignUpState.Valid
+    }
+
     Button(
         onClick = onButtonClick,
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(100.dp),
         colors = ButtonDefaults.buttonColors(
             containerColor = Blue50
-        )
+        ),
+        enabled = isValid,
     ) {
         Text(
             text = buttonText,
-            color = Color.White,
+            color = if (isValid) Color.White else Gray50,
             fontSize = 14.sp,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center,
@@ -46,7 +54,8 @@ fun SubmitButtonComponent(
 )
 @Composable
 fun PreviewSubmitButtonComponent() {
-    SubmitButtonComponent(
+    SignUpSubmitButtonComponent(
+        signUpStates = listOf(),
         buttonText = "",
         onButtonClick = {}
     )

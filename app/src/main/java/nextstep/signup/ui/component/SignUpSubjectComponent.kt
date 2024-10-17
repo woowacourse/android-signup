@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun SubjectComponent(
+fun SignUpSubjectComponent(
     subject: String,
     emoji: String? = null
 ) {
@@ -46,7 +46,7 @@ fun SubjectComponent(
 )
 @Composable
 fun PreviewSubjectComponent() {
-    SubjectComponent(
+    SignUpSubjectComponent(
         subject = "Welcome to Compose",
         emoji = "🚀"
     )
