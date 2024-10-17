@@ -6,27 +6,35 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
+import nextstep.signup.R
 import nextstep.signup.domain.Password
 import nextstep.signup.domain.PasswordResult
 
 @Composable
-fun PasswordScreen(
+fun PasswordTextFields(
     modifier: Modifier = Modifier,
+    passwordLabelText: String = stringResource(R.string.default_text_field_label),
+    passwordConfirmLabelText: String = stringResource(R.string.default_text_field_label),
+    onPasswordChange: (String) -> Unit,
+    onPasswordConfirmChange: (String) -> Unit,
     password: String = "",
-    passwordConfirm: String = "",
-    visualTransformation: VisualTransformation = PasswordVisualTransformation()
+    passwordConfirm: String = ""
 ) {
     Column {
         SignUpTextField2(
             modifier = modifier,
+            labelText = passwordLabelText,
             value = password,
-            visualTransformation = visualTransformation,
+            onValueChange = onPasswordChange,
+            visualTransformation = PasswordVisualTransformation(),
+            keyboardType = KeyboardType.Password,
             isError = when (Password.from(password, passwordConfirm)) {
                 is PasswordResult.EmptyField -> false
                 is PasswordResult.Failure -> true
@@ -47,8 +55,11 @@ fun PasswordScreen(
 
         SignUpTextField2(
             modifier = modifier,
+            labelText = passwordConfirmLabelText,
             value = passwordConfirm,
-            visualTransformation = visualTransformation,
+            onValueChange = onPasswordConfirmChange,
+            visualTransformation = PasswordVisualTransformation(),
+            keyboardType = KeyboardType.Password,
             isError = when (Password.from(password, passwordConfirm)) {
                 is PasswordResult.EmptyField -> false
                 is PasswordResult.Failure -> true
@@ -69,9 +80,11 @@ fun PasswordScreen(
 @Preview
 @Composable
 private fun PasswordTextFieldsPreview(@PreviewParameter(PasswordPreviewParameter::class) passwords: Pair<String, String>) {
-    PasswordScreen(
+    PasswordTextFields(
         password = passwords.first,
-        passwordConfirm = passwords.second
+        passwordConfirm = passwords.second,
+        onPasswordChange = {},
+        onPasswordConfirmChange = {}
     )
 }
 

@@ -14,11 +14,15 @@ import nextstep.signup.domain.UserNameResult
 @Composable
 fun UserNameTextField(
     modifier: Modifier = Modifier,
-    name: String
+    name: String,
+    onValueChange: (String) -> Unit,
+    labelText: String = stringResource(R.string.default_text_field_label)
 ) {
     SignUpTextField2(
         modifier = modifier,
+        labelText = labelText,
         value = name,
+        onValueChange = onValueChange,
         isError = when (UserName.from(name)) {
             is UserNameResult.EmptyField -> false
             is UserNameResult.Success -> false
@@ -44,7 +48,8 @@ fun UsernameTextFieldPreview(
     @PreviewParameter(UsernamePreviewParameter::class) username: String
 ) {
     UserNameTextField(
-        name = username
+        name = username,
+        onValueChange = {}
     )
 }
 
