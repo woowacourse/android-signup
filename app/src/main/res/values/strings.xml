@@ -13,4 +13,6 @@
     <string name="invalid_password_length">비밀번호는 8~16자여야 합니다.</string>
     <string name="invalid_password_composition">비밀번호는 영문과 숫자를 포함해야 합니다.</string>
     <string name="invalid_password_confirm">비밀번호가 일치하지 않습니다.</string>
+
+    <string name="complete_join">회원가입이 완료되었습니다.</string>
 </resources>
