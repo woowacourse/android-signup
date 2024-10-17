@@ -17,6 +17,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.signup.R
+import nextstep.signup.model.InputFieldType
 
 @Composable
 fun SignUpScreen() {
@@ -42,6 +43,7 @@ fun SignUpScreen() {
             isPasswordInputField = false,
             keyboardType = KeyboardType.Text,
             paddingBottom = 36.dp,
+            type = InputFieldType.USER_NAME,
         )
 
         InputField(
@@ -51,6 +53,7 @@ fun SignUpScreen() {
             isPasswordInputField = false,
             keyboardType = KeyboardType.Email,
             paddingBottom = 36.dp,
+            type = InputFieldType.EMAIL,
         )
 
         InputField(
@@ -60,6 +63,7 @@ fun SignUpScreen() {
             isPasswordInputField = true,
             keyboardType = KeyboardType.Password,
             paddingBottom = 36.dp,
+            type = InputFieldType.PASSWORD,
         )
 
         InputField(
@@ -69,6 +73,7 @@ fun SignUpScreen() {
             isPasswordInputField = true,
             keyboardType = KeyboardType.Password,
             paddingBottom = 36.dp,
+            type = InputFieldType.PASSWORD_CONFIRM,
         )
 
         SignUpButton(stringResource(R.string.sign_up))

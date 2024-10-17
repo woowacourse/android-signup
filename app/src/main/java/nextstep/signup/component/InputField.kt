@@ -20,7 +20,12 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nextstep.signup.R
-import nextstep.signup.model.UsernameInputResult
+import nextstep.signup.model.inputresult.EmailInputResult
+import nextstep.signup.model.InputFieldType
+import nextstep.signup.model.inputresult.InputResult
+import nextstep.signup.model.inputresult.PasswordConfirmInputResult
+import nextstep.signup.model.inputresult.PasswordInputResult
+import nextstep.signup.model.inputresult.UsernameInputResult
 
 @Composable
 fun InputField(
@@ -30,19 +35,20 @@ fun InputField(
     isPasswordInputField: Boolean,
     keyboardType: KeyboardType = KeyboardType.Text,
     paddingBottom: Dp = 0.dp,
+    type: InputFieldType,
 ) {
-    var errorType by remember { mutableStateOf(UsernameInputResult.NO_ERROR) }
+    var inputResult by remember { mutableStateOf(UsernameInputResult.NO_ERROR) }
 
     TextField(
-        value = value,
-        onValueChange = { input ->
-            onValueChange(input)
-            errorType = UsernameInputResult.of(input)
-        },
-        label = { Text(label) },
         modifier =
         Modifier
             .fillMaxWidth(),
+        value = value,
+        onValueChange = { input ->
+            onValueChange(input)
+            inputResult = UsernameInputResult.of(input)
+        },
+        label = { Text(label) },
         keyboardOptions =
         KeyboardOptions(
             keyboardType = keyboardType,
@@ -56,26 +62,60 @@ fun InputField(
             top = 4.dp,
             bottom = paddingBottom
         ),
-        text = errorMessageOf(errorType),
+        text = errorMessageOf(type, inputResult),
         fontSize = 12.sp,
         color = MaterialTheme.colorScheme.error,
         style = MaterialTheme.typography.bodySmall,
     )
 }
 
+@Composable
+private fun usernameErrorMessageOf(result: UsernameInputResult): String {
+    return when (result) {
+        UsernameInputResult.INVALID_FORMAT -> stringResource(R.string.invalid_username_format)
+        UsernameInputResult.INVALID_LENGTH -> stringResource(R.string.invalid_username_length)
+        UsernameInputResult.NO_ERROR -> stringResource(R.string.no_error)
+    }
+}
+
+@Composable
+private fun emailErrorMessageOf(result: EmailInputResult): String {
+    return when (result) {
+        EmailInputResult.INVALID_FORMAT -> stringResource(R.string.invalid_email_format)
+        EmailInputResult.NO_ERROR -> stringResource(R.string.no_error)
+    }
+}
+
+@Composable
+private fun passwordErrorMessageOf(result: PasswordInputResult): String {
+    return when (result) {
+        PasswordInputResult.INVALID_FORMAT -> stringResource(R.string.invalid_password_format)
+        PasswordInputResult.INVALID_LENGTH -> stringResource(R.string.invalid_password_length)
+        PasswordInputResult.NO_ERROR -> stringResource(R.string.no_error)
+    }
+}
+
+@Composable
+private fun passwordConfirmErrorMessageOf(result: PasswordConfirmInputResult): String {
+    return when (result) {
+        PasswordConfirmInputResult.DOES_NOT_MATCH -> stringResource(R.string.password_confirm_does_not_match)
+        PasswordConfirmInputResult.NO_ERROR -> stringResource(R.string.no_error)
+    }
+}
+
+@Composable
+private fun errorMessageOf(inputFieldType: InputFieldType, result: InputResult): String {
+    return when (inputFieldType) {
+        InputFieldType.USER_NAME -> usernameErrorMessageOf(result as UsernameInputResult)
+        InputFieldType.EMAIL -> emailErrorMessageOf(result as EmailInputResult)
+        InputFieldType.PASSWORD -> passwordErrorMessageOf(result as PasswordInputResult)
+        InputFieldType.PASSWORD_CONFIRM -> passwordConfirmErrorMessageOf(result as PasswordConfirmInputResult)
+    }
+}
 
 private fun visualTransformationOf(isPasswordInputField: Boolean): VisualTransformation {
     return when (isPasswordInputField) {
         true -> PasswordVisualTransformation()
         false -> VisualTransformation.None
-    }
-}
-
-@Composable
-fun errorMessageOf(result: UsernameInputResult): String {
-    return when (result) {
-        UsernameInputResult.INVALID_FORMAT -> stringResource(R.string.invalid_format)
-        UsernameInputResult.INVALID_LENGTH -> stringResource(R.string.invalid_length)
-        UsernameInputResult.NO_ERROR -> stringResource(R.string.no_error)
     }
 }

@@ -1,6 +1,6 @@
-package nextstep.signup.model
+package nextstep.signup.model.inputresult
 
-enum class UsernameInputResult {
+enum class UsernameInputResult : InputResult {
     INVALID_FORMAT,
     INVALID_LENGTH,
     NO_ERROR;
