@@ -16,7 +16,7 @@ class SignupButtonTest {
     val composeTestRule: ComposeContentTestRule = createComposeRule()
 
     @Test
-    fun 버튼을_누르면_onClick이_호출된다() {
+    fun `버튼을_누르면_onClick이_호출된다`() {
         // given
         var state by mutableStateOf(false)
 
@@ -24,7 +24,7 @@ class SignupButtonTest {
             SignupButton(
                 text = signupButtonText,
                 enabled = true,
-                onClick = { state = true }
+                onClick = { state = true },
             )
         }
 

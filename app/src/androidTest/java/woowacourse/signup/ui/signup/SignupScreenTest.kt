@@ -26,14 +26,15 @@ class SignupScreenTest {
     }
 
     @Test
-    fun 모든_입력값이_에러_없이_채워졌다면_회원가입_버튼이_활성화된다() {
+    fun `모든_입력값이_에러_없이_채워졌다면_회원가입_버튼이_활성화된다`() {
         // when
-        performInputSignupInfo(
-            userName = "올리브",
-            email = "olive@wooteco.com",
-            password = "olive123",
-            passwordConfirm = "olive123",
-        )
+        composeTestRule
+            .performInputSignupInfo(
+                userName = "올리브",
+                email = "olive@wooteco.com",
+                password = "olive123",
+                passwordConfirm = "olive123",
+            )
 
         // then
         composeTestRule.waitForIdle()
@@ -43,14 +44,15 @@ class SignupScreenTest {
     }
 
     @Test
-    fun 입력값에_에러가_있다면_회원가입_버튼이_비활성화된다() {
+    fun `입력값에_에러가_있다면_회원가입_버튼이_비활성화된다`() {
         // when
-        performInputSignupInfo(
-            userName = "올",
-            email = "olive",
-            password = "ol",
-            passwordConfirm = "olive",
-        )
+        composeTestRule
+            .performInputSignupInfo(
+                userName = "올",
+                email = "olive",
+                password = "ol",
+                passwordConfirm = "olive",
+            )
 
         // then
         composeTestRule.waitForIdle()
@@ -60,14 +62,15 @@ class SignupScreenTest {
     }
 
     @Test
-    fun 회원가입_버튼을_누르면_회원가입_완료_스낵바가_노출된다() {
+    fun `회원가입_버튼을_누르면_회원가입_완료_스낵바가_노출된다`() {
         // given
-        performInputSignupInfo(
-            userName = "올리브",
-            email = "olive@wooteco.com",
-            password = "olive123",
-            passwordConfirm = "olive123",
-        )
+        composeTestRule
+            .performInputSignupInfo(
+                userName = "올리브",
+                email = "olive@wooteco.com",
+                password = "olive123",
+                passwordConfirm = "olive123",
+            )
 
         // when
         composeTestRule
@@ -80,7 +83,7 @@ class SignupScreenTest {
             .assertIsDisplayed()
     }
 
-    private fun performInputSignupInfo(
+    private fun ComposeContentTestRule.performInputSignupInfo(
         userName: String,
         email: String,
         password: String,

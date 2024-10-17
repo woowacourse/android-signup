@@ -16,7 +16,7 @@ class SignupTextFieldTest {
     val composeTestRule: ComposeContentTestRule = createComposeRule()
 
     @Test
-    fun 입력값이_변경되면_onValueChange이_호출된다() {
+    fun `입력값이_변경되면_onValueChange이_호출된다`() {
         // given
         var value by mutableStateOf("")
         composeTestRule.setContent {
@@ -24,7 +24,7 @@ class SignupTextFieldTest {
                 labelText = signupTextFieldLabel,
                 inputValue = value,
                 isError = false,
-                errorText = ""
+                errorText = "",
             ) {
                 value = "메롱"
             }
@@ -39,15 +39,17 @@ class SignupTextFieldTest {
         composeTestRule.waitForIdle()
         assertThat(value).isEqualTo("메롱")
     }
+
     @Test
-    fun 에러면_에러_메시지가_노출된다() {
+    fun `에러면_에러_메시지가_노출된다`() {
         // when
         composeTestRule.setContent {
             SignupTextField(
                 labelText = signupTextFieldLabel,
                 inputValue = "input value",
                 isError = true,
-                errorText = "error message")
+                errorText = "error message",
+            )
         }
 
         // then
@@ -58,14 +60,15 @@ class SignupTextFieldTest {
     }
 
     @Test
-    fun 에러가_아니면_에러_메시지가_노출되지_않는다() {
+    fun `에러가_아니면_에러_메시지가_노출되지_않는다`() {
         // when
         composeTestRule.setContent {
             SignupTextField(
                 labelText = signupTextFieldLabel,
                 inputValue = "input value",
                 isError = false,
-                errorText = "error message")
+                errorText = "error message",
+            )
         }
 
         // then
@@ -76,14 +79,15 @@ class SignupTextFieldTest {
     }
 
     @Test
-    fun 아무것도_입력되지_않았다면_에러여도_에러_메시지가_노출되지_않는다() {
+    fun `아무것도_입력되지_않았다면_에러여도_에러_메시지가_노출되지_않는다`() {
         // when
         composeTestRule.setContent {
             SignupTextField(
                 labelText = signupTextFieldLabel,
                 inputValue = "",
                 isError = true,
-                errorText = "error message")
+                errorText = "error message",
+            )
         }
 
         // then
