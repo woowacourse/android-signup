@@ -16,9 +16,7 @@ import androidx.compose.ui.unit.sp
 import nextstep.signup.R
 
 @Composable
-fun SignUpToast(
-    message: String,
-) {
+fun SignUpSnackBar(message: String) {
     Box(
         modifier = Modifier
             .padding(top = 30.dp)
@@ -43,6 +41,6 @@ fun SignUpToast(
 
 @Preview
 @Composable
-fun PreviewSignUpToast(){
-    SignUpToast(stringResource(R.string.confirm_sign_up))
+fun PreviewSignUpToast() {
+    SignUpSnackBar(stringResource(R.string.confirm_sign_up))
 }

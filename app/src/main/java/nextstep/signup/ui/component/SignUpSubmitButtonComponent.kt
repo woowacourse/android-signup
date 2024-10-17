@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nextstep.signup.ui.model.SignUpState
 import nextstep.signup.ui.theme.Blue50
+import nextstep.signup.ui.theme.Gray50
 
 @Composable
 fun SubmitButtonComponent(
@@ -23,6 +24,10 @@ fun SubmitButtonComponent(
     buttonText: String,
     onButtonClick: () -> Unit
 ) {
+    val isValid = signUpStates.all { signUpState ->
+        signUpState == SignUpState.Valid
+    }
+
     Button(
         onClick = onButtonClick,
         modifier = Modifier.fillMaxWidth(),
@@ -30,13 +35,11 @@ fun SubmitButtonComponent(
         colors = ButtonDefaults.buttonColors(
             containerColor = Blue50
         ),
-        enabled = signUpStates.all { signUpState ->
-            signUpState == SignUpState.Valid
-        }
+        enabled = isValid,
     ) {
         Text(
             text = buttonText,
-            color = Color.White,
+            color = if (isValid) Color.White else Gray50,
             fontSize = 14.sp,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center,

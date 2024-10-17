@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -26,7 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import nextstep.signup.ui.component.SignUpToast
+import nextstep.signup.ui.component.SignUpSnackBar
 import nextstep.signup.ui.component.SubjectComponent
 import nextstep.signup.ui.component.SubmitButtonComponent
 import nextstep.signup.ui.component.TextFieldComponent
@@ -127,7 +126,7 @@ fun SignupScreen() {
         }
 
         if (toastVisible.value) {
-            SignUpToast(stringResource(R.string.confirm_sign_up))
+            SignUpSnackBar(stringResource(R.string.confirm_sign_up))
             scope.launch {
                 delay(2000)
                 toastVisible.value = false
