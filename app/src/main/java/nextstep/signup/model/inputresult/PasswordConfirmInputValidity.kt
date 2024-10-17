@@ -13,7 +13,7 @@ enum class PasswordConfirmInputValidity : InputValidity {
         }
 
         private fun isNotMatch(input: String): Boolean {
-            TODO()
+            return true
         }
     }
 }
