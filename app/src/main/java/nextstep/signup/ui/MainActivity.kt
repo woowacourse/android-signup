@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -50,11 +49,6 @@ fun SignUpScreen(
     signUpInfo: SignUpInfo,
     onChangeSignUpInfo: (SignUpInfo) -> Unit,
 ) {
-
-    val snackbarHostState = remember {
-        SnackbarHostState()
-    }
-
     Column(
         modifier = Modifier.padding(horizontal = 32.dp),
         horizontalAlignment = Alignment.CenterHorizontally
