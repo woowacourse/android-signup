@@ -13,16 +13,25 @@ import androidx.compose.ui.unit.dp
 import nextstep.signup.R
 
 @Composable
-fun SignUpButton(buttonText: String) {
+fun SignUpButton(
+    buttonText: String,
+    isEnable: Boolean,
+) {
     Button(
         onClick = {},
         modifier =
-            Modifier
-                .fillMaxWidth()
-                .height(60.dp),
+        Modifier
+            .fillMaxWidth()
+            .height(60.dp),
         colors =
+        if (isEnable)
             ButtonDefaults.buttonColors(
                 containerColor = colorResource(R.color.blue_50),
+                contentColor = Color.White,
+            )
+        else
+            ButtonDefaults.buttonColors(
+                containerColor = colorResource(R.color.purple_700),
                 contentColor = Color.White,
             ),
     ) {

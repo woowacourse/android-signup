@@ -21,7 +21,7 @@ class EmailInputValidationTest {
             InputField(
                 label = EMAIL_INPUT_FIELD_LABEL,
                 value = "",
-                onValueChange = {},
+                onValueChange = { _, _ -> },
                 keyboardType = KeyboardType.Text,
                 paddingBottom = 36.dp,
                 type = InputFieldType.EMAIL,

@@ -27,7 +27,7 @@ import nextstep.signup.model.inputvalidity.UsernameInputValidity
 fun InputField(
     label: String,
     value: String,
-    onValueChange: (String) -> Unit,
+    onValueChange: (String, Boolean) -> Unit,
     keyboardType: KeyboardType = KeyboardType.Text,
     paddingBottom: Dp = 0.dp,
     type: InputFieldType,
@@ -37,27 +37,28 @@ fun InputField(
 
     TextField(
         modifier =
-            Modifier
-                .fillMaxWidth(),
+        Modifier
+            .fillMaxWidth(),
         value = value,
         onValueChange = { input ->
-            onValueChange(input)
             inputValidity = validityOf(type, input)
+            val submitValidity = submitValidityOf(type, input, inputValidity)
+            onValueChange(input, submitValidity)
         },
         label = { Text(label) },
         keyboardOptions =
-            KeyboardOptions(
-                keyboardType = keyboardType,
-            ),
+        KeyboardOptions(
+            keyboardType = keyboardType,
+        ),
     )
 
     Text(
         modifier =
-            Modifier.padding(
-                start = 16.dp,
-                top = 4.dp,
-                bottom = paddingBottom,
-            ),
+        Modifier.padding(
+            start = 16.dp,
+            top = 4.dp,
+            bottom = paddingBottom,
+        ),
         text = errorMessageOf(type, inputValidity),
         fontSize = 12.sp,
         color = MaterialTheme.colorScheme.error,
@@ -79,6 +80,17 @@ private fun validityOf(
     return when (type) {
         InputFieldType.USER_NAME -> UsernameInputValidity.of(input)
         InputFieldType.EMAIL -> EmailInputValidity.of(input)
+    }
+}
+
+private fun submitValidityOf(
+    type: InputFieldType,
+    input: String,
+    inputValidity: InputValidity,
+): Boolean {
+    return when (type) {
+        InputFieldType.USER_NAME -> input.isNotEmpty() && inputValidity == UsernameInputValidity.NO_ERROR
+        InputFieldType.EMAIL -> input.isNotEmpty() && inputValidity == EmailInputValidity.NO_ERROR
     }
 }
 

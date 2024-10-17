@@ -27,12 +27,19 @@ fun SignUpScreen() {
     var password by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }
 
+    var isUserNameValid by remember { mutableStateOf(false) }
+    var isEmailValid by remember { mutableStateOf(false) }
+    var isPasswordValid by remember { mutableStateOf(false) }
+    var isConfirmPasswordValid by remember { mutableStateOf(false) }
+
+    val isFormValid = isUserNameValid && isEmailValid && isPasswordValid && isConfirmPasswordValid
+
     Column(
         modifier =
-            Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-        verticalArrangement = Arrangement.Center,
+        Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.Top,
     ) {
         TitleText(stringResource(R.string.title))
 
@@ -41,7 +48,10 @@ fun SignUpScreen() {
         InputField(
             label = stringResource(R.string.sign_up),
             value = userName,
-            onValueChange = { userName = it },
+            onValueChange = { inputUserName, validity ->
+                userName = inputUserName
+                isUserNameValid = validity
+            },
             keyboardType = KeyboardType.Text,
             paddingBottom = 36.dp,
             type = InputFieldType.USER_NAME,
@@ -50,7 +60,10 @@ fun SignUpScreen() {
         InputField(
             label = stringResource(R.string.email),
             value = email,
-            onValueChange = { email = it },
+            onValueChange = { inputUserName, validity ->
+                email = inputUserName
+                isEmailValid = validity
+            },
             keyboardType = KeyboardType.Email,
             paddingBottom = 36.dp,
             type = InputFieldType.EMAIL,
@@ -59,7 +72,10 @@ fun SignUpScreen() {
         PasswordInputField(
             label = stringResource(R.string.password),
             value = password,
-            onValueChange = { password = it },
+            onValueChange = { inputPassword, validity ->
+                password = inputPassword
+                isPasswordValid = validity
+            },
             keyboardType = KeyboardType.Password,
             paddingBottom = 36.dp,
             type = PasswordInputFieldType.PASSWORD,
@@ -68,13 +84,19 @@ fun SignUpScreen() {
         PasswordInputField(
             label = stringResource(R.string.password_confirm),
             value = confirmPassword,
-            onValueChange = { confirmPassword = it },
+            onValueChange = { inputPassword, validity ->
+                confirmPassword = inputPassword
+                isConfirmPasswordValid = validity
+            },
             keyboardType = KeyboardType.Password,
             paddingBottom = 36.dp,
             type = PasswordInputFieldType.PASSWORD_CONFIRM,
         )
 
-        SignUpButton(stringResource(R.string.sign_up))
+        SignUpButton(
+            buttonText = stringResource(R.string.sign_up),
+            isEnable = isFormValid
+        )
     }
 }
 

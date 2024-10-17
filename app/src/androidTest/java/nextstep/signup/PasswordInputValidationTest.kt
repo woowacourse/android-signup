@@ -23,7 +23,7 @@ class PasswordInputValidationTest {
                 PasswordInputField(
                     label = PASSWORD_INPUT_FIELD_LABEL,
                     value = "",
-                    onValueChange = {},
+                    onValueChange = { _, _ -> },
                     keyboardType = KeyboardType.Password,
                     paddingBottom = 36.dp,
                     type = PasswordInputFieldType.PASSWORD,
@@ -32,7 +32,7 @@ class PasswordInputValidationTest {
                 PasswordInputField(
                     label = PASSWORD_CONFIRM_INPUT_FIELD_LABEL,
                     value = "",
-                    onValueChange = {},
+                    onValueChange = { _, _ -> },
                     keyboardType = KeyboardType.Password,
                     paddingBottom = 36.dp,
                     type = PasswordInputFieldType.PASSWORD_CONFIRM,
@@ -109,6 +109,23 @@ class PasswordInputValidationTest {
             .onNodeWithText(PASSWORD_CONFIRM_NOT_MATCH_ERROR)
             .assertDoesNotExist()
     }
+
+//    @Test
+//    fun `비밀번호_확인_필드가_비밀번호와_일치하지_않으면_에러메세지가_노출된다`() {
+//        // when
+//        composeTestRule
+//            .onNodeWithText(PASSWORD_INPUT_FIELD_LABEL)
+//            .performTextInput("alsong1234")
+//
+//        composeTestRule
+//            .onNodeWithText(PASSWORD_CONFIRM_INPUT_FIELD_LABEL)
+//            .performTextInput("1234alsong")
+//
+//        // then
+//        composeTestRule
+//            .onNodeWithText(PASSWORD_CONFIRM_NOT_MATCH_ERROR)
+//            .assertExists()
+//    }
 
     companion object {
         private const val PASSWORD_INPUT_FIELD_LABEL = "비번 입력필드 테스트!"

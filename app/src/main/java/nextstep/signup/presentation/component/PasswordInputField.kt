@@ -29,7 +29,7 @@ import nextstep.signup.model.inputvalidity.PasswordInputValidity
 fun PasswordInputField(
     label: String,
     value: String,
-    onValueChange: (String) -> Unit,
+    onValueChange: (String, Boolean) -> Unit,
     keyboardType: KeyboardType = KeyboardType.Text,
     paddingBottom: Dp = 0.dp,
     type: PasswordInputFieldType,
@@ -39,12 +39,13 @@ fun PasswordInputField(
 
     TextField(
         modifier =
-            Modifier
-                .fillMaxWidth(),
+        Modifier
+            .fillMaxWidth(),
         value = value,
         onValueChange = { input ->
-            onValueChange(input)
             inputValidity = validityOf(type, input)
+            val submitValidity = submitValidityOf(type, input, inputValidity)
+            onValueChange(input, submitValidity)
             when (type) {
                 PasswordInputFieldType.PASSWORD -> password = input
                 PasswordInputFieldType.PASSWORD_CONFIRM -> passwordConfirm = input
@@ -52,23 +53,27 @@ fun PasswordInputField(
         },
         label = { Text(label) },
         keyboardOptions =
-            KeyboardOptions(
-                keyboardType = keyboardType,
-            ),
+        KeyboardOptions(
+            keyboardType = keyboardType,
+        ),
     )
 
     Text(
         modifier =
-            Modifier.padding(
-                start = 16.dp,
-                top = 4.dp,
-                bottom = paddingBottom,
-            ),
+        Modifier.padding(
+            start = 16.dp,
+            top = 4.dp,
+            bottom = paddingBottom,
+        ),
         text =
-            when (type) {
-                PasswordInputFieldType.PASSWORD_CONFIRM -> passwordConfirmErrorMessage(password, passwordConfirm)
-                else -> errorMessageOf(type, inputValidity)
-            },
+        when (type) {
+            PasswordInputFieldType.PASSWORD_CONFIRM -> passwordConfirmErrorMessage(
+                password,
+                passwordConfirm
+            )
+
+            else -> errorMessageOf(type, inputValidity)
+        },
         fontSize = 12.sp,
         color = MaterialTheme.colorScheme.error,
         style = MaterialTheme.typography.bodySmall,
@@ -89,6 +94,17 @@ private fun validityOf(
     return when (type) {
         PasswordInputFieldType.PASSWORD -> PasswordInputValidity.of(input)
         PasswordInputFieldType.PASSWORD_CONFIRM -> PasswordConfirmInputValidity.of(input)
+    }
+}
+
+private fun submitValidityOf(
+    type: PasswordInputFieldType,
+    input: String,
+    inputValidity: InputValidity,
+): Boolean {
+    return when (type) {
+        PasswordInputFieldType.PASSWORD -> input.isNotEmpty() && inputValidity == PasswordInputValidity.NO_ERROR
+        PasswordInputFieldType.PASSWORD_CONFIRM -> input.isNotEmpty() && inputValidity == PasswordConfirmInputValidity.NO_ERROR
     }
 }
 

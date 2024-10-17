@@ -21,7 +21,7 @@ class UsernameInputValidationTest {
             InputField(
                 label = USERNAME_INPUT_FIELD_LABEL,
                 value = "",
-                onValueChange = {},
+                onValueChange = { _, _ -> },
                 keyboardType = KeyboardType.Text,
                 paddingBottom = 36.dp,
                 type = InputFieldType.USER_NAME,
