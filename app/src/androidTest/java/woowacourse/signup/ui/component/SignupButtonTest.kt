@@ -18,6 +18,7 @@ class SignupButtonTest {
     fun 버튼을_누르면_onClick이_호출된다() {
         // given
         var state by mutableStateOf(false)
+
         composeTestRule.setContent {
             SignupButton(
                 text = signupButtonText,
