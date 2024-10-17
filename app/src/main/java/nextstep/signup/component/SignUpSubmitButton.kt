@@ -11,12 +11,18 @@ import androidx.compose.ui.unit.dp
 import nextstep.signup.R
 
 @Composable
-fun SignUpSubmitButton(modifier: Modifier, text: String, onClick: () -> Unit) {
+fun SignUpSubmitButton(
+    modifier: Modifier,
+    text: String,
+    onClick: () -> Unit,
+    enabled : Boolean = false,
+) {
     Button(
         modifier = modifier,
         onClick = { onClick() },
         colors = ButtonDefaults.buttonColors(containerColor = colorResource(R.color.blue_50)),
-        contentPadding = PaddingValues(vertical = 15.dp)
+        contentPadding = PaddingValues(vertical = 15.dp),
+        enabled = enabled
     ) {
         Text(text = text)
     }

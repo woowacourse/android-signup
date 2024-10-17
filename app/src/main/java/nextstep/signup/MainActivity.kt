@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -26,6 +27,11 @@ import nextstep.signup.component.SignUpPasswordTextField
 import nextstep.signup.component.SignUpSubmitButton
 import nextstep.signup.component.SignUpTitle
 import nextstep.signup.component.SignUpUsernameTextField
+import nextstep.signup.domain.validation.Email
+import nextstep.signup.domain.validation.Password
+import nextstep.signup.domain.validation.PasswordConfirm
+import nextstep.signup.domain.validation.SignUpState
+import nextstep.signup.domain.validation.Username
 import nextstep.signup.ui.theme.SignupTheme
 
 class MainActivity : ComponentActivity() {
@@ -52,6 +58,16 @@ fun SignUpScreen(
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordConfirm by remember { mutableStateOf("") }
+    val signUpState by remember {
+        derivedStateOf {
+            SignUpState(
+                username = Username(username),
+                email = Email(email),
+                password = Password(password),
+                passwordConfirm = PasswordConfirm(password, passwordConfirm)
+            )
+        }
+    }
 
     Column(
         modifier = modifier
@@ -101,7 +117,8 @@ fun SignUpScreen(
                 .fillMaxWidth()
                 .padding(vertical = 32.dp),
             text = stringResource(R.string.button_sign_up),
-            onClick = { }
+            onClick = { },
+            enabled = signUpState.isValid()
         )
     }
 }

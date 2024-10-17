@@ -1,6 +1,6 @@
 package nextstep.signup.domain.validation
 
-data class Username(private val name: String = "") {
+data class Username(private val name: String = DEFAULT_USERNAME) {
     private val regex = Regex(USERNAME_REGEX)
 
     fun validationResult(): ValidationResult {
@@ -17,6 +17,7 @@ data class Username(private val name: String = "") {
     private fun isValidFormat(): Boolean = name.matches(regex)
 
     companion object {
+        const val DEFAULT_USERNAME = ""
         const val USERNAME_REGEX = "^[a-zA-Z가-힣]+$"
     }
 }
