@@ -1,15 +1,23 @@
 package nextstep.signup.ui.domain
 
 class Password(
-    val text: String = DEFAULT_PASSWORD_TEXT
-) {
-    fun isValid(): Boolean =  isValidLength() && isValidText()
+    override val text: String = DEFAULT_PASSWORD_TEXT,
+) : SignUpModel {
+    override fun validState(): SignUpState {
+        return when {
+            !isValidLength() -> SignUpState.InValid.PasswordLength
+            !isValidText() -> SignUpState.InValid.PasswordType
+            else -> SignUpState.Valid
+        }
+    }
 
-    private fun isValidLength() : Boolean  =
-        text.matches(PASSWORD_REGEX_LENGTH.toRegex())
+    private fun isValidLength(): Boolean {
+        return text.matches(PASSWORD_REGEX_LENGTH.toRegex())
+    }
 
-    private fun isValidText() : Boolean =
-        text.matches(PASSWORD_REGEX_TEXT.toRegex())
+    private fun isValidText(): Boolean {
+        return text.matches(PASSWORD_REGEX_TEXT.toRegex())
+    }
 
     companion object {
         private const val DEFAULT_PASSWORD_TEXT = ""

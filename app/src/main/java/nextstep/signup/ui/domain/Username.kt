@@ -1,15 +1,21 @@
 package nextstep.signup.ui.domain
 
 data class Username(
-    val name: String = DEFAULT_NAME
-) {
-    fun isValid(): Boolean = isValidText() && isValidLength()
+    override val text: String = DEFAULT_NAME
+): SignUpModel {
+    override fun validState(): SignUpState {
+        return when {
+            !isValidLength() -> SignUpState.InValid.UserNameLength
+            !isValidText() -> SignUpState.InValid.UserNameType
+            else -> SignUpState.Valid
+        }
+    }
 
     private fun isValidLength(): Boolean =
-        name.matches(USERNAME_REGEX_LENGTH.toRegex())
+        text.matches(USERNAME_REGEX_LENGTH.toRegex())
 
     private fun isValidText() : Boolean =
-        name.matches(USERNAME_REGEX_TEXT.toRegex())
+        text.matches(USERNAME_REGEX_TEXT.toRegex())
 
     companion object {
         private const val DEFAULT_NAME = ""

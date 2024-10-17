@@ -1,11 +1,15 @@
 package nextstep.signup.ui.domain
 
 data class Email(
-    val address: String = DEFAULT_EMAIL_ADDRESS
-) {
-
-    fun isValid(): Boolean =
-        address.matches(EMAIL_REGEX.toRegex())
+    override val text: String = DEFAULT_EMAIL_ADDRESS
+) : SignUpModel {
+    override fun validState(): SignUpState {
+        return if (text.matches(EMAIL_REGEX.toRegex())) {
+            SignUpState.Valid
+        } else {
+            SignUpState.InValid.Email
+        }
+    }
 
     companion object {
         private const val DEFAULT_EMAIL_ADDRESS = ""

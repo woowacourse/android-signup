@@ -3,6 +3,7 @@ package nextstep.signup
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -52,9 +53,9 @@ fun SignupScreen() {
 
     Column(
         modifier = Modifier.padding(horizontal = 32.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
-        Spacer(Modifier.height(30.dp))
         SubjectComponent(
             subject = stringResource(R.string.subject),
             emoji = stringResource(R.string.emoji)
