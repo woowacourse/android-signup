@@ -1,16 +1,16 @@
 package nextstep.signup.model.inputresult
 
-enum class PasswordInputResult : InputResult {
+enum class UsernameInputValidity : InputValidity {
     INVALID_FORMAT,
     INVALID_LENGTH,
     NO_ERROR;
 
     companion object {
-        private const val PASSWORD_REGEX = "^(?=.*[a-zA-Z])(?=.*[0-9]).{8,16}$"
-        private const val MIN_PASSWORD_LENGTH = 8
-        private const val MAX_PASSWORD_LENGTH = 16
+        private const val USERNAME_REGEX = "^[a-zA-Z가-힣]+$"
+        private const val MIN_USERNAME_LENGTH = 2
+        private const val MAX_USERNAME_LENGTH = 5
 
-        fun of(input: String): PasswordInputResult {
+        fun of(input: String): UsernameInputValidity {
             return when {
                 isInputFormatInvalid(input) -> INVALID_FORMAT
                 isInputLengthInvalid(input) -> INVALID_LENGTH
@@ -19,11 +19,11 @@ enum class PasswordInputResult : InputResult {
         }
 
         private fun isInputFormatInvalid(input: String): Boolean {
-            return !input.matches(PASSWORD_REGEX.toRegex())
+            return !input.matches(USERNAME_REGEX.toRegex())
         }
 
         private fun isInputLengthInvalid(input: String): Boolean {
-            return input.length !in MIN_PASSWORD_LENGTH..MAX_PASSWORD_LENGTH
+            return input.length !in MIN_USERNAME_LENGTH..MAX_USERNAME_LENGTH
         }
     }
 }

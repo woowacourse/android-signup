@@ -20,12 +20,12 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nextstep.signup.R
-import nextstep.signup.model.inputresult.EmailInputResult
+import nextstep.signup.model.inputresult.EmailInputValidity
 import nextstep.signup.model.InputFieldType
-import nextstep.signup.model.inputresult.InputResult
-import nextstep.signup.model.inputresult.PasswordConfirmInputResult
-import nextstep.signup.model.inputresult.PasswordInputResult
-import nextstep.signup.model.inputresult.UsernameInputResult
+import nextstep.signup.model.inputresult.InputValidity
+import nextstep.signup.model.inputresult.PasswordConfirmInputValidity
+import nextstep.signup.model.inputresult.PasswordInputValidity
+import nextstep.signup.model.inputresult.UsernameInputValidity
 
 @Composable
 fun InputField(
@@ -37,7 +37,7 @@ fun InputField(
     paddingBottom: Dp = 0.dp,
     type: InputFieldType,
 ) {
-    var inputResult by remember { mutableStateOf(UsernameInputResult.NO_ERROR) }
+    var inputValidity by remember { mutableStateOf(UsernameInputValidity.NO_ERROR) }
 
     TextField(
         modifier =
@@ -46,7 +46,7 @@ fun InputField(
         value = value,
         onValueChange = { input ->
             onValueChange(input)
-            inputResult = UsernameInputResult.of(input)
+            inputValidity = UsernameInputValidity.of(input)
         },
         label = { Text(label) },
         keyboardOptions =
@@ -62,7 +62,7 @@ fun InputField(
             top = 4.dp,
             bottom = paddingBottom
         ),
-        text = errorMessageOf(type, inputResult),
+        text = errorMessageOf(type, inputValidity),
         fontSize = 12.sp,
         color = MaterialTheme.colorScheme.error,
         style = MaterialTheme.typography.bodySmall,
@@ -70,46 +70,46 @@ fun InputField(
 }
 
 @Composable
-private fun usernameErrorMessageOf(result: UsernameInputResult): String {
-    return when (result) {
-        UsernameInputResult.INVALID_FORMAT -> stringResource(R.string.invalid_username_format)
-        UsernameInputResult.INVALID_LENGTH -> stringResource(R.string.invalid_username_length)
-        UsernameInputResult.NO_ERROR -> stringResource(R.string.no_error)
+private fun usernameErrorMessageOf(validity: UsernameInputValidity): String {
+    return when (validity) {
+        UsernameInputValidity.INVALID_FORMAT -> stringResource(R.string.invalid_username_format)
+        UsernameInputValidity.INVALID_LENGTH -> stringResource(R.string.invalid_username_length)
+        UsernameInputValidity.NO_ERROR -> stringResource(R.string.no_error)
     }
 }
 
 @Composable
-private fun emailErrorMessageOf(result: EmailInputResult): String {
-    return when (result) {
-        EmailInputResult.INVALID_FORMAT -> stringResource(R.string.invalid_email_format)
-        EmailInputResult.NO_ERROR -> stringResource(R.string.no_error)
+private fun emailErrorMessageOf(validity: EmailInputValidity): String {
+    return when (validity) {
+        EmailInputValidity.INVALID_FORMAT -> stringResource(R.string.invalid_email_format)
+        EmailInputValidity.NO_ERROR -> stringResource(R.string.no_error)
     }
 }
 
 @Composable
-private fun passwordErrorMessageOf(result: PasswordInputResult): String {
-    return when (result) {
-        PasswordInputResult.INVALID_FORMAT -> stringResource(R.string.invalid_password_format)
-        PasswordInputResult.INVALID_LENGTH -> stringResource(R.string.invalid_password_length)
-        PasswordInputResult.NO_ERROR -> stringResource(R.string.no_error)
+private fun passwordErrorMessageOf(validity: PasswordInputValidity): String {
+    return when (validity) {
+        PasswordInputValidity.INVALID_FORMAT -> stringResource(R.string.invalid_password_format)
+        PasswordInputValidity.INVALID_LENGTH -> stringResource(R.string.invalid_password_length)
+        PasswordInputValidity.NO_ERROR -> stringResource(R.string.no_error)
     }
 }
 
 @Composable
-private fun passwordConfirmErrorMessageOf(result: PasswordConfirmInputResult): String {
-    return when (result) {
-        PasswordConfirmInputResult.DOES_NOT_MATCH -> stringResource(R.string.password_confirm_does_not_match)
-        PasswordConfirmInputResult.NO_ERROR -> stringResource(R.string.no_error)
+private fun passwordConfirmErrorMessageOf(validity: PasswordConfirmInputValidity): String {
+    return when (validity) {
+        PasswordConfirmInputValidity.DOES_NOT_MATCH -> stringResource(R.string.password_confirm_does_not_match)
+        PasswordConfirmInputValidity.NO_ERROR -> stringResource(R.string.no_error)
     }
 }
 
 @Composable
-private fun errorMessageOf(inputFieldType: InputFieldType, result: InputResult): String {
+private fun errorMessageOf(inputFieldType: InputFieldType, validity: InputValidity): String {
     return when (inputFieldType) {
-        InputFieldType.USER_NAME -> usernameErrorMessageOf(result as UsernameInputResult)
-        InputFieldType.EMAIL -> emailErrorMessageOf(result as EmailInputResult)
-        InputFieldType.PASSWORD -> passwordErrorMessageOf(result as PasswordInputResult)
-        InputFieldType.PASSWORD_CONFIRM -> passwordConfirmErrorMessageOf(result as PasswordConfirmInputResult)
+        InputFieldType.USER_NAME -> usernameErrorMessageOf(validity as UsernameInputValidity)
+        InputFieldType.EMAIL -> emailErrorMessageOf(validity as EmailInputValidity)
+        InputFieldType.PASSWORD -> passwordErrorMessageOf(validity as PasswordInputValidity)
+        InputFieldType.PASSWORD_CONFIRM -> passwordConfirmErrorMessageOf(validity as PasswordConfirmInputValidity)
     }
 }
 
