@@ -113,9 +113,9 @@ private fun SignupContent(
             modifier = Modifier.padding(top = 16.dp),
             labelText = stringResource(id = R.string.password_confirm_input),
             inputValue = passwordConfirm.value,
-            visualTransformation = PasswordVisualTransformation(),
             isError = passwordConfirm.isError(password),
             errorText = errorText(passwordConfirm.errorMessage(password)),
+            visualTransformation = PasswordVisualTransformation(),
         ) {
             passwordConfirm = PasswordConfirmUiModel(it)
         }
