@@ -1,7 +1,9 @@
 package nextstep.signup
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -13,13 +15,18 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import nextstep.signup.ui.CustomTextField
 
 object TestFixture {
     const val TEST_TAG = "이름"
     const val FIRST_TEXT = "깜포즈"
     const val SECOND_TEXT = "끔포즈"
     const val PREVIEW_TEXT = "안녕 난 컴포즈야~"
+
+    const val USERNAME_LENGTH_ERROR = "이름은 2~5자여야 합니다."
+    const val USERNAME_FORMAT_ERROR = "이름에는 숫자나 기호가 포함될 수 없습니다."
 
     @Composable
     fun MakeColumnText() {
@@ -57,6 +64,33 @@ object TestFixture {
             modifier = modifier.testTag("버튼")
         ) {
             Text(text = buttonText)
+        }
+    }
+
+    @Composable
+    fun TestCustomTextField(
+        valueState: MutableState<String>,
+        errorState: MutableState<String>,
+        label: String,
+        onValueChange: (String) -> Unit
+    ) {
+        Column {
+            CustomTextField(
+                value = valueState.value,
+                onValueChange = {
+                    valueState.value = it
+                    onValueChange(it)
+                },
+                label = label,
+                isError = errorState.value.isNotEmpty()
+            )
+            if (errorState.value.isNotEmpty()) {
+                Text(
+                    text = errorState.value,
+                    color = MaterialTheme.colorScheme.error,
+                    modifier = Modifier.padding(start = 24.dp)
+                )
+            }
         }
     }
 }
