@@ -2,7 +2,8 @@ package nextstep.signup.model.inputresult
 
 enum class PasswordConfirmInputValidity : InputValidity {
     DOES_NOT_MATCH,
-    NO_ERROR;
+    NO_ERROR,
+    ;
 
     companion object {
         fun of(input: String): PasswordConfirmInputValidity {

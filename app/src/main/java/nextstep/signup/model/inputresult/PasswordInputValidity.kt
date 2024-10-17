@@ -3,7 +3,8 @@ package nextstep.signup.model.inputresult
 enum class PasswordInputValidity : InputValidity {
     INVALID_FORMAT,
     INVALID_LENGTH,
-    NO_ERROR;
+    NO_ERROR,
+    ;
 
     companion object {
         private const val PASSWORD_REGEX = "^(?=.*[a-zA-Z])(?=.*[0-9]).*$"

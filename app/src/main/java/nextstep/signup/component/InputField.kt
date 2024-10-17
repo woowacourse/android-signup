@@ -1,6 +1,5 @@
 package nextstep.signup.component
 
-import android.util.Log
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
@@ -46,8 +45,8 @@ fun InputField(
 
     TextField(
         modifier =
-        Modifier
-            .fillMaxWidth(),
+            Modifier
+                .fillMaxWidth(),
         value = value,
         onValueChange = { input ->
             onValueChange(input)
@@ -60,22 +59,24 @@ fun InputField(
         },
         label = { Text(label) },
         keyboardOptions =
-        KeyboardOptions(
-            keyboardType = keyboardType,
-        ),
+            KeyboardOptions(
+                keyboardType = keyboardType,
+            ),
         visualTransformation = visualTransformationOf(isPasswordInputField),
     )
 
     Text(
-        modifier = Modifier.padding(
-            start = 16.dp,
-            top = 4.dp,
-            bottom = paddingBottom
-        ),
-        text = when (type) {
-            InputFieldType.PASSWORD_CONFIRM -> passwordConfirmErrorMessage(password, passwordConfirm)
-            else -> errorMessageOf(type, inputValidity)
-        },
+        modifier =
+            Modifier.padding(
+                start = 16.dp,
+                top = 4.dp,
+                bottom = paddingBottom,
+            ),
+        text =
+            when (type) {
+                InputFieldType.PASSWORD_CONFIRM -> passwordConfirmErrorMessage(password, passwordConfirm)
+                else -> errorMessageOf(type, inputValidity)
+            },
         fontSize = 12.sp,
         color = MaterialTheme.colorScheme.error,
         style = MaterialTheme.typography.bodySmall,
@@ -91,7 +92,10 @@ private fun initInputValidity(type: InputFieldType): InputValidity {
     }
 }
 
-private fun validityOf(type: InputFieldType, input: String): InputValidity {
+private fun validityOf(
+    type: InputFieldType,
+    input: String,
+): InputValidity {
     return when (type) {
         InputFieldType.USER_NAME -> UsernameInputValidity.of(input)
         InputFieldType.EMAIL -> EmailInputValidity.of(input)
@@ -135,7 +139,10 @@ private fun passwordConfirmErrorMessageOf(validity: PasswordConfirmInputValidity
 }
 
 @Composable
-private fun errorMessageOf(type: InputFieldType, validity: InputValidity): String {
+private fun errorMessageOf(
+    type: InputFieldType,
+    validity: InputValidity,
+): String {
     return when (type) {
         InputFieldType.USER_NAME -> usernameErrorMessageOf(validity as UsernameInputValidity)
         InputFieldType.EMAIL -> emailErrorMessageOf(validity as EmailInputValidity)
@@ -145,7 +152,10 @@ private fun errorMessageOf(type: InputFieldType, validity: InputValidity): Strin
 }
 
 @Composable
-private fun passwordConfirmErrorMessage(password: String, passwordConfirm: String): String {
+private fun passwordConfirmErrorMessage(
+    password: String,
+    passwordConfirm: String,
+): String {
     return when (password == passwordConfirm) {
         true -> stringResource(R.string.no_error)
         false -> stringResource(R.string.password_confirm_does_not_match)

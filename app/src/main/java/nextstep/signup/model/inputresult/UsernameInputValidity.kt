@@ -3,7 +3,8 @@ package nextstep.signup.model.inputresult
 enum class UsernameInputValidity : InputValidity {
     INVALID_FORMAT,
     INVALID_LENGTH,
-    NO_ERROR;
+    NO_ERROR,
+    ;
 
     companion object {
         private const val USERNAME_REGEX = "^[a-zA-Z가-힣]+$"

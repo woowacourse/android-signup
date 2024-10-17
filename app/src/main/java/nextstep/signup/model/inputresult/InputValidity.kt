@@ -1,4 +1,3 @@
 package nextstep.signup.model.inputresult
 
-interface InputValidity {
-}
+interface InputValidity

@@ -2,7 +2,8 @@ package nextstep.signup.model.inputresult
 
 enum class EmailInputValidity : InputValidity {
     INVALID_FORMAT,
-    NO_ERROR;
+    NO_ERROR,
+    ;
 
     companion object {
         private const val EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$"
