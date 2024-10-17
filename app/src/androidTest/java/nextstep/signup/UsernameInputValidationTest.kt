@@ -11,7 +11,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-class InputValidationTest {
+class UsernameInputValidationTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
@@ -30,7 +30,7 @@ class InputValidationTest {
     }
 
     @Test
-    fun `사용자_이름은_2에서_5자여야_한다`() {
+    fun `사용자_이름은_2에서_5자_사이여야_한다`() {
         // when
         composeTestRule
             .onNodeWithText(USERNAME_INPUT_FIELD_LABEL)
@@ -55,8 +55,35 @@ class InputValidationTest {
             .assertExists()
     }
 
+    @Test
+    fun `사용자_이름에_숫자나_기호가_포함되지_않아야_한다`() {
+        // when
+        composeTestRule
+            .onNodeWithText(USERNAME_INPUT_FIELD_LABEL)
+            .performTextInput("아알송")
+
+        // then
+        composeTestRule
+            .onNodeWithText(USERNAME_FORMAT_ERROR)
+            .assertDoesNotExist()
+    }
+
+    @Test
+    fun `사용자_이름에_숫자나_기호가_포함되면_에러메시지가_노출된다`() {
+        // when
+        composeTestRule
+            .onNodeWithText(USERNAME_INPUT_FIELD_LABEL)
+            .performTextInput("알송1")
+
+        // then
+        composeTestRule
+            .onNodeWithText(USERNAME_FORMAT_ERROR)
+            .assertExists()
+    }
+
     companion object {
         private const val USERNAME_INPUT_FIELD_LABEL = "유저네임 입력필드 테스트!"
         private const val USERNAME_LENGTH_ERROR = "이름은 2~5자여야 합니다."
+        private const val USERNAME_FORMAT_ERROR = "이름에는 숫자나 기호가 포함될 수 없습니다."
     }
 }
