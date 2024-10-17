@@ -26,9 +26,9 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import nextstep.signup.ui.component.SignUpSnackBar
-import nextstep.signup.ui.component.SubjectComponent
-import nextstep.signup.ui.component.SubmitButtonComponent
-import nextstep.signup.ui.component.TextFieldComponent
+import nextstep.signup.ui.component.SignUpSubjectComponent
+import nextstep.signup.ui.component.SignUpSubmitButtonComponent
+import nextstep.signup.ui.component.SignUpTextFieldComponent
 import nextstep.signup.ui.model.ConfirmPassword
 import nextstep.signup.ui.model.Email
 import nextstep.signup.ui.model.Password
@@ -77,26 +77,26 @@ fun SignupScreen() {
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Spacer(Modifier.height(30.dp))
-            SubjectComponent(
+            SignUpSubjectComponent(
                 subject = stringResource(R.string.subject),
                 emoji = stringResource(R.string.emoji)
             )
             Spacer(Modifier.height(39.dp))
-            TextFieldComponent(
+            SignUpTextFieldComponent(
                 signUpModel = userName,
                 onTextChange = { newText ->
                     userName = Username(newText)
                 },
                 labelText = stringResource(R.string.username_label)
             )
-            TextFieldComponent(
+            SignUpTextFieldComponent(
                 signUpModel = email,
                 onTextChange = { newEmail ->
                     email = Email(newEmail)
                 },
                 labelText = stringResource(R.string.email_label)
             )
-            TextFieldComponent(
+            SignUpTextFieldComponent(
                 signUpModel = password,
                 onTextChange = { newPassword ->
                     password = Password(newPassword)
@@ -104,7 +104,7 @@ fun SignupScreen() {
                 labelText = stringResource(R.string.password_label),
                 isPassword = true
             )
-            TextFieldComponent(
+            SignUpTextFieldComponent(
                 signUpModel = passwordConfirm,
                 onTextChange = { newPasswordConfirm ->
                     passwordConfirm = ConfirmPassword(password, newPasswordConfirm)
@@ -113,7 +113,7 @@ fun SignupScreen() {
                 isPassword = true
             )
             Spacer(Modifier.height(24.dp))
-            SubmitButtonComponent(
+            SignUpSubmitButtonComponent(
                 signUpStates = listOf(
                     userName.validState(),
                     email.validState(),

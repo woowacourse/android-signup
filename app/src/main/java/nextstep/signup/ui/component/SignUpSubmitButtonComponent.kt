@@ -19,7 +19,7 @@ import nextstep.signup.ui.theme.Blue50
 import nextstep.signup.ui.theme.Gray50
 
 @Composable
-fun SubmitButtonComponent(
+fun SignUpSubmitButtonComponent(
     signUpStates : List<SignUpState>,
     buttonText: String,
     onButtonClick: () -> Unit
@@ -54,7 +54,7 @@ fun SubmitButtonComponent(
 )
 @Composable
 fun PreviewSubmitButtonComponent() {
-    SubmitButtonComponent(
+    SignUpSubmitButtonComponent(
         signUpStates = listOf(),
         buttonText = "",
         onButtonClick = {}

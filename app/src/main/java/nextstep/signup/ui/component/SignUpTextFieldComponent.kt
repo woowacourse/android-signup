@@ -28,7 +28,7 @@ import nextstep.signup.ui.theme.BlueGray20
 import nextstep.signup.ui.theme.Gray50
 
 @Composable
-fun TextFieldComponent(
+fun SignUpTextFieldComponent(
     signUpModel: SignUpModel,
     onTextChange: (newText: String) -> Unit,
     labelText: String,
@@ -90,7 +90,7 @@ fun TextFieldComponent(
 )
 @Composable
 fun PreviewTextFieldComponent() {
-    TextFieldComponent(
+    SignUpTextFieldComponent(
         signUpModel = Username(),
         onTextChange = {},
         labelText = "",
