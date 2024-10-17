@@ -11,7 +11,7 @@ import nextstep.signup.ui.component.InputText
 import org.junit.Rule
 import org.junit.Test
 
-class InputValidationTest {
+class InputTextTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
