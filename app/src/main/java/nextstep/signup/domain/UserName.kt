@@ -17,6 +17,25 @@ value class UserName(
         private val NAME_RANGE = MIN_NAME_LENGTH..MAX_NAME_LENGTH
 
         private const val USERNAME_REGEX = "^[a-zA-Z가-힣]+$"
-        private val regex = Regex(USERNAME_REGEX)
+        val regex = Regex(USERNAME_REGEX)
+
+        fun from(input: String): UserNameResult {
+            if (input == "") return EmptyField
+            if (input.length !in NAME_RANGE) return InvalidNameLength
+            if (!input.matches(regex)) return InvalidNameFormat
+            return Success(UserName(input))
+        }
     }
 }
+
+sealed interface UserNameResult
+
+data class Success(val userName: UserName) : UserNameResult
+
+data object EmptyField : UserNameResult
+
+sealed interface Failure : UserNameResult
+
+data object InvalidNameLength : Failure
+
+data object InvalidNameFormat : Failure
