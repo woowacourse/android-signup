@@ -65,25 +65,29 @@ fun SignUpScreen() {
                     passwordConfirm = passwordConfirm,
                 )
 
+            Spacer(modifier = Modifier.padding(top = 84.dp))
+
             SignUpHeaderText(
                 modifier =
                     Modifier.padding(
                         start = 28.dp,
                         end = 28.dp,
-                        top = 84.dp,
-                        bottom = 42.dp,
                     ),
                 text = stringResource(R.string.sign_up_header),
             )
 
             Column(
-                modifier = Modifier.padding(start = 28.dp, end = 28.dp),
+                modifier =
+                    Modifier.padding(
+                        start = 28.dp,
+                        end = 28.dp,
+                        top = 42.dp,
+                        bottom = 42.dp,
+                    ),
             ) {
                 SignUpTextField(
                     modifier =
-                        Modifier
-                            .fillMaxWidth()
-                            .padding(bottom = 36.dp),
+                        Modifier.fillMaxWidth(),
                     label = stringResource(R.string.username_label),
                     value = userName.text,
                     onValueChange = { value ->
@@ -97,7 +101,7 @@ fun SignUpScreen() {
                     modifier =
                         Modifier
                             .fillMaxWidth()
-                            .padding(bottom = 36.dp),
+                            .padding(top = 36.dp),
                     label = stringResource(R.string.email_label),
                     value = email.text,
                     onValueChange = { value ->
@@ -112,7 +116,7 @@ fun SignUpScreen() {
                     modifier =
                         Modifier
                             .fillMaxWidth()
-                            .padding(bottom = 36.dp),
+                            .padding(top = 36.dp),
                     label = stringResource(R.string.password_label),
                     value = password.text,
                     onValueChange = { value ->
@@ -129,7 +133,7 @@ fun SignUpScreen() {
                     modifier =
                         Modifier
                             .fillMaxWidth()
-                            .padding(bottom = 36.dp),
+                            .padding(top = 36.dp),
                     label = stringResource(R.string.password_confirm_label),
                     value = passwordConfirm.text,
                     onValueChange = { value ->
