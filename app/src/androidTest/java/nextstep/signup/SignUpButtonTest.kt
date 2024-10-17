@@ -20,7 +20,6 @@ class SignUpButtonTest {
 
     private val isButtonEnable = mutableStateOf(false)
 
-
     @Before
     fun setUp() {
         composeTestRule.setContent {
@@ -47,7 +46,7 @@ class SignUpButtonTest {
         composeTestRule.onNodeWithText(BUTTON_CONTENT).assertIsEnabled()
 
         // when
-        composeTestRule.onNodeWithText( BUTTON_CONTENT).performClick()
+        composeTestRule.onNodeWithText(BUTTON_CONTENT).performClick()
 
         // then
         composeTestRule.onNodeWithText(SNACKBAR_MESSAGE).isDisplayed()
@@ -57,5 +56,4 @@ class SignUpButtonTest {
         private const val BUTTON_CONTENT = "Sign Up"
         private const val SNACKBAR_MESSAGE = "회원가입이 완료되었습니다."
     }
-
 }
