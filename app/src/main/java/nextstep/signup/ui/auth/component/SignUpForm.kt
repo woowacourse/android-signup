@@ -1,4 +1,4 @@
-package nextstep.signup.auth.component
+package nextstep.signup.ui.auth.component
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -18,8 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import nextstep.signup.R
-import nextstep.signup.auth.preview.SignUpPreviewParamsProvider
-import nextstep.signup.auth.state.SignUpFormState
+import nextstep.signup.ui.auth.preview.SignUpPreviewParamsProvider
 import nextstep.signup.ui.theme.SignupTheme
 
 @Composable

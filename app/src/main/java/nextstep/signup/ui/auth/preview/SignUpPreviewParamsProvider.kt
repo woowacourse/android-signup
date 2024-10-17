@@ -1,7 +1,7 @@
-package nextstep.signup.auth.preview
+package nextstep.signup.ui.auth.preview
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import nextstep.signup.auth.state.SignUpFormState
+import nextstep.signup.ui.auth.component.SignUpFormState
 
 class SignUpPreviewParamsProvider : PreviewParameterProvider<SignUpFormState> {
     override val values: Sequence<SignUpFormState>

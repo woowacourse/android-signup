@@ -7,8 +7,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import nextstep.signup.auth.screen.SignUpScreen
-import nextstep.signup.auth.state.SignUpFormState
+import nextstep.signup.ui.auth.screen.SignUpScreen
+import nextstep.signup.ui.auth.component.SignUpFormState
 import nextstep.signup.ui.theme.SignupTheme
 
 class MainActivity : ComponentActivity() {

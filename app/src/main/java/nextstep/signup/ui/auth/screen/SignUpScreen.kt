@@ -1,4 +1,4 @@
-package nextstep.signup.auth.screen
+package nextstep.signup.ui.auth.screen
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -17,11 +17,11 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
-import nextstep.signup.auth.component.SignUpConfirmButton
-import nextstep.signup.auth.component.SignUpForm
-import nextstep.signup.auth.component.SignUpTitle
-import nextstep.signup.auth.preview.SignUpPreviewParamsProvider
-import nextstep.signup.auth.state.SignUpFormState
+import nextstep.signup.ui.auth.component.SignUpConfirmButton
+import nextstep.signup.ui.auth.component.SignUpForm
+import nextstep.signup.ui.auth.component.SignUpTitle
+import nextstep.signup.ui.auth.preview.SignUpPreviewParamsProvider
+import nextstep.signup.ui.auth.component.SignUpFormState
 import nextstep.signup.ui.interaction.clearFocusWith
 import nextstep.signup.ui.theme.SignupTheme
 

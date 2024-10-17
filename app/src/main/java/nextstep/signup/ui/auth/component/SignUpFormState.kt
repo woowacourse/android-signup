@@ -1,4 +1,4 @@
-package nextstep.signup.auth.state
+package nextstep.signup.ui.auth.component
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
