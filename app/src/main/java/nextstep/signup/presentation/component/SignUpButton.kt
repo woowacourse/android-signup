@@ -3,6 +3,7 @@ package nextstep.signup.presentation.component
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,17 +25,23 @@ fun SignUpButton(
             .fillMaxWidth()
             .height(60.dp),
         colors =
-        if (isEnable)
-            ButtonDefaults.buttonColors(
-                containerColor = colorResource(R.color.blue_50),
-                contentColor = Color.White,
-            )
-        else
-            ButtonDefaults.buttonColors(
-                containerColor = colorResource(R.color.purple_700),
-                contentColor = Color.White,
-            ),
+        buttonColors(isEnable),
     ) {
         Text(text = buttonText)
+    }
+}
+
+@Composable
+private fun buttonColors(isEnable: Boolean): ButtonColors {
+    return when (isEnable) {
+        true -> ButtonDefaults.buttonColors(
+            containerColor = colorResource(R.color.blue_50),
+            contentColor = Color.White,
+        )
+
+        false -> ButtonDefaults.buttonColors(
+            containerColor = colorResource(R.color.gray200),
+            contentColor = Color.DarkGray,
+        )
     }
 }
