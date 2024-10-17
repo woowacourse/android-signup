@@ -9,18 +9,23 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.launch
 import nextstep.signup.component.SignUpEmailTextField
 import nextstep.signup.component.SignUpPasswordConfirmTextField
 import nextstep.signup.component.SignUpPasswordTextField
@@ -68,58 +73,72 @@ fun SignUpScreen(
             )
         }
     }
+    val scope = rememberCoroutineScope()
+    val snackbarHostState = remember { SnackbarHostState() }
+    val signupSuccessMessage = stringResource(R.string.success_sign_up)
 
-    Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(start = 32.dp, end = 32.dp, top = 22.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Top
-    ) {
-        SignUpTitle(title = stringResource(R.string.sign_up_title))
-
-        SignUpUsernameTextField(
+    Scaffold(
+        snackbarHost = {
+            SnackbarHost(hostState = snackbarHostState)
+        }
+    ) { contentPadding ->
+        Column(
             modifier = modifier
                 .fillMaxWidth()
-                .padding(vertical = 20.dp),
-            username = username,
-            onUsernameChange = { username = it }
-        )
+                .padding(contentPadding)
+                .padding(start = 32.dp, end = 32.dp, top = 22.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Top
+        ) {
+            SignUpTitle(title = stringResource(R.string.sign_up_title))
 
-        SignUpEmailTextField(
-            modifier = modifier
-                .fillMaxWidth()
-                .padding(vertical = 20.dp),
-            email = email,
-            onEmailChange = { email = it }
-        )
+            SignUpUsernameTextField(
+                modifier = modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 20.dp),
+                username = username,
+                onUsernameChange = { username = it }
+            )
 
-        SignUpPasswordTextField(
-            modifier = modifier
-                .fillMaxWidth()
-                .padding(vertical = 20.dp),
-            password = password,
-            onPasswordChange = { password = it }
-        )
+            SignUpEmailTextField(
+                modifier = modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 20.dp),
+                email = email,
+                onEmailChange = { email = it }
+            )
 
-        SignUpPasswordConfirmTextField(
-            modifier = modifier
-                .fillMaxWidth()
-                .padding(vertical = 20.dp),
-            password = password,
-            passwordConfirm = passwordConfirm,
-            onPasswordConfirmChange = { passwordConfirm = it }
-        )
+            SignUpPasswordTextField(
+                modifier = modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 20.dp),
+                password = password,
+                onPasswordChange = { password = it }
+            )
+
+            SignUpPasswordConfirmTextField(
+                modifier = modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 20.dp),
+                password = password,
+                passwordConfirm = passwordConfirm,
+                onPasswordConfirmChange = { passwordConfirm = it }
+            )
 
 
-        SignUpSubmitButton(
-            modifier = modifier
-                .fillMaxWidth()
-                .padding(vertical = 32.dp),
-            text = stringResource(R.string.button_sign_up),
-            onClick = { },
-            enabled = signUpState.isValid()
-        )
+            SignUpSubmitButton(
+                modifier = modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 32.dp),
+                text = stringResource(R.string.button_sign_up),
+                onClick = {
+                    scope.launch {
+                        snackbarHostState.showSnackbar(signupSuccessMessage)
+                    }
+                },
+                enabled = signUpState.isValid()
+            )
+        }
     }
 }
 
