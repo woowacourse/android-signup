@@ -14,8 +14,9 @@ import nextstep.signup.R
 fun TextButton(
     @StringRes stringRes: Int,
     enabled: Boolean,
+    onClickEvent: () -> Unit = {},
 ) {
-    Button(onClick = {}, contentPadding = PaddingValues(120.dp, 15.dp), enabled = enabled) {
+    Button(onClick = { onClickEvent() }, contentPadding = PaddingValues(120.dp, 15.dp), enabled = enabled) {
         Text(text = stringResource(stringRes))
     }
 }
