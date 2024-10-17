@@ -26,6 +26,12 @@ val Typography =
                 color = Color.Black,
                 fontSize = 26.sp,
                 lineHeight = 28.sp,
-                letterSpacing = 0.sp,
+            ),
+        bodySmall =
+            TextStyle(
+                fontFamily = FontFamily.Default,
+                fontWeight = FontWeight.W400,
+                fontSize = 12.sp,
+                lineHeight = 16.sp,
             ),
     )
