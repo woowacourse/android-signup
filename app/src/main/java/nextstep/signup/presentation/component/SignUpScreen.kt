@@ -22,6 +22,11 @@ import nextstep.signup.model.fieldtype.PasswordInputFieldType
 
 @Composable
 fun SignUpScreen() {
+    var userName by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var confirmPassword by remember { mutableStateOf("") }
+
     Column(
         modifier =
             Modifier
@@ -29,10 +34,6 @@ fun SignUpScreen() {
                 .padding(16.dp),
         verticalArrangement = Arrangement.Center,
     ) {
-        var userName by remember { mutableStateOf("") }
-        var email by remember { mutableStateOf("") }
-        var password by remember { mutableStateOf("") }
-        var confirmPassword by remember { mutableStateOf("") }
         TitleText(stringResource(R.string.title))
 
         Spacer(modifier = Modifier.height(16.dp))
