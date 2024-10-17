@@ -99,7 +99,6 @@ private fun emailErrorMessageOf(validity: EmailInputValidity): String {
     }
 }
 
-
 @Composable
 private fun errorMessageOf(
     type: InputFieldType,
