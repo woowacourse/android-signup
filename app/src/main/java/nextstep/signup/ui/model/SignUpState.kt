@@ -1,7 +1,8 @@
-package nextstep.signup.ui.domain
+package nextstep.signup.ui.model
 
 sealed interface SignUpState {
     data object Valid : SignUpState
+    data object Blank : SignUpState
     sealed interface InValid: SignUpState {
         data object UserNameLength : InValid
         data object UserNameType: InValid

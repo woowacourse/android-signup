@@ -20,9 +20,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nextstep.signup.R
-import nextstep.signup.ui.domain.SignUpModel
-import nextstep.signup.ui.domain.SignUpState
-import nextstep.signup.ui.domain.Username
+import nextstep.signup.ui.model.SignUpModel
+import nextstep.signup.ui.model.SignUpState
+import nextstep.signup.ui.model.Username
 import nextstep.signup.ui.theme.Blue50
 import nextstep.signup.ui.theme.BlueGray20
 import nextstep.signup.ui.theme.Gray50
@@ -40,7 +40,7 @@ fun TextFieldComponent(
 ) {
     Column(
         modifier = Modifier
-            .padding(vertical = 18.dp)
+            .padding(vertical = 8.dp)
     ) {
         TextField(
             value = signUpModel.text,
@@ -63,25 +63,23 @@ fun TextFieldComponent(
                 color = Gray50,
                 fontSize = 16.sp
             ),
-            supportingText = {
-                val signUpStateText = when (signUpModel.validState()) {
-                    is SignUpState.Valid -> ""
-                    SignUpState.InValid.Confirm -> stringResource(R.string.error_confirm)
-                    SignUpState.InValid.Email -> stringResource(R.string.error_email)
-                    SignUpState.InValid.PasswordLength -> stringResource(R.string.error_password_length)
-                    SignUpState.InValid.PasswordType -> stringResource(R.string.error_password_type)
-                    SignUpState.InValid.UserNameLength -> stringResource(R.string.error_username_length)
-                    SignUpState.InValid.UserNameType -> stringResource(R.string.error_username_type)
-                }
-                Text(
-                    modifier = Modifier.padding(start = 16.dp),
-                    fontSize = 12.sp,
-                    text = signUpStateText,
-                    color = Color.Red,
-                )
-            },
             visualTransformation = if (isPassword) visualTransformation else VisualTransformation.None,
             keyboardOptions = if (isPassword) keyboardOptions else KeyboardOptions.Default
+        )
+        val signUpStateText = when (signUpModel.validState()) {
+            SignUpState.InValid.Confirm -> stringResource(R.string.error_confirm)
+            SignUpState.InValid.Email -> stringResource(R.string.error_email)
+            SignUpState.InValid.PasswordLength -> stringResource(R.string.error_password_length)
+            SignUpState.InValid.PasswordType -> stringResource(R.string.error_password_type)
+            SignUpState.InValid.UserNameLength -> stringResource(R.string.error_username_length)
+            SignUpState.InValid.UserNameType -> stringResource(R.string.error_username_type)
+            else -> ""
+        }
+        Text(
+            fontSize = 12.sp,
+            text = signUpStateText,
+            color = Color.Red,
+            modifier = Modifier.padding(start = 16.dp, top = 4.dp)
         )
     }
 }

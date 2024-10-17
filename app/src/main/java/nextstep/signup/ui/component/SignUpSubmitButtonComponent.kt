@@ -14,10 +14,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import nextstep.signup.ui.model.SignUpState
 import nextstep.signup.ui.theme.Blue50
 
 @Composable
 fun SubmitButtonComponent(
+    signUpStates : List<SignUpState>,
     buttonText: String,
     onButtonClick: () -> Unit
 ) {
@@ -27,7 +29,10 @@ fun SubmitButtonComponent(
         shape = RoundedCornerShape(100.dp),
         colors = ButtonDefaults.buttonColors(
             containerColor = Blue50
-        )
+        ),
+        enabled = signUpStates.all { signUpState ->
+            signUpState == SignUpState.Valid
+        }
     ) {
         Text(
             text = buttonText,
@@ -47,6 +52,7 @@ fun SubmitButtonComponent(
 @Composable
 fun PreviewSubmitButtonComponent() {
     SubmitButtonComponent(
+        signUpStates = listOf(),
         buttonText = "",
         onButtonClick = {}
     )

@@ -1,14 +1,19 @@
-package nextstep.signup.ui.domain
+package nextstep.signup.ui.model
 
 data class Username(
     override val text: String = DEFAULT_NAME
 ): SignUpModel {
     override fun validState(): SignUpState {
         return when {
+            isBlank() -> SignUpState.Blank
             !isValidLength() -> SignUpState.InValid.UserNameLength
             !isValidText() -> SignUpState.InValid.UserNameType
             else -> SignUpState.Valid
         }
+    }
+
+    override fun isBlank(): Boolean {
+        return text.isBlank()
     }
 
     private fun isValidLength(): Boolean =
