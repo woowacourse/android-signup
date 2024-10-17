@@ -24,9 +24,9 @@ class SignUpTextFieldTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
-    private val tag = "chad"
+    private val tag = "Chad"
     private val label = "SignUpTextField"
-    private val text = "bye"
+    private val text = "Bye"
     private val invalidLengthErrorMessage = "이름은 2~5자여야 합니다."
     private var userName by mutableStateOf(UserName(text))
 
@@ -58,7 +58,7 @@ class SignUpTextFieldTest {
 
     @Test
     fun 입력을_받으면_text가_변경된다() {
-        val input = "hi"
+        val input = "Hi"
         composeTestRule.onNodeWithTag(tag).performTextInput(input)
 
         composeTestRule.onNodeWithTag(tag).assert(hasText(input + text))

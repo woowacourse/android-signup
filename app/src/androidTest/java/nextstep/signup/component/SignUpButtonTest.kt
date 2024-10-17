@@ -20,7 +20,7 @@ class SignUpButtonTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
-    private val tag = "chad"
+    private val tag = "Chad"
     private val text = "SignUpButton"
     private var isClicked = false
     private var enabled by mutableStateOf(true)
