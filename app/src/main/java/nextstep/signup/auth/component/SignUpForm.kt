@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
@@ -16,20 +15,26 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import nextstep.signup.R
+import nextstep.signup.auth.preview.SignUpPreviewParamsProvider
 import nextstep.signup.auth.state.SignUpFormState
 import nextstep.signup.ui.theme.SignupTheme
 
 @Composable
 internal fun SignUpForm(
     signUpFormState: SignUpFormState,
-    onSignUpFormStateChange: (SignUpFormState) -> Unit,
+    onUserNameChange: (String) -> Unit,
+    onEmailChange: (String) -> Unit,
+    onPasswordChange: (String) -> Unit,
+    onPasswordConfirmChange: (String) -> Unit,
     onDoneSignUp: () -> Unit
 ) {
     val focusRequester = remember {
         FocusRequester()
     }
+
     LaunchedEffect(key1 = Unit) {
         focusRequester.requestFocus()
     }
@@ -43,9 +48,7 @@ internal fun SignUpForm(
             true
         },
         imeAction = ImeAction.Next,
-        onTextChange = { userName ->
-            onSignUpFormStateChange(signUpFormState.copy(userName = userName))
-        }
+        onTextChange = onUserNameChange
     )
     Spacer(modifier = Modifier.height(16.dp))
     AuthTextField(
@@ -56,9 +59,7 @@ internal fun SignUpForm(
             true
         },
         imeAction = ImeAction.Next,
-        onTextChange = { email ->
-            onSignUpFormStateChange(signUpFormState.copy(email = email))
-        }
+        onTextChange = onEmailChange
     )
     Spacer(modifier = Modifier.height(16.dp))
     AuthTextField(
@@ -71,14 +72,12 @@ internal fun SignUpForm(
         },
         imeAction = ImeAction.Next,
         keyboardType = KeyboardType.Password,
-        onTextChange = { password ->
-            onSignUpFormStateChange(signUpFormState.copy(password = password))
-        }
+        onTextChange = onPasswordChange
     )
     Spacer(modifier = Modifier.height(16.dp))
     AuthTextField(
         label = stringResource(id = R.string.sign_up_password_confirm_form),
-        text = signUpFormState.confirmPassword,
+        text = signUpFormState.passwordConfirm,
         isValid = {
             // TODO: Password와 동일
             true
@@ -86,32 +85,25 @@ internal fun SignUpForm(
         onDone = onDoneSignUp,
         imeAction = ImeAction.Done,
         keyboardType = KeyboardType.Password,
-        onTextChange = { confirmPassword ->
-            onSignUpFormStateChange(signUpFormState.copy(confirmPassword = confirmPassword))
-        }
+        onTextChange = onPasswordConfirmChange
     )
 }
 
 @Preview
 @Composable
-private fun Preview() {
+private fun Preview(
+    @PreviewParameter(SignUpPreviewParamsProvider::class) value: SignUpFormState,
+) {
     SignupTheme {
         Surface {
-            val (value, onChangeValue) = remember {
-                mutableStateOf(
-                    SignUpFormState(
-                        "",
-                        "",
-                        "",
-                        ""
-                    )
-                )
-            }
             Column(Modifier.padding(32.dp)) {
                 SignUpForm(
                     signUpFormState = value,
-                    onSignUpFormStateChange = onChangeValue,
-                    onDoneSignUp = {}
+                    onUserNameChange = {},
+                    onEmailChange = {},
+                    onPasswordChange = {},
+                    onPasswordConfirmChange = {},
+                    onDoneSignUp = {},
                 )
             }
         }
