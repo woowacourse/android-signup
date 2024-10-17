@@ -69,17 +69,17 @@ private fun SignupContent(
 
     Column(
         modifier =
-        modifier
-            .fillMaxSize()
-            .padding(horizontal = 32.dp),
+            modifier
+                .fillMaxSize()
+                .padding(horizontal = 32.dp),
     ) {
         Text(
             text = stringResource(id = R.string.sign_up_title),
             style = Typography.titleLarge,
             modifier =
-            Modifier
-                .padding(top = 60.dp, bottom = 14.dp)
-                .fillMaxWidth(),
+                Modifier
+                    .padding(top = 60.dp, bottom = 14.dp)
+                    .fillMaxWidth(),
         )
         SignupTextField(
             modifier = Modifier.padding(top = 16.dp),
@@ -115,7 +115,7 @@ private fun SignupContent(
             inputValue = passwordConfirm.value,
             visualTransformation = PasswordVisualTransformation(),
             isError = passwordConfirm.isError(password),
-            errorText = errorText(passwordConfirm.errorMessage(password))
+            errorText = errorText(passwordConfirm.errorMessage(password)),
         ) {
             passwordConfirm = PasswordConfirmUiModel(it)
         }
@@ -130,7 +130,9 @@ private fun SignupContent(
 }
 
 @Composable
-private fun errorText(@StringRes stringResId: Int?): String {
+private fun errorText(
+    @StringRes stringResId: Int?,
+): String {
     return if (stringResId == null) "" else stringResource(id = stringResId)
 }
 

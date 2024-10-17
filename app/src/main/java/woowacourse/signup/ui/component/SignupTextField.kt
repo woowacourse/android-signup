@@ -40,17 +40,17 @@ fun SignupTextField(
             value = inputValue,
             onValueChange = onValueChange,
             textStyle =
-            TextStyle(
-                fontSize = 16.sp,
-                fontWeight = FontWeight.W400,
-            ),
+                TextStyle(
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.W400,
+                ),
             singleLine = true,
             colors =
-            TextFieldDefaults.colors(
-                focusedIndicatorColor = textFieldColor,
-                focusedLabelColor = textFieldColor,
-                cursorColor = textFieldColor,
-            ),
+                TextFieldDefaults.colors(
+                    focusedIndicatorColor = textFieldColor,
+                    focusedLabelColor = textFieldColor,
+                    cursorColor = textFieldColor,
+                ),
             visualTransformation = visualTransformation,
             supportingText = {
                 Text(
