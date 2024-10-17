@@ -20,22 +20,22 @@ value class UserName(
         val regex = Regex(USERNAME_REGEX)
 
         fun from(input: String): UserNameResult {
-            if (input == "") return EmptyField
-            if (input.length !in NAME_RANGE) return InvalidNameLength
-            if (!input.matches(regex)) return InvalidNameFormat
-            return Success(UserName(input))
+            if (input == "") return UserNameResult.EmptyField
+            if (input.length !in NAME_RANGE) return UserNameResult.InvalidNameLength
+            if (!input.matches(regex)) return UserNameResult.InvalidNameFormat
+            return UserNameResult.Success(UserName(input))
         }
     }
 }
 
-sealed interface UserNameResult
+sealed interface UserNameResult {
+    data class Success(val userName: UserName) : UserNameResult
 
-data class Success(val userName: UserName) : UserNameResult
+    data object EmptyField : UserNameResult
 
-data object EmptyField : UserNameResult
+    sealed interface Failure : UserNameResult
 
-sealed interface Failure : UserNameResult
+    data object InvalidNameLength : Failure
 
-data object InvalidNameLength : Failure
-
-data object InvalidNameFormat : Failure
+    data object InvalidNameFormat : Failure
+}

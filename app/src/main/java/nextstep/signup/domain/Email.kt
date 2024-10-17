@@ -10,7 +10,23 @@ data class Email2(
     companion object {
         private const val EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$"
         private val regex = Regex(EMAIL_REGEX)
+
+        fun from(input: String): EmailResult {
+            if (input == "") return EmailResult.EmptyField
+            if (!regex.matches(input)) return EmailResult.InvalidNameFormat
+            return EmailResult.Success(Email2(input))
+        }
     }
+}
+
+sealed interface EmailResult {
+    data class Success(val email: Email2) : EmailResult
+
+    data object EmptyField : EmailResult
+
+    sealed interface Failure : EmailResult
+
+    data object InvalidNameFormat : Failure
 }
 
 data class Email(

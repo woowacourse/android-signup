@@ -8,12 +8,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import nextstep.signup.R
-import nextstep.signup.domain.EmptyField
-import nextstep.signup.domain.Failure
-import nextstep.signup.domain.InvalidNameFormat
-import nextstep.signup.domain.InvalidNameLength
-import nextstep.signup.domain.Success
 import nextstep.signup.domain.UserName
+import nextstep.signup.domain.UserNameResult
 
 @Composable
 fun UserNameTextField(
@@ -24,18 +20,18 @@ fun UserNameTextField(
         modifier = modifier,
         value = name,
         isError = when (UserName.from(name)) {
-            is EmptyField -> false
-            is Success -> false
-            is Failure -> true
+            is UserNameResult.EmptyField -> false
+            is UserNameResult.Success -> false
+            is UserNameResult.Failure -> true
         },
         supportingText = {
             when (UserName.from(name)) {
-                is EmptyField -> return@SignUpTextField2
-                is Success -> return@SignUpTextField2
-                is InvalidNameLength ->
+                is UserNameResult.EmptyField -> return@SignUpTextField2
+                is UserNameResult.Success -> return@SignUpTextField2
+                is UserNameResult.InvalidNameLength ->
                     Text(text = stringResource(id = R.string.error_message_user_name_invalid_length))
 
-                is InvalidNameFormat ->
+                is UserNameResult.InvalidNameFormat ->
                     Text(text = stringResource(id = R.string.error_message_user_name_invalid_format))
             }
         }
@@ -45,14 +41,14 @@ fun UserNameTextField(
 @Preview
 @Composable
 fun UsernameTextFieldPreview(
-    @PreviewParameter(UsernamePreviewParameterProvider::class) username: String
+    @PreviewParameter(UsernamePreviewParameter::class) username: String
 ) {
     UserNameTextField(
         name = username
     )
 }
 
-class UsernamePreviewParameterProvider : PreviewParameterProvider<String> {
+class UsernamePreviewParameter : PreviewParameterProvider<String> {
     override val values = sequenceOf(
         // failure
         "a",
