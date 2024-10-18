@@ -30,6 +30,7 @@ import nextstep.signup.model.PasswordConfirm
 import nextstep.signup.model.User
 import nextstep.signup.ui.theme.Blue50
 import nextstep.signup.ui.theme.SignupTheme
+import nextstep.signup.ui.theme.gray50
 
 @Composable
 fun SignUpScreen() {
@@ -104,9 +105,9 @@ fun SignUpScreen() {
         )
 
         Spacer(modifier = Modifier.height(42.dp))
+        val user = User(nameModel, emailModel, passwordModel, passwordConfirmModel)
         CustomButton(
             onClick = {
-                val user = User(nameModel, emailModel, passwordModel, passwordConfirmModel)
                 if (user.isInValid()) {
                     Log.d("SignUpScreen", "회원가입 실패")
                 } else {
@@ -114,7 +115,7 @@ fun SignUpScreen() {
                 }
             },
             buttonText = stringResource(R.string.sign_up_button),
-            colors = ButtonDefaults.buttonColors(containerColor = Blue50)
+            colors = ButtonDefaults.buttonColors(containerColor = if (user.isInValid()) gray50 else Blue50)
         )
     }
 }
