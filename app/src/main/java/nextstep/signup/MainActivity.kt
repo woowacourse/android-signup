@@ -135,7 +135,7 @@ fun PasswordComposable(
             val errorMessage = password.getErrorMessage() ?: return@TextFieldComponent
             TextComponent(description = errorMessage)
         },
-        isError = password.isValid(),
+        isError = password.isInvalid(),
         keyboardType = KeyboardType.Password,
     )
     Spacer(modifier = Modifier.size(36.dp))

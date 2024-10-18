@@ -1,7 +1,7 @@
 package nextstep.signup.model
 
 data class Password(val password: String) {
-    fun isValid() = !isBlank() && (!isValidLength() || !hasEnglishAndNumber())
+    fun isInvalid() = !isBlank() && (!isValidLength() || !hasEnglishAndNumber())
 
     fun getErrorMessage(): String? =
         when {
