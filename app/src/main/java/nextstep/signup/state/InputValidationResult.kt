@@ -1,4 +1,4 @@
-package nextstep.signup
+package nextstep.signup.state
 
 enum class InputValidationResult {
     Valid,

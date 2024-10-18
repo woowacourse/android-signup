@@ -1,8 +1,8 @@
-package nextstep.signup
+package nextstep.signup.state
 
-import nextstep.signup.InputValidationResult.Empty
-import nextstep.signup.InputValidationResult.Valid
-import nextstep.signup.InputValidationResult.WrongFormat
+import nextstep.signup.state.InputValidationResult.Empty
+import nextstep.signup.state.InputValidationResult.Valid
+import nextstep.signup.state.InputValidationResult.WrongFormat
 
 data class EmailState(
     val email: String = ""

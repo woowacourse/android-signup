@@ -1,4 +1,4 @@
-package nextstep.signup
+package nextstep.signup.components
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,6 +12,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import nextstep.signup.R
 
 @Composable
 fun DefaultButton(

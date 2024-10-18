@@ -1,4 +1,4 @@
-package nextstep.signup
+package nextstep.signup.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardOptions
@@ -12,11 +12,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import nextstep.signup.InputValidationResult.Empty
-import nextstep.signup.InputValidationResult.LengthError
-import nextstep.signup.InputValidationResult.NotSame
-import nextstep.signup.InputValidationResult.Valid
-import nextstep.signup.InputValidationResult.WrongFormat
+import nextstep.signup.R
+import nextstep.signup.state.InputValidationResult
+import nextstep.signup.state.InputValidationResult.Empty
+import nextstep.signup.state.InputValidationResult.LengthError
+import nextstep.signup.state.InputValidationResult.NotSame
+import nextstep.signup.state.InputValidationResult.Valid
+import nextstep.signup.state.InputValidationResult.WrongFormat
 
 @Composable
 fun UsernameTextField(
