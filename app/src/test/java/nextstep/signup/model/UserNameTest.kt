@@ -40,6 +40,12 @@ class UserNameTest {
         assertEquals(true, isInvalid)
     }
 
+    @Test
+    fun `사용자_이름이_비어있다면_isInvalid의_값은_false이다`() {
+        val isInvalid: Boolean = UserName("").isInvalid()
+        assertEquals(false, isInvalid)
+    }
+
     companion object {
         private const val USERNAME_LENGTH_ERROR = "이름은 2~5자여야 합니다."
         private const val USERNAME_FORM_ERROR = "이름에는 숫자나 기호가 포함될 수 없습니다."
