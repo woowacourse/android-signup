@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -49,6 +50,11 @@ fun SignUpInteractionLayer(onButtonClicked: () -> Unit) {
     var email by remember { mutableStateOf(Email("")) }
     var password by remember { mutableStateOf(Password("")) }
     var passwordConfirm by remember { mutableStateOf("") }
+    val isFormatValid by remember {
+        derivedStateOf {
+            username.isValid && email.isValid && password.isValid && passwordConfirm == password.value
+        }
+    }
 
     Column(
         modifier = Modifier.fillMaxHeight(0.8f),
@@ -90,6 +96,7 @@ fun SignUpInteractionLayer(onButtonClicked: () -> Unit) {
         StateButton(
             modifier = textFieldModifier.requiredHeight(50.dp),
             text = stringResource(id = R.string.signup_signup),
+            enabled = isFormatValid,
         ) {
             onButtonClicked()
         }
