@@ -36,5 +36,7 @@ data class SignUp(
 sealed interface SignUpResult {
     data class Success(val signUp: SignUp) : SignUpResult
 
+    data object Initial : SignUpResult
+
     data object Failure : SignUpResult
 }
