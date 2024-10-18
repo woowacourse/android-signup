@@ -1,7 +1,10 @@
+package nextstep.signup.ui.auth.screen
+
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.test.assert
+import androidx.compose.ui.test.isDisplayed
 import androidx.compose.ui.test.isFocused
 import androidx.compose.ui.test.isNotFocused
 import androidx.compose.ui.test.junit4.createComposeRule
@@ -12,7 +15,6 @@ import androidx.compose.ui.test.performTextInput
 import androidx.test.espresso.Espresso.onIdle
 import nextstep.signup.R
 import nextstep.signup.ui.auth.model.SignUpFormState
-import nextstep.signup.ui.auth.screen.SignUpScreen
 import org.junit.Rule
 import org.junit.Test
 
@@ -64,7 +66,7 @@ class SignUpScreenTest {
                 onEmailChange = {},
                 onPasswordChange = {},
                 onPasswordConfirmChange = {},
-                enableSignUp = true,
+                enableSignUp = false,
                 onDoneSignUp = {}
             )
         }
@@ -95,7 +97,7 @@ class SignUpScreenTest {
                 onEmailChange = {},
                 onPasswordChange = {},
                 onPasswordConfirmChange = {},
-                enableSignUp = true,
+                enableSignUp = false,
                 onDoneSignUp = {}
             )
         }
@@ -126,7 +128,7 @@ class SignUpScreenTest {
                 onEmailChange = {},
                 onPasswordChange = {},
                 onPasswordConfirmChange = {},
-                enableSignUp = true,
+                enableSignUp = false,
                 onDoneSignUp = {}
             )
         }
@@ -140,5 +142,37 @@ class SignUpScreenTest {
         // then
         composeTestRule.onNodeWithText(passwordConfirmFormLabel)
             .assert(isNotFocused())
+    }
+
+    @Test
+    fun `회원가입_버튼이_활성화됐을때_누르면_스낵바_메세지가_뜬다`() {
+        // given
+        var passwordConfirmFormLabel = ""
+        var snackBarMessage = ""
+        composeTestRule.setContent {
+            val (formState, onChangeFormState) = remember {
+                mutableStateOf(SignUpFormState.empty())
+            }
+            passwordConfirmFormLabel = stringResource(id = R.string.sign_up_password_confirm_form)
+            snackBarMessage = stringResource(id = R.string.sign_up_success)
+            SignUpScreen(
+                signUpFormState = formState,
+                onUserNameChange = {},
+                onEmailChange = {},
+                onPasswordChange = {},
+                onPasswordConfirmChange = {},
+                enableSignUp = true,
+                onDoneSignUp = {}
+            )
+        }
+
+        // when
+        onIdle()
+        composeTestRule.onNodeWithText(passwordConfirmFormLabel)
+            .performClick()
+        // then
+        onIdle()
+        composeTestRule.onNodeWithText(snackBarMessage)
+            .isDisplayed()
     }
 }
