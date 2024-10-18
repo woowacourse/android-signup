@@ -18,6 +18,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import nextstep.signup.R
+import nextstep.signup.ui.auth.model.SignUpFormState
+import nextstep.signup.ui.auth.model.toErrorMessage
 import nextstep.signup.ui.auth.preview.SignUpPreviewParamsProvider
 import nextstep.signup.ui.theme.SignupTheme
 
@@ -30,6 +32,20 @@ internal fun SignUpForm(
     onPasswordConfirmChange: (String) -> Unit,
     onDoneSignUp: () -> Unit
 ) {
+    val userNameValidateResult = remember(signUpFormState.userName) {
+        signUpFormState.userNameValidateResult
+    }
+    val emailValidateResult = remember(signUpFormState.email) {
+        signUpFormState.emailValidateResult
+    }
+    val passwordValidateResult = remember(signUpFormState.password) {
+        signUpFormState.passwordValidateResult
+    }
+    val passwordConfirmValidateResult =
+        remember(signUpFormState.password, signUpFormState.passwordConfirm) {
+            signUpFormState.passwordConfirmValidateResult
+        }
+
     val focusRequester = remember {
         FocusRequester()
     }
@@ -41,11 +57,8 @@ internal fun SignUpForm(
         modifier = Modifier.focusRequester(focusRequester),
         label = stringResource(id = R.string.sign_up_user_name_form),
         text = signUpFormState.userName,
-        isValid = {
-            // TODO: 이름은 2~5자여야 합니다.
-            // TODO: 이름에는 숫자나 기호가 포함될 수 없습니다
-            true
-        },
+        isValid = userNameValidateResult.isValid,
+        errorMessage = userNameValidateResult.toErrorMessage(),
         imeAction = ImeAction.Next,
         onTextChange = onUserNameChange
     )
@@ -53,10 +66,8 @@ internal fun SignUpForm(
     AuthTextField(
         label = stringResource(id = R.string.sign_up_email_form),
         text = signUpFormState.email,
-        isValid = {
-            // TODO: 이메일 형식
-            true
-        },
+        isValid = emailValidateResult.isValid,
+        errorMessage = emailValidateResult.toErrorMessage(),
         imeAction = ImeAction.Next,
         onTextChange = onEmailChange
     )
@@ -64,11 +75,8 @@ internal fun SignUpForm(
     AuthTextField(
         label = stringResource(id = R.string.sign_up_password_form),
         text = signUpFormState.password,
-        isValid = {
-            // TODO: 비밀 번호 8 ~ 16자리
-            // TODO: 영문, 숫자
-            true
-        },
+        isValid = passwordValidateResult.isValid,
+        errorMessage = passwordValidateResult.toErrorMessage(),
         imeAction = ImeAction.Next,
         keyboardType = KeyboardType.Password,
         onTextChange = onPasswordChange
@@ -77,10 +85,8 @@ internal fun SignUpForm(
     AuthTextField(
         label = stringResource(id = R.string.sign_up_password_confirm_form),
         text = signUpFormState.passwordConfirm,
-        isValid = {
-            // TODO: Password와 동일
-            true
-        },
+        isValid = passwordConfirmValidateResult.isValid,
+        errorMessage = passwordConfirmValidateResult.toErrorMessage(),
         onDone = onDoneSignUp,
         imeAction = ImeAction.Done,
         keyboardType = KeyboardType.Password,
