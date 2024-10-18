@@ -24,10 +24,27 @@ data class SignUpFormState(
     val userNameValidateResult: UserNameValidateResult get() = UserName.validate(userName)
     val emailValidateResult: EmailValidateResult get() = Email.validate(email)
     val passwordValidateResult: PasswordValidateResult get() = Password.validate(password)
-    val passwordConfirmValidateResult: PasswordConfirmValidateResult get() = PasswordConfirm.validate(password, passwordConfirm)
+    val passwordConfirmValidateResult: PasswordConfirmValidateResult
+        get() = PasswordConfirm.validate(
+            password,
+            passwordConfirm
+        )
 
-    val enableSignUp: Boolean get() =
-        userNameValidateResult.isValid && emailValidateResult.isValid && passwordValidateResult.isValid && passwordConfirmValidateResult.isValid
+    val enableSignUp: Boolean
+        get() =
+            userNameValidateResult.isValid && emailValidateResult.isValid && passwordValidateResult.isValid && passwordConfirmValidateResult.isValid
+
+    companion object {
+        fun empty(): SignUpFormState {
+            return SignUpFormState(
+                userName = "",
+                email = "",
+                password = "",
+                passwordConfirm = ""
+            )
+
+        }
+    }
 }
 
 @Composable

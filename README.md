@@ -21,7 +21,7 @@
 - [x] rememberSaveable 을 사용하여 회원가입 폼 상태를 저장한다.
 
 ## Step 3
-- [] AuthTextField 들 UserName, Email, Password, Password Confirm 컴포넌트로 만든다.
+
 - [x] onXXXChangeState 함수를 상위로 올려 리컴포지션을 최적화 한다.
 - [x] Email, Password, Password Confirm 의 Validation 을 추가한다.
 - [x] 모든 화면의 Validation 을 통과하면 SignUp 버튼을 활성화 한다.
