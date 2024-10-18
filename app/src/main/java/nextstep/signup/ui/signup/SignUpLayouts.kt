@@ -25,6 +25,8 @@ import nextstep.signup.ui.common.button.StateButton
 import nextstep.signup.ui.common.textfield.InputType
 import nextstep.signup.ui.common.textfield.SingleLineTextInput
 import nextstep.signup.ui.common.textfield.validateEmailInput
+import nextstep.signup.ui.common.textfield.validatePasswordConfirmInput
+import nextstep.signup.ui.common.textfield.validatePasswordInput
 import nextstep.signup.ui.common.textfield.validateUsernameInput
 import nextstep.signup.ui.theme.SignUpTheme
 import nextstep.signup.ui.theme.Typography
@@ -72,6 +74,7 @@ fun SignUpInteractionLayer(onButtonClicked: () -> Unit) {
             onValueChange = { password = it },
             label = stringResource(id = R.string.signup_password),
             inputType = InputType.Password,
+            validateInput = { validatePasswordInput(password) },
         )
         SingleLineTextInput(
             modifier = textFieldModifier,
@@ -79,6 +82,7 @@ fun SignUpInteractionLayer(onButtonClicked: () -> Unit) {
             onValueChange = { passwordConfirm = it },
             label = stringResource(id = R.string.signup_password_confirm),
             inputType = InputType.Password,
+            validateInput = { validatePasswordConfirmInput(password, passwordConfirm) },
         )
         StateButton(
             modifier = textFieldModifier.requiredHeight(50.dp),
