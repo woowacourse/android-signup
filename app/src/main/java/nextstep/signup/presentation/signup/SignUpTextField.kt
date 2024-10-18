@@ -1,3 +1,5 @@
+@file:JvmName("SignUpTextFieldKt")
+
 package nextstep.signup.presentation.signup
 
 import androidx.compose.foundation.text.KeyboardOptions
@@ -8,9 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import nextstep.signup.R
-import nextstep.signup.ui.theme.SignupTheme
 
 @Composable
 fun SignUpTextField(
@@ -19,7 +19,9 @@ fun SignUpTextField(
     visualTransformation: VisualTransformation = VisualTransformation.None,
     value: String = "",
     onValueChange: (String) -> Unit = { },
-    keyboardType: KeyboardType = KeyboardType.Text
+    keyboardType: KeyboardType = KeyboardType.Text,
+    isError: Boolean = false,
+    supportingText: @Composable (() -> Unit)? = null
 ) {
     TextField(
         value = value,
@@ -30,14 +32,8 @@ fun SignUpTextField(
         visualTransformation = visualTransformation,
         keyboardOptions = KeyboardOptions(
             keyboardType = keyboardType
-        )
+        ),
+        isError = isError,
+        supportingText = supportingText
     )
-}
-
-@Preview
-@Composable
-private fun SignUpTextFieldPreview() {
-    SignupTheme {
-        SignUpTextField()
-    }
 }
