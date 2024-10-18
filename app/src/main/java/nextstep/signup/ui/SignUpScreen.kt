@@ -131,7 +131,8 @@ fun SignUpScreen() {
                 }
             },
             buttonText = stringResource(R.string.sign_up_button),
-            colors = ButtonDefaults.buttonColors(containerColor = if (user.isInvalid()) gray50 else Blue50)
+            colors = ButtonDefaults.buttonColors(containerColor = if (user.isInvalid()) gray50 else Blue50),
+            enabled = !user.isInvalid(),
         )
     }
 }
