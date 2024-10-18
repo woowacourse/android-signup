@@ -2,7 +2,7 @@ package nextstep.signup.domain
 
 data class SignUp(
     val userName: UserName,
-    val email: Email2,
+    val email: Email,
     val password: Password,
     val passwordConfirm: PasswordConfirm
 ) {

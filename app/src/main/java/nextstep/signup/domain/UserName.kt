@@ -9,8 +9,6 @@ value class UserName(
         require(name.matches(regex)) { "name must not include number or symbol" }
     }
 
-    fun isValid(): Boolean = name.isNotBlank()
-
     companion object {
         private const val MIN_NAME_LENGTH = 2
         private const val MAX_NAME_LENGTH = 5

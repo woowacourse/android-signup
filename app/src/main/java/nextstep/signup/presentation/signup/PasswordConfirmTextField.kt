@@ -21,7 +21,7 @@ fun PasswordConfirmTextField(
     onValueChange: (String) -> Unit,
     labelText: String = stringResource(R.string.default_text_field_label)
 ) {
-    SignUpTextField2(
+    SignUpTextField(
         modifier = modifier,
         labelText = labelText,
         value = passwordConfirm,
@@ -33,8 +33,8 @@ fun PasswordConfirmTextField(
         },
         supportingText = {
             when (PasswordConfirm.from(password, passwordConfirm)) {
-                is PasswordConfirmResult.EmptyField -> return@SignUpTextField2
-                is PasswordConfirmResult.Success -> return@SignUpTextField2
+                is PasswordConfirmResult.EmptyField -> return@SignUpTextField
+                is PasswordConfirmResult.Success -> return@SignUpTextField
                 is PasswordConfirmResult.NotSamePasswordConfirm ->
                     Text(text = stringResource(id = R.string.error_message_password_not_same))
             }

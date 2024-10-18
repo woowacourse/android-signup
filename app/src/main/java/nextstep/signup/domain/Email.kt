@@ -1,6 +1,6 @@
 package nextstep.signup.domain
 
-data class Email2(
+data class Email(
     val content: String
 ) {
     init {
@@ -14,44 +14,17 @@ data class Email2(
         fun from(input: String): EmailResult {
             if (input == "") return EmailResult.EmptyField
             if (!regex.matches(input)) return EmailResult.InvalidNameFormat
-            return EmailResult.Success(Email2(input))
+            return EmailResult.Success(Email(input))
         }
     }
 }
 
 sealed interface EmailResult {
-    data class Success(val email: Email2) : EmailResult
+    data class Success(val email: Email) : EmailResult
 
     data object EmptyField : EmailResult
 
     sealed interface Failure : EmailResult
 
     data object InvalidNameFormat : Failure
-}
-
-data class Email(
-    val id: EmailId,
-    val domain: EmailDomain
-) {
-    fun isValid(): Boolean = id.isValid() && domain.isValid()
-
-    fun whole(): String = id.id
-}
-
-@JvmInline
-value class EmailId(
-    val id: String
-) {
-    fun isValid(): Boolean = id.isNotBlank()
-}
-
-@JvmInline
-value class EmailDomain(
-    val domain: String
-) {
-    fun isValid(): Boolean = domain.isNotBlank()
-
-    companion object {
-        val DEFAULT = EmailDomain("wooteco.com")
-    }
 }

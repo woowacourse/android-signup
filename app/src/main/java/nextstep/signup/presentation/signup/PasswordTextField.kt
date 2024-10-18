@@ -20,7 +20,7 @@ fun PasswordTextField(
     onValueChange: (String) -> Unit,
     labelText: String = stringResource(R.string.default_text_field_label)
 ) {
-    SignUpTextField2(
+    SignUpTextField(
         modifier = modifier,
         labelText = labelText,
         value = password,
@@ -32,8 +32,8 @@ fun PasswordTextField(
         },
         supportingText = {
             when (Password.from(password)) {
-                is PasswordResult.EmptyField -> return@SignUpTextField2
-                is PasswordResult.Success -> return@SignUpTextField2
+                is PasswordResult.EmptyField -> return@SignUpTextField
+                is PasswordResult.Success -> return@SignUpTextField
                 is PasswordResult.InvalidPasswordLength ->
                     Text(text = stringResource(id = R.string.error_message_password_invalid_length))
 

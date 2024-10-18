@@ -9,7 +9,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import nextstep.signup.R
-import nextstep.signup.domain.Email2
+import nextstep.signup.domain.Email
 import nextstep.signup.domain.EmailResult
 
 @Composable
@@ -19,21 +19,21 @@ fun EmailTextField(
     onValueChange: (String) -> Unit,
     email: String
 ) {
-    SignUpTextField2(
+    SignUpTextField(
         modifier = modifier,
         labelText = labelText,
         value = email,
         onValueChange = onValueChange,
         keyboardType = KeyboardType.Email,
-        isError = when (Email2.from(input = email)) {
+        isError = when (Email.from(input = email)) {
             is EmailResult.EmptyField -> false
             is EmailResult.Success -> false
             is EmailResult.Failure -> true
         },
         supportingText = {
-            when (Email2.from(input = email)) {
-                is EmailResult.EmptyField -> return@SignUpTextField2
-                is EmailResult.Success -> return@SignUpTextField2
+            when (Email.from(input = email)) {
+                is EmailResult.EmptyField -> return@SignUpTextField
+                is EmailResult.Success -> return@SignUpTextField
                 is EmailResult.InvalidNameFormat -> Text(text = stringResource(id = R.string.error_message_email_invalid_format))
             }
         }

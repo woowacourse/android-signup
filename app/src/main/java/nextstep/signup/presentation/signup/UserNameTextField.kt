@@ -18,7 +18,7 @@ fun UserNameTextField(
     onValueChange: (String) -> Unit,
     labelText: String = stringResource(R.string.default_text_field_label)
 ) {
-    SignUpTextField2(
+    SignUpTextField(
         modifier = modifier,
         labelText = labelText,
         value = name,
@@ -30,8 +30,8 @@ fun UserNameTextField(
         },
         supportingText = {
             when (UserName.from(name)) {
-                is UserNameResult.EmptyField -> return@SignUpTextField2
-                is UserNameResult.Success -> return@SignUpTextField2
+                is UserNameResult.EmptyField -> return@SignUpTextField
+                is UserNameResult.Success -> return@SignUpTextField
                 is UserNameResult.InvalidNameLength ->
                     Text(text = stringResource(id = R.string.error_message_user_name_invalid_length))
 
