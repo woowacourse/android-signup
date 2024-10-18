@@ -11,7 +11,7 @@ import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
-class InputValidationTest {
+class UserNameValidationTest {
 
     @get:Rule
     val composeTestRule = createComposeRule()
