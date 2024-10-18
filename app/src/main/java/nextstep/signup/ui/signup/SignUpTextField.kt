@@ -24,6 +24,7 @@ fun SignUpTextField(
     isError: Boolean = false,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    errorMessage: String = ""
 ) {
     TextField(
         modifier = modifier.fillMaxWidth(),
@@ -33,6 +34,11 @@ fun SignUpTextField(
         isError = isError,
         visualTransformation = visualTransformation,
         keyboardOptions = keyboardOptions,
+        supportingText = {
+            if (isError) {
+                Text(text = errorMessage)
+            }
+        }
     )
 }
 

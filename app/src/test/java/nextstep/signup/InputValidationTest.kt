@@ -69,5 +69,6 @@ fun UsernameTextField(
         text = username,
         onValueChange = onValueChange,
         isError = isError,
+        errorMessage = errorMessage
     )
 }
