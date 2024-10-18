@@ -86,16 +86,8 @@ private fun UserNameComposable() {
         supportingText = {
             when {
                 isBlank -> return@TextFieldComponent
-                isInvalidLength -> {
-                    TextComponent(
-                        description = "이름은 2~5자여야 합니다.",
-                    )
-                }
-                hasInvalidCharacter -> {
-                    TextComponent(
-                        description = "이름에는 숫자나 기호가 포함될 수 없습니다.",
-                    )
-                }
+                isInvalidLength -> TextComponent(description = "이름은 2~5자여야 합니다.")
+                hasInvalidCharacter -> TextComponent(description = "이름에는 숫자나 기호가 포함될 수 없습니다.")
             }
         },
         isError = isError,
@@ -129,11 +121,23 @@ private fun EmailComposable() {
 @Composable
 private fun PasswordComposable() {
     var password by remember { mutableStateOf("") }
+    val isBlank = password.isBlank()
+    val isInvalidLength = password.length !in EMAIL_MIN_LENGTH..EMAIL_MAX_LENGTH
+    val hasEnglishAndNumber = password.matches(Regex(PASSWORD_REGEX)).not()
+    val isError = isBlank.not() && (isInvalidLength || hasEnglishAndNumber)
+
     TextFieldComponent(
         newValue = password,
         onValueChange = { password = it },
         label = R.string.main_password,
-        supportingText = {},
+        supportingText = {
+            when {
+                isBlank -> return@TextFieldComponent
+                isInvalidLength -> TextComponent(description = "비밀번호는 8~16자여야 합니다.")
+                hasEnglishAndNumber -> TextComponent(description = "비밀번호는 영문과 숫자를 포함해야 합니다.")
+            }
+        },
+        isError = isError,
         keyboardType = KeyboardType.Password,
     )
     Spacer(modifier = Modifier.size(36.dp))
@@ -165,3 +169,5 @@ const val EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$"
 const val PASSWORD_REGEX = "^(?=.*[a-zA-Z])(?=.*[0-9]).{8,16}$"
 const val USERNAME_MIN_LENGTH = 2
 const val USERNAME_MAX_LENGTH = 5
+const val EMAIL_MIN_LENGTH = 8
+const val EMAIL_MAX_LENGTH = 16
