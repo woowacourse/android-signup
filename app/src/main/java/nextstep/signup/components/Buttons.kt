@@ -18,6 +18,7 @@ import nextstep.signup.R
 fun DefaultButton(
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues,
+    enabled: Boolean,
     onClick: () -> Unit
 ) {
     Button(
@@ -25,6 +26,7 @@ fun DefaultButton(
         modifier = modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(20.dp)),
+        enabled = enabled,
         colors = ButtonDefaults.buttonColors(Color.Blue),
         contentPadding = contentPadding
     ) {

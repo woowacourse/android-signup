@@ -27,6 +27,7 @@ import nextstep.signup.components.HeadLine
 import nextstep.signup.components.PasswordTextField
 import nextstep.signup.components.UsernameTextField
 import nextstep.signup.state.EmailState
+import nextstep.signup.state.InputValidationResult.Valid
 import nextstep.signup.state.PasswordConfirmState
 import nextstep.signup.state.PasswordState
 import nextstep.signup.state.UsernameState
@@ -55,6 +56,19 @@ fun SignUpScreen() {
     var emailState by remember { mutableStateOf(EmailState()) }
     var passwordState by remember { mutableStateOf(PasswordState()) }
     var passwordConfirmState by remember { mutableStateOf(PasswordConfirmState()) }
+    val isSignUpEnabled by remember(
+        usernameState,
+        emailState,
+        passwordState,
+        passwordConfirmState
+    ) {
+        mutableStateOf(
+            usernameState.validate() == Valid &&
+                emailState.validate() == Valid &&
+                passwordState.validate() == Valid &&
+                passwordConfirmState.validate(passwordState.password) == Valid
+        )
+    }
 
     Column(
         modifier = Modifier.padding(
@@ -91,6 +105,9 @@ fun SignUpScreen() {
             inputValidationResult = passwordConfirmState.validate(passwordState.password)
         )
         Spacer(modifier = Modifier.height(6.dp))
-        DefaultButton(contentPadding = PaddingValues(15.dp)) {}
+        DefaultButton(
+            contentPadding = PaddingValues(15.dp),
+            enabled = isSignUpEnabled
+        ) {}
     }
 }
