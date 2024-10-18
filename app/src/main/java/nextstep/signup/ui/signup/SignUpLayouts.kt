@@ -24,6 +24,7 @@ import nextstep.signup.R
 import nextstep.signup.ui.common.button.StateButton
 import nextstep.signup.ui.common.textfield.InputType
 import nextstep.signup.ui.common.textfield.SingleLineTextInput
+import nextstep.signup.ui.common.textfield.validateEmailInput
 import nextstep.signup.ui.common.textfield.validateUsernameInput
 import nextstep.signup.ui.theme.SignUpTheme
 import nextstep.signup.ui.theme.Typography
@@ -63,6 +64,7 @@ fun SignUpInteractionLayer(onButtonClicked: () -> Unit) {
             onValueChange = { email = it },
             label = stringResource(id = R.string.signup_email),
             inputType = InputType.Email,
+            validateInput = { validateEmailInput(email) },
         )
         SingleLineTextInput(
             modifier = textFieldModifier,
