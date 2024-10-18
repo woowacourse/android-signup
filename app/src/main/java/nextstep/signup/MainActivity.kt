@@ -70,7 +70,7 @@ private fun SignUpInputBox() {
     var password by remember { mutableStateOf("") }
     var passwordConfirm by remember { mutableStateOf("") }
 
-    UserNameComposable(userName = userName, onUserNameChange = { userName = it })
+    UserNameComposable(value = userName, onUserNameChange = { userName = it })
     EmailComposable(email = email, onEmailChange = { email = it })
     PasswordComposable(password = password, onPasswordChange = { password = it })
     PasswordConfirmComposable(password = password, passwordConfirm = passwordConfirm, onPasswordConfirmChange = { passwordConfirm = it })
@@ -78,26 +78,20 @@ private fun SignUpInputBox() {
 
 @Composable
 fun UserNameComposable(
-    userName: String,
+    value: String,
     onUserNameChange: (String) -> Unit,
 ) {
-    val isBlank = userName.isBlank()
-    val isInvalidLength = userName.length !in USERNAME_MIN_LENGTH..USERNAME_MAX_LENGTH
-    val hasInvalidCharacter = userName.matches(regex = Regex(USERNAME_REGEX)).not()
-    val isError = isBlank.not() && (isInvalidLength || hasInvalidCharacter)
+    val userName = UserName(value)
 
     TextFieldComponent(
-        newValue = userName,
+        newValue = value,
         onValueChange = onUserNameChange,
         label = R.string.main_user_name,
         supportingText = {
-            when {
-                isBlank -> return@TextFieldComponent
-                isInvalidLength -> TextComponent(description = "이름은 2~5자여야 합니다.")
-                hasInvalidCharacter -> TextComponent(description = "이름에는 숫자나 기호가 포함될 수 없습니다.")
-            }
+            val errorMessage = userName.getErrorMessage() ?: return@TextFieldComponent
+            TextComponent(description = errorMessage)
         },
-        isError = isError,
+        isError = userName.isValid(),
     )
     Spacer(modifier = Modifier.size(36.dp))
 }
@@ -188,10 +182,7 @@ private fun GreetingPreview() {
     }
 }
 
-const val USERNAME_REGEX = "^[a-zA-Z가-힣]+$"
 const val EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$"
 const val PASSWORD_REGEX = "^(?=.*[a-zA-Z])(?=.*[0-9]).{8,16}$"
-const val USERNAME_MIN_LENGTH = 2
-const val USERNAME_MAX_LENGTH = 5
 const val PASSWORD_MIN_LENGTH = 8
 const val PASSWORD_MAX_LENGTH = 16
