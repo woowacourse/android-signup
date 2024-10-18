@@ -124,14 +124,14 @@ fun SignUpScreen() {
 
         CustomButton(
             onClick = {
-                if (user.isInValid()) {
+                if (user.isInvalid()) {
                     Log.d("SignUpScreen", "회원가입 실패")
                 } else {
                     Log.d("SignUpScreen", "회원가입 성공")
                 }
             },
             buttonText = stringResource(R.string.sign_up_button),
-            colors = ButtonDefaults.buttonColors(containerColor = if (user.isInValid()) gray50 else Blue50)
+            colors = ButtonDefaults.buttonColors(containerColor = if (user.isInvalid()) gray50 else Blue50)
         )
     }
 }

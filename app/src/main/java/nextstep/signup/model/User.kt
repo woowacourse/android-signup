@@ -6,7 +6,7 @@ data class User(
     val password: Password,
     val passwordConfirm: PasswordConfirm
 ) {
-    fun isInValid(): Boolean {
+    fun isInvalid(): Boolean {
         return name.isInvalid() || email.isInvalid() || password.isInvalid() || passwordConfirm.isInvalid()
     }
 }
