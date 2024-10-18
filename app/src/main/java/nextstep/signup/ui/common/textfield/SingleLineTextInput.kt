@@ -48,9 +48,9 @@ fun SingleLineTextInput(
                 focusedIndicatorColor = MaterialTheme.colorScheme.secondary,
                 focusedLabelColor = MaterialTheme.colorScheme.secondary,
             ),
-        isError = supportingText.isNullOrBlank().not(),
+        isError = !supportingText.isNullOrBlank(),
         supportingText = {
-            if (supportingText != null) Text(text = supportingText)
-        }
+            if (!supportingText.isNullOrBlank()) Text(text = supportingText)
+        },
     )
 }

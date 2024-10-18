@@ -10,6 +10,10 @@ import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -19,6 +23,7 @@ import nextstep.signup.R
 import nextstep.signup.ui.common.button.StateButton
 import nextstep.signup.ui.common.textfield.InputType
 import nextstep.signup.ui.common.textfield.SingleLineTextInput
+import nextstep.signup.ui.common.textfield.validateUsernameInput
 import nextstep.signup.ui.theme.SignUpTheme
 import nextstep.signup.ui.theme.Typography
 
@@ -33,6 +38,8 @@ fun SignUpTitle() {
 @Composable
 fun SignUpInteractionLayer(onButtonClicked: () -> Unit) {
     val textFieldModifier = Modifier.fillMaxWidth()
+    var usernameSupportingText by remember { mutableStateOf("") }
+
     Column(
         modifier = Modifier.fillMaxHeight(0.8f),
         verticalArrangement = Arrangement.SpaceEvenly,
@@ -41,8 +48,12 @@ fun SignUpInteractionLayer(onButtonClicked: () -> Unit) {
         SingleLineTextInput(
             modifier = textFieldModifier,
             label = stringResource(id = R.string.signup_username),
-            onValueChange = { it },
+            onValueChange = { name ->
+                usernameSupportingText = validateUsernameInput(name)
+                name
+            },
             inputType = InputType.Username,
+            supportingText = usernameSupportingText,
         )
         SingleLineTextInput(
             modifier = textFieldModifier,
@@ -75,9 +86,9 @@ fun SignUpInteractionLayer(onButtonClicked: () -> Unit) {
 fun SignUpLayout(onButtonClicked: () -> Unit) {
     Column(
         modifier =
-            Modifier
-                .fillMaxHeight(0.7f)
-                .padding(32.dp),
+        Modifier
+            .fillMaxHeight(0.7f)
+            .padding(32.dp),
         verticalArrangement = Arrangement.SpaceEvenly,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
@@ -94,9 +105,9 @@ fun SignUpLayoutPreview() {
     SignUpTheme {
         Surface(
             modifier =
-                Modifier
-                    .fillMaxSize()
-                    .padding(32.dp),
+            Modifier
+                .fillMaxSize()
+                .padding(32.dp),
         ) {
             SignUpInteractionLayer {}
         }
