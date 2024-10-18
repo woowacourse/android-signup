@@ -3,10 +3,11 @@ package nextstep.signup
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
+import nextstep.signup.domain.Password
 import nextstep.signup.ui.common.textfield.InputType
 import nextstep.signup.ui.common.textfield.SingleLineTextInput
-import nextstep.signup.ui.common.textfield.validatePasswordConfirmInput
-import nextstep.signup.ui.common.textfield.validatePasswordInput
+import nextstep.signup.ui.signup.SignUpValidator.validatePassword
+import nextstep.signup.ui.signup.SignUpValidator.validatePasswordConfirm
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -14,7 +15,7 @@ import org.junit.Test
 class PasswordInputValidationTest {
     @get:Rule
     val composeTestRule = createComposeRule()
-    private val password = mutableStateOf("")
+    private val password = mutableStateOf(Password(""))
     private val passwordConfirm = mutableStateOf("")
 
     @Before
@@ -22,10 +23,10 @@ class PasswordInputValidationTest {
         composeTestRule.setContent {
             SingleLineTextInput(
                 label = "비밀번호 테스트",
-                value = password.value,
-                onValueChange = { password.value = it },
+                value = password.value.value,
+                onValueChange = { password.value = Password(it) },
                 inputType = InputType.Password,
-                validateInput = { validatePasswordInput(password.value) },
+                validateInput = { password.value.validatePassword() },
             )
 
             SingleLineTextInput(
@@ -34,9 +35,8 @@ class PasswordInputValidationTest {
                 onValueChange = { passwordConfirm.value = it },
                 inputType = InputType.Password,
                 validateInput = {
-                    validatePasswordConfirmInput(
-                        password.value,
-                        passwordConfirm.value,
+                    passwordConfirm.value.validatePasswordConfirm(
+                        password.value.value
                     )
                 },
             )
@@ -46,7 +46,7 @@ class PasswordInputValidationTest {
     @Test
     fun 비밀번호는_8에서_16자여야_한다() {
         // when
-        password.value = "abcd1234"
+        password.value = Password("abcd1234")
 
         // then
         composeTestRule
@@ -57,7 +57,7 @@ class PasswordInputValidationTest {
     @Test
     fun 비밀번호가_8에서_16자가_아니면_에러메시지가_노출된다() {
         // when
-        password.value = "abcd12"
+        password.value = Password("abcd12")
 
         // then
         composeTestRule
@@ -68,7 +68,7 @@ class PasswordInputValidationTest {
     @Test
     fun 비밀번호에_영문과_숫자가_포함되어야_한다() {
         // when
-        password.value = "abcd1234xyz"
+        password.value = Password("abcd1234xyz")
 
         // then
         composeTestRule
@@ -79,7 +79,7 @@ class PasswordInputValidationTest {
     @Test
     fun 비밀번호에_영문과_숫자가_함께_포함되지_않으면_에러메시지가_노출된다() {
         // when
-        password.value = "abcdefgh"
+        password.value = Password("abcdefgh")
 
         // then
         composeTestRule
@@ -90,7 +90,7 @@ class PasswordInputValidationTest {
     @Test
     fun 비밀번호_확인_시_비밀번호가_일치해야한다() {
         // when
-        password.value = "abcd1234"
+        password.value = Password("abcd1234")
         passwordConfirm.value = "abcd1234"
 
         // then
@@ -102,7 +102,7 @@ class PasswordInputValidationTest {
     @Test
     fun 비밀번호가_일치하지_않으면_에러메시지가_노출된다() {
         // when
-        password.value = "abcd5678"
+        password.value = Password("abcd5678")
         passwordConfirm.value = "abcd1234"
 
         // then

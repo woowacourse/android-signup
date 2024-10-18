@@ -3,9 +3,10 @@ package nextstep.signup
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
+import nextstep.signup.domain.Username
 import nextstep.signup.ui.common.textfield.InputType
 import nextstep.signup.ui.common.textfield.SingleLineTextInput
-import nextstep.signup.ui.common.textfield.validateUsernameInput
+import nextstep.signup.ui.signup.SignUpValidator.validateUsername
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -13,17 +14,17 @@ import org.junit.Test
 class UsernameInputValidationTest {
     @get:Rule
     val composeTestRule = createComposeRule()
-    private val username = mutableStateOf("")
+    private val username = mutableStateOf(Username(""))
 
     @Before
     fun setup() {
         composeTestRule.setContent {
             SingleLineTextInput(
                 label = "이름 테스트",
-                value = username.value,
-                onValueChange = { username.value = it },
+                value = username.value.value,
+                onValueChange = { username.value = Username(it) },
                 inputType = InputType.Username,
-                validateInput = { validateUsernameInput(username.value) },
+                validateInput = { username.value.validateUsername() },
             )
         }
     }
@@ -31,7 +32,7 @@ class UsernameInputValidationTest {
     @Test
     fun 사용자_이름은_2에서_5자여야_한다() {
         // when
-        username.value = "원컴포즈"
+        username.value = Username("원컴포즈")
 
         // then
         composeTestRule
@@ -42,7 +43,7 @@ class UsernameInputValidationTest {
     @Test
     fun 사용자_이름이_2에서_5자가_아니면_에러메시지가_노출된다() {
         // when
-        username.value = "원컴포즈입니다"
+        username.value = Username("원컴포즈입니다")
 
         // then
         composeTestRule
@@ -53,7 +54,7 @@ class UsernameInputValidationTest {
     @Test
     fun 사용자_이름에_숫자나_기호가_포함되면_에러메시지가_노출된다() {
         // when
-        username.value = "원.컴포즈"
+        username.value = Username("원.컴포즈")
 
         // then
         composeTestRule
@@ -64,7 +65,7 @@ class UsernameInputValidationTest {
     @Test
     fun 사용자_이름에_공백이_포함되면_에러메시지가_노출된다() {
         // when
-        username.value = "원컴 포즈"
+        username.value = Username("원컴 포즈")
 
         // then
         composeTestRule
