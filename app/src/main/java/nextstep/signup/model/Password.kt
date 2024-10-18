@@ -1,19 +1,16 @@
 package nextstep.signup.model
 
-import android.util.Log
-
 class Password(private val value: String) : InputValidation {
     private var errorMessage: String? = null
 
-    override fun isInValid(): Boolean {
-        return regexValidate() || lengthValidate()
+    override fun isInvalid(): Boolean {
+        return lengthValidate() || regexValidate()
     }
 
-    override fun getErrorMessage() = if (isInValid()) errorMessage else null
+    override fun getErrorMessage() = if (isInvalid()) errorMessage else null
 
     private fun regexValidate(): Boolean {
         if (!value.matches(PASSWORD_REGEX.toRegex())) {
-            Log.d("Password", "value: $value")
             errorMessage = ERROR_USER_PASSWORD_REGEX
             return true
         }

@@ -3,11 +3,11 @@ package nextstep.signup.model
 class Email(private val value: String) : InputValidation {
     private var errorMessage: String? = null
 
-    override fun isInValid(): Boolean {
+    override fun isInvalid(): Boolean {
         return regexValidate()
     }
 
-    override fun getErrorMessage() = if (isInValid()) errorMessage else null
+    override fun getErrorMessage() = if (isInvalid()) errorMessage else null
 
     private fun regexValidate(): Boolean {
         if (!value.matches(EMAIL_REGEX.toRegex())) {

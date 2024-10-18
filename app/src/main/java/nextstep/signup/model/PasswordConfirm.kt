@@ -6,7 +6,7 @@ class PasswordConfirm(
 ) : InputValidation {
     private var errorMessage: String? = null
 
-    override fun isInValid(): Boolean {
+    override fun isInvalid(): Boolean {
         if (value != originalPassword) {
             errorMessage = ERROR_USER_PASSWORD_CONFIRM
             return true
@@ -14,7 +14,7 @@ class PasswordConfirm(
         return false
     }
 
-    override fun getErrorMessage() = if (isInValid()) errorMessage else null
+    override fun getErrorMessage() = if (isInvalid()) errorMessage else null
 
     fun setValue(password: String, passwordConfirm: String) {
         value = passwordConfirm
