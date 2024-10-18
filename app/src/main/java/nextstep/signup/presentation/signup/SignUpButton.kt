@@ -9,6 +9,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.signup.R
+import nextstep.signup.domain.SignUpResult
 import nextstep.signup.ui.theme.SignupTheme
 import nextstep.signup.ui.theme.Typography
 
@@ -16,12 +17,12 @@ import nextstep.signup.ui.theme.Typography
 fun SignUpButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit = {},
-    enable: () -> Boolean = { true },
+    signUpResult: SignUpResult,
     text: String = stringResource(R.string.sign_up_button)
 ) {
     Button(
         onClick = { onClick() },
-        enabled = enable(),
+        enabled = signUpResult is SignUpResult.Success,
         modifier = modifier
     ) {
         Text(
@@ -37,6 +38,8 @@ fun SignUpButton(
 @Composable
 private fun SignUpButtonPreview() {
     SignupTheme {
-        SignUpButton()
+        SignUpButton(
+            signUpResult = SignUpResult.Failure
+        )
     }
 }

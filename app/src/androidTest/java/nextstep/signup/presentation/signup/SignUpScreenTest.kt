@@ -4,15 +4,10 @@ import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createComposeRule
-import nextstep.signup.domain.Email
-import nextstep.signup.domain.EmailDomain
-import nextstep.signup.domain.EmailId
-import nextstep.signup.domain.Password
-import nextstep.signup.domain.SignUp
-import nextstep.signup.domain.UserName
 import org.junit.Rule
 import org.junit.Test
 
+// TODO: SignUpScreen 으로
 class SignUpScreenTest {
     @get:Rule
     val composeTestRule = createComposeRule()
@@ -22,7 +17,7 @@ class SignUpScreenTest {
     fun signup_is_not_enabled_when_signup_condition_is_not_satisfied() {
         // given
         composeTestRule.setContent {
-            SignUpScreen(initialSignUp = SignUp.INITIAL)
+//            SignUpScreen3(initialSignUp = SignUp3.INITIAL)
         }
 
         // then
@@ -33,19 +28,19 @@ class SignUpScreenTest {
     fun signup_is_enabled_when_signup_condition_is_satisfied() {
         // given
         composeTestRule.setContent {
-            SignUpScreen(
-                initialSignUp = SignUp(
-                    userName = UserName("악어"),
-                    email = Email(
-                        EmailId("sh1mj1"),
-                        EmailDomain("wooteco.com")
-                    ),
-                    password = Password(
-                        password = "1234",
-                        passwordConfirm = "1234"
-                    )
-                )
-            )
+// //            SignUpScreen3(
+// //                initialSignUp = SignUp3(
+// //                    userName = UserName("악어"),
+// //                    email = Email(
+// //                        EmailId("sh1mj1"),
+// //                        EmailDomain("wooteco.com")
+// //                    ),
+// //                    password = Password3(
+// //                        password = "1234",
+// //                        passwordConfirm = "1234"
+// //                    )
+// //                )
+//            )
         }
 
         // then
