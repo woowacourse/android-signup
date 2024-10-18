@@ -114,7 +114,7 @@ fun EmailComposable(
             val errorMessage = email.getErrorMessage() ?: return@TextFieldComponent
             TextComponent(description = errorMessage)
         },
-        isError = email.isValid(),
+        isError = email.isInvalid(),
         keyboardType = KeyboardType.Email,
     )
     Spacer(modifier = Modifier.size(36.dp))

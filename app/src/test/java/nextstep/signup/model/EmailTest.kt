@@ -12,12 +12,15 @@ class EmailTest {
 
     @Test
     fun `이메일_형식이_올바르면_에러메시지가_반환된다`() {
-        val errorMessage: String? = Email("hannah@naver.com").getErrorMessage()
+        val errorMessage: String? = Email("hannahnaver.com").getErrorMessage()
         assertEquals(EMAIL_FORM_ERROR, errorMessage)
     }
 
-//    @Test
-//    fun
+    @Test
+    fun `이메일_형식이_비어있다면_isInvalid의_값은_false이다`() {
+        val isInvalid: Boolean = Email("").isInvalid()
+        assertEquals(false, isInvalid)
+    }
 
     companion object {
         private const val EMAIL_FORM_ERROR = "이메일 형식이 올바르지 않습니다."
