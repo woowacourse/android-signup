@@ -2,6 +2,7 @@ package nextstep.signup.ui.auth.model
 
 import android.os.Parcelable
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.res.stringResource
 import kotlinx.parcelize.Parcelize
 import nextstep.signup.R
@@ -71,6 +72,7 @@ fun UserNameValidateResult.toErrorMessage(): String? {
 }
 
 @Composable
+@ReadOnlyComposable
 fun EmailValidateResult.toErrorMessage(): String? {
     return when (this) {
         EmailValidateResult.Success -> null
@@ -80,6 +82,7 @@ fun EmailValidateResult.toErrorMessage(): String? {
 }
 
 @Composable
+@ReadOnlyComposable
 fun PasswordValidateResult.toErrorMessage(): String? {
     return when (this) {
         PasswordValidateResult.Success -> null
@@ -101,6 +104,7 @@ fun PasswordValidateResult.toErrorMessage(): String? {
 }
 
 @Composable
+@ReadOnlyComposable
 fun PasswordConfirmValidateResult.toErrorMessage(): String? {
     return when (this) {
         PasswordConfirmValidateResult.Success -> null
