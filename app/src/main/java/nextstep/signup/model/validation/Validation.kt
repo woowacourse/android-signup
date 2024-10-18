@@ -1,4 +1,4 @@
-package nextstep.signup.model
+package nextstep.signup.model.validation
 
 interface Validation {
     fun validate(text: String): Boolean

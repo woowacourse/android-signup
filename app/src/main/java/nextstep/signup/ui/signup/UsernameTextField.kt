@@ -5,9 +5,9 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import nextstep.signup.R
-import nextstep.signup.model.CompositeValidation
-import nextstep.signup.model.LengthValidation
-import nextstep.signup.model.RegexValidation
+import nextstep.signup.model.validation.CompositeValidation
+import nextstep.signup.model.validation.LengthValidation
+import nextstep.signup.model.validation.RegexValidation
 
 @Composable
 fun UsernameTextField(
