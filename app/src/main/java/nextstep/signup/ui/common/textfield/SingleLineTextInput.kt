@@ -5,10 +5,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import nextstep.signup.ui.theme.Typography
 
@@ -23,19 +19,18 @@ fun LabelText(label: String) {
 @Composable
 fun SingleLineTextInput(
     modifier: Modifier = Modifier,
-    onValueChange: (String) -> String,
+    value: String,
+    onValueChange: (String) -> Unit,
     label: String,
     inputType: InputType,
-    supportingText: String? = null,
+    validateInput: @Composable ((String) -> String)? = null,
 ) {
-    var value by rememberSaveable { mutableStateOf("") }
+    val supportingText = validateInput?.let { it(value) }
 
     TextField(
         modifier = modifier,
         value = value,
-        onValueChange = {
-            value = onValueChange(it)
-        },
+        onValueChange = onValueChange,
         label = {
             LabelText(label = label)
         },
@@ -50,7 +45,9 @@ fun SingleLineTextInput(
             ),
         isError = !supportingText.isNullOrBlank(),
         supportingText = {
-            if (!supportingText.isNullOrBlank()) Text(text = supportingText)
+            if (!supportingText.isNullOrBlank()) {
+                Text(supportingText)
+            }
         },
     )
 }

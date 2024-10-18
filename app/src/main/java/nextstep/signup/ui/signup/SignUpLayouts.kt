@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -38,7 +39,10 @@ fun SignUpTitle() {
 @Composable
 fun SignUpInteractionLayer(onButtonClicked: () -> Unit) {
     val textFieldModifier = Modifier.fillMaxWidth()
-    var usernameSupportingText by remember { mutableStateOf("") }
+    var username by rememberSaveable { mutableStateOf("") }
+    var email by rememberSaveable { mutableStateOf("") }
+    var password by rememberSaveable { mutableStateOf("") }
+    var passwordConfirm by rememberSaveable { mutableStateOf("") }
 
     Column(
         modifier = Modifier.fillMaxHeight(0.8f),
@@ -47,30 +51,31 @@ fun SignUpInteractionLayer(onButtonClicked: () -> Unit) {
     ) {
         SingleLineTextInput(
             modifier = textFieldModifier,
+            value = username,
+            onValueChange = { username = it },
             label = stringResource(id = R.string.signup_username),
-            onValueChange = { name ->
-                usernameSupportingText = validateUsernameInput(name)
-                name
-            },
             inputType = InputType.Username,
-            supportingText = usernameSupportingText,
+            validateInput = { validateUsernameInput(username) },
         )
         SingleLineTextInput(
             modifier = textFieldModifier,
+            value = email,
+            onValueChange = { email = it },
             label = stringResource(id = R.string.signup_email),
-            onValueChange = { it },
             inputType = InputType.Email,
         )
         SingleLineTextInput(
             modifier = textFieldModifier,
+            value = password,
+            onValueChange = { password = it },
             label = stringResource(id = R.string.signup_password),
-            onValueChange = { it },
             inputType = InputType.Password,
         )
         SingleLineTextInput(
             modifier = textFieldModifier,
+            value = passwordConfirm,
+            onValueChange = { passwordConfirm = it },
             label = stringResource(id = R.string.signup_password_confirm),
-            onValueChange = { it },
             inputType = InputType.Password,
         )
         StateButton(
