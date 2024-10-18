@@ -4,7 +4,7 @@ data class PasswordConfirm(
     val password: String,
     val passwordConfirm: String,
 ) {
-    fun isValid(): Boolean = !isBlank() && !isMatchPassword()
+    fun isInvalid(): Boolean = !isBlank() && !isMatchPassword()
 
     fun getErrorMessage(): String? =
         when {
