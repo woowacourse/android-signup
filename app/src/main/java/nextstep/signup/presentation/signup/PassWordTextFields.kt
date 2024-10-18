@@ -14,8 +14,8 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import nextstep.signup.R
-import nextstep.signup.domain.Password
-import nextstep.signup.domain.PasswordResult
+import nextstep.signup.domain.Password3
+import nextstep.signup.domain.PasswordResult3
 
 @Composable
 fun PasswordTextFields(
@@ -35,17 +35,17 @@ fun PasswordTextFields(
             onValueChange = onPasswordChange,
             visualTransformation = PasswordVisualTransformation(),
             keyboardType = KeyboardType.Password,
-            isError = when (Password.from(password, passwordConfirm)) {
-                is PasswordResult.EmptyField -> false
-                is PasswordResult.Failure -> true
-                is PasswordResult.Success -> false
+            isError = when (Password3.from(password, passwordConfirm)) {
+                is PasswordResult3.EmptyField -> false
+                is PasswordResult3.Failure -> true
+                is PasswordResult3.Success -> false
             },
             supportingText = {
-                when (Password.from(password, passwordConfirm)) {
-                    is PasswordResult.EmptyField -> return@SignUpTextField2
-                    is PasswordResult.Success -> return@SignUpTextField2
-                    is PasswordResult.InvalidPasswordLength -> Text(text = "비밀번호는 8~16자여야 합니다.")
-                    is PasswordResult.InvalidPasswordFormat -> Text(text = "비밀번호는 영문과 숫자를 포함해야 합니다.")
+                when (Password3.from(password, passwordConfirm)) {
+                    is PasswordResult3.EmptyField -> return@SignUpTextField2
+                    is PasswordResult3.Success -> return@SignUpTextField2
+                    is PasswordResult3.InvalidPasswordLength -> Text(text = "비밀번호는 8~16자여야 합니다.")
+                    is PasswordResult3.InvalidPasswordFormat -> Text(text = "비밀번호는 영문과 숫자를 포함해야 합니다.")
                     else -> return@SignUpTextField2
                 }
             }
@@ -60,16 +60,16 @@ fun PasswordTextFields(
             onValueChange = onPasswordConfirmChange,
             visualTransformation = PasswordVisualTransformation(),
             keyboardType = KeyboardType.Password,
-            isError = when (Password.from(password, passwordConfirm)) {
-                is PasswordResult.EmptyField -> false
-                is PasswordResult.Failure -> true
-                is PasswordResult.Success -> false
+            isError = when (Password3.from(password, passwordConfirm)) {
+                is PasswordResult3.EmptyField -> false
+                is PasswordResult3.Failure -> true
+                is PasswordResult3.Success -> false
             },
             supportingText = {
-                when (Password.from(password, passwordConfirm)) {
-                    is PasswordResult.EmptyField -> return@SignUpTextField2
-                    is PasswordResult.Success -> return@SignUpTextField2
-                    is PasswordResult.NotSamePasswordConfirm -> Text(text = "비밀번호가 일치하지 않습니다.")
+                when (Password3.from(password, passwordConfirm)) {
+                    is PasswordResult3.EmptyField -> return@SignUpTextField2
+                    is PasswordResult3.Success -> return@SignUpTextField2
+                    is PasswordResult3.NotSamePasswordConfirm -> Text(text = "비밀번호가 일치하지 않습니다.")
                     else -> return@SignUpTextField2
                 }
             }
@@ -79,7 +79,7 @@ fun PasswordTextFields(
 
 @Preview
 @Composable
-private fun PasswordTextFieldsPreview(@PreviewParameter(PasswordPreviewParameter::class) passwords: Pair<String, String>) {
+private fun PasswordTextFieldsPreview(@PreviewParameter(PasswordPreviewParameter3::class) passwords: Pair<String, String>) {
     PasswordTextFields(
         password = passwords.first,
         passwordConfirm = passwords.second,
@@ -88,7 +88,7 @@ private fun PasswordTextFieldsPreview(@PreviewParameter(PasswordPreviewParameter
     )
 }
 
-class PasswordPreviewParameter : PreviewParameterProvider<Pair<String, String>> {
+class PasswordPreviewParameter3 : PreviewParameterProvider<Pair<String, String>> {
     override val values: Sequence<Pair<String, String>> = sequenceOf(
         // empty
         Pair("a", ""),

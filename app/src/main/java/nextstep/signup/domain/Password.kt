@@ -1,16 +1,13 @@
 package nextstep.signup.domain
 
-data class Password(
-    val password: String = "",
-    val passwordConfirm: String = ""
-) {
+@JvmInline
+value class Password(val content: String) {
     init {
-        require(password.length in PASSWORD_RANGE) { "password has to be in $PASSWORD_RANGE" }
-        require(regex.matches(password)) { "password must contain at least one English and number" }
-        require(password == passwordConfirm) { "password and password confirm is different" }
+        require(content.length in PASSWORD_RANGE) { "password has to be in ${PASSWORD_RANGE}" }
+        require(regex.matches(content)) { "password must contain at least one English and number" }
     }
 
-    fun isValid(): Boolean = password.isNotBlank() && password == passwordConfirm
+    fun isSame(passwordConfirm: String): Boolean = content == passwordConfirm
 
     companion object {
         private const val MIN_PASSWORD_LENGTH = 8
@@ -21,18 +18,17 @@ data class Password(
 
         private val regex = Regex(PASSWORD_REGEX)
 
-        fun from(password: String, passwordConfirm: String): PasswordResult {
-            if (password == "" || passwordConfirm == "") return PasswordResult.EmptyField
-            if (password.length !in PASSWORD_RANGE) return PasswordResult.InvalidPasswordLength
-            if (!regex.matches(password)) return PasswordResult.InvalidPasswordFormat
-            if (password != passwordConfirm) return PasswordResult.NotSamePasswordConfirm
-            return PasswordResult.Success(password, passwordConfirm)
+        fun from(passwordInput: String): PasswordResult {
+            if (passwordInput == "") return PasswordResult.EmptyField
+            if (passwordInput.length !in PASSWORD_RANGE) return PasswordResult.InvalidPasswordLength
+            if (!regex.matches(passwordInput)) return PasswordResult.InvalidPasswordFormat
+            return PasswordResult.Success(passwordInput)
         }
     }
 }
 
 sealed interface PasswordResult {
-    data class Success(val password: String, val passwordConfirm: String) : PasswordResult
+    data class Success(val password: String) : PasswordResult
 
     data object EmptyField : PasswordResult
 
@@ -42,5 +38,4 @@ sealed interface PasswordResult {
 
     data object InvalidPasswordFormat : Failure
 
-    data object NotSamePasswordConfirm : Failure
 }
