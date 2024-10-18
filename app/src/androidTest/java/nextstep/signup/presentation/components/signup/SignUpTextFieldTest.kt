@@ -1,12 +1,12 @@
 package nextstep.signup.presentation.components.signup
 
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import nextstep.signup.domain.Email
 import nextstep.signup.domain.Error
+import nextstep.signup.ui.model.ErrorMessage
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -27,7 +27,7 @@ class SignUpTextFieldTest {
                 value = email.value.address,
                 onValueChange = {},
                 label = "Email",
-                errorMessage = email.value.errorMessage()?.message ?: ""
+                errorMessage = ErrorMessage(email.value.error).message
             )
         }
 
@@ -50,12 +50,12 @@ class SignUpTextFieldTest {
                 value = email.value.address,
                 onValueChange = {},
                 label = "Email",
-                errorMessage = email.value.errorMessage()?.message ?: ""
+                errorMessage = ErrorMessage(email.value.error).message
             )
         }
 
         composeTestRule
-            .onNodeWithText(Error.INVALID_EMAIL.message)
+            .onNodeWithText(ErrorMessage(Error.INVALID_EMAIL).message)
             .assertDoesNotExist()
     }
 

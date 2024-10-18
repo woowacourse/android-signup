@@ -74,27 +74,27 @@ class PasswordTest {
     }
 
     @Test
-    fun `errorMessage is null when value is blank`() {
+    fun `errorMessage is NO_ERROR when value is blank`() {
         // given
         val password = Password("")
 
         // when
-        val error = password.errorMessage()
+        val error = password.error
 
         // then
-        assertNull(error)
+        assertEquals(Error.NO_ERROR, error)
     }
 
     @Test
-    fun `errorMessage is null when valid`() {
+    fun `errorMessage is NO_ERROR when valid`() {
         // given
         val password = Password("Abcdef1234!")
 
         // when
-        val error = password.errorMessage()
+        val error = password.error
 
         // then
-        assertNull(error)
+        assertEquals(Error.NO_ERROR, error)
     }
 
     @Test
@@ -105,7 +105,7 @@ class PasswordTest {
         // when & then
         repeat(6) {
             password = password.copy(value = password.value + "1")
-            val error = password.errorMessage()
+            val error = password.error
             assertEquals(Error.INVALID_PASSWORD_LENGTH, error)
         }
     }
@@ -116,7 +116,7 @@ class PasswordTest {
         val password = Password("1abcdefghijklmnopqrstuvwxyz")
 
         // when
-        val error = password.errorMessage()
+        val error = password.error
 
         // then
         assertEquals(Error.INVALID_PASSWORD_LENGTH, error)
@@ -129,8 +129,8 @@ class PasswordTest {
         val password2 = Password("12345678")
 
         // when
-        val error1 = password1.errorMessage()
-        val error2 = password2.errorMessage()
+        val error1 = password1.error
+        val error2 = password2.error
 
         // then
         assertEquals(Error.INVALID_PASSWORD_TYPE, error1)

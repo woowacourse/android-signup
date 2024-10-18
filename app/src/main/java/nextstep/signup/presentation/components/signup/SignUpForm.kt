@@ -20,6 +20,7 @@ import nextstep.signup.R
 import nextstep.signup.domain.Email
 import nextstep.signup.domain.SignUp
 import nextstep.signup.domain.Username
+import nextstep.signup.ui.model.ErrorMessage
 
 @Composable
 fun SignUpForm(
@@ -52,7 +53,7 @@ fun SignUpForm(
             },
             modifier = Modifier.fillMaxWidth(),
             label = stringResource(R.string.sign_up_form_username),
-            errorMessage = signUpData.username.errorMessage().message
+            errorMessage = ErrorMessage(signUpData.password.error).message
         )
 
         // Email Input
@@ -67,7 +68,7 @@ fun SignUpForm(
             },
             modifier = Modifier.fillMaxWidth(),
             label = stringResource(R.string.sign_up_form_email),
-            errorMessage = signUpData.email.errorMessage().message
+            errorMessage = ErrorMessage(signUpData.password.error).message
         )
 
         // Password Input
@@ -85,7 +86,7 @@ fun SignUpForm(
             modifier = Modifier.fillMaxWidth(),
             label = stringResource(R.string.sign_up_form_password),
             isPassword = true,
-            errorMessage = signUpData.password.errorMessage().message
+            errorMessage = ErrorMessage(signUpData.password.error).message
         )
 
         // Password Confirm Input
@@ -103,7 +104,7 @@ fun SignUpForm(
             modifier = Modifier.fillMaxWidth(),
             label = stringResource(R.string.sign_up_form_password_confirm),
             isPassword = true,
-            errorMessage = signUpData.errorMessage().message
+            errorMessage = ErrorMessage(signUpData.password.error).message
         )
 
         // Sign Up Button

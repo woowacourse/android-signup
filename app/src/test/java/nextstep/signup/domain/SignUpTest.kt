@@ -65,11 +65,11 @@ class SignUpTest {
             confirmPassword = Password("differentPassword")
         )
 
-        assertEquals(Error.INVALID_CONFIRM_PASSWORD, signUp.errorMessage())
+        assertEquals(Error.INVALID_CONFIRM_PASSWORD, signUp.error)
     }
 
     @Test
-    fun `errorMessage returns null when confirmPassword is blank`() {
+    fun `errorMessage returns NO_ERROR when confirmPassword is blank`() {
         val signUp = SignUp(
             email = Email("test@example.com"),
             username = Username("testuser"),
@@ -77,11 +77,11 @@ class SignUpTest {
             confirmPassword = Password("")
         )
 
-        assertNull(signUp.errorMessage())
+        assertEquals(Error.NO_ERROR, signUp.error)
     }
 
     @Test
-    fun `errorMessage returns null when all fields are valid and passwords match`() {
+    fun `errorMessage returns NO_ERROR when all fields are valid and passwords match`() {
         val signUp = SignUp(
             email = Email("test@example.com"),
             username = Username("test"),
@@ -89,6 +89,6 @@ class SignUpTest {
             confirmPassword = Password("password123")
         )
 
-        assertNull(signUp.errorMessage())
+        assertEquals(Error.NO_ERROR, signUp.error)
     }
 }
