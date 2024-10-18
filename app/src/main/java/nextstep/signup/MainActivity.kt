@@ -73,7 +73,7 @@ private fun SignUpInputBox() {
     UserNameComposable(userName = userName, onUserNameChange = { userName = it })
     EmailComposable(email = email, onEmailChange = { email = it })
     PasswordComposable(password = password, onPasswordChange = { password = it })
-    PasswordConfirmComposable(passwordConfirm = passwordConfirm, onPasswordConfirmChange = { passwordConfirm = it })
+    PasswordConfirmComposable(password = password, passwordConfirm = passwordConfirm, onPasswordConfirmChange = { passwordConfirm = it })
 }
 
 @Composable
@@ -156,14 +156,25 @@ private fun PasswordComposable(
 
 @Composable
 private fun PasswordConfirmComposable(
+    password: String,
     passwordConfirm: String,
     onPasswordConfirmChange: (String) -> Unit,
 ) {
+    val isBlank = passwordConfirm.isBlank()
+    val isNotMatchPassword = password != passwordConfirm
+    val isError = isBlank.not() && isNotMatchPassword
+
     TextFieldComponent(
         newValue = passwordConfirm,
         onValueChange = onPasswordConfirmChange,
         label = R.string.main_password_confirm,
-        supportingText = {},
+        supportingText = {
+            when {
+                isBlank -> return@TextFieldComponent
+                isNotMatchPassword -> TextComponent(description = "비밀번호가 일치하지 않습니다.")
+            }
+        },
+        isError = isError,
         keyboardType = KeyboardType.Password,
     )
     Spacer(modifier = Modifier.size(42.dp))
