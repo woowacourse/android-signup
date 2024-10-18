@@ -65,15 +65,22 @@ private fun SignUpGreeting() {
 
 @Composable
 private fun SignUpInputBox() {
-    UserNameComposable()
-    EmailComposable()
-    PasswordComposable()
-    PasswordConfirmComposable()
+    var userName by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var passwordConfirm by remember { mutableStateOf("") }
+
+    UserNameComposable(userName = userName, onUserNameChange = { userName = it })
+    EmailComposable(email = email, onEmailChange = { email = it })
+    PasswordComposable(password = password, onPasswordChange = { password = it })
+    PasswordConfirmComposable(passwordConfirm = passwordConfirm, onPasswordConfirmChange = { passwordConfirm = it })
 }
 
 @Composable
-private fun UserNameComposable() {
-    var userName by remember { mutableStateOf("") }
+private fun UserNameComposable(
+    userName: String,
+    onUserNameChange: (String) -> Unit,
+) {
     val isBlank = userName.isBlank()
     val isInvalidLength = userName.length !in USERNAME_MIN_LENGTH..USERNAME_MAX_LENGTH
     val hasInvalidCharacter = userName.matches(regex = Regex(USERNAME_REGEX)).not()
@@ -81,7 +88,7 @@ private fun UserNameComposable() {
 
     TextFieldComponent(
         newValue = userName,
-        onValueChange = { userName = it },
+        onValueChange = onUserNameChange,
         label = R.string.main_user_name,
         supportingText = {
             when {
@@ -96,15 +103,17 @@ private fun UserNameComposable() {
 }
 
 @Composable
-private fun EmailComposable() {
-    var email by remember { mutableStateOf("") }
+private fun EmailComposable(
+    email: String,
+    onEmailChange: (String) -> Unit,
+) {
     val isBlank = email.isBlank()
-    val isInvalidEmail = !email.matches(Regex(EMAIL_REGEX))
+    val isInvalidEmail = email.matches(Regex(EMAIL_REGEX)).not()
     val isError = isBlank.not() && isInvalidEmail
 
     TextFieldComponent(
         newValue = email,
-        onValueChange = { email = it },
+        onValueChange = onEmailChange,
         label = R.string.main_email,
         supportingText = {
             when {
@@ -119,8 +128,10 @@ private fun EmailComposable() {
 }
 
 @Composable
-private fun PasswordComposable() {
-    var password by remember { mutableStateOf("") }
+private fun PasswordComposable(
+    password: String,
+    onPasswordChange: (String) -> Unit,
+) {
     val isBlank = password.isBlank()
     val isInvalidLength = password.length !in EMAIL_MIN_LENGTH..EMAIL_MAX_LENGTH
     val hasEnglishAndNumber = password.matches(Regex(PASSWORD_REGEX)).not()
@@ -128,7 +139,7 @@ private fun PasswordComposable() {
 
     TextFieldComponent(
         newValue = password,
-        onValueChange = { password = it },
+        onValueChange = onPasswordChange,
         label = R.string.main_password,
         supportingText = {
             when {
@@ -144,11 +155,13 @@ private fun PasswordComposable() {
 }
 
 @Composable
-private fun PasswordConfirmComposable() {
-    var passwordConfirm by remember { mutableStateOf("") }
+private fun PasswordConfirmComposable(
+    passwordConfirm: String,
+    onPasswordConfirmChange: (String) -> Unit,
+) {
     TextFieldComponent(
         newValue = passwordConfirm,
-        onValueChange = { passwordConfirm = it },
+        onValueChange = onPasswordConfirmChange,
         label = R.string.main_password_confirm,
         supportingText = {},
         keyboardType = KeyboardType.Password,
