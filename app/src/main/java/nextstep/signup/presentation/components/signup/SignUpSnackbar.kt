@@ -6,7 +6,9 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import nextstep.signup.R
 
 @Composable
 fun SignUpSnackbar(
@@ -16,7 +18,7 @@ fun SignUpSnackbar(
     Snackbar(
         action = {
             TextButton(onClick = onDismiss) {
-                Text("확인")
+                Text(stringResource(R.string.confirm_text))
             }
         },
         modifier = Modifier.padding(8.dp)
