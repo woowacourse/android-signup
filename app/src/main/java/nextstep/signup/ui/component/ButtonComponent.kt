@@ -17,11 +17,13 @@ import nextstep.signup.ui.theme.Blue50
 @Composable
 fun ButtonComponent(
     modifier: Modifier = Modifier,
+    enabled: Boolean = false,
     @StringRes description: Int,
 ) {
     Button(
         onClick = {},
         modifier = modifier.fillMaxWidth(),
+        enabled = enabled,
         colors = ButtonDefaults.buttonColors(containerColor = Blue50),
         contentPadding = PaddingValues(vertical = 15.dp),
     ) {

@@ -55,9 +55,30 @@ fun SignUpScreen() {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
+        // TODO: 리팩터링
+        var userNameValue by remember { mutableStateOf("") }
+        var emailValue by remember { mutableStateOf("") }
+        var passwordValue by remember { mutableStateOf("") }
+        var passwordConfirmValue by remember { mutableStateOf("") }
+
+        val userName = UserName(userNameValue)
+        val email = Email(emailValue)
+        val password = Password(passwordValue)
+        val passwordConfirm = PasswordConfirm(passwordValue, passwordConfirmValue)
+        val isSubmitButtonEnabled = !userName.isInvalid() && !email.isInvalid() && !password.isInvalid() && !passwordConfirm.isInvalid()
+
         SignUpGreeting()
-        SignUpInputBox()
-        ButtonComponent(description = R.string.main_sign_up)
+        SignUpInputBox(
+            userName,
+            email,
+            password,
+            passwordConfirm,
+            onUserNameChange = { userNameValue = it },
+            onEmailChange = { emailValue = it },
+            onPasswordChange = { passwordValue = it },
+            onPasswordConfirmChange = { passwordConfirmValue = it },
+        )
+        ButtonComponent(enabled = isSubmitButtonEnabled, description = R.string.main_sign_up)
     }
 }
 
@@ -68,27 +89,29 @@ private fun SignUpGreeting() {
 }
 
 @Composable
-private fun SignUpInputBox() {
-    var userName by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var passwordConfirm by remember { mutableStateOf("") }
-
-    UserNameComposable(value = userName, onUserNameChange = { userName = it })
-    EmailComposable(value = email, onEmailChange = { email = it })
-    PasswordComposable(value = password, onPasswordChange = { password = it })
-    PasswordConfirmComposable(password = password, value = passwordConfirm, onPasswordConfirmChange = { passwordConfirm = it })
+private fun SignUpInputBox(
+    userName: UserName,
+    email: Email,
+    password: Password,
+    passwordConfirm: PasswordConfirm,
+    onUserNameChange: (String) -> Unit,
+    onEmailChange: (String) -> Unit,
+    onPasswordChange: (String) -> Unit,
+    onPasswordConfirmChange: (String) -> Unit,
+) {
+    UserNameComposable(userName = userName, onUserNameChange)
+    EmailComposable(email = email, onEmailChange)
+    PasswordComposable(password = password, onPasswordChange)
+    PasswordConfirmComposable(passwordConfirm = passwordConfirm, onPasswordConfirmChange)
 }
 
 @Composable
 fun UserNameComposable(
-    value: String,
+    userName: UserName,
     onUserNameChange: (String) -> Unit,
 ) {
-    val userName = UserName(value)
-
     TextFieldComponent(
-        newValue = value,
+        newValue = userName.userName,
         onValueChange = onUserNameChange,
         label = R.string.main_user_name,
         supportingText = {
@@ -102,12 +125,11 @@ fun UserNameComposable(
 
 @Composable
 fun EmailComposable(
-    value: String,
+    email: Email,
     onEmailChange: (String) -> Unit,
 ) {
-    val email = Email(value)
     TextFieldComponent(
-        newValue = value,
+        newValue = email.email,
         onValueChange = onEmailChange,
         label = R.string.main_email,
         supportingText = {
@@ -122,11 +144,9 @@ fun EmailComposable(
 
 @Composable
 fun PasswordComposable(
-    value: String,
+    password: Password,
     onPasswordChange: (String) -> Unit,
 ) {
-    val password = Password(value)
-
     TextFieldComponent(
         newValue = password.password,
         onValueChange = onPasswordChange,
@@ -143,14 +163,11 @@ fun PasswordComposable(
 
 @Composable
 fun PasswordConfirmComposable(
-    password: String,
-    value: String,
+    passwordConfirm: PasswordConfirm,
     onPasswordConfirmChange: (String) -> Unit,
 ) {
-    val passwordConfirm = PasswordConfirm(password, passwordConfirm = value)
-
     TextFieldComponent(
-        newValue = value,
+        newValue = passwordConfirm.passwordConfirm,
         onValueChange = onPasswordConfirmChange,
         label = R.string.main_password_confirm,
         supportingText = {
