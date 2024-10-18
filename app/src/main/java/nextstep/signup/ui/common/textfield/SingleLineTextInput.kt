@@ -26,6 +26,7 @@ fun SingleLineTextInput(
     onValueChange: (String) -> String,
     label: String,
     inputType: InputType,
+    supportingText: String? = null,
 ) {
     var value by rememberSaveable { mutableStateOf("") }
 
@@ -47,5 +48,9 @@ fun SingleLineTextInput(
                 focusedIndicatorColor = MaterialTheme.colorScheme.secondary,
                 focusedLabelColor = MaterialTheme.colorScheme.secondary,
             ),
+        isError = supportingText.isNullOrBlank().not(),
+        supportingText = {
+            if (supportingText != null) Text(text = supportingText)
+        }
     )
 }
