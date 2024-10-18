@@ -20,7 +20,8 @@ fun CustomButton(
     buttonHeight: Int = 50,
     shapes: RoundedCornerShape = RoundedCornerShape(25.dp),
     colors: ButtonColors = ButtonDefaults.buttonColors(),
-    buttonText: String
+    buttonText: String,
+    enabled: Boolean = true
 ) {
     Button(
         modifier = modifier
@@ -28,7 +29,8 @@ fun CustomButton(
             .height(buttonHeight.dp),
         onClick = onClick,
         shape = shapes,
-        colors = colors
+        colors = colors,
+        enabled = enabled
     ) {
         Text(
             text = buttonText,

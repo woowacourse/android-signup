@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.sp
 fun TitleText(
     modifier: Modifier = Modifier,
     title: String,
-    fontSize: Int = 26,
+    fontSize: Int = 25,
     color: Color = Color.Black
 ) {
     Text(
@@ -30,5 +30,5 @@ fun TitleText(
 @Composable()
 @Preview
 private fun TitleTextPreview() {
-    TitleText(title = "Title")
+    TitleText(title = "Welcome to Compose")
 }

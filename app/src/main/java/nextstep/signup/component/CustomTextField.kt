@@ -7,6 +7,7 @@ import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import nextstep.signup.ui.theme.Red50
 
 @Composable
 fun CustomTextField(
@@ -14,6 +15,8 @@ fun CustomTextField(
     value: String,
     onValueChange: (String) -> Unit,
     label: String,
+    isError: Boolean = false,
+    errorMessage: String? = null,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default
 ) {
     TextField(
@@ -26,7 +29,16 @@ fun CustomTextField(
             )
         },
         keyboardOptions = keyboardOptions,
-        singleLine = true
+        singleLine = true,
+        isError = isError,
+        supportingText = {
+            errorMessage?.let {
+                Text(
+                    text = it,
+                    color = Red50
+                )
+            }
+        }
     )
 }
 
@@ -36,6 +48,8 @@ private fun CustomTextFieldPreview() {
     CustomTextField(
         value = "",
         onValueChange = {},
-        label = "Label"
+        label = "Label",
+        isError = true,
+        errorMessage = "Invalid input"
     )
 }
