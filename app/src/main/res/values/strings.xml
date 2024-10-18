@@ -6,4 +6,22 @@
     <string name="sign_up_email_form">Email</string>
     <string name="sign_up_password_form">Password</string>
     <string name="sign_up_password_confirm_form">Password Confirm</string>
+
+    <!--    userName errMsg-->
+    <string name="user_name_error_blank">이름은 공백일 수 없습니다.</string>
+    <string name="user_name_error_length">이름은 %d 자 이상 %d 자 이하여야합니다.</string>
+    <string name="user_name_error_special_character">이름에 특수문자를 포함할 수 없습니다.</string>
+    <string name="user_name_error_number">이름에 숫자를 포함할 수 없습니다.</string>
+    <!--    email errMsg-->
+    <string name="email_error_blank">이메일은 공백일 수 없습니다.</string>
+    <string name="email_error_format">이메일 형식이 올바르지 않습니다. \n 예시) sample@gmail.com</string>
+    <!--    password errMsg-->
+    <string name="password_error_blank">비밀번호는 공백일 수 없습니다.</string>
+    <string name="password_error_length">비밀번호는 %d 자 이상 %d 자 이하여야합니다.</string>
+    <string name="password_error_number">비밀번호에 숫자를 포함해야합니다.</string>
+    <string name="password_error_alpha">비밀번호에 영문자를 포함해야합니다.</string>
+    <!--    passwordConfirm errMsg-->
+    <string name="password_confirm_error">비밀번호와 일치하지 않습니다.</string>
+    <!--    signUp success-->
+    <string name="sign_up_success">회원가입에 성공하였습니다.</string>
 </resources>
