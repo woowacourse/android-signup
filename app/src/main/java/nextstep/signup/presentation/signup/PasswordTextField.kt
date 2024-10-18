@@ -25,11 +25,7 @@ fun PasswordTextField(
         labelText = labelText,
         value = password,
         onValueChange = onValueChange,
-        isError = when (Password.from(password)) {
-            is PasswordResult.EmptyField -> false
-            is PasswordResult.Success -> false
-            is PasswordResult.Failure -> true
-        },
+        isError = Password.from(password) is PasswordResult.Failure,
         supportingText = {
             when (Password.from(password)) {
                 is PasswordResult.EmptyField -> return@SignUpTextField
