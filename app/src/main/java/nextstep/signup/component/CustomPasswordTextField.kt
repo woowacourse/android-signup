@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
+import nextstep.signup.ui.theme.Red50
 
 @Composable
 fun CustomPasswordTextField(
@@ -15,6 +16,8 @@ fun CustomPasswordTextField(
     value: String,
     onValueChange: (String) -> Unit,
     label: String,
+    isError: Boolean = false,
+    errorMessage: String? = null,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default
 ) {
     TextField(
@@ -29,6 +32,15 @@ fun CustomPasswordTextField(
         },
         keyboardOptions = keyboardOptions,
         singleLine = true,
+        isError = isError,
+        supportingText = {
+            errorMessage?.let {
+                Text(
+                    text = it,
+                    color = Red50
+                )
+            }
+        },
         visualTransformation = PasswordVisualTransformation()
     )
 }
