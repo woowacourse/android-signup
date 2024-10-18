@@ -1,5 +1,6 @@
 package nextstep.signup.ui.signup
 
+import nextstep.signup.domain.Email
 import nextstep.signup.domain.Username
 import nextstep.signup.ui.common.textfield.EMAIL_REGEX
 import nextstep.signup.ui.common.textfield.PASSWORD_REGEX
@@ -17,10 +18,10 @@ object SignUpValidator {
         }
     }
 
-    fun validateEmail(input: String): String {
-        return if (input.isEmpty()) {
+    fun validateEmail(email: Email): String {
+        return if (email.value.isEmpty()) {
             ""
-        } else if (!input.matches(Regex(EMAIL_REGEX))) {
+        } else if (email.isValidFormat.not()) {
             "이메일 형식이 올바르지 않습니다."
         } else {
             ""
