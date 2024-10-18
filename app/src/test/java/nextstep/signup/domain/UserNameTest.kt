@@ -68,5 +68,4 @@ class UserNameTest {
         // then
         userNameResult shouldBe UserNameResult.Success(UserName(input))
     }
-
 }

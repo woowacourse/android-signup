@@ -7,8 +7,6 @@ value class Password(val content: String) {
         require(regex.matches(content)) { "password must contain at least one English and number" }
     }
 
-    fun isSame(passwordConfirm: String): Boolean = content == passwordConfirm
-
     companion object {
         private const val MIN_PASSWORD_LENGTH = 8
         private const val MAX_PASSWORD_LENGTH = 16
