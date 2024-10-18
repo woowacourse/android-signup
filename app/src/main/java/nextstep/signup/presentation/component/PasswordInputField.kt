@@ -15,6 +15,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -31,7 +32,6 @@ fun PasswordInputField(
     label: String,
     value: String,
     onValueChange: (String, Boolean) -> Unit,
-    keyboardType: KeyboardType = KeyboardType.Text,
     paddingBottom: Dp = 0.dp,
     type: PasswordInputFieldType,
 ) {
@@ -55,8 +55,9 @@ fun PasswordInputField(
         label = { Text(label) },
         keyboardOptions =
             KeyboardOptions(
-                keyboardType = keyboardType,
+                keyboardType = KeyboardType.Password,
             ),
+        visualTransformation = PasswordVisualTransformation(),
     )
 
     Text(
@@ -95,7 +96,7 @@ private fun validityOf(
 ): InputValidity {
     return when (type) {
         PasswordInputFieldType.PASSWORD -> PasswordInputValidity.of(input)
-        PasswordInputFieldType.PASSWORD_CONFIRM -> PasswordConfirmInputValidity.of(input)
+        PasswordInputFieldType.PASSWORD_CONFIRM -> PasswordConfirmInputValidity.of()
     }
 }
 

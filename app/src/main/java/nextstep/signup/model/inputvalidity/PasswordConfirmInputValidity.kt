@@ -9,14 +9,14 @@ enum class PasswordConfirmInputValidity : InputValidity {
         var password: String = ""
         var passwordConfirm: String = ""
 
-        fun of(input: String): PasswordConfirmInputValidity {
+        fun of(): PasswordConfirmInputValidity {
             return when {
-                doesNotMatch(input) -> DOES_NOT_MATCH
+                doesNotMatch() -> DOES_NOT_MATCH
                 else -> NO_ERROR
             }
         }
 
-        private fun doesNotMatch(input: String): Boolean {
+        private fun doesNotMatch(): Boolean {
             return password != passwordConfirm
         }
     }

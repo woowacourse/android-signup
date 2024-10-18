@@ -76,7 +76,6 @@ fun SignUpScreen() {
                 password = inputPassword
                 isPasswordValid = validity
             },
-            keyboardType = KeyboardType.Password,
             paddingBottom = 36.dp,
             type = PasswordInputFieldType.PASSWORD,
         )
@@ -88,7 +87,6 @@ fun SignUpScreen() {
                 confirmPassword = inputPassword
                 isPasswordConfirmValid = validity
             },
-            keyboardType = KeyboardType.Password,
             paddingBottom = 36.dp,
             type = PasswordInputFieldType.PASSWORD_CONFIRM,
         )
