@@ -21,27 +21,29 @@ fun SignUpButton(
     Button(
         onClick = {},
         modifier =
-        Modifier
-            .fillMaxWidth()
-            .height(60.dp),
-        colors =
-        buttonColors(isEnable),
+            Modifier
+                .fillMaxWidth()
+                .height(60.dp),
+        colors = buttonColorsOf(isEnable),
+        enabled = isEnable,
     ) {
         Text(text = buttonText)
     }
 }
 
 @Composable
-private fun buttonColors(isEnable: Boolean): ButtonColors {
+private fun buttonColorsOf(isEnable: Boolean): ButtonColors {
     return when (isEnable) {
-        true -> ButtonDefaults.buttonColors(
-            containerColor = colorResource(R.color.blue_50),
-            contentColor = Color.White,
-        )
+        true ->
+            ButtonDefaults.buttonColors(
+                containerColor = colorResource(R.color.blue_50),
+                contentColor = Color.White,
+            )
 
-        false -> ButtonDefaults.buttonColors(
-            containerColor = colorResource(R.color.gray200),
-            contentColor = Color.DarkGray,
-        )
+        false ->
+            ButtonDefaults.buttonColors(
+                containerColor = colorResource(R.color.gray200),
+                contentColor = Color.DarkGray,
+            )
     }
 }

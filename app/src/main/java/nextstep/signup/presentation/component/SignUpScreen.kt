@@ -36,9 +36,9 @@ fun SignUpScreen() {
 
     Column(
         modifier =
-        Modifier
-            .fillMaxSize()
-            .padding(16.dp),
+            Modifier
+                .fillMaxSize()
+                .padding(16.dp),
         verticalArrangement = Arrangement.Top,
     ) {
         TitleText(stringResource(R.string.title))
@@ -46,7 +46,7 @@ fun SignUpScreen() {
         Spacer(modifier = Modifier.height(16.dp))
 
         InputField(
-            label = stringResource(R.string.sign_up),
+            label = stringResource(R.string.user_name),
             value = userName,
             onValueChange = { inputUserName, validity ->
                 userName = inputUserName
@@ -95,7 +95,7 @@ fun SignUpScreen() {
 
         SignUpButton(
             buttonText = stringResource(R.string.sign_up),
-            isEnable = isFormValid
+            isEnable = isFormValid,
         )
     }
 }

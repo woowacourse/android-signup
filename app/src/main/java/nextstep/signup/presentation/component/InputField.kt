@@ -37,8 +37,8 @@ fun InputField(
 
     TextField(
         modifier =
-        Modifier
-            .fillMaxWidth(),
+            Modifier
+                .fillMaxWidth(),
         value = value,
         onValueChange = { input ->
             inputValidity = validityOf(type, input)
@@ -47,18 +47,18 @@ fun InputField(
         },
         label = { Text(label) },
         keyboardOptions =
-        KeyboardOptions(
-            keyboardType = keyboardType,
-        ),
+            KeyboardOptions(
+                keyboardType = keyboardType,
+            ),
     )
 
     Text(
         modifier =
-        Modifier.padding(
-            start = 16.dp,
-            top = 4.dp,
-            bottom = paddingBottom,
-        ),
+            Modifier.padding(
+                start = 16.dp,
+                top = 4.dp,
+                bottom = paddingBottom,
+            ),
         text = errorMessageOf(type, inputValidity),
         fontSize = 12.sp,
         color = MaterialTheme.colorScheme.error,
