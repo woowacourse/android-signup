@@ -29,7 +29,7 @@ class CustomButtonTest {
                 modifier = Modifier.testTag(buttonTag),
                 onClick = { isClicked = true },
                 buttonText = "Sign Up",
-                enabled = false,
+                enabled = false
             )
         }
 

@@ -4,8 +4,7 @@ import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-
-class NameTest{
+class NameTest {
     @Test
     fun `이름 값이 2자 미만일 때 isInavalid는 true이다`() {
         // given
@@ -29,7 +28,6 @@ class NameTest{
         // then
         assertEquals(Name.ERROR_USER_NAME_LENGTH, errorMessage)
     }
-
 
     @Test
     fun `이름 값이 5자 초과일 때 isInavalid는 true이다`() {

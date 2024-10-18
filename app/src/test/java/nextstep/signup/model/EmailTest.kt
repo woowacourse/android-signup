@@ -5,7 +5,7 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
-class EmailTest{
+class EmailTest {
     @Test
     fun `이메일 값이 이메일 형식이 아닐 때 isInavalid는 true이다`() {
         // given

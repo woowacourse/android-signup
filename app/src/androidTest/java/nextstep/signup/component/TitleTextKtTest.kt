@@ -5,12 +5,12 @@ import androidx.compose.ui.test.onNodeWithText
 import org.junit.Rule
 import org.junit.Test
 
-class TitleTextKtTest{
+class TitleTextKtTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
     @Test
-    fun `TitleText가_정상적으로_렌더링된다`(){
+    fun `TitleText가_정상적으로_렌더링된다`() {
         val title = "Welcome to Compose"
         // given
         composeTestRule.setContent {

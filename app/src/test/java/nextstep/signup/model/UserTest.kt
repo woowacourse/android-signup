@@ -4,7 +4,7 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
-class UserTest{
+class UserTest {
     @Test
     fun `모든 값이 올바를 때 isInvalid false이다`() {
         // given
@@ -12,7 +12,7 @@ class UserTest{
             name = Name(VALID_NAME),
             email = Email(VALID_EMAIL),
             password = Password(VALID_PASSWORD),
-            passwordConfirm = PasswordConfirm(VALID_PASSWORD, VALID_PASSWORD),
+            passwordConfirm = PasswordConfirm(VALID_PASSWORD, VALID_PASSWORD)
         )
 
         // when
@@ -29,7 +29,7 @@ class UserTest{
             name = Name(INVALID_NAME),
             email = Email(VALID_EMAIL),
             password = Password(VALID_PASSWORD),
-            passwordConfirm = PasswordConfirm(VALID_PASSWORD, VALID_PASSWORD),
+            passwordConfirm = PasswordConfirm(VALID_PASSWORD, VALID_PASSWORD)
         )
 
         // when
