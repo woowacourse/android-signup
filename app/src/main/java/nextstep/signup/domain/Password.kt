@@ -1,5 +1,7 @@
 package nextstep.signup.domain
 
+import androidx.compose.runtime.Immutable
+
 @JvmInline
 value class Password(val value: String) {
 
@@ -32,8 +34,10 @@ value class Password(val value: String) {
     }
 }
 
-
+@Immutable
 sealed interface PasswordValidateResult {
+    val isValid: Boolean get() = this is Success
+
     data object Success : PasswordValidateResult
     data object InValidBlank : PasswordValidateResult
     data object InValidNotContainAlpha : PasswordValidateResult

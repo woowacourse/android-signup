@@ -1,5 +1,7 @@
 package nextstep.signup.domain
 
+import androidx.compose.runtime.Immutable
+
 @JvmInline
 value class Email(val value: String) {
 
@@ -25,7 +27,10 @@ value class Email(val value: String) {
     }
 }
 
+@Immutable
 sealed interface EmailValidateResult {
+    val isValid: Boolean get() = this is Success
+
     data object Success : EmailValidateResult
     data object InvalidBlank : EmailValidateResult
     data object InvalidEmailFormat : EmailValidateResult

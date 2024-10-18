@@ -1,5 +1,7 @@
 package nextstep.signup.domain
 
+import androidx.compose.runtime.Immutable
+
 @JvmInline
 value class UserName(val value: String) {
     init {
@@ -10,7 +12,9 @@ value class UserName(val value: String) {
     }
 
     companion object {
-        private const val NAME_REGEX = "^.{2,5}$"
+        const val MIN_LENGTH = 2
+        const val MAX_LENGTH = 5
+        private const val NAME_REGEX = "^.{$MIN_LENGTH,$MAX_LENGTH}$"
         private val NUMBER_REGEX = "\\d".toRegex()
         private val SPECIAL_CHAR_EXIST = "[!@#\$%^&*()\\-_+=]".toRegex()
 
@@ -38,7 +42,10 @@ value class UserName(val value: String) {
     }
 }
 
+@Immutable
 sealed interface UserNameValidateResult {
+    val isValid: Boolean get() = this is Success
+
     data object Success : UserNameValidateResult
     data object InvalidBlank : UserNameValidateResult
     data object InvalidContainNumber : UserNameValidateResult
