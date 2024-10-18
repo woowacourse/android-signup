@@ -20,13 +20,17 @@ fun TextFieldComponent(
     newValue: String,
     onValueChange: (String) -> Unit,
     @StringRes label: Int,
+    supportingText: @Composable () -> Unit,
+    isError: Boolean = false,
     keyboardType: KeyboardType = KeyboardType.Text,
 ) {
     TextField(
         value = newValue,
-        onValueChange = { onValueChange(newValue) },
+        onValueChange = { onValueChange(it) },
         modifier = modifier.fillMaxWidth(),
         label = { Text(text = stringResource(id = label)) },
+        supportingText = { supportingText() },
+        isError = isError,
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
         colors = TextFieldDefaults.colors(focusedIndicatorColor = Blue50),
     )
@@ -39,5 +43,7 @@ private fun TextFieldPreview() {
         newValue = "",
         onValueChange = {},
         label = R.string.main_user_name,
+        supportingText = {},
+        isError = true,
     )
 }

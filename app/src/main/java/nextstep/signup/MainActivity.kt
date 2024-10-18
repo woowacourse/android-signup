@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -59,7 +60,7 @@ fun SignUpScreen() {
 
 @Composable
 private fun SignUpGreeting() {
-    TextComponent(description = stringResource(R.string.main_greeting))
+    TextComponent(description = stringResource(R.string.main_greeting), style = MaterialTheme.typography.titleLarge)
     Spacer(modifier = Modifier.size(42.dp))
 }
 
@@ -74,10 +75,31 @@ private fun SignUpInputBox() {
 @Composable
 private fun UserNameComposable() {
     var userName by remember { mutableStateOf("") }
+    val isBlank = userName.isBlank()
+    val isInvalidLength = userName.length !in USERNAME_MIN_LENGTH..USERNAME_MAX_LENGTH
+    val hasInvalidCharacter = userName.matches(regex = Regex(USERNAME_REGEX)).not()
+    val isError = isBlank.not() && (isInvalidLength || hasInvalidCharacter)
+
     TextFieldComponent(
         newValue = userName,
         onValueChange = { userName = it },
         label = R.string.main_user_name,
+        supportingText = {
+            when {
+                isBlank -> return@TextFieldComponent
+                isInvalidLength -> {
+                    TextComponent(
+                        description = "이름은 2~5자여야 합니다.",
+                    )
+                }
+                hasInvalidCharacter -> {
+                    TextComponent(
+                        description = "이름에는 숫자나 기호가 포함될 수 없습니다.",
+                    )
+                }
+            }
+        },
+        isError = isError,
     )
     Spacer(modifier = Modifier.size(36.dp))
 }
@@ -89,6 +111,7 @@ private fun EmailComposable() {
         newValue = email,
         onValueChange = { email = it },
         label = R.string.main_email,
+        supportingText = {},
         keyboardType = KeyboardType.Email,
     )
     Spacer(modifier = Modifier.size(36.dp))
@@ -101,6 +124,7 @@ private fun PasswordComposable() {
         newValue = password,
         onValueChange = { password = it },
         label = R.string.main_password,
+        supportingText = {},
         keyboardType = KeyboardType.Password,
     )
     Spacer(modifier = Modifier.size(36.dp))
@@ -113,6 +137,7 @@ private fun PasswordConfirmComposable() {
         newValue = passwordConfirm,
         onValueChange = { passwordConfirm = it },
         label = R.string.main_password_confirm,
+        supportingText = {},
         keyboardType = KeyboardType.Password,
     )
     Spacer(modifier = Modifier.size(42.dp))
@@ -125,3 +150,9 @@ private fun GreetingPreview() {
         SignUpScreen()
     }
 }
+
+const val USERNAME_REGEX = "^[a-zA-Z가-힣]+$"
+const val EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$"
+const val PASSWORD_REGEX = "^(?=.*[a-zA-Z])(?=.*[0-9]).{8,16}$"
+const val USERNAME_MIN_LENGTH = 2
+const val USERNAME_MAX_LENGTH = 5
