@@ -18,7 +18,7 @@ internal fun AuthPasswordTextField(
     keyboardType: KeyboardType = KeyboardType.Password,
     imeAction: ImeAction = ImeAction.Next,
     onNext: () -> Unit = {},
-    onDone: () -> Unit = {},
+    onDone: () -> Unit = {}
 ) {
     AuthTextField(
         modifier = modifier,

@@ -12,7 +12,6 @@ import nextstep.signup.R
 import nextstep.signup.domain.EmailValidateResult
 import nextstep.signup.ui.auth.model.toErrorMessage
 
-
 @Composable
 internal fun AuthEmailTextField(
     modifier: Modifier = Modifier,
@@ -22,7 +21,7 @@ internal fun AuthEmailTextField(
     keyboardType: KeyboardType = KeyboardType.Text,
     imeAction: ImeAction = ImeAction.Next,
     onNext: () -> Unit = {},
-    onDone: () -> Unit = {},
+    onDone: () -> Unit = {}
 ) {
     AuthTextField(
         modifier = modifier,
@@ -43,7 +42,7 @@ class EmailPreviewParamsProvider : PreviewParameterProvider<Pair<String, EmailVa
         get() = sequenceOf(
             "sample@gmail.com" to EmailValidateResult.Success,
             "  " to EmailValidateResult.InvalidBlank,
-            "asd" to EmailValidateResult.InvalidEmailFormat,
+            "asd" to EmailValidateResult.InvalidEmailFormat
         )
 }
 

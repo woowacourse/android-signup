@@ -32,7 +32,10 @@ data class SignUpFormState(
 
     val enableSignUp: Boolean
         get() =
-            userNameValidateResult.isValid && emailValidateResult.isValid && passwordValidateResult.isValid && passwordConfirmValidateResult.isValid
+            userNameValidateResult.isValid &&
+                emailValidateResult.isValid &&
+                passwordValidateResult.isValid &&
+                passwordConfirmValidateResult.isValid
 
     companion object {
         fun empty(): SignUpFormState {
@@ -42,7 +45,6 @@ data class SignUpFormState(
                 password = "",
                 passwordConfirm = ""
             )
-
         }
     }
 }
@@ -52,8 +54,14 @@ fun UserNameValidateResult.toErrorMessage(): String? {
     return when (this) {
         UserNameValidateResult.Success -> null
         UserNameValidateResult.InvalidBlank -> stringResource(id = R.string.user_name_error_blank)
-        UserNameValidateResult.InvalidContainNumber -> stringResource(id = R.string.user_name_error_number)
-        UserNameValidateResult.InvalidContainSpecialCharacter -> stringResource(id = R.string.user_name_error_special_character)
+        UserNameValidateResult.InvalidContainNumber -> stringResource(
+            id = R.string.user_name_error_number
+        )
+
+        UserNameValidateResult.InvalidContainSpecialCharacter -> stringResource(
+            id = R.string.user_name_error_special_character
+        )
+
         UserNameValidateResult.InvalidOutOfLength -> stringResource(
             id = R.string.user_name_error_length,
             UserName.MIN_LENGTH,
@@ -82,8 +90,13 @@ fun PasswordValidateResult.toErrorMessage(): String? {
             Password.MAX_LENGTH
         )
 
-        PasswordValidateResult.InValidNotContainNumber -> stringResource(id = R.string.password_error_number)
-        PasswordValidateResult.InValidNotContainAlpha -> stringResource(id = R.string.password_error_alpha)
+        PasswordValidateResult.InValidNotContainNumber -> stringResource(
+            id = R.string.password_error_number
+        )
+
+        PasswordValidateResult.InValidNotContainAlpha -> stringResource(
+            id = R.string.password_error_alpha
+        )
     }
 }
 
@@ -91,6 +104,8 @@ fun PasswordValidateResult.toErrorMessage(): String? {
 fun PasswordConfirmValidateResult.toErrorMessage(): String? {
     return when (this) {
         PasswordConfirmValidateResult.Success -> null
-        PasswordConfirmValidateResult.InValid -> stringResource(id = R.string.password_confirm_error)
+        PasswordConfirmValidateResult.InValid -> stringResource(
+            id = R.string.password_confirm_error
+        )
     }
 }

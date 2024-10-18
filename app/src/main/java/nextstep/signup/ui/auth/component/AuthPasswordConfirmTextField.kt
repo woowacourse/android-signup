@@ -9,7 +9,6 @@ import nextstep.signup.R
 import nextstep.signup.domain.PasswordConfirmValidateResult
 import nextstep.signup.ui.auth.model.toErrorMessage
 
-
 @Composable
 internal fun AuthPasswordConfirmTextField(
     modifier: Modifier = Modifier,
@@ -19,7 +18,7 @@ internal fun AuthPasswordConfirmTextField(
     keyboardType: KeyboardType = KeyboardType.Password,
     imeAction: ImeAction = ImeAction.Next,
     onNext: () -> Unit = {},
-    onDone: () -> Unit = {},
+    onDone: () -> Unit = {}
 ) {
     AuthTextField(
         modifier = modifier,

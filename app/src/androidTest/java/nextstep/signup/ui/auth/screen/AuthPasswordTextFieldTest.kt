@@ -58,7 +58,6 @@ class AuthPasswordTextFieldTest {
             .assertExists()
     }
 
-
     @Test
     fun `비밀번호가_유효하면_에러_메시지가_표시되지_않는다`() {
         // given

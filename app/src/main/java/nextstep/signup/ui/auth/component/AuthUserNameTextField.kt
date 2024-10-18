@@ -9,7 +9,6 @@ import nextstep.signup.R
 import nextstep.signup.domain.UserNameValidateResult
 import nextstep.signup.ui.auth.model.toErrorMessage
 
-
 @Composable
 internal fun AuthUserNameTextField(
     modifier: Modifier = Modifier,
@@ -19,7 +18,7 @@ internal fun AuthUserNameTextField(
     keyboardType: KeyboardType = KeyboardType.Text,
     imeAction: ImeAction = ImeAction.Next,
     onNext: () -> Unit = {},
-    onDone: () -> Unit = {},
+    onDone: () -> Unit = {}
 ) {
     AuthTextField(
         modifier = modifier,

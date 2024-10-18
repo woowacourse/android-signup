@@ -95,7 +95,6 @@ internal fun SignUpScreen(
     enableSignUp: Boolean,
     onDoneSignUp: () -> Unit
 ) {
-
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -129,9 +128,7 @@ private fun Preview1() {
 
 @Preview(showSystemUi = true)
 @Composable
-private fun Preview2(
-    @PreviewParameter(SignUpPreviewParamsProvider::class) state: SignUpFormState
-) {
+private fun Preview2(@PreviewParameter(SignUpPreviewParamsProvider::class) state: SignUpFormState) {
     SignupTheme {
         SignUpScreen(
             signUpFormState = state,

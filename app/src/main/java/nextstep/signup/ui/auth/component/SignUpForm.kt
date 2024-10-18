@@ -53,19 +53,19 @@ internal fun SignUpForm(
         modifier = Modifier.focusRequester(focusRequester),
         userName = signUpFormState.userName,
         onUserNameChange = onUserNameChange,
-        userNameValidateResult = userNameValidateResult,
+        userNameValidateResult = userNameValidateResult
     )
     Spacer(modifier = Modifier.height(16.dp))
     AuthEmailTextField(
         email = signUpFormState.email,
         onEmailChange = onEmailChange,
-        emailValidateResult = emailValidateResult,
+        emailValidateResult = emailValidateResult
     )
     Spacer(modifier = Modifier.height(16.dp))
     AuthPasswordTextField(
         password = signUpFormState.password,
         onPasswordChange = onPasswordChange,
-        passwordValidateResult = passwordValidateResult,
+        passwordValidateResult = passwordValidateResult
     )
     Spacer(modifier = Modifier.height(16.dp))
     AuthPasswordConfirmTextField(
@@ -79,9 +79,7 @@ internal fun SignUpForm(
 
 @Preview
 @Composable
-private fun Preview(
-    @PreviewParameter(SignUpPreviewParamsProvider::class) value: SignUpFormState,
-) {
+private fun Preview(@PreviewParameter(SignUpPreviewParamsProvider::class) value: SignUpFormState) {
     SignupTheme {
         Surface {
             Column(Modifier.padding(32.dp)) {
@@ -91,7 +89,7 @@ private fun Preview(
                     onEmailChange = {},
                     onPasswordChange = {},
                     onPasswordConfirmChange = {},
-                    onDoneSignUp = {},
+                    onDoneSignUp = {}
                 )
             }
         }
