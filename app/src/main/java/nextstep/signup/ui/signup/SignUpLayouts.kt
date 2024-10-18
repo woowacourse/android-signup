@@ -21,6 +21,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.signup.R
+import nextstep.signup.domain.Username
 import nextstep.signup.ui.common.button.StateButton
 import nextstep.signup.ui.common.textfield.InputType
 import nextstep.signup.ui.common.textfield.SingleLineTextInput
@@ -28,6 +29,7 @@ import nextstep.signup.ui.common.textfield.validateEmailInput
 import nextstep.signup.ui.common.textfield.validatePasswordConfirmInput
 import nextstep.signup.ui.common.textfield.validatePasswordInput
 import nextstep.signup.ui.common.textfield.validateUsernameInput
+import nextstep.signup.ui.signup.SignUpValidator.validateUsername
 import nextstep.signup.ui.theme.SignUpTheme
 import nextstep.signup.ui.theme.Typography
 
@@ -42,6 +44,7 @@ fun SignUpTitle() {
 @Composable
 fun SignUpInteractionLayer(onButtonClicked: () -> Unit) {
     val textFieldModifier = Modifier.fillMaxWidth()
+
     var username by rememberSaveable { mutableStateOf("") }
     var email by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
@@ -58,7 +61,7 @@ fun SignUpInteractionLayer(onButtonClicked: () -> Unit) {
             onValueChange = { username = it },
             label = stringResource(id = R.string.signup_username),
             inputType = InputType.Username,
-            validateInput = { validateUsernameInput(username) },
+            validateInput = { validateUsername(Username(username)) },
         )
         SingleLineTextInput(
             modifier = textFieldModifier,
