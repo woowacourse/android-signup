@@ -25,7 +25,7 @@ class InputValidationTest {
             PasswordComposable(value = password, onPasswordChange = { password = it })
             PasswordConfirmComposable(
                 password = password,
-                passwordConfirm = passwordConfirm,
+                value = passwordConfirm,
                 onPasswordConfirmChange = { passwordConfirm = it },
             )
         }
