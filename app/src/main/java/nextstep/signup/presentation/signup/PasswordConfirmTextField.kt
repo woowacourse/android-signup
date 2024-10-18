@@ -4,6 +4,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
@@ -36,15 +38,16 @@ fun PasswordConfirmTextField(
                 is PasswordConfirmResult.NotSamePasswordConfirm ->
                     Text(text = stringResource(id = R.string.error_message_password_not_same))
             }
-        }
+        },
+        keyboardType = KeyboardType.Password,
+        visualTransformation = PasswordVisualTransformation()
     )
 }
-
 
 @Preview
 @Composable
 fun PasswordTextFieldPreview(
-    @PreviewParameter(PasswordConfirmPreviewParameter::class) passwordWithConfirm: PasswordWithConfirm,
+    @PreviewParameter(PasswordConfirmPreviewParameter::class) passwordWithConfirm: PasswordWithConfirm
 ) {
     PasswordConfirmTextField(
         password = passwordWithConfirm.password,
@@ -61,11 +64,11 @@ class PasswordConfirmPreviewParameter : PreviewParameterProvider<PasswordWithCon
         // not same
         PasswordWithConfirm("abcd1234", "abcd12345"),
         // success
-        PasswordWithConfirm("abcd1234", "abcd1234"),
+        PasswordWithConfirm("abcd1234", "abcd1234")
     )
 }
 
 data class PasswordWithConfirm(
     val password: String,
-    val passwordConfirm: String,
+    val passwordConfirm: String
 )

@@ -3,7 +3,7 @@ package nextstep.signup.domain
 @JvmInline
 value class Password(val content: String) {
     init {
-        require(content.length in PASSWORD_RANGE) { "password has to be in ${PASSWORD_RANGE}" }
+        require(content.length in PASSWORD_RANGE) { "password has to be in $PASSWORD_RANGE" }
         require(regex.matches(content)) { "password must contain at least one English and number" }
     }
 
@@ -22,13 +22,13 @@ value class Password(val content: String) {
             if (passwordInput == "") return PasswordResult.EmptyField
             if (passwordInput.length !in PASSWORD_RANGE) return PasswordResult.InvalidPasswordLength
             if (!regex.matches(passwordInput)) return PasswordResult.InvalidPasswordFormat
-            return PasswordResult.Success(passwordInput)
+            return PasswordResult.Success(Password(passwordInput))
         }
     }
 }
 
 sealed interface PasswordResult {
-    data class Success(val password: String) : PasswordResult
+    data class Success(val password: Password) : PasswordResult
 
     data object EmptyField : PasswordResult
 
@@ -37,5 +37,4 @@ sealed interface PasswordResult {
     data object InvalidPasswordLength : Failure
 
     data object InvalidPasswordFormat : Failure
-
 }

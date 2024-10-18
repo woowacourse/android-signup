@@ -7,18 +7,17 @@ value class PasswordConfirm(val content: String) {
         fun from(passwordInput: String, passwordConfirmInput: String): PasswordConfirmResult {
             if (passwordConfirmInput == "") return PasswordConfirmResult.EmptyField
             if (passwordInput != passwordConfirmInput) return PasswordConfirmResult.NotSamePasswordConfirm
-            return PasswordConfirmResult.Success(passwordConfirmInput)
+            return PasswordConfirmResult.Success(PasswordConfirm(passwordConfirmInput))
         }
     }
 }
 
 sealed interface PasswordConfirmResult {
-    data class Success(val passwordConfirm: String) : PasswordConfirmResult
+    data class Success(val passwordConfirm: PasswordConfirm) : PasswordConfirmResult
 
     data object EmptyField : PasswordConfirmResult
 
     sealed interface Failure : PasswordConfirmResult
 
     data object NotSamePasswordConfirm : Failure
-
 }

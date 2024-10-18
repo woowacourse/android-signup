@@ -4,12 +4,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import nextstep.signup.R
 import nextstep.signup.domain.Password
-import nextstep.signup.domain.Password3
 import nextstep.signup.domain.PasswordResult
 
 @Composable
@@ -39,7 +40,9 @@ fun PasswordTextField(
                 is PasswordResult.InvalidPasswordFormat ->
                     Text(text = stringResource(id = R.string.error_message_password_invalid_format))
             }
-        }
+        },
+        keyboardType = KeyboardType.Password,
+        visualTransformation = PasswordVisualTransformation()
     )
 }
 
@@ -67,6 +70,6 @@ class PasswordPreviewParameter : PreviewParameterProvider<String> {
         "qwertyuio",
 
         // success
-        "abcd1234",
+        "abcd1234"
     )
 }
