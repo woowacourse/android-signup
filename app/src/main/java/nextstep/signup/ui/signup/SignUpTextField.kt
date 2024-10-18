@@ -21,6 +21,7 @@ fun SignUpTextField(
     label: String,
     text: MutableState<String>,
     onValueChange: (String) -> Unit = {},
+    isError: Boolean = false,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
 ) {
@@ -29,6 +30,7 @@ fun SignUpTextField(
         value = text.value,
         onValueChange = onValueChange,
         label = { Text(text = label) },
+        isError = isError,
         visualTransformation = visualTransformation,
         keyboardOptions = keyboardOptions,
     )

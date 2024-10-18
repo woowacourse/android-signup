@@ -49,7 +49,7 @@ fun SignUpScreen(
             verticalArrangement = Arrangement.spacedBy(36.dp),
         ) {
             SignUpTextField(
-                label = stringResource(id = R.string.user_name),
+                label = stringResource(id = R.string.username),
                 text = userName,
                 onValueChange = { userName.value = it },
             )
