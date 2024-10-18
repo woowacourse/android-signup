@@ -1,25 +1,13 @@
 package nextstep.signup.domain
 
-class Password(password: String = "") {
-    private var _value = password
-    val value: String
-        get() = _value
+data class Password(val value: String = "") {
+    val isValid: Boolean = isValidLength && isValidFormat
 
-    private var _isValid = isValidLength && isValidFormat
-    val isValid: Boolean
-        get() = _isValid
-
-    private var _isValidLength = password.validatePasswordLength()
     val isValidLength: Boolean
-        get() = _isValidLength
+        get() = value.validatePasswordLength()
 
-    private var _isValidFormat = password.validatePasswordFormat()
     val isValidFormat: Boolean
-        get() = _isValidFormat
-
-    fun setPassword(value: String) {
-        _value = value
-    }
+        get() = value.validatePasswordFormat()
 
     private fun String.validatePasswordLength(): Boolean = length in PASSWORD_LEGNTH
 

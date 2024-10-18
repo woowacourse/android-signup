@@ -1,25 +1,13 @@
 package nextstep.signup.domain
 
-class Username(name: String = "") {
-    private var _value = name
-    val value: String
-        get() = _value
+data class Username(val value: String = "") {
+    val isValid: Boolean = isValidLength && isValidFormat
 
-    private var _isValid = isValidLength && isValidFormat
-    val isValid: Boolean
-        get() = _isValid
-
-    private var _isValidLength = name.validateUsernameLength()
     val isValidLength: Boolean
-        get() = _isValidLength
+        get() = value.validateUsernameLength()
 
-    private var _isValidFormat = name.validateUsernameFormat()
     val isValidFormat: Boolean
-        get() = _isValidFormat
-
-    fun setUsername(value: String) {
-        _value = value
-    }
+        get() = value.validateUsernameFormat()
 
     private fun String.validateUsernameLength(): Boolean = length in USERNAME_LEGNTH
 

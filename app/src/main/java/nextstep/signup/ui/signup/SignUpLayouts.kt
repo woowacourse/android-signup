@@ -13,7 +13,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,10 +26,7 @@ import nextstep.signup.domain.Username
 import nextstep.signup.ui.common.button.StateButton
 import nextstep.signup.ui.common.textfield.InputType
 import nextstep.signup.ui.common.textfield.SingleLineTextInput
-import nextstep.signup.ui.common.textfield.validateEmailInput
 import nextstep.signup.ui.common.textfield.validatePasswordConfirmInput
-import nextstep.signup.ui.common.textfield.validatePasswordInput
-import nextstep.signup.ui.common.textfield.validateUsernameInput
 import nextstep.signup.ui.signup.SignUpValidator.validateEmail
 import nextstep.signup.ui.signup.SignUpValidator.validatePassword
 import nextstep.signup.ui.signup.SignUpValidator.validateUsername
@@ -49,10 +45,10 @@ fun SignUpTitle() {
 fun SignUpInteractionLayer(onButtonClicked: () -> Unit) {
     val textFieldModifier = Modifier.fillMaxWidth()
 
-    var username by rememberSaveable { mutableStateOf("") }
-    var email by rememberSaveable { mutableStateOf("") }
-    var password by rememberSaveable { mutableStateOf("") }
-    var passwordConfirm by rememberSaveable { mutableStateOf("") }
+    var username by remember { mutableStateOf(Username("")) }
+    var email by remember { mutableStateOf(Email("")) }
+    var password by remember { mutableStateOf(Password("")) }
+    var passwordConfirm by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier.fillMaxHeight(0.8f),
@@ -61,27 +57,27 @@ fun SignUpInteractionLayer(onButtonClicked: () -> Unit) {
     ) {
         SingleLineTextInput(
             modifier = textFieldModifier,
-            value = username,
-            onValueChange = { username = it },
+            value = username.value,
+            onValueChange = { username = Username(it) },
             label = stringResource(id = R.string.signup_username),
             inputType = InputType.Username,
-            validateInput = { validateUsername(Username(username)) },
+            validateInput = { validateUsername(username) },
         )
         SingleLineTextInput(
             modifier = textFieldModifier,
-            value = email,
-            onValueChange = { email = it },
+            value = email.value,
+            onValueChange = { email = Email(it) },
             label = stringResource(id = R.string.signup_email),
             inputType = InputType.Email,
-            validateInput = { validateEmail(Email(email)) },
+            validateInput = { validateEmail(email) },
         )
         SingleLineTextInput(
             modifier = textFieldModifier,
-            value = password,
-            onValueChange = { password = it },
+            value = password.value,
+            onValueChange = { password = Password(it) },
             label = stringResource(id = R.string.signup_password),
             inputType = InputType.Password,
-            validateInput = { validatePassword(Password(password)) },
+            validateInput = { validatePassword(password) },
         )
         SingleLineTextInput(
             modifier = textFieldModifier,
@@ -89,7 +85,7 @@ fun SignUpInteractionLayer(onButtonClicked: () -> Unit) {
             onValueChange = { passwordConfirm = it },
             label = stringResource(id = R.string.signup_password_confirm),
             inputType = InputType.Password,
-            validateInput = { validatePasswordConfirmInput(password, passwordConfirm) },
+            validateInput = { validatePasswordConfirmInput(password.value, passwordConfirm) },
         )
         StateButton(
             modifier = textFieldModifier.requiredHeight(50.dp),
