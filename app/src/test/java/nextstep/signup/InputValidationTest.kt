@@ -1,13 +1,9 @@
 package nextstep.signup
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
-import nextstep.signup.ui.signup.SignUpTextField
+import nextstep.signup.ui.signup.UsernameTextField
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -67,59 +63,7 @@ class InputValidationTest {
     }
 }
 
-@Composable
-fun UsernameTextField(
-    username: MutableState<String>,
-    modifier: Modifier = Modifier,
-    onValueChange: (String) -> Unit = {},
-) {
-    val lengthValidation = LengthValidation(2..5, stringResource(R.string.username_length_error))
-    val characterValidation = RegexValidation("[a-zA-Z가-힣]+".toRegex(), stringResource(R.string.username_character_error))
-    val compositeValidation = CompositeValidation(lengthValidation, characterValidation)
-    SignUpTextField(
-        modifier = modifier,
-        label = stringResource(R.string.username),
-        text = username,
-        onValueChange = onValueChange,
-        isError = !compositeValidation.validate(username.value),
-        errorMessage = compositeValidation.errorMessage(username.value)
-    )
-}
 
-interface Validation {
-    fun validate(text: String): Boolean
-    fun errorMessage(text: String): String
-}
 
-class CompositeValidation(
-    private vararg val validations: Validation
-) : Validation {
-    override fun validate(text: String): Boolean =
-        validations.all { it.validate(text) }
 
-    override fun errorMessage(text: String): String =
-        filterUnpassedValidations(text).joinToString(separator = "\n") { it.errorMessage(text) }
 
-    private fun filterUnpassedValidations(text: String): List<Validation> =
-        validations.filter { !it.validate(text) }
-}
-
-class LengthValidation(
-    private val range: IntRange,
-    private val errorMessage: String,
-) : Validation {
-    override fun validate(text: String): Boolean =
-        text.length in range
-
-    override fun errorMessage(text: String): String = errorMessage
-}
-
-class RegexValidation(
-    private val regex: Regex,
-    private val errorMessage: String,
-) : Validation {
-    override fun validate(text: String): Boolean =
-        regex.matches(text)
-
-    override fun errorMessage(text: String): String = errorMessage
-}
