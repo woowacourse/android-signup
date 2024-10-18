@@ -23,11 +23,7 @@ fun UserNameTextField(
         labelText = labelText,
         value = name,
         onValueChange = onValueChange,
-        isError = when (UserName.from(name)) {
-            is UserNameResult.EmptyField -> false
-            is UserNameResult.Success -> false
-            is UserNameResult.Failure -> true
-        },
+        isError = UserName.from(name) is UserNameResult.Failure,
         supportingText = {
             when (UserName.from(name)) {
                 is UserNameResult.EmptyField -> return@SignUpTextField
