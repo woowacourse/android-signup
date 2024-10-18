@@ -25,11 +25,7 @@ fun EmailTextField(
         value = email,
         onValueChange = onValueChange,
         keyboardType = KeyboardType.Email,
-        isError = when (Email.from(input = email)) {
-            is EmailResult.EmptyField -> false
-            is EmailResult.Success -> false
-            is EmailResult.Failure -> true
-        },
+        isError = Email.from(email) is EmailResult.Failure,
         supportingText = {
             when (Email.from(input = email)) {
                 is EmailResult.EmptyField -> return@SignUpTextField

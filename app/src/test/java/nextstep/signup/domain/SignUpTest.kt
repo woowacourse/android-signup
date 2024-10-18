@@ -19,7 +19,7 @@ class SignUpTest {
             password = Password.from(passwordInput),
             passwordConfirm = PasswordConfirm.from(
                 passwordInput,
-                passwordConfirmInput,
+                passwordConfirmInput
             )
         )
 
@@ -32,6 +32,5 @@ class SignUpTest {
                 passwordConfirm = PasswordConfirm(passwordConfirmInput)
             )
         )
-
     }
 }
