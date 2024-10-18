@@ -36,7 +36,7 @@ class PasswordInputValidationTest {
                 inputType = InputType.Password,
                 validateInput = {
                     passwordConfirm.value.validatePasswordConfirm(
-                        password.value.value
+                        password.value.value,
                     )
                 },
             )

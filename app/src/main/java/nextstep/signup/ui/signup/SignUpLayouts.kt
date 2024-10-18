@@ -107,9 +107,9 @@ fun SignUpInteractionLayer(onButtonClicked: () -> Unit) {
 fun SignUpLayout(onButtonClicked: () -> Unit) {
     Column(
         modifier =
-        Modifier
-            .fillMaxHeight(0.7f)
-            .padding(32.dp),
+            Modifier
+                .fillMaxHeight(0.7f)
+                .padding(32.dp),
         verticalArrangement = Arrangement.SpaceEvenly,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
@@ -126,9 +126,9 @@ fun SignUpLayoutPreview() {
     SignUpTheme {
         Surface(
             modifier =
-            Modifier
-                .fillMaxSize()
-                .padding(32.dp),
+                Modifier
+                    .fillMaxSize()
+                    .padding(32.dp),
         ) {
             SignUpInteractionLayer {}
         }
