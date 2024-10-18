@@ -95,7 +95,7 @@ fun UserNameComposable(
             val errorMessage = userName.getErrorMessage() ?: return@TextFieldComponent
             TextComponent(description = errorMessage)
         },
-        isError = userName.isValid(),
+        isError = userName.isInvalid(),
     )
     Spacer(modifier = Modifier.size(36.dp))
 }
