@@ -22,6 +22,7 @@ data class PasswordConfirm(val value: String, private val password: String) {
     }
 }
 
+
 @Immutable
 sealed interface PasswordConfirmValidateResult {
     val isValid: Boolean get() = this is Success
