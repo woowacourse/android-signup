@@ -87,7 +87,7 @@ class InputValidationTest {
     }
 
     @Test
-    fun `이메일_형식이_올바르면_에러메시지가_노출된다`() {
+    fun `이메일_형식이_올바르지_않으면_에러메시지가_노출된다`() {
         // when
         email = "hannahnaver.com"
 
