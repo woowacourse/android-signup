@@ -1,4 +1,4 @@
-package nextstep.signup
+package nextstep.signup.model
 
 data class Email(val email: String) {
     fun isValid(): Boolean = !isBlank() && !isValidEmail()

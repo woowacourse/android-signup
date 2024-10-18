@@ -1,4 +1,4 @@
-package nextstep.signup
+package nextstep.signup.model
 
 data class PasswordConfirm(
     val password: String,

@@ -1,4 +1,4 @@
-package nextstep.signup
+package nextstep.signup.model
 
 data class UserName(val userName: String) {
     fun isValid() = !isBlank() && (!isValidLength() || !hasInvalidCharacter())

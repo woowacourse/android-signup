@@ -1,6 +1,5 @@
 package nextstep.signup
 
-import android.opengl.ETC1.isValid
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -22,6 +21,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import nextstep.signup.model.Email
+import nextstep.signup.model.Password
+import nextstep.signup.model.PasswordConfirm
+import nextstep.signup.model.UserName
 import nextstep.signup.ui.component.ButtonComponent
 import nextstep.signup.ui.component.TextComponent
 import nextstep.signup.ui.component.TextFieldComponent
