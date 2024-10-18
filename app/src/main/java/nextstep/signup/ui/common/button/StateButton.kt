@@ -13,10 +13,12 @@ import nextstep.signup.ui.theme.Typography
 fun StateButton(
     modifier: Modifier = Modifier,
     text: String,
+    enabled: Boolean = true,
     onClick: () -> Unit,
 ) {
     Button(
         modifier = modifier,
+        enabled = enabled,
         onClick = { onClick() },
     ) {
         Text(
