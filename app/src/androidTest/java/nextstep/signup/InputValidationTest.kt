@@ -22,7 +22,7 @@ class InputValidationTest {
         composeTestRule.setContent {
             UserNameComposable(value = username, onUserNameChange = { username = it })
             EmailComposable(value = email, onEmailChange = { email = it })
-            PasswordComposable(password = password, onPasswordChange = { password = it })
+            PasswordComposable(value = password, onPasswordChange = { password = it })
             PasswordConfirmComposable(
                 password = password,
                 passwordConfirm = passwordConfirm,

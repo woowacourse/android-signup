@@ -1,5 +1,6 @@
 package nextstep.signup
 
+import android.opengl.ETC1.isValid
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -72,7 +73,7 @@ private fun SignUpInputBox() {
 
     UserNameComposable(value = userName, onUserNameChange = { userName = it })
     EmailComposable(value = email, onEmailChange = { email = it })
-    PasswordComposable(password = password, onPasswordChange = { password = it })
+    PasswordComposable(value = password, onPasswordChange = { password = it })
     PasswordConfirmComposable(password = password, passwordConfirm = passwordConfirm, onPasswordConfirmChange = { passwordConfirm = it })
 }
 
@@ -118,26 +119,20 @@ fun EmailComposable(
 
 @Composable
 fun PasswordComposable(
-    password: String,
+    value: String,
     onPasswordChange: (String) -> Unit,
 ) {
-    val isBlank = password.isBlank()
-    val isInvalidLength = password.length !in PASSWORD_MIN_LENGTH..PASSWORD_MAX_LENGTH
-    val hasEnglishAndNumber = password.matches(Regex(PASSWORD_REGEX)).not()
-    val isError = isBlank.not() && (isInvalidLength || hasEnglishAndNumber)
+    val password = Password(value)
 
     TextFieldComponent(
-        newValue = password,
+        newValue = password.password,
         onValueChange = onPasswordChange,
         label = R.string.main_password,
         supportingText = {
-            when {
-                isBlank -> return@TextFieldComponent
-                isInvalidLength -> TextComponent(description = "비밀번호는 8~16자여야 합니다.")
-                hasEnglishAndNumber -> TextComponent(description = "비밀번호는 영문과 숫자를 포함해야 합니다.")
-            }
+            val errorMessage = password.getErrorMessage() ?: return@TextFieldComponent
+            TextComponent(description = errorMessage)
         },
-        isError = isError,
+        isError = password.isValid(),
         keyboardType = KeyboardType.Password,
     )
     Spacer(modifier = Modifier.size(36.dp))
@@ -176,7 +171,3 @@ private fun GreetingPreview() {
         SignUpScreen()
     }
 }
-
-const val PASSWORD_REGEX = "^(?=.*[a-zA-Z])(?=.*[0-9]).{8,16}$"
-const val PASSWORD_MIN_LENGTH = 8
-const val PASSWORD_MAX_LENGTH = 16
