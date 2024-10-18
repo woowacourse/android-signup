@@ -71,7 +71,7 @@ private fun SignUpInputBox() {
     var passwordConfirm by remember { mutableStateOf("") }
 
     UserNameComposable(value = userName, onUserNameChange = { userName = it })
-    EmailComposable(email = email, onEmailChange = { email = it })
+    EmailComposable(value = email, onEmailChange = { email = it })
     PasswordComposable(password = password, onPasswordChange = { password = it })
     PasswordConfirmComposable(password = password, passwordConfirm = passwordConfirm, onPasswordConfirmChange = { passwordConfirm = it })
 }
@@ -98,24 +98,19 @@ fun UserNameComposable(
 
 @Composable
 fun EmailComposable(
-    email: String,
+    value: String,
     onEmailChange: (String) -> Unit,
 ) {
-    val isBlank = email.isBlank()
-    val isInvalidEmail = email.matches(Regex(EMAIL_REGEX)).not()
-    val isError = isBlank.not() && isInvalidEmail
-
+    val email = Email(value)
     TextFieldComponent(
-        newValue = email,
+        newValue = value,
         onValueChange = onEmailChange,
         label = R.string.main_email,
         supportingText = {
-            when {
-                isBlank -> return@TextFieldComponent
-                isInvalidEmail -> TextComponent(description = "이메일 형식이 올바르지 않습니다.")
-            }
+            val errorMessage = email.getErrorMessage() ?: return@TextFieldComponent
+            TextComponent(description = errorMessage)
         },
-        isError = isError,
+        isError = email.isValid(),
         keyboardType = KeyboardType.Email,
     )
     Spacer(modifier = Modifier.size(36.dp))
@@ -182,7 +177,6 @@ private fun GreetingPreview() {
     }
 }
 
-const val EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$"
 const val PASSWORD_REGEX = "^(?=.*[a-zA-Z])(?=.*[0-9]).{8,16}$"
 const val PASSWORD_MIN_LENGTH = 8
 const val PASSWORD_MAX_LENGTH = 16

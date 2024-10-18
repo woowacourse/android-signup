@@ -21,7 +21,7 @@ class InputValidationTest {
     fun setup() {
         composeTestRule.setContent {
             UserNameComposable(value = username, onUserNameChange = { username = it })
-            EmailComposable(email = email, onEmailChange = { email = it })
+            EmailComposable(value = email, onEmailChange = { email = it })
             PasswordComposable(password = password, onPasswordChange = { password = it })
             PasswordConfirmComposable(
                 password = password,
