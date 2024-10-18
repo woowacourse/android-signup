@@ -27,6 +27,6 @@ data class UsernameState(
     companion object {
         private const val USERNAME_REGEX = "^[a-zA-Z가-힣]+$"
         private const val USERNAME_MINIMUM_LENGTH = 2
-        private const val USERNAME_MAXIMUM_LENGTH = 10
+        private const val USERNAME_MAXIMUM_LENGTH = 5
     }
 }
