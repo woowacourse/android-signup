@@ -1,6 +1,7 @@
 package nextstep.signup.ui.signup
 
 import nextstep.signup.domain.Email
+import nextstep.signup.domain.Password
 import nextstep.signup.domain.Username
 import nextstep.signup.ui.common.textfield.EMAIL_REGEX
 import nextstep.signup.ui.common.textfield.PASSWORD_REGEX
@@ -28,12 +29,12 @@ object SignUpValidator {
         }
     }
 
-    fun validatePassword(input: String): String {
-        return if (input.isEmpty()) {
+    fun validatePassword(password: Password): String {
+        return if (password.value.isEmpty()) {
             ""
-        } else if (!input.matches(Regex(PASSWORD_REGEX))) {
+        } else if (password.isValidFormat.not()) {
             "비밀번호는 영문과 숫자를 포함해야 합니다."
-        } else if (input.length !in 8..16) {
+        } else if (password.isValidLength.not()) {
             "비밀번호는 8~16자여야 합니다."
         } else {
             ""

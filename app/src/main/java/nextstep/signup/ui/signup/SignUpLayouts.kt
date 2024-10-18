@@ -22,6 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.signup.R
 import nextstep.signup.domain.Email
+import nextstep.signup.domain.Password
 import nextstep.signup.domain.Username
 import nextstep.signup.ui.common.button.StateButton
 import nextstep.signup.ui.common.textfield.InputType
@@ -31,6 +32,7 @@ import nextstep.signup.ui.common.textfield.validatePasswordConfirmInput
 import nextstep.signup.ui.common.textfield.validatePasswordInput
 import nextstep.signup.ui.common.textfield.validateUsernameInput
 import nextstep.signup.ui.signup.SignUpValidator.validateEmail
+import nextstep.signup.ui.signup.SignUpValidator.validatePassword
 import nextstep.signup.ui.signup.SignUpValidator.validateUsername
 import nextstep.signup.ui.theme.SignUpTheme
 import nextstep.signup.ui.theme.Typography
@@ -79,7 +81,7 @@ fun SignUpInteractionLayer(onButtonClicked: () -> Unit) {
             onValueChange = { password = it },
             label = stringResource(id = R.string.signup_password),
             inputType = InputType.Password,
-            validateInput = { validatePasswordInput(password) },
+            validateInput = { validatePassword(Password(password)) },
         )
         SingleLineTextInput(
             modifier = textFieldModifier,
