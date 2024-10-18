@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -107,11 +106,21 @@ private fun UserNameComposable() {
 @Composable
 private fun EmailComposable() {
     var email by remember { mutableStateOf("") }
+    val isBlank = email.isBlank()
+    val isInvalidEmail = !email.matches(Regex(EMAIL_REGEX))
+    val isError = isBlank.not() && isInvalidEmail
+
     TextFieldComponent(
         newValue = email,
         onValueChange = { email = it },
         label = R.string.main_email,
-        supportingText = {},
+        supportingText = {
+            when {
+                isBlank -> return@TextFieldComponent
+                isInvalidEmail -> TextComponent(description = "이메일 형식이 올바르지 않습니다.")
+            }
+        },
+        isError = isError,
         keyboardType = KeyboardType.Email,
     )
     Spacer(modifier = Modifier.size(36.dp))
