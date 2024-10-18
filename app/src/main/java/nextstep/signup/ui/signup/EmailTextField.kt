@@ -10,6 +10,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.signup.R
+import nextstep.signup.model.RegexValidation
 import nextstep.signup.ui.theme.SignupTheme
 
 @Composable
@@ -18,15 +19,24 @@ fun EmailTextField(
     label: String,
     text: MutableState<String>,
     onValueChange: (String) -> Unit = {},
-) = SignUpTextField(
-    modifier = modifier,
-    label = label,
-    text = text,
-    onValueChange = onValueChange,
-    keyboardOptions = KeyboardOptions(
-        keyboardType = KeyboardType.Email
+){
+    val emailValidation =
+        RegexValidation(
+            "[a-zA-Z0-9._-]+@[a-zA-Z]+\\.+[a-zA-Z]+".toRegex(),
+            stringResource(id = R.string.email_form_error)
+        )
+    SignUpTextField(
+        modifier = modifier,
+        label = label,
+        text = text,
+        onValueChange = onValueChange,
+        keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Email
+        ),
+        isError = !emailValidation.validate(text.value),
+        errorMessage = emailValidation.errorMessage(text.value),
     )
-)
+}
 
 @Preview(showBackground = true)
 @Composable
