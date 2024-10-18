@@ -77,7 +77,7 @@ private fun SignUpInputBox() {
 }
 
 @Composable
-private fun UserNameComposable(
+fun UserNameComposable(
     userName: String,
     onUserNameChange: (String) -> Unit,
 ) {
@@ -103,7 +103,7 @@ private fun UserNameComposable(
 }
 
 @Composable
-private fun EmailComposable(
+fun EmailComposable(
     email: String,
     onEmailChange: (String) -> Unit,
 ) {
@@ -128,12 +128,12 @@ private fun EmailComposable(
 }
 
 @Composable
-private fun PasswordComposable(
+fun PasswordComposable(
     password: String,
     onPasswordChange: (String) -> Unit,
 ) {
     val isBlank = password.isBlank()
-    val isInvalidLength = password.length !in EMAIL_MIN_LENGTH..EMAIL_MAX_LENGTH
+    val isInvalidLength = password.length !in PASSWORD_MIN_LENGTH..PASSWORD_MAX_LENGTH
     val hasEnglishAndNumber = password.matches(Regex(PASSWORD_REGEX)).not()
     val isError = isBlank.not() && (isInvalidLength || hasEnglishAndNumber)
 
@@ -155,7 +155,7 @@ private fun PasswordComposable(
 }
 
 @Composable
-private fun PasswordConfirmComposable(
+fun PasswordConfirmComposable(
     password: String,
     passwordConfirm: String,
     onPasswordConfirmChange: (String) -> Unit,
@@ -193,5 +193,5 @@ const val EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$"
 const val PASSWORD_REGEX = "^(?=.*[a-zA-Z])(?=.*[0-9]).{8,16}$"
 const val USERNAME_MIN_LENGTH = 2
 const val USERNAME_MAX_LENGTH = 5
-const val EMAIL_MIN_LENGTH = 8
-const val EMAIL_MAX_LENGTH = 16
+const val PASSWORD_MIN_LENGTH = 8
+const val PASSWORD_MAX_LENGTH = 16
