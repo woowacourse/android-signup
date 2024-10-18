@@ -42,6 +42,11 @@ fun SignUpScreen() {
     var password by remember { mutableStateOf("") }
     var passwordConfirm by remember { mutableStateOf("") }
 
+    var nameInputStarted by remember { mutableStateOf(false) }
+    var emailInputStarted by remember { mutableStateOf(false) }
+    var passwordInputStarted by remember { mutableStateOf(false) }
+    var passwordConfirmInputStarted by remember { mutableStateOf(false) }
+
     val nameModel by rememberUpdatedState(Name(name))
     val emailModel by rememberUpdatedState(Email(email))
     val passwordModel by rememberUpdatedState(Password(password))
@@ -67,19 +72,27 @@ fun SignUpScreen() {
 
         InputField(
             value = name,
-            onValueChange = { name = it },
+            onValueChange = {
+                name = it
+                nameInputStarted = true
+            },
             model = nameModel,
-            label = stringResource(R.string.user_name)
+            label = stringResource(R.string.user_name),
+            showError = nameInputStarted
         )
 
         Spacer(modifier = Modifier.height(36.dp))
 
         InputField(
             value = email,
-            onValueChange = { email = it },
+            onValueChange = {
+                email = it
+                emailInputStarted = true
+            },
             model = emailModel,
             label = stringResource(R.string.user_email),
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+            showError = emailInputStarted
         )
 
         Spacer(modifier = Modifier.height(36.dp))
@@ -88,19 +101,25 @@ fun SignUpScreen() {
             value = password,
             onValueChange = {
                 password = it
+                passwordInputStarted = true
                 passwordConfirmModel.setValue(password, passwordConfirm)
             },
             model = passwordModel,
-            label = stringResource(R.string.user_password)
+            label = stringResource(R.string.user_password),
+            showError = passwordInputStarted
         )
 
         Spacer(modifier = Modifier.height(36.dp))
 
         PasswordInputField(
             value = passwordConfirm,
-            onValueChange = { passwordConfirm = it },
+            onValueChange = {
+                passwordConfirm = it
+                passwordConfirmInputStarted = true
+            },
             model = passwordConfirmModel,
-            label = stringResource(R.string.user_password_confirm)
+            label = stringResource(R.string.user_password_confirm),
+            showError = passwordConfirmInputStarted
         )
 
         Spacer(modifier = Modifier.height(42.dp))
@@ -125,14 +144,15 @@ fun InputField(
     onValueChange: (String) -> Unit,
     model: InputValidation,
     label: String,
-    keyboardOptions: KeyboardOptions = KeyboardOptions.Default
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    showError: Boolean = false
 ) {
     CustomTextField(
         value = value,
         onValueChange = onValueChange,
         label = label,
-        isError = model.isInValid(),
-        errorMessage = model.getErrorMessage(),
+        isError = showError && model.isInValid(),
+        errorMessage = if (showError) model.getErrorMessage() else null,
         keyboardOptions = keyboardOptions
     )
 }
@@ -142,21 +162,14 @@ fun PasswordInputField(
     value: String,
     onValueChange: (String) -> Unit,
     model: InputValidation,
-    label: String
+    label: String,
+    showError: Boolean = false
 ) {
     CustomPasswordTextField(
         value = value,
         onValueChange = onValueChange,
-        isError = model.isInValid(),
-        errorMessage = model.getErrorMessage(),
+        isError = showError && model.isInValid(),
+        errorMessage = if (showError) model.getErrorMessage() else null,
         label = label
     )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun SignUpScreenPreview() {
-    SignupTheme {
-        SignUpScreen()
-    }
 }
