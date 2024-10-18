@@ -31,7 +31,7 @@ class SignUpActivity : ComponentActivity() {
     }
 
     private fun onSignUpClicked() {
-        Toast.makeText(this, getString(R.string.all_not_implemented_yet), Toast.LENGTH_LONG).show()
+        Toast.makeText(this, getString(R.string.signup_signup_success), Toast.LENGTH_LONG).show()
     }
 }
 
