@@ -1,5 +1,6 @@
 package nextstep.signup.ui
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,6 +23,11 @@ import nextstep.signup.component.CustomButton
 import nextstep.signup.component.CustomPasswordTextField
 import nextstep.signup.component.CustomTextField
 import nextstep.signup.component.TitleText
+import nextstep.signup.model.Email
+import nextstep.signup.model.Name
+import nextstep.signup.model.Password
+import nextstep.signup.model.PasswordConfirm
+import nextstep.signup.model.User
 import nextstep.signup.ui.theme.Blue50
 import nextstep.signup.ui.theme.SignupTheme
 
@@ -32,12 +38,10 @@ fun SignUpScreen() {
     var password by remember { mutableStateOf("") }
     var passwordConfirm by remember { mutableStateOf("") }
 
-    val user = User(
-        name = name,
-        email = email,
-        password = password,
-        passwordConfirm = passwordConfirm
-    )
+    var nameModel = Name(name)
+    var emailModel = Email(email)
+    var passwordModel = Password(password)
+    var passwordConfirmModel = PasswordConfirm(password, passwordConfirm)
 
     Column(
         modifier = Modifier
@@ -51,38 +55,64 @@ fun SignUpScreen() {
 
         Spacer(modifier = Modifier.height(40.dp))
         CustomTextField(
-            value = user.name,
-            onValueChange = { name = it },
-            label = stringResource(R.string.user_name)
+            value = name,
+            onValueChange = { newName ->
+                name = newName
+                nameModel = Name(newName)
+            },
+            label = stringResource(R.string.user_name),
+            isError = nameModel.isInValid(),
+            errorMessage = nameModel.getErrorMessage()
         )
 
         Spacer(modifier = Modifier.height(36.dp))
         CustomTextField(
-            value = user.email,
-            onValueChange = { email = it },
+            value = email,
+            onValueChange = { newEmail ->
+                email = newEmail
+                emailModel = Email(newEmail)
+            },
             label = stringResource(R.string.user_email),
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Email
-            )
+            isError = emailModel.isInValid(),
+            errorMessage = emailModel.getErrorMessage(),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
         )
 
         Spacer(modifier = Modifier.height(36.dp))
         CustomPasswordTextField(
-            value = user.password,
-            onValueChange = { password = it },
+            value = password,
+            onValueChange = { newPassword ->
+                password = newPassword
+                passwordModel = Password(newPassword)
+                passwordConfirmModel = PasswordConfirm(newPassword, passwordConfirm)
+            },
+            isError = passwordModel.isInValid(),
+            errorMessage = passwordModel.getErrorMessage(),
             label = stringResource(R.string.user_password)
         )
 
         Spacer(modifier = Modifier.height(36.dp))
         CustomPasswordTextField(
-            value = user.passwordConfirm,
-            onValueChange = { passwordConfirm = it },
+            value = passwordConfirm,
+            onValueChange = { newPasswordConfirm ->
+                passwordConfirm = newPasswordConfirm
+                passwordConfirmModel = PasswordConfirm(password, newPasswordConfirm)
+            },
+            isError = passwordConfirmModel.isInValid(),
+            errorMessage = passwordConfirmModel.getErrorMessage(),
             label = stringResource(R.string.user_password_confirm)
         )
 
         Spacer(modifier = Modifier.height(42.dp))
         CustomButton(
-            onClick = {},
+            onClick = {
+                val user = User(nameModel, emailModel, passwordModel, passwordConfirmModel)
+                if (user.isInValid()) {
+                    Log.d("SignUpScreen", "회원가입 실패")
+                } else {
+                    Log.d("SignUpScreen", "회원가입 성공")
+                }
+            },
             buttonText = stringResource(R.string.sign_up_button),
             colors = ButtonDefaults.buttonColors(containerColor = Blue50)
         )
