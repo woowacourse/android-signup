@@ -17,13 +17,13 @@ fun UsernameTextField(
 ) {
     val lengthValidation = LengthValidation(2..5, stringResource(R.string.username_length_error))
     val characterValidation = RegexValidation("[a-zA-Z가-힣]+".toRegex(), stringResource(R.string.username_character_error))
-    val compositeValidation = CompositeValidation(lengthValidation, characterValidation)
+    val userNameValidation = CompositeValidation(lengthValidation, characterValidation)
     SignUpTextField(
         modifier = modifier,
         label = stringResource(R.string.username),
         text = username,
         onValueChange = onValueChange,
-        isError = !compositeValidation.validate(username.value),
-        errorMessage = compositeValidation.errorMessage(username.value)
+        isError = !userNameValidation.validate(username.value),
+        errorMessage = userNameValidation.errorMessage(username.value)
     )
 }
