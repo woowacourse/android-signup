@@ -3,8 +3,6 @@ package nextstep.signup.ui.signup
 import nextstep.signup.domain.Email
 import nextstep.signup.domain.Password
 import nextstep.signup.domain.Username
-import nextstep.signup.ui.common.textfield.EMAIL_REGEX
-import nextstep.signup.ui.common.textfield.PASSWORD_REGEX
 
 object SignUpValidator {
     fun validateUsername(username: Username): String {
@@ -41,13 +39,10 @@ object SignUpValidator {
         }
     }
 
-    fun validatePasswordConfirm(
-        password: String,
-        input: String,
-    ): String {
-        return if (input.isEmpty()) {
+    fun String.validatePasswordConfirm(password: String): String {
+        return if (isEmpty()) {
             ""
-        } else if (input != password) {
+        } else if (this != password) {
             "비밀번호가 일치하지 않습니다."
         } else {
             ""
