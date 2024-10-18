@@ -22,7 +22,8 @@ internal fun AuthTextField(
     modifier: Modifier = Modifier,
     label: String,
     text: String,
-    isValid: (String) -> Boolean,
+    errorMessage: String? = null,
+    isValid: Boolean = true,
     imeAction: ImeAction,
     keyboardType: KeyboardType = KeyboardType.Text,
     onTextChange: (String) -> Unit,
@@ -42,6 +43,7 @@ internal fun AuthTextField(
         label = label,
         text = text,
         isValid = isValid,
+        errorMessage = errorMessage,
         keyboardOptions = KeyboardOptions(
             imeAction = imeAction,
             keyboardType = keyboardType
@@ -66,7 +68,7 @@ internal fun AuthTextField(
     modifier: Modifier = Modifier,
     label: String,
     text: String,
-    isValid: (String) -> Boolean = { true },
+    isValid: Boolean = true,
     errorMessage: String? = null,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
@@ -79,13 +81,13 @@ internal fun AuthTextField(
             value = text,
             onValueChange = onTextChange,
             label = { Text(label) },
-            isError = isValid(text).not(),
+            isError = text.isNotEmpty() && isValid.not(),
             singleLine = true,
             visualTransformation = visualTransformation,
             keyboardOptions = keyboardOptions,
             keyboardActions = keyboardActions
         )
-        val shouldShowErrorMsg = isValid(text).not() && errorMessage.isNullOrBlank().not()
+        val shouldShowErrorMsg = text.isNotEmpty() && isValid.not()
         if (shouldShowErrorMsg) {
             Text(
                 text = errorMessage.orEmpty(),
@@ -128,7 +130,7 @@ private fun Preview3() {
             label = "ㅎㅇ",
             text = "나 오둥",
             onTextChange = {},
-            isValid = { false }
+            isValid = false
         )
     }
 }
@@ -142,7 +144,7 @@ private fun Preview4() {
             text = "나 오둥",
             onTextChange = {},
             errorMessage = "오류가 발생했습니다.",
-            isValid = { false }
+            isValid = false
         )
     }
 }

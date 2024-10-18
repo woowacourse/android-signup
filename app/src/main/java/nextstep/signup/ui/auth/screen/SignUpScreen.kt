@@ -20,26 +20,28 @@ import androidx.compose.ui.unit.dp
 import nextstep.signup.ui.auth.component.SignUpConfirmButton
 import nextstep.signup.ui.auth.component.SignUpForm
 import nextstep.signup.ui.auth.component.SignUpTitle
+import nextstep.signup.ui.auth.model.SignUpFormState
 import nextstep.signup.ui.auth.preview.SignUpPreviewParamsProvider
-import nextstep.signup.ui.auth.component.SignUpFormState
 import nextstep.signup.ui.interaction.clearFocusWith
 import nextstep.signup.ui.theme.SignupTheme
 
 @Composable
 fun SignUpScreen(
+    modifier: Modifier = Modifier,
     signUpFormState: SignUpFormState,
     onUserNameChange: (String) -> Unit,
-    onEmailChange: (String) -> Unit,
+    onEmailChange: (String) ->  Unit,
     onPasswordChange: (String) -> Unit,
     onPasswordConfirmChange: (String) -> Unit,
+    enableSignUp: Boolean,
     onDoneSignUp: () -> Unit
 ) {
     Surface {
         Column(
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxSize()
                 .clearFocusWith(LocalFocusManager.current)
-                .padding(top = 50.dp)
+                .padding(top = 30.dp)
                 .padding(horizontal = 36.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -54,7 +56,7 @@ fun SignUpScreen(
                 onDoneSignUp = onDoneSignUp
             )
             Spacer(modifier = Modifier.height(16.dp))
-            SignUpConfirmButton(onDoneSignUp, signUpFormState.enableSignUp)
+            SignUpConfirmButton(onDoneSignUp, enableSignUp)
         }
     }
 }
@@ -91,7 +93,8 @@ private fun Preview(
             onEmailChange = onEmailChange,
             onPasswordChange = onPasswordChange,
             onPasswordConfirmChange = onPasswordConfirmChange,
-            onDoneSignUp = onDoneSignUp
+            onDoneSignUp = onDoneSignUp,
+            enableSignUp = true
         )
     }
 }
