@@ -9,9 +9,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -24,6 +26,7 @@ import nextstep.signup.component.CustomPasswordTextField
 import nextstep.signup.component.CustomTextField
 import nextstep.signup.component.TitleText
 import nextstep.signup.model.Email
+import nextstep.signup.model.InputValidation
 import nextstep.signup.model.Name
 import nextstep.signup.model.Password
 import nextstep.signup.model.PasswordConfirm
@@ -39,10 +42,16 @@ fun SignUpScreen() {
     var password by remember { mutableStateOf("") }
     var passwordConfirm by remember { mutableStateOf("") }
 
-    var nameModel = Name(name)
-    var emailModel = Email(email)
-    var passwordModel = Password(password)
-    var passwordConfirmModel = PasswordConfirm(password, passwordConfirm)
+    val nameModel by rememberUpdatedState(Name(name))
+    val emailModel by rememberUpdatedState(Email(email))
+    val passwordModel by rememberUpdatedState(Password(password))
+    val passwordConfirmModel by rememberUpdatedState(PasswordConfirm(password, passwordConfirm))
+
+    val user by remember {
+        derivedStateOf {
+            User(nameModel, emailModel, passwordModel, passwordConfirmModel)
+        }
+    }
 
     Column(
         modifier = Modifier
@@ -55,57 +64,47 @@ fun SignUpScreen() {
         )
 
         Spacer(modifier = Modifier.height(40.dp))
-        CustomTextField(
+
+        InputField(
             value = name,
-            onValueChange = { newName ->
-                name = newName
-                nameModel = Name(newName)
-            },
-            label = stringResource(R.string.user_name),
-            isError = nameModel.isInValid(),
-            errorMessage = nameModel.getErrorMessage()
+            onValueChange = { name = it },
+            model = nameModel,
+            label = stringResource(R.string.user_name)
         )
 
         Spacer(modifier = Modifier.height(36.dp))
-        CustomTextField(
+
+        InputField(
             value = email,
-            onValueChange = { newEmail ->
-                email = newEmail
-                emailModel = Email(newEmail)
-            },
+            onValueChange = { email = it },
+            model = emailModel,
             label = stringResource(R.string.user_email),
-            isError = emailModel.isInValid(),
-            errorMessage = emailModel.getErrorMessage(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
         )
 
         Spacer(modifier = Modifier.height(36.dp))
-        CustomPasswordTextField(
+
+        PasswordInputField(
             value = password,
-            onValueChange = { newPassword ->
-                password = newPassword
-                passwordModel = Password(newPassword)
-                passwordConfirmModel = PasswordConfirm(newPassword, passwordConfirm)
+            onValueChange = {
+                password = it
+                passwordConfirmModel.setValue(password, passwordConfirm)
             },
-            isError = passwordModel.isInValid(),
-            errorMessage = passwordModel.getErrorMessage(),
+            model = passwordModel,
             label = stringResource(R.string.user_password)
         )
 
         Spacer(modifier = Modifier.height(36.dp))
-        CustomPasswordTextField(
+
+        PasswordInputField(
             value = passwordConfirm,
-            onValueChange = { newPasswordConfirm ->
-                passwordConfirm = newPasswordConfirm
-                passwordConfirmModel = PasswordConfirm(password, newPasswordConfirm)
-            },
-            isError = passwordConfirmModel.isInValid(),
-            errorMessage = passwordConfirmModel.getErrorMessage(),
+            onValueChange = { passwordConfirm = it },
+            model = passwordConfirmModel,
             label = stringResource(R.string.user_password_confirm)
         )
 
         Spacer(modifier = Modifier.height(42.dp))
-        val user = User(nameModel, emailModel, passwordModel, passwordConfirmModel)
+
         CustomButton(
             onClick = {
                 if (user.isInValid()) {
@@ -118,6 +117,40 @@ fun SignUpScreen() {
             colors = ButtonDefaults.buttonColors(containerColor = if (user.isInValid()) gray50 else Blue50)
         )
     }
+}
+
+@Composable
+fun InputField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    model: InputValidation,
+    label: String,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default
+) {
+    CustomTextField(
+        value = value,
+        onValueChange = onValueChange,
+        label = label,
+        isError = model.isInValid(),
+        errorMessage = model.getErrorMessage(),
+        keyboardOptions = keyboardOptions
+    )
+}
+
+@Composable
+fun PasswordInputField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    model: InputValidation,
+    label: String
+) {
+    CustomPasswordTextField(
+        value = value,
+        onValueChange = onValueChange,
+        isError = model.isInValid(),
+        errorMessage = model.getErrorMessage(),
+        label = label
+    )
 }
 
 @Preview(showBackground = true)
