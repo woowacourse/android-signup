@@ -1,6 +1,5 @@
 package woowacourse.signup.ui.component
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -29,39 +28,37 @@ fun SignupTextField(
 ) {
     val textFieldColor = if (isError) Color.Red else Blue50
     val supportingText = if (inputValue.isBlank() || !isError) "" else errorText
-    Column {
-        TextField(
-            label = {
-                Text(
-                    text = labelText,
-                    fontWeight = FontWeight.W400,
-                )
-            },
-            value = inputValue,
-            onValueChange = onValueChange,
-            textStyle =
-                TextStyle(
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.W400,
-                ),
-            singleLine = true,
-            colors =
-                TextFieldDefaults.colors(
-                    focusedIndicatorColor = textFieldColor,
-                    focusedLabelColor = textFieldColor,
-                    cursorColor = textFieldColor,
-                ),
-            visualTransformation = visualTransformation,
-            supportingText = {
-                Text(
-                    text = supportingText,
-                    style = Typography.bodySmall,
-                    color = Color.Red,
-                )
-            },
-            modifier = modifier.fillMaxWidth(),
-        )
-    }
+    TextField(
+        label = {
+            Text(
+                text = labelText,
+                fontWeight = FontWeight.W400,
+            )
+        },
+        value = inputValue,
+        onValueChange = onValueChange,
+        textStyle =
+        TextStyle(
+            fontSize = 16.sp,
+            fontWeight = FontWeight.W400,
+        ),
+        singleLine = true,
+        colors =
+        TextFieldDefaults.colors(
+            focusedIndicatorColor = textFieldColor,
+            focusedLabelColor = textFieldColor,
+            cursorColor = textFieldColor,
+        ),
+        visualTransformation = visualTransformation,
+        supportingText = {
+            Text(
+                text = supportingText,
+                style = Typography.bodySmall,
+                color = Color.Red,
+            )
+        },
+        modifier = modifier.fillMaxWidth(),
+    )
 }
 
 @Preview(showBackground = true)
