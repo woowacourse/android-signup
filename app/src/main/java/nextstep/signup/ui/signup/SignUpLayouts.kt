@@ -67,7 +67,7 @@ fun SignUpInteractionLayer(onButtonClicked: () -> Unit) {
             onValueChange = { username = Username(it) },
             label = stringResource(id = R.string.signup_username),
             inputType = InputType.Username,
-            validateInput = { validateUsername(username) },
+            validateInput = { username.validateUsername() },
         )
         SingleLineTextInput(
             modifier = textFieldModifier,
@@ -75,7 +75,7 @@ fun SignUpInteractionLayer(onButtonClicked: () -> Unit) {
             onValueChange = { email = Email(it) },
             label = stringResource(id = R.string.signup_email),
             inputType = InputType.Email,
-            validateInput = { validateEmail(email) },
+            validateInput = { email.validateEmail() },
         )
         SingleLineTextInput(
             modifier = textFieldModifier,
@@ -83,7 +83,7 @@ fun SignUpInteractionLayer(onButtonClicked: () -> Unit) {
             onValueChange = { password = Password(it) },
             label = stringResource(id = R.string.signup_password),
             inputType = InputType.Password,
-            validateInput = { validatePassword(password) },
+            validateInput = { password.validatePassword() },
         )
         SingleLineTextInput(
             modifier = textFieldModifier,
