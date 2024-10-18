@@ -7,6 +7,9 @@ class SignUpPreviewParamsProvider : PreviewParameterProvider<SignUpFormState> {
     override val values: Sequence<SignUpFormState>
         get() = sequenceOf(
             SignUpFormState("", "", "", ""),
-            SignUpFormState("userName", "email", "password", "confirmPassword")
+            SignUpFormState("user", "1", "2", "3"),
+            SignUpFormState("user", "sample@naver.com", "a", "3"),
+            SignUpFormState("user", "sample@naver.com", "abcd1234", "1"),
+            SignUpFormState("user", "sample@naver.com", "abcd1234", "abcd1234"),
         )
 }
