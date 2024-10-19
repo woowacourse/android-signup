@@ -47,45 +47,45 @@ class UserNameTest {
     }
 
     @Test
-    fun `사용자 이름이 2~5자이고 숫자나 기호가 포함되어 있지 않다면 isInvalid의 값은 false이다`() {
-        val isInvalid: Boolean = UserName("해나").isInvalid()
-        assertEquals(false, isInvalid)
+    fun `사용자 이름이 2~5자이고 숫자나 기호가 포함되어 있지 않다면 isValid의 값은 true이다`() {
+        val isValid: Boolean = UserName("해나").isValid()
+        assertEquals(true, isValid)
     }
 
     @Test
-    fun `사용자 이름이 2자 미만이면 isInvalid의 값은 true이다`() {
-        val isInvalid: Boolean = UserName("h").isInvalid()
-        assertEquals(true, isInvalid)
+    fun `사용자 이름이 2자 미만이면 isValid의 값은 false이다`() {
+        val isValid: Boolean = UserName("h").isValid()
+        assertEquals(false, isValid)
     }
 
     @Test
-    fun `사용자 이름이 5자 초과이면 isInvalid의 값은 true이다`() {
-        val isInvalid: Boolean = UserName("hannah").isInvalid()
-        assertEquals(true, isInvalid)
+    fun `사용자 이름이 5자 초과이면 isValid의 값은 false이다`() {
+        val isValid: Boolean = UserName("hannah").isValid()
+        assertEquals(false, isValid)
     }
 
     @Test
-    fun `사용자 이름에 숫자가 포함되어 있다면 isInvalid의 값은 true이다`() {
-        val isInvalid: Boolean = UserName("해나731").isInvalid()
-        assertEquals(true, isInvalid)
+    fun `사용자 이름에 숫자가 포함되어 있다면 isValid의 값은 false이다`() {
+        val isValid: Boolean = UserName("해나731").isValid()
+        assertEquals(false, isValid)
     }
 
     @Test
-    fun `사용자 이름에 기호가 포함되어 있다면 isInvalid의 값은 true이다`() {
-        val isInvalid: Boolean = UserName("해나&#").isInvalid()
-        assertEquals(true, isInvalid)
+    fun `사용자 이름에 기호가 포함되어 있다면 isValid의 값은 false이다`() {
+        val isValid: Boolean = UserName("해나&#").isValid()
+        assertEquals(false, isValid)
     }
 
     @Test
-    fun `사용자_이름이_2~5자_이상이고_숫자나_기호가_포함되어_있다면_isInvalid의_값은_true이다`() {
-        val isInvalid: Boolean = UserName("해나123&#").isInvalid()
-        assertEquals(true, isInvalid)
+    fun `사용자_이름이_2~5자_이상이고_숫자나_기호가_포함되어_있다면_isValid의_값은_false이다`() {
+        val isValid: Boolean = UserName("해나123&#").isValid()
+        assertEquals(false, isValid)
     }
 
     @Test
-    fun `사용자_이름이_비어있다면_isInvalid의_값은_false이다`() {
-        val isInvalid: Boolean = UserName("").isInvalid()
-        assertEquals(false, isInvalid)
+    fun `사용자_이름이_비어있다면_isValid의_값은_true이다`() {
+        val isValid: Boolean = UserName("").isValid()
+        assertEquals(true, isValid)
     }
 
     companion object {
