@@ -23,7 +23,7 @@ class PasswordTest {
     }
 
     @Test
-    fun `비밀번호가_영문과_숫자를_포함하고_있다면_에러_메시지는_null이_반환된다`() {
+    fun `비밀번호가 영문과 숫자를 포함하고 있다면 에러 메시지는 null이 반환된다`() {
         val errorMessage: String? = Password("hannah0731").getErrorMessage()
         assertEquals(null, errorMessage)
     }
@@ -47,45 +47,45 @@ class PasswordTest {
     }
 
     @Test
-    fun `비밀번호가_8~16자이고_영문과_숫자를_포함하고_있다면_isInvalid의_값은_false이다`() {
-        val isInvalid: Boolean = Password("hannah0731").isInvalid()
-        assertEquals(false, isInvalid)
+    fun `비밀번호가 8~16자이고 영문과 숫자를 포함하고 있다면 isValid의 값은 true이다`() {
+        val isValid: Boolean = Password("hannah0731").isValid()
+        assertEquals(true, isValid)
     }
 
     @Test
-    fun `비밀번호가_8자 미만이라면_isInvalid의_값은_true이다`() {
-        val isInvalid: Boolean = Password("hye731").isInvalid()
-        assertEquals(true, isInvalid)
+    fun `비밀번호가 8자 미만이라면 isValid의 값은 false이다`() {
+        val isValid: Boolean = Password("hye731").isValid()
+        assertEquals(false, isValid)
     }
 
     @Test
-    fun `비밀번호가_16자 초과라면 isInvalid의 값은 true이다`() {
-        val isInvalid: Boolean = Password("hannah731gonghyeyeon").isInvalid()
-        assertEquals(true, isInvalid)
+    fun `비밀번호가 16자 초과라면 isValid의 값은 false이다`() {
+        val isValid: Boolean = Password("hannah731gonghyeyeon").isValid()
+        assertEquals(false, isValid)
     }
 
     @Test
-    fun `비밀번호가 숫자를 포함하지 않으면 isInvalid의 값은 true이다`() {
-        val isInvalid: Boolean = Password("gonghyeyeon").isInvalid()
-        assertEquals(true, isInvalid)
+    fun `비밀번호가 숫자를 포함하지 않으면 isValid의 값은 false이다`() {
+        val isValid: Boolean = Password("gonghyeyeon").isValid()
+        assertEquals(false, isValid)
     }
 
     @Test
-    fun `비밀번호가 영문을 포함하지 않으면 isInvalid의 값은 true이다`() {
-        val isInvalid: Boolean = Password("1234567899").isInvalid()
-        assertEquals(true, isInvalid)
+    fun `비밀번호가 영문을 포함하지 않으면 isValid의 값은 false이다`() {
+        val isValid: Boolean = Password("1234567899").isValid()
+        assertEquals(false, isValid)
     }
 
     @Test
-    fun `비밀번호가_8~16자가_아니고_영문과_숫자를_포함하고_있지_않다면_isInvalid의_값은_true이다`() {
-        val isInvalid: Boolean = Password("해나@#\$").isInvalid()
-        assertEquals(true, isInvalid)
+    fun `비밀번호가 8~16자가 아니고 영문과 숫자를 포함하고 있지 않다면 isValid의 값은 false이다`() {
+        val isValid: Boolean = Password("해나@#\$").isValid()
+        assertEquals(false, isValid)
     }
 
     @Test
-    fun `비밀번호가_비어있다면_isInvalid의_값은_false이다`() {
-        val isInvalid: Boolean = Password("").isInvalid()
-        assertEquals(false, isInvalid)
+    fun `비밀번호가_비어있다면_isValid의_값은_true이다`() {
+        val isValid: Boolean = Password("").isValid()
+        assertEquals(true, isValid)
     }
 
     companion object {

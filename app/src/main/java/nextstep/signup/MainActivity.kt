@@ -1,7 +1,6 @@
 package nextstep.signup
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
@@ -40,9 +39,9 @@ class MainActivity : ComponentActivity() {
             SignupTheme {
                 Surface(
                     modifier =
-                    Modifier
-                        .fillMaxSize()
-                        .padding(top = 56.dp, start = 32.dp, end = 32.dp),
+                        Modifier
+                            .fillMaxSize()
+                            .padding(top = 56.dp, start = 32.dp, end = 32.dp),
                     color = MaterialTheme.colorScheme.background,
                 ) {
                     SignUpScreen()
@@ -64,7 +63,7 @@ fun SignUpScreen() {
 
         val userInformation = UserInformation(userName, email, password, passwordConfirm)
         val isSubmitButtonEnabled =
-            !userName.isValid() && !email.isValid() && !password.isInvalid() && !passwordConfirm.isInvalid(password.password)
+            !userName.isValid() && !email.isValid() && !password.isValid() && !passwordConfirm.isInvalid(password.password)
 
         SignUpGreeting()
         SignUpInputBox(
@@ -152,7 +151,7 @@ fun PasswordComposable(
             val errorMessage = password.getErrorMessage() ?: return@TextFieldComponent
             TextComponent(description = errorMessage)
         },
-        isError = password.isInvalid(),
+        isError = !password.isValid(),
         keyboardType = KeyboardType.Password,
     )
     Spacer(modifier = Modifier.size(36.dp))
