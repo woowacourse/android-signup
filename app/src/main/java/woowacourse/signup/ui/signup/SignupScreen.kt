@@ -1,7 +1,5 @@
 package woowacourse.signup.ui.signup
 
-import android.util.Log
-import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,7 +9,6 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -67,6 +64,7 @@ private fun SignupContent(
     var passwordConfirm by remember { mutableStateOf(PasswordConfirmUiModel()) }
 
     val buttonEnabled = !(userName.isError() || email.isError() || password.isError() || passwordConfirm.isError(password))
+    val localContextResource = LocalContext.current.resources
 
     Column(
         modifier =
@@ -87,7 +85,7 @@ private fun SignupContent(
             labelText = stringResource(id = R.string.username_input),
             inputValue = userName.value,
             isError = userName.isError(),
-            errorText = errorText(userName.errorMessage()),
+            errorText = userName.errorMessage(localContextResource),
         ) {
             userName = UserNameUiModel(it)
         }
@@ -96,7 +94,7 @@ private fun SignupContent(
             labelText = stringResource(id = R.string.email_input),
             inputValue = email.value,
             isError = email.isError(),
-            errorText = errorText(email.errorMessage().also { Log.e("TEST", "$it") }),
+            errorText = email.errorMessage(localContextResource),
         ) {
             email = EmailUiModel(it)
         }
@@ -105,7 +103,7 @@ private fun SignupContent(
             labelText = stringResource(id = R.string.password_input),
             inputValue = password.value,
             isError = password.isError(),
-            errorText = errorText(password.errorMessage()),
+            errorText = password.errorMessage(localContextResource),
             visualTransformation = PasswordVisualTransformation(),
         ) {
             password = PasswordUiModel(it)
@@ -115,7 +113,7 @@ private fun SignupContent(
             labelText = stringResource(id = R.string.password_confirm_input),
             inputValue = passwordConfirm.value,
             isError = passwordConfirm.isError(password),
-            errorText = errorText(passwordConfirm.errorMessage(password)),
+            errorText = passwordConfirm.errorMessage(localContextResource, password),
             visualTransformation = PasswordVisualTransformation(),
         ) {
             passwordConfirm = PasswordConfirmUiModel(it)
@@ -128,14 +126,6 @@ private fun SignupContent(
             onShowJoinSnackbar()
         }
     }
-}
-
-@Composable
-@ReadOnlyComposable
-private fun errorText(
-    @StringRes stringResId: Int?,
-): String {
-    return if (stringResId == null) "" else stringResource(id = stringResId)
 }
 
 @Preview(showBackground = true)

@@ -1,5 +1,6 @@
 package woowacourse.signup.ui.signup.model
 
+import android.content.res.Resources
 import woowacourse.signup.R
 import woowacourse.signup.domain.Email
 import woowacourse.signup.domain.InvalidEmailException
@@ -9,11 +10,12 @@ class EmailUiModel(val value: String = "") {
         return runCatching { Email(value) }.isFailure
     }
 
-    fun errorMessage(): Int? {
-        val exception = runCatching { Email(value) }.exceptionOrNull() ?: return null
+    fun errorMessage(resources: Resources): String {
+        if (value.isBlank()) return ""
+        val exception = runCatching { Email(value) }.exceptionOrNull() ?: return ""
         return when (exception) {
-            is InvalidEmailException -> R.string.invalid_email
-            else -> null
+            is InvalidEmailException -> resources.getString(R.string.invalid_email)
+            else -> ""
         }
     }
 }
