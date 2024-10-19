@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import nextstep.signup.model.Email
 import nextstep.signup.model.Password
 import nextstep.signup.model.PasswordConfirm
+import nextstep.signup.model.UserInformation
 import nextstep.signup.model.UserName
 import nextstep.signup.ui.component.ButtonComponent
 import nextstep.signup.ui.component.TextComponent
@@ -58,16 +59,15 @@ fun SignUpScreen() {
         var userName by remember { mutableStateOf(UserName("")) }
         var email by remember { mutableStateOf(Email("")) }
         var password by remember { mutableStateOf(Password("")) }
-        var passwordConfirm by remember { mutableStateOf(PasswordConfirm("", "")) }
+        var passwordConfirm by remember { mutableStateOf(PasswordConfirm("")) }
 
-        val isSubmitButtonEnabled = !userName.isInvalid() && !email.isInvalid() && !password.isInvalid() && !passwordConfirm.isInvalid()
+        val userInformation = UserInformation(userName, email, password, passwordConfirm)
+        val isSubmitButtonEnabled =
+            !userName.isInvalid() && !email.isInvalid() && !password.isInvalid() && !passwordConfirm.isInvalid(password.password)
 
         SignUpGreeting()
         SignUpInputBox(
-            userName,
-            email,
-            password,
-            passwordConfirm,
+            userInformation,
             onUserNameChange = { userName = userName.copy(userName = it) },
             onEmailChange = { email = email.copy(email = it) },
             onPasswordChange = { password = password.copy(password = it) },
@@ -85,19 +85,20 @@ private fun SignUpGreeting() {
 
 @Composable
 private fun SignUpInputBox(
-    userName: UserName,
-    email: Email,
-    password: Password,
-    passwordConfirm: PasswordConfirm,
+    userInformation: UserInformation,
     onUserNameChange: (String) -> Unit,
     onEmailChange: (String) -> Unit,
     onPasswordChange: (String) -> Unit,
     onPasswordConfirmChange: (String) -> Unit,
 ) {
-    UserNameComposable(userName = userName, onUserNameChange)
-    EmailComposable(email = email, onEmailChange)
-    PasswordComposable(password = password, onPasswordChange)
-    PasswordConfirmComposable(passwordConfirm = passwordConfirm, onPasswordConfirmChange)
+    UserNameComposable(userName = userInformation.userName, onUserNameChange)
+    EmailComposable(email = userInformation.email, onEmailChange)
+    PasswordComposable(password = userInformation.password, onPasswordChange)
+    PasswordConfirmComposable(
+        password = userInformation.password,
+        passwordConfirm = userInformation.passwordConfirm,
+        onPasswordConfirmChange,
+    )
 }
 
 @Composable
@@ -158,6 +159,7 @@ fun PasswordComposable(
 
 @Composable
 fun PasswordConfirmComposable(
+    password: Password,
     passwordConfirm: PasswordConfirm,
     onPasswordConfirmChange: (String) -> Unit,
 ) {
@@ -166,10 +168,10 @@ fun PasswordConfirmComposable(
         onValueChange = onPasswordConfirmChange,
         label = R.string.main_password_confirm,
         supportingText = {
-            val errorMessage = passwordConfirm.getErrorMessage() ?: return@TextFieldComponent
+            val errorMessage = passwordConfirm.getErrorMessage(password.password) ?: return@TextFieldComponent
             TextComponent(description = errorMessage)
         },
-        isError = passwordConfirm.isInvalid(),
+        isError = passwordConfirm.isInvalid(password.password),
         keyboardType = KeyboardType.Password,
     )
     Spacer(modifier = Modifier.size(42.dp))

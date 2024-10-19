@@ -1,21 +1,20 @@
 package nextstep.signup.model
 
 data class PasswordConfirm(
-    val password: String,
     val passwordConfirm: String,
 ) {
-    fun isInvalid(): Boolean = !isBlank() && !isMatchPassword()
+    fun isInvalid(password: String): Boolean = !isBlank() && !isMatchPassword(password)
 
-    fun getErrorMessage(): String? =
+    fun getErrorMessage(password: String): String? =
         when {
             isBlank() -> null
-            !isMatchPassword() -> PASSWORD_CONFIRM_ERROR
+            !isMatchPassword(password) -> PASSWORD_CONFIRM_ERROR
             else -> null
         }
 
     private fun isBlank(): Boolean = passwordConfirm.isBlank()
 
-    private fun isMatchPassword(): Boolean = password == passwordConfirm
+    private fun isMatchPassword(password: String): Boolean = password == passwordConfirm
 
     companion object {
         private const val PASSWORD_CONFIRM_ERROR = "비밀번호가 일치하지 않습니다."
