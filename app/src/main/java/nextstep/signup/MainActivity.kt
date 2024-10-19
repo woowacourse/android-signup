@@ -55,16 +55,11 @@ fun SignUpScreen() {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        // TODO: 리팩터링
-        var userNameValue by remember { mutableStateOf("") }
-        var emailValue by remember { mutableStateOf("") }
-        var passwordValue by remember { mutableStateOf("") }
-        var passwordConfirmValue by remember { mutableStateOf("") }
+        var userName by remember { mutableStateOf(UserName("")) }
+        var email by remember { mutableStateOf(Email("")) }
+        var password by remember { mutableStateOf(Password("")) }
+        var passwordConfirm by remember { mutableStateOf(PasswordConfirm("", "")) }
 
-        val userName = UserName(userNameValue)
-        val email = Email(emailValue)
-        val password = Password(passwordValue)
-        val passwordConfirm = PasswordConfirm(passwordValue, passwordConfirmValue)
         val isSubmitButtonEnabled = !userName.isInvalid() && !email.isInvalid() && !password.isInvalid() && !passwordConfirm.isInvalid()
 
         SignUpGreeting()
@@ -73,10 +68,10 @@ fun SignUpScreen() {
             email,
             password,
             passwordConfirm,
-            onUserNameChange = { userNameValue = it },
-            onEmailChange = { emailValue = it },
-            onPasswordChange = { passwordValue = it },
-            onPasswordConfirmChange = { passwordConfirmValue = it },
+            onUserNameChange = { userName = userName.copy(userName = it) },
+            onEmailChange = { email = email.copy(email = it) },
+            onPasswordChange = { password = password.copy(password = it) },
+            onPasswordConfirmChange = { passwordConfirm = passwordConfirm.copy(passwordConfirm = it) },
         )
         ButtonComponent(enabled = isSubmitButtonEnabled, description = R.string.main_sign_up)
     }
