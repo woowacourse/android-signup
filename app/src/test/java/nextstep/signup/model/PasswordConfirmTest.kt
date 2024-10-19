@@ -6,19 +6,19 @@ import org.junit.Test
 class PasswordConfirmTest {
     @Test
     fun `비밀번호와_확인용_비밀번호는_일치한다면_에러메시지는_null을_반환한다`() {
-        val errorMessage: String? = PasswordConfirm("hannah0731", "hannah0731").getErrorMessage()
+        val errorMessage: String? = PasswordConfirm("hannah0731").getErrorMessage("hannah0731")
         assertEquals(null, errorMessage)
     }
 
     @Test
     fun `비밀번호와_확인용_비밀번호가_일치하지_않으면_에러메시지가_노출된다`() {
-        val errorMessage: String? = PasswordConfirm("hannah0731", "hannah07").getErrorMessage()
+        val errorMessage: String? = PasswordConfirm("hannah07").getErrorMessage("hannah0731")
         assertEquals(PASSWORD_CONFIRM_ERROR, errorMessage)
     }
 
     @Test
     fun `확인용_비밀번호가_비어있다면_isInvalid의_값은_false이다`() {
-        val isInvalid: Boolean = PasswordConfirm("hannah0731", "").isInvalid()
+        val isInvalid: Boolean = PasswordConfirm("").isInvalid("hannah0731")
         assertEquals(false, isInvalid)
     }
 
