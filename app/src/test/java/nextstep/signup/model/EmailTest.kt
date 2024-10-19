@@ -5,15 +5,27 @@ import org.junit.Test
 
 class EmailTest {
     @Test
-    fun `이메일_형식이_올바르면_에러메시지는_null이_반환된다`() {
-        val errorMessage: String? = Email("hannah@naver.com").getErrorMessage()
-        assertEquals(null, errorMessage)
+    fun `이메일 형식에 @가 포함되어 있지 않다면 에러메시지가 반환된다`() {
+        val errorMessage: String? = Email("hannahnaver.com").getErrorMessage()
+        assertEquals(EMAIL_FORM_ERROR, errorMessage)
     }
 
     @Test
-    fun `이메일_형식이_올바르면_에러메시지가_반환된다`() {
-        val errorMessage: String? = Email("hannahnaver.com").getErrorMessage()
+    fun `이메일 형식에 온점이 포함되어 있지 않다면 에러메시지가 반환된다`() {
+        val errorMessage: String? = Email("hannah@navercom").getErrorMessage()
         assertEquals(EMAIL_FORM_ERROR, errorMessage)
+    }
+
+    @Test
+    fun `이메일 형식에 @와 온점을 포함되어 있지 않으면 에러메시지가 반환된다`() {
+        val errorMessage: String? = Email("hannahnavercom").getErrorMessage()
+        assertEquals(EMAIL_FORM_ERROR, errorMessage)
+    }
+
+    @Test
+    fun `이메일 형식이 올바르면 에러메시지는 null이 반환된다`() {
+        val errorMessage: String? = Email("hannah@naver.com").getErrorMessage()
+        assertEquals(null, errorMessage)
     }
 
     @Test
