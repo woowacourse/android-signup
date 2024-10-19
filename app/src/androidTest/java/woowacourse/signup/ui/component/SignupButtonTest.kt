@@ -22,7 +22,7 @@ class SignupButtonTest {
 
         composeTestRule.setContent {
             SignupButton(
-                text = signupButtonText,
+                text = BUTTON_TEXT,
                 enabled = true,
                 onClick = { state = true },
             )
@@ -30,11 +30,15 @@ class SignupButtonTest {
 
         // when
         composeTestRule
-            .onNodeWithText(signupButtonText)
+            .onNodeWithText(BUTTON_TEXT)
             .performClick()
 
         // then
         composeTestRule.waitForIdle()
         assertThat(state).isTrue
+    }
+
+    companion object {
+        private const val BUTTON_TEXT = "SignupButtonText"
     }
 }

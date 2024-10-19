@@ -37,7 +37,6 @@ class SignupScreenTest {
             )
 
         // then
-        composeTestRule.waitForIdle()
         composeTestRule
             .onNodeWithText(testStringResource(id = R.string.sign_up_button))
             .assertIsEnabled()
@@ -55,7 +54,6 @@ class SignupScreenTest {
             )
 
         // then
-        composeTestRule.waitForIdle()
         composeTestRule
             .onNodeWithText(testStringResource(id = R.string.sign_up_button))
             .assertIsNotEnabled()
@@ -78,7 +76,6 @@ class SignupScreenTest {
             .performClick()
 
         // then
-        composeTestRule.waitForIdle()
         composeTestRule.onNodeWithText(testStringResource(id = R.string.complete_join))
             .assertIsDisplayed()
     }
@@ -89,20 +86,16 @@ class SignupScreenTest {
         password: String,
         passwordConfirm: String,
     ) {
-        composeTestRule
-            .onNodeWithText(testStringResource(id = R.string.username_input))
+        this.onNodeWithText(testStringResource(id = R.string.username_input))
             .performTextInput(userName)
 
-        composeTestRule
-            .onNodeWithText(testStringResource(id = R.string.email_input))
+        this.onNodeWithText(testStringResource(id = R.string.email_input))
             .performTextInput(email)
 
-        composeTestRule
-            .onNodeWithText(testStringResource(id = R.string.password_input))
+        this.onNodeWithText(testStringResource(id = R.string.password_input))
             .performTextInput(password)
 
-        composeTestRule
-            .onNodeWithText(testStringResource(id = R.string.password_confirm_input))
+        this.onNodeWithText(testStringResource(id = R.string.password_confirm_input))
             .performTextInput(passwordConfirm)
     }
 }

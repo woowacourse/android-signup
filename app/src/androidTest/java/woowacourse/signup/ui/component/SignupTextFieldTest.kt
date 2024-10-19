@@ -21,7 +21,7 @@ class SignupTextFieldTest {
         var value by mutableStateOf("")
         composeTestRule.setContent {
             SignupTextField(
-                labelText = signupTextFieldLabel,
+                labelText = TEXT_FIELD_LABEL,
                 inputValue = value,
                 isError = false,
                 errorText = "",
@@ -32,11 +32,10 @@ class SignupTextFieldTest {
 
         // when
         composeTestRule
-            .onNodeWithText(signupTextFieldLabel)
+            .onNodeWithText(TEXT_FIELD_LABEL)
             .performTextInput("input field value changed")
 
         // then
-        composeTestRule.waitForIdle()
         assertThat(value).isEqualTo("메롱")
     }
 
@@ -45,7 +44,7 @@ class SignupTextFieldTest {
         // when
         composeTestRule.setContent {
             SignupTextField(
-                labelText = signupTextFieldLabel,
+                labelText = TEXT_FIELD_LABEL,
                 inputValue = "input value",
                 isError = true,
                 errorText = "error message",
@@ -53,7 +52,6 @@ class SignupTextFieldTest {
         }
 
         // then
-        composeTestRule.waitForIdle()
         composeTestRule
             .onNodeWithText("error message")
             .assertExists()
@@ -64,7 +62,7 @@ class SignupTextFieldTest {
         // when
         composeTestRule.setContent {
             SignupTextField(
-                labelText = signupTextFieldLabel,
+                labelText = TEXT_FIELD_LABEL,
                 inputValue = "input value",
                 isError = false,
                 errorText = "error message",
@@ -72,7 +70,6 @@ class SignupTextFieldTest {
         }
 
         // then
-        composeTestRule.waitForIdle()
         composeTestRule
             .onNodeWithText("error message")
             .assertDoesNotExist()
@@ -83,7 +80,7 @@ class SignupTextFieldTest {
         // when
         composeTestRule.setContent {
             SignupTextField(
-                labelText = signupTextFieldLabel,
+                labelText = TEXT_FIELD_LABEL,
                 inputValue = "",
                 isError = true,
                 errorText = "error message",
@@ -91,9 +88,12 @@ class SignupTextFieldTest {
         }
 
         // then
-        composeTestRule.waitForIdle()
         composeTestRule
             .onNodeWithText("error message")
             .assertDoesNotExist()
+    }
+
+    companion object {
+        private const val TEXT_FIELD_LABEL = "SignupTextFieldLabel"
     }
 }
