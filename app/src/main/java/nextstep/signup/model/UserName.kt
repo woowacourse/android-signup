@@ -1,7 +1,9 @@
 package nextstep.signup.model
 
 data class UserName(val userName: String) {
-    fun isValid(): Boolean = isBlank() || (isValidLength() && hasInvalidCharacter())
+    fun isError(): Boolean = !isBlank() && !isValid()
+
+    fun isValid(): Boolean = isValidLength() && hasInvalidCharacter()
 
     fun getErrorMessage(): String? =
         when {

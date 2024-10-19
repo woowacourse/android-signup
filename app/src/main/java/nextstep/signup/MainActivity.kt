@@ -63,7 +63,7 @@ fun SignUpScreen() {
 
         val userInformation = UserInformation(userName, email, password, passwordConfirm)
         val isSubmitButtonEnabled =
-            !userName.isValid() && !email.isValid() && !password.isValid() && !passwordConfirm.isValid(password.password)
+            userName.isValid() && email.isValid() && password.isValid() && passwordConfirm.isMatch(password.password)
 
         SignUpGreeting()
         SignUpInputBox(
@@ -114,7 +114,7 @@ fun UserNameComposable(
             val errorMessage = userName.getErrorMessage() ?: return@TextFieldComponent
             TextComponent(description = errorMessage)
         },
-        isError = !userName.isValid(),
+        isError = userName.isError(),
     )
     Spacer(modifier = Modifier.size(36.dp))
 }
@@ -132,7 +132,7 @@ fun EmailComposable(
             val errorMessage = email.getErrorMessage() ?: return@TextFieldComponent
             TextComponent(description = errorMessage)
         },
-        isError = !email.isValid(),
+        isError = email.isError(),
         keyboardType = KeyboardType.Email,
     )
     Spacer(modifier = Modifier.size(36.dp))
@@ -151,7 +151,7 @@ fun PasswordComposable(
             val errorMessage = password.getErrorMessage() ?: return@TextFieldComponent
             TextComponent(description = errorMessage)
         },
-        isError = !password.isValid(),
+        isError = password.isError(),
         keyboardType = KeyboardType.Password,
     )
     Spacer(modifier = Modifier.size(36.dp))
@@ -171,7 +171,7 @@ fun PasswordConfirmComposable(
             val errorMessage = passwordConfirm.getErrorMessage(password.password) ?: return@TextFieldComponent
             TextComponent(description = errorMessage)
         },
-        isError = !passwordConfirm.isValid(password.password),
+        isError = passwordConfirm.isError(password.password),
         keyboardType = KeyboardType.Password,
     )
     Spacer(modifier = Modifier.size(42.dp))
