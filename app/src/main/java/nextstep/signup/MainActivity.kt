@@ -64,7 +64,7 @@ fun SignUpScreen() {
 
         val userInformation = UserInformation(userName, email, password, passwordConfirm)
         val isSubmitButtonEnabled =
-            !userName.isValid() && !email.isInvalid() && !password.isInvalid() && !passwordConfirm.isInvalid(password.password)
+            !userName.isValid() && !email.isValid() && !password.isInvalid() && !passwordConfirm.isInvalid(password.password)
 
         SignUpGreeting()
         SignUpInputBox(
@@ -133,7 +133,7 @@ fun EmailComposable(
             val errorMessage = email.getErrorMessage() ?: return@TextFieldComponent
             TextComponent(description = errorMessage)
         },
-        isError = email.isInvalid(),
+        isError = !email.isValid(),
         keyboardType = KeyboardType.Email,
     )
     Spacer(modifier = Modifier.size(36.dp))

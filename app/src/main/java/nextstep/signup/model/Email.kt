@@ -1,7 +1,7 @@
 package nextstep.signup.model
 
 data class Email(val email: String) {
-    fun isInvalid(): Boolean = !isBlank() && !isValidEmail()
+    fun isValid(): Boolean = isBlank() || isValidEmail()
 
     fun getErrorMessage(): String? {
         return when {
