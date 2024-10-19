@@ -17,9 +17,9 @@ class PasswordConfirmTest {
     }
 
     @Test
-    fun `확인용_비밀번호가_비어있다면_isInvalid의_값은_false이다`() {
-        val isInvalid: Boolean = PasswordConfirm("").isInvalid("hannah0731")
-        assertEquals(false, isInvalid)
+    fun `확인용_비밀번호가_비어있다면_isValid의_값은_true이다`() {
+        val isValid: Boolean = PasswordConfirm("").isValid("hannah0731")
+        assertEquals(true, isValid)
     }
 
     companion object {

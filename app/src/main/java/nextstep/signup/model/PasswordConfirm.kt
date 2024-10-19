@@ -3,7 +3,7 @@ package nextstep.signup.model
 data class PasswordConfirm(
     val passwordConfirm: String,
 ) {
-    fun isInvalid(password: String): Boolean = !isBlank() && !isMatchPassword(password)
+    fun isValid(password: String): Boolean = isBlank() || isMatchPassword(password)
 
     fun getErrorMessage(password: String): String? =
         when {
