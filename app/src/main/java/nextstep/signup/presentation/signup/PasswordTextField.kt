@@ -2,6 +2,9 @@ package nextstep.signup.presentation.signup
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
@@ -20,26 +23,35 @@ fun PasswordTextField(
     onValueChange: (String) -> Unit,
     labelText: String = stringResource(R.string.default_text_field_label)
 ) {
+    val passwordResult: PasswordResult by remember(password) {
+        mutableStateOf(Password.from(password))
+    }
+
     SignUpTextField(
         modifier = modifier,
         labelText = labelText,
         value = password,
         onValueChange = onValueChange,
-        isError = Password.from(password) is PasswordResult.Failure,
+        isError = passwordResult is PasswordResult.Failure,
         supportingText = {
-            when (Password.from(password)) {
-                is PasswordResult.EmptyField -> return@SignUpTextField
-                is PasswordResult.Success -> return@SignUpTextField
-                is PasswordResult.InvalidPasswordLength ->
-                    Text(text = stringResource(id = R.string.error_message_password_invalid_length))
-
-                is PasswordResult.InvalidPasswordFormat ->
-                    Text(text = stringResource(id = R.string.error_message_password_invalid_format))
-            }
+            ErrorText(passwordResult)
         },
         keyboardType = KeyboardType.Password,
         visualTransformation = PasswordVisualTransformation()
     )
+}
+
+@Composable
+private fun ErrorText(passwordResult: PasswordResult) {
+    when (passwordResult) {
+        is PasswordResult.EmptyField -> return
+        is PasswordResult.Success -> return
+        is PasswordResult.InvalidPasswordLength ->
+            Text(text = stringResource(id = R.string.error_message_password_invalid_length))
+
+        is PasswordResult.InvalidPasswordFormat ->
+            Text(text = stringResource(id = R.string.error_message_password_invalid_format))
+    }
 }
 
 @Preview
