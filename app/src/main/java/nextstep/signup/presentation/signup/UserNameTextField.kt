@@ -2,6 +2,9 @@ package nextstep.signup.presentation.signup
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -18,24 +21,33 @@ fun UserNameTextField(
     onValueChange: (String) -> Unit,
     labelText: String = stringResource(R.string.default_text_field_label)
 ) {
+    val userNameResult: UserNameResult by remember(name) {
+        mutableStateOf(UserName.from(name))
+    }
+
     SignUpTextField(
         modifier = modifier,
         labelText = labelText,
         value = name,
         onValueChange = onValueChange,
-        isError = UserName.from(name) is UserNameResult.Failure,
+        isError = userNameResult is UserNameResult.Failure,
         supportingText = {
-            when (UserName.from(name)) {
-                is UserNameResult.EmptyField -> return@SignUpTextField
-                is UserNameResult.Success -> return@SignUpTextField
-                is UserNameResult.InvalidNameLength ->
-                    Text(text = stringResource(id = R.string.error_message_user_name_invalid_length))
-
-                is UserNameResult.InvalidNameFormat ->
-                    Text(text = stringResource(id = R.string.error_message_user_name_invalid_format))
-            }
+            ErrorText(userNameResult)
         }
     )
+}
+
+@Composable
+private fun ErrorText(userNameResult: UserNameResult) {
+    when (userNameResult) {
+        is UserNameResult.EmptyField -> return
+        is UserNameResult.Success -> return
+        is UserNameResult.InvalidNameLength ->
+            Text(text = stringResource(id = R.string.error_message_user_name_invalid_length))
+
+        is UserNameResult.InvalidNameFormat ->
+            Text(text = stringResource(id = R.string.error_message_user_name_invalid_format))
+    }
 }
 
 @Preview
