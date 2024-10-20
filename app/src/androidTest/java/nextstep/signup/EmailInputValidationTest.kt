@@ -30,7 +30,7 @@ class EmailInputValidationTest {
     }
 
     @Test
-    fun 입력된_이메일이_형식에_맞아야_한다() {
+    fun `입력된_이메일이_형식에_맞아야_한다`() {
         // when
         email.value = Email("abcdef@test.xyz")
 
@@ -41,7 +41,7 @@ class EmailInputValidationTest {
     }
 
     @Test
-    fun 입력된_이메일이_형식에_어긋나면_에러메시지가_노출된다() {
+    fun `입력된_이메일이_형식에_어긋나면_에러메시지가_노출된다`() {
         // when
         email.value = Email("thisisnot.valid.email@")
 

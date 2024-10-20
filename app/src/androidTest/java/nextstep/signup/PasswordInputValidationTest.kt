@@ -34,7 +34,8 @@ class PasswordInputValidationTest {
                 value = passwordConfirm.value,
                 onValueChange = { passwordConfirm.value = it },
                 inputType = InputType.Password,
-                supportingText = passwordConfirm.value.validatePasswordConfirm(
+                supportingText =
+                    passwordConfirm.value.validatePasswordConfirm(
                         password.value.value,
                     ),
             )
@@ -42,7 +43,7 @@ class PasswordInputValidationTest {
     }
 
     @Test
-    fun 비밀번호는_8에서_16자여야_한다() {
+    fun `비밀번호는_8에서_16자여야_한다`() {
         // when
         password.value = Password("abcd1234")
 
@@ -53,7 +54,7 @@ class PasswordInputValidationTest {
     }
 
     @Test
-    fun 비밀번호가_8에서_16자가_아니면_에러메시지가_노출된다() {
+    fun `비밀번호가_8에서_16자가_아니면_에러메시지가_노출된다`() {
         // when
         password.value = Password("abcd12")
 
@@ -64,7 +65,7 @@ class PasswordInputValidationTest {
     }
 
     @Test
-    fun 비밀번호에_영문과_숫자가_포함되어야_한다() {
+    fun `비밀번호에_영문과_숫자가_포함되어야_한다`() {
         // when
         password.value = Password("abcd1234xyz")
 
@@ -75,7 +76,7 @@ class PasswordInputValidationTest {
     }
 
     @Test
-    fun 비밀번호에_영문과_숫자가_함께_포함되지_않으면_에러메시지가_노출된다() {
+    fun `비밀번호에_영문과_숫자가_함께_포함되지_않으면_에러메시지가_노출된다`() {
         // when
         password.value = Password("abcdefgh")
 
@@ -86,7 +87,7 @@ class PasswordInputValidationTest {
     }
 
     @Test
-    fun 비밀번호_확인_시_비밀번호가_일치해야한다() {
+    fun `비밀번호_확인_시_비밀번호가_일치해야_한다`() {
         // when
         password.value = Password("abcd1234")
         passwordConfirm.value = "abcd1234"
@@ -98,7 +99,7 @@ class PasswordInputValidationTest {
     }
 
     @Test
-    fun 비밀번호가_일치하지_않으면_에러메시지가_노출된다() {
+    fun `비밀번호가_일치하지_않으면_에러메시지가_노출된다`() {
         // when
         password.value = Password("abcd5678")
         passwordConfirm.value = "abcd1234"

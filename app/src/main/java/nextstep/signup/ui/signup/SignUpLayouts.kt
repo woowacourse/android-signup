@@ -53,9 +53,9 @@ fun SignUpLayout() {
 
     Column(
         modifier =
-        Modifier
-            .fillMaxHeight(0.7f)
-            .padding(32.dp),
+            Modifier
+                .fillMaxHeight(0.7f)
+                .padding(32.dp),
         verticalArrangement = Arrangement.SpaceEvenly,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
@@ -107,7 +107,7 @@ fun SignUpInteractionLayer(onButtonClicked: () -> Unit) {
             onUsernameChanged = { username = username.copy(value = it) },
             onEmailChanged = { email = email.copy(value = it) },
             onPasswordChanged = { password = password.copy(value = it) },
-            onPasswordConfirmChanged = { passwordConfirm = it }
+            onPasswordConfirmChanged = { passwordConfirm = it },
         )
         StateButton(
             modifier = modifier.requiredHeight(50.dp),

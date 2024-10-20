@@ -30,7 +30,7 @@ class UsernameInputValidationTest {
     }
 
     @Test
-    fun 사용자_이름은_2에서_5자여야_한다() {
+    fun `사용자_이름은_2에서_5자여야_한다`() {
         // when
         username.value = Username("원컴포즈")
 
@@ -41,7 +41,7 @@ class UsernameInputValidationTest {
     }
 
     @Test
-    fun 사용자_이름이_2에서_5자가_아니면_에러메시지가_노출된다() {
+    fun `사용자_이름이_2에서_5자가_아니면_에러메시지가_노출된다`() {
         // when
         username.value = Username("원컴포즈입니다")
 
@@ -52,7 +52,7 @@ class UsernameInputValidationTest {
     }
 
     @Test
-    fun 사용자_이름에_숫자나_기호가_포함되면_에러메시지가_노출된다() {
+    fun `사용자_이름에_숫자나_기호가_포함되면_에러메시지가_노출된다`() {
         // when
         username.value = Username("원.컴포즈")
 
@@ -63,7 +63,7 @@ class UsernameInputValidationTest {
     }
 
     @Test
-    fun 사용자_이름에_공백이_포함되면_에러메시지가_노출된다() {
+    fun `사용자_이름에_공백이_포함되면_에러메시지가_노출된다`() {
         // when
         username.value = Username("원컴 포즈")
 
