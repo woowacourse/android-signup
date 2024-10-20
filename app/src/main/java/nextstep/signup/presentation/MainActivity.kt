@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import nextstep.signup.presentation.signup.SignUpInput
 import nextstep.signup.presentation.signup.SignUpScreen
 import nextstep.signup.ui.theme.SignupTheme
 
@@ -19,7 +20,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    SignUpScreen()
+                    SignUpScreen(initialSignUpInput = SignUpInput.intial)
                 }
             }
         }

@@ -5,4 +5,8 @@ data class SignUpInput(
     val email: String,
     val password: String,
     val passwordConfirm: String
-)
+) {
+    companion object {
+        val intial = SignUpInput(username = "", email = "", password = "", passwordConfirm = "")
+    }
+}

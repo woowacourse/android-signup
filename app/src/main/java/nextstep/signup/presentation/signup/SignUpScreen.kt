@@ -24,17 +24,10 @@ import nextstep.signup.domain.UserName
 import nextstep.signup.ui.theme.SignupTheme
 
 @Composable
-fun SignUpScreen() {
-    var signUpInput: SignUpInput by remember {
-        mutableStateOf(
-            SignUpInput(
-                username = "",
-                email = "",
-                password = "",
-                passwordConfirm = ""
-            )
-        )
-    }
+fun SignUpScreen(
+    initialSignUpInput: SignUpInput = SignUpInput.intial,
+) {
+    var signUpInput: SignUpInput by remember { mutableStateOf(initialSignUpInput) }
 
     val signUpResult: SignUpResult by remember(signUpInput) {
         mutableStateOf(
@@ -111,6 +104,8 @@ fun SignUpScreen() {
 @Composable
 private fun SignupScreenPreview() {
     SignupTheme {
-        SignUpScreen()
+        SignUpScreen(
+            SignUpInput.intial
+        )
     }
 }

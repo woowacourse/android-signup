@@ -73,17 +73,22 @@ class RecompositionTest {
 
     @Test
     fun 특정_값_변경시만_유효성_검사() {
+        // given
         composeTestRule.setContent {
             TestTextFieldWithRemember(username = username.value, other = other.value)
         }
         count = 0
 
+        // when
         username.value = "김컴포즈"
         composeTestRule.waitForIdle()
+        // then
         assert(count == 1)
 
+        // when
         other.value = "다른 값"
         composeTestRule.waitForIdle()
+        // then
         assert(count == 1)
     }
 }

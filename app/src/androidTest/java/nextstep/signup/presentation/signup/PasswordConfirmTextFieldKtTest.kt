@@ -1,5 +1,6 @@
 package nextstep.signup.presentation.signup
 
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -17,6 +18,8 @@ class PasswordConfirmTextFieldKtTest {
 
     private var passwordContent by mutableStateOf("")
     private var passwordConfirmContent by mutableStateOf("")
+
+    private var count = 0
 
     @Before
     fun setUp() {
@@ -52,5 +55,41 @@ class PasswordConfirmTextFieldKtTest {
         composeTestRule
             .onNodeWithText("비밀번호가 일치하지 않습니다.")
             .assertExists()
+    }
+
+    @Composable
+    fun RecompositionTestPasswordConfirmTextField(
+        modifier: Modifier = Modifier,
+        passwordContent: String,
+        passwordConfirmContent: String
+    ) {
+        val passwordConfirmIsEmpty = (passwordConfirmContent.isNotEmpty()).also { count++ }
+
+        PasswordConfirmTextField(
+            password = passwordContent,
+            passwordConfirm = passwordConfirmContent,
+            onValueChange = {}
+
+        )
+    }
+
+    @Test
+    fun recomposition() {
+        // given
+        composeTestRule.setContent {
+            PasswordConfirmTextField(
+                modifier = Modifier.testTag("test"),
+                password = passwordContent,
+                passwordConfirm = passwordConfirmContent,
+                onValueChange = { passwordConfirmContent = it }
+            )
+        }
+
+        passwordContent = "qwer1234"
+        count = 0
+
+        // when
+
+        // then
     }
 }
