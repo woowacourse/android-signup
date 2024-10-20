@@ -48,7 +48,7 @@ class UserNameTextFieldKtTest {
 
     @Test
     fun when_input_contains_number_or_symbol_invalid_format_error_message_is_shown() {
-        // given
+        // when
         userNameContent = "12w3"
 
         // then

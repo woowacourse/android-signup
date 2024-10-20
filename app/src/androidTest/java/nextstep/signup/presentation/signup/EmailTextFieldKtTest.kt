@@ -26,7 +26,7 @@ class EmailTextFieldKtTest {
 
     @Test
     fun when_input_is_empty__no_invalid_length_error_message() {
-        // given
+        // when
         emailContent = ""
 
         // then
@@ -37,7 +37,7 @@ class EmailTextFieldKtTest {
 
     @Test
     fun when_email_input_is_invalid_format__invalid_format_error_message_is_shown() {
-        // given
+        // when
         emailContent = "qwe@cc"
 
         // then
@@ -48,7 +48,7 @@ class EmailTextFieldKtTest {
 
     @Test
     fun when_email_input_is_valid_format__no_error_message_is_shown() {
-        // given
+        // when
         emailContent = "qwer@wooteco.com"
 
         // then
