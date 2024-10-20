@@ -34,3 +34,12 @@
 - [x] 유효성 검사 로직과 뷰 로직을 나누어 관심사를 분리한다.
 - [ ] 모든 로직에 테스트 코드를 추가한다. todo: SignUpScreen
 - [x] 테스트 가능한 부분과 테스트하기 힘든 부분을 분리해 테스트 가능한 부분에 대해서만 테스트를 진행한다.
+- [ ] (선택사항) Sign up 버튼을 클릭하면 회원가입 완료 스낵바가 노출된다.
+
+### step4 이후 추가로 할 것들
+
+- [ ] recomposition study 테스트
+- [ ] recomposition 프로덕션에 적용
+- [ ] rememberSavable 추가하기
+- [ ] [TextField 의 focus 를 빼내는 법?](https://velog.io/@heeung/Android-Compose-Textfield-%ED%8F%AC%EC%BB%A4%EC%8A%A4%EB%A5%BC-%EC%B2%98%EB%A6%AC%ED%95%B4%EB%B3%B4%EC%9E%90) 
+- [ ] SignupScreen 테스트가 가능한가?
