@@ -178,6 +178,16 @@ val userNameResult: UserNameResult by remember {
 - **`remember(name)`**: `name`이 변경될 때마다 `UserNameResult`를 다시 계산해야 할 때 사용.
 - **`remember`**: 한 번만 계산하고 이후 값이 변하지 않거나, 상태를 계속 유지할 필요가 있을 때 사용.
 
+가입 버튼 리컴포지션
 
+![img.png](img.png)
 
+![img_1.png](img_1.png)
 
+위 두 상황에서 qwer 이던지 qwe 이던지, 둘 다 가입이 가능한 상태이다.
+그런데 버튼은 recomposition 이 되고 있다.
+그렇다면, 이것을 skip recomposition 할 수 잇지 않을까?
+
+더 간단환 상황에서 리컴포지션 & 리컴포지션 스킵 되는 상황을 테스트 코드로 검증해볼까?
+
+[ss](../../../../../androidTest/java/nextstep/signup/RecompositionTest.kt)
