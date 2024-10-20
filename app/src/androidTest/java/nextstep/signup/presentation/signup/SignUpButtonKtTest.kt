@@ -22,33 +22,22 @@ import org.junit.Test
 class SignUpButtonKtTest {
     @get:Rule
     val composeTestRule = createComposeRule()
-    private var signUpResult: SignUpResult by mutableStateOf(SignUpResult.Initial)
+    private var signUpIsEnabled: Boolean by mutableStateOf(false)
 
     @Before
     fun setUp() {
         composeTestRule.setContent {
             SignUpButton(
-                signUpResult = signUpResult,
+                enabled = signUpIsEnabled,
                 modifier = Modifier.testTag("test")
             )
         }
     }
 
     @Test
-    fun when_signup_is_initial___button_is_not_enabled() {
-        // when
-        signUpResult = SignUpResult.Initial
-
-        // then
-        composeTestRule
-            .onNodeWithTag("test")
-            .assertIsNotEnabled()
-    }
-
-    @Test
     fun when_signup_is_failure___button_is_not_enabled() {
         // when
-        signUpResult = SignUpResult.Failure
+        signUpIsEnabled = false
 
         // then
         composeTestRule
@@ -59,14 +48,7 @@ class SignUpButtonKtTest {
     @Test
     fun when_signup_is_success___button_is__enabled() {
         // when
-        signUpResult = SignUpResult.Success(
-            signUp = SignUp(
-                userName = UserName("qwer"),
-                email = Email("qwer@wooteco.com"),
-                password = Password("qwer12345"),
-                passwordConfirm = PasswordConfirm("qwer12345")
-            )
-        )
+        signUpIsEnabled = true
 
         // then
         composeTestRule

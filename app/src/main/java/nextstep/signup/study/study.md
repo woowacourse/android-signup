@@ -191,3 +191,6 @@ val userNameResult: UserNameResult by remember {
 더 간단환 상황에서 리컴포지션 & 리컴포지션 스킵 되는 상황을 테스트 코드로 검증해볼까?
 
 [ss](../../../../../androidTest/java/nextstep/signup/RecompositionTest.kt)
+
+SignUpButton 에서 enabled 을 boolean 으로 하고 
+SignUpScreen 에서 enabled 를 mutableStateOf 로!
