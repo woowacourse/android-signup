@@ -28,20 +28,6 @@ internal fun SignUpForm(
     onPasswordConfirmChange: (String) -> Unit,
     onDoneSignUp: () -> Unit
 ) {
-    val userNameValidateResult = remember(signUpFormState.userName) {
-        signUpFormState.userNameValidateResult
-    }
-    val emailValidateResult = remember(signUpFormState.email) {
-        signUpFormState.emailValidateResult
-    }
-    val passwordValidateResult = remember(signUpFormState.password) {
-        signUpFormState.passwordValidateResult
-    }
-    val passwordConfirmValidateResult =
-        remember(signUpFormState.password, signUpFormState.passwordConfirm) {
-            signUpFormState.passwordConfirmValidateResult
-        }
-
     val focusRequester = remember {
         FocusRequester()
     }
@@ -53,25 +39,22 @@ internal fun SignUpForm(
         modifier = Modifier.focusRequester(focusRequester),
         userName = signUpFormState.userName,
         onUserNameChange = onUserNameChange,
-        userNameValidateResult = userNameValidateResult
     )
     Spacer(modifier = Modifier.height(16.dp))
     AuthEmailTextField(
         email = signUpFormState.email,
         onEmailChange = onEmailChange,
-        emailValidateResult = emailValidateResult
     )
     Spacer(modifier = Modifier.height(16.dp))
     AuthPasswordTextField(
         password = signUpFormState.password,
         onPasswordChange = onPasswordChange,
-        passwordValidateResult = passwordValidateResult
     )
     Spacer(modifier = Modifier.height(16.dp))
     AuthPasswordConfirmTextField(
+        password = signUpFormState.password,
         passwordConfirm = signUpFormState.passwordConfirm,
         onPasswordConfirmChange = onPasswordConfirmChange,
-        passwordConfirmValidateResult = passwordConfirmValidateResult,
         imeAction = ImeAction.Done,
         onDone = onDoneSignUp
     )

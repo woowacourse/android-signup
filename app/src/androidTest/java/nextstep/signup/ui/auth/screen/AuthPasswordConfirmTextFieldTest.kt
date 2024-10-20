@@ -5,7 +5,7 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.test.espresso.Espresso.onIdle
 import nextstep.signup.domain.PasswordConfirmValidateResult
 import nextstep.signup.ui.auth.component.AuthPasswordConfirmTextField
-import nextstep.signup.ui.auth.model.toErrorMessage
+import nextstep.signup.ui.auth.component.toErrorMessage
 import org.junit.Rule
 import org.junit.Test
 
@@ -17,16 +17,16 @@ class AuthPasswordConfirmTextFieldTest {
     @Test
     fun `비밀번호_확인이_유효하지_않으면_에러_메시지가_표시된다`() {
         // given
+        val password = "password"
         val passwordConfirm = "password123"
-        val passwordConfirmValidateResult = PasswordConfirmValidateResult.InValid
         var passwordConfirmErrorMessage: String? = null
 
         composeTestRule.setContent {
-            passwordConfirmErrorMessage = passwordConfirmValidateResult.toErrorMessage()
+            passwordConfirmErrorMessage = PasswordConfirmValidateResult.InValid.toErrorMessage()
             AuthPasswordConfirmTextField(
+                password = password,
                 passwordConfirm = passwordConfirm,
                 onPasswordConfirmChange = {},
-                passwordConfirmValidateResult = passwordConfirmValidateResult
             )
         }
 
@@ -40,16 +40,16 @@ class AuthPasswordConfirmTextFieldTest {
     @Test
     fun `비밀번호_확인이_유효하면_에러_메시지가_표시되지_않는다`() {
         // given
+        val password = "password123"
         val passwordConfirm = "password123"
-        val passwordConfirmValidateResult = PasswordConfirmValidateResult.Success
         var passwordConfirmErrorMessage: String? = null
 
         composeTestRule.setContent {
-            passwordConfirmErrorMessage = passwordConfirmValidateResult.toErrorMessage()
+            passwordConfirmErrorMessage = PasswordConfirmValidateResult.Success.toErrorMessage()
             AuthPasswordConfirmTextField(
+                password = password,
                 passwordConfirm = passwordConfirm,
                 onPasswordConfirmChange = {},
-                passwordConfirmValidateResult = passwordConfirmValidateResult
             )
         }
 

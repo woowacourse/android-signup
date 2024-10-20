@@ -5,7 +5,7 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.test.espresso.Espresso.onIdle
 import nextstep.signup.domain.PasswordValidateResult
 import nextstep.signup.ui.auth.component.AuthPasswordTextField
-import nextstep.signup.ui.auth.model.toErrorMessage
+import nextstep.signup.ui.auth.component.toErrorMessage
 import org.junit.Rule
 import org.junit.Test
 
@@ -18,15 +18,13 @@ class AuthPasswordTextFieldTest {
     fun `영어_없으면_에러_메시지가_표시된다`() {
         // given
         val password = "12345678"
-        val passwordValidateResult = PasswordValidateResult.InValidNotContainAlpha
         var passwordErrorMessage: String? = null
 
         composeTestRule.setContent {
-            passwordErrorMessage = passwordValidateResult.toErrorMessage()
+            passwordErrorMessage = PasswordValidateResult.InValidNotContainAlpha.toErrorMessage()
             AuthPasswordTextField(
                 password = password,
                 onPasswordChange = {},
-                passwordValidateResult = passwordValidateResult
             )
         }
 
@@ -41,15 +39,13 @@ class AuthPasswordTextFieldTest {
     fun `숫자_없으면_에러_메시지가_표시된다`() {
         // given
         val password = "invalidpassword"
-        val passwordValidateResult = PasswordValidateResult.InValidNotContainNumber
         var passwordErrorMessage: String? = null
 
         composeTestRule.setContent {
-            passwordErrorMessage = passwordValidateResult.toErrorMessage()
+            passwordErrorMessage = PasswordValidateResult.InValidNotContainNumber.toErrorMessage()
             AuthPasswordTextField(
                 password = password,
                 onPasswordChange = {},
-                passwordValidateResult = passwordValidateResult
             )
         }
 
@@ -64,15 +60,13 @@ class AuthPasswordTextFieldTest {
     fun `비밀번호가_유효하면_에러_메시지가_표시되지_않는다`() {
         // given
         val password = "validPassword123"
-        val passwordValidateResult = PasswordValidateResult.Success
         var passwordErrorMessage: String? = null
 
         composeTestRule.setContent {
-            passwordErrorMessage = passwordValidateResult.toErrorMessage()
+            passwordErrorMessage = PasswordValidateResult.Success.toErrorMessage()
             AuthPasswordTextField(
                 password = password,
                 onPasswordChange = {},
-                passwordValidateResult = passwordValidateResult
             )
         }
 
