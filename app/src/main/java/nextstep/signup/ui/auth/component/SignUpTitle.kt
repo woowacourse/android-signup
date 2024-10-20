@@ -9,23 +9,3 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.signup.R
 import nextstep.signup.ui.theme.SignupTheme
-
-@Composable
-internal fun SignUpTitle() {
-    Text(
-        text = stringResource(id = R.string.sign_up_title),
-        style = MaterialTheme.typography.titleLarge.copy(
-            fontWeight = FontWeight.Bold
-        )
-    )
-}
-
-@Preview
-@Composable
-private fun SignUpTitlePreview() {
-    SignupTheme {
-        Surface {
-            SignUpTitle()
-        }
-    }
-}
