@@ -22,16 +22,10 @@ class SignUpActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                 ) {
-                    SignUpLayout(
-                        onButtonClicked = { onSignUpClicked() },
-                    )
+                    SignUpLayout()
                 }
             }
         }
-    }
-
-    private fun onSignUpClicked() {
-        Toast.makeText(this, getString(R.string.signup_signup_success), Toast.LENGTH_LONG).show()
     }
 }
 
@@ -47,9 +41,7 @@ fun SignUpPreview() {
                     .fillMaxSize()
                     .padding(32.dp),
         ) {
-            SignUpLayout(
-                onButtonClicked = { },
-            )
+            SignUpLayout()
         }
     }
 }
