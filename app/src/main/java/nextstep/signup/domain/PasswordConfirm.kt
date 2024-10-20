@@ -12,8 +12,8 @@ data class PasswordConfirm(val value: String, private val password: String) {
             return password == confirmPassword
         }
 
-        fun validate(password: String, confirmPassword: String): PasswordConfirmValidateResult {
-            return if (isValid(password, confirmPassword)) {
+        fun validate(password: String, passwordConfirm: String): PasswordConfirmValidateResult {
+            return if (isValid(password, passwordConfirm)) {
                 PasswordConfirmValidateResult.Success
             } else {
                 PasswordConfirmValidateResult.InValid

@@ -20,24 +20,24 @@ class PasswordConfirmTest {
     fun `비밀번호와 일치 결과 성공`() {
         // given
         val password = "password"
-        val confirmPassword = "password"
+        val passwordConfirm = "password"
 
         // when
-        val passwordConfirm = PasswordConfirm.validate(password, confirmPassword)
+        val result = PasswordConfirm.validate(password, passwordConfirm)
 
         // then
-        passwordConfirm.shouldBeTypeOf<PasswordConfirmValidateResult.Success>()
+        result.shouldBeTypeOf<PasswordConfirmValidateResult.Success>()
     }
 
     @Test
     fun `비밀번호와 일치하지 않으면 예외`() {
         // given
         val password = "password"
-        val confirmPassword = "password1"
+        val passwordConfirm = "password1"
 
         // when & then
         shouldThrow<IllegalArgumentException> {
-            PasswordConfirm(password, confirmPassword)
+            PasswordConfirm(password, passwordConfirm)
         }
     }
 
@@ -45,12 +45,12 @@ class PasswordConfirmTest {
     fun `비밀번호와 일치하지 않으면 실패 결과 반환`() {
         // given
         val password = "password"
-        val confirmPassword = "password1"
+        val passwordConfirm = "password1"
 
         // when
-        val passwordConfirm = PasswordConfirm.validate(password, confirmPassword)
+        val result = PasswordConfirm.validate(password, passwordConfirm)
 
         // then
-        passwordConfirm.shouldBeTypeOf<PasswordConfirmValidateResult.InValid>()
+        result.shouldBeTypeOf<PasswordConfirmValidateResult.InValid>()
     }
 }
