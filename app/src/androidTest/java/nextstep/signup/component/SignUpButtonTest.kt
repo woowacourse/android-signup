@@ -35,7 +35,7 @@ class SignUpButtonTest {
     }
 
     @Test
-    fun ext인자로_받은_text가_화면에_나타난다() {
+    fun text인자로_받은_text가_화면에_나타난다() {
         composeTestRule.onNodeWithText(text).assertExists()
     }
 
