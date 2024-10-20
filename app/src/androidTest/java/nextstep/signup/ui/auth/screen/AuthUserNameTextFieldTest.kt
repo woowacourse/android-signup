@@ -31,6 +31,7 @@ class AuthUserNameTextFieldTest {
         }
 
         // then
+        onIdle()
         assert(userNameErrorMessage != null)
         composeTestRule.onNodeWithText(userNameErrorMessage.orEmpty())
             .assertExists()
@@ -53,6 +54,7 @@ class AuthUserNameTextFieldTest {
         }
 
         // then
+        onIdle()
         assert(userNameErrorMessage != null)
         composeTestRule.onNodeWithText(userNameErrorMessage.orEmpty())
             .assertExists()
@@ -75,6 +77,7 @@ class AuthUserNameTextFieldTest {
         }
 
         // then
+        onIdle()
         assert(userNameErrorMessage != null)
         composeTestRule.onNodeWithText(userNameErrorMessage.orEmpty())
             .assertExists()

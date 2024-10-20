@@ -31,6 +31,7 @@ class AuthPasswordConfirmTextFieldTest {
         }
 
         // then
+        onIdle()
         assert(passwordConfirmErrorMessage != null)
         composeTestRule.onNodeWithText(passwordConfirmErrorMessage.orEmpty())
             .assertExists()

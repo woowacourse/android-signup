@@ -34,6 +34,7 @@ class AuthEmailTextFieldTest {
         }
 
         // then
+        onIdle()
         assert(emailErrorMessage != null)
         composeTestRule.onNodeWithText(emailErrorMessage.orEmpty())
             .isDisplayed()
@@ -57,6 +58,7 @@ class AuthEmailTextFieldTest {
         }
 
         // then
+        onIdle()
         assert(emailErrorMessage != null)
         composeTestRule.onNodeWithText(emailErrorMessage.orEmpty())
             .isDisplayed()

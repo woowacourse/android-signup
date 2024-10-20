@@ -12,7 +12,6 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performImeAction
 import androidx.compose.ui.test.performTextInput
-import androidx.test.espresso.Espresso.onIdle
 import nextstep.signup.R
 import nextstep.signup.ui.auth.model.SignUpFormState
 import org.junit.Rule
@@ -44,6 +43,7 @@ class SignUpScreenTest {
         }
 
         // then
+        composeTestRule.runOnIdle { }
         assert(nameFormLabel.isNotBlank())
         composeTestRule.onNodeWithText(nameFormLabel)
             .assert(isFocused())
@@ -72,7 +72,6 @@ class SignUpScreenTest {
         }
 
         // when
-        onIdle()
         composeTestRule.onNodeWithText(title)
             .performClick()
         // then
@@ -167,11 +166,9 @@ class SignUpScreenTest {
         }
 
         // when
-        onIdle()
         composeTestRule.onNodeWithText(passwordConfirmFormLabel)
             .performClick()
         // then
-        onIdle()
         composeTestRule.onNodeWithText(snackBarMessage)
             .isDisplayed()
     }

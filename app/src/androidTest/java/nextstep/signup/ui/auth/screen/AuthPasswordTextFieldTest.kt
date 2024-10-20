@@ -31,6 +31,7 @@ class AuthPasswordTextFieldTest {
         }
 
         // then
+        onIdle()
         assert(passwordErrorMessage != null)
         composeTestRule.onNodeWithText(passwordErrorMessage.orEmpty())
             .assertExists()
@@ -53,6 +54,7 @@ class AuthPasswordTextFieldTest {
         }
 
         // then
+        onIdle()
         assert(passwordErrorMessage != null)
         composeTestRule.onNodeWithText(passwordErrorMessage.orEmpty())
             .assertExists()
