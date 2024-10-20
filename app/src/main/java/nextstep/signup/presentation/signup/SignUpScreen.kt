@@ -19,25 +19,36 @@ import nextstep.signup.domain.Email
 import nextstep.signup.domain.Password
 import nextstep.signup.domain.PasswordConfirm
 import nextstep.signup.domain.SignUp
+import nextstep.signup.domain.SignUpResult
 import nextstep.signup.domain.UserName
 import nextstep.signup.ui.theme.SignupTheme
 
 @Composable
 fun SignUpScreen() {
-    var username: String by remember {
-        mutableStateOf("")
+    var signUpInput: SignUpInput by remember {
+        mutableStateOf(
+            SignUpInput(
+                username = "",
+                email = "",
+                password = "",
+                passwordConfirm = ""
+            )
+        )
     }
 
-    var email: String by remember {
-        mutableStateOf("")
+    val signUpResult: SignUpResult by remember(signUpInput) {
+        mutableStateOf(
+            SignUp.from(
+                userName = UserName.from(signUpInput.username),
+                email = Email.from(signUpInput.email),
+                password = Password.from(signUpInput.password),
+                passwordConfirm = PasswordConfirm.from(signUpInput.password, signUpInput.passwordConfirm)
+            )
+        )
     }
 
-    var password: String by remember {
-        mutableStateOf("")
-    }
-
-    var passwordConfirm: String by remember {
-        mutableStateOf("")
+    val signUpIsEnabled: Boolean by remember(signUpResult) {
+        mutableStateOf(signUpResult is SignUpResult.Success)
     }
 
     Column(
@@ -52,30 +63,38 @@ fun SignUpScreen() {
         )
 
         UserNameTextField(
-            name = username,
-            onValueChange = { username = it },
+            name = signUpInput.username,
+            onValueChange = {
+                signUpInput = signUpInput.copy(username = it)
+            },
             labelText = stringResource(R.string.sign_up_user_name_label),
             modifier = Modifier.fillMaxWidth()
         )
 
         EmailTextField(
-            email = email,
-            onValueChange = { email = it },
+            email = signUpInput.email,
+            onValueChange = {
+                signUpInput = signUpInput.copy(email = it)
+            },
             labelText = stringResource(R.string.sign_up_email_label),
             modifier = Modifier.fillMaxWidth()
         )
 
         PasswordTextField(
-            password = password,
-            onValueChange = { password = it },
+            password = signUpInput.password,
+            onValueChange = {
+                signUpInput = signUpInput.copy(password = it)
+            },
             labelText = stringResource(id = R.string.sign_up_password_label),
             modifier = Modifier.fillMaxWidth()
         )
 
         PasswordConfirmTextField(
-            password = password,
-            passwordConfirm = passwordConfirm,
-            onValueChange = { passwordConfirm = it },
+            password = signUpInput.password,
+            passwordConfirm = signUpInput.passwordConfirm,
+            onValueChange = {
+                signUpInput = signUpInput.copy(passwordConfirm = it)
+            },
             labelText = stringResource(id = R.string.sign_up_password_confirm_label),
             modifier = Modifier.fillMaxWidth()
         )
@@ -83,12 +102,7 @@ fun SignUpScreen() {
         SignUpButton(
             text = stringResource(R.string.sign_up_button),
             modifier = Modifier.fillMaxWidth(),
-            signUpResult = SignUp.from(
-                userName = UserName.from(username),
-                email = Email.from(email),
-                password = Password.from(password),
-                passwordConfirm = PasswordConfirm.from(password, passwordConfirm)
-            )
+            enabled = signUpIsEnabled
         )
     }
 }

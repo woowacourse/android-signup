@@ -25,20 +25,20 @@ class RecompositionTest {
     @Composable
     private fun TestTextField(
         username: String,
-        other: String,
+        other: String
     ) {
         val usernameLengthError = (username.length !in 2..5).also { count++ }
         TextField(
             value = username,
             onValueChange = { },
-            isError = usernameLengthError,
+            isError = usernameLengthError
         )
     }
 
     @Composable
     private fun TestTextFieldWithRemember(
         username: String,
-        other: String,
+        other: String
     ) {
         val usernameLengthError = remember(username) {
             (username.length !in 2..5).also { count++ }
@@ -46,7 +46,7 @@ class RecompositionTest {
         TextField(
             value = username,
             onValueChange = { },
-            isError = usernameLengthError,
+            isError = usernameLengthError
         )
     }
 
