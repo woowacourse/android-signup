@@ -77,15 +77,15 @@ class UserNameTest {
     }
 
     @Test
-    fun `사용자_이름이_2~5자_이상이고_숫자나_기호가_포함되어_있다면_isValid의_값은_false이다`() {
+    fun `사용자 이름이 2~5자 이상이고 숫자나 기호가 포함되어 있다면 isValid의 값은 false이다`() {
         val isValid: Boolean = UserName("해나123&#").isValid()
         assertEquals(false, isValid)
     }
 
     @Test
-    fun `사용자_이름이_비어있다면_isValid의_값은_true이다`() {
-        val isValid: Boolean = UserName("").isValid()
-        assertEquals(true, isValid)
+    fun `사용자 이름이 비어있다면 isError의 값은 false이다`() {
+        val isError: Boolean = UserName("").isError()
+        assertEquals(false, isError)
     }
 
     companion object {

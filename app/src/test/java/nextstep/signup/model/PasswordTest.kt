@@ -83,9 +83,9 @@ class PasswordTest {
     }
 
     @Test
-    fun `비밀번호가_비어있다면_isValid의_값은_true이다`() {
-        val isValid: Boolean = Password("").isValid()
-        assertEquals(true, isValid)
+    fun `비밀번호가 비어있다면 isError의 값은 false이다`() {
+        val isError: Boolean = Password("").isError()
+        assertEquals(false, isError)
     }
 
     companion object {

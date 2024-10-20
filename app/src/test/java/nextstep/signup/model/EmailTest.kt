@@ -29,9 +29,9 @@ class EmailTest {
     }
 
     @Test
-    fun `이메일_형식이_비어있다면_isValid의_값은_true이다`() {
-        val isInvalid: Boolean = Email("").isValid()
-        assertEquals(true, isInvalid)
+    fun `이메일_형식이_비어있다면_isError의_값은_false이다`() {
+        val isError: Boolean = Email("").isError()
+        assertEquals(false, isError)
     }
 
     @Test
