@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -87,6 +88,7 @@ fun SignUpScreen(
 }
 
 @Composable
+@ReadOnlyComposable
 fun getUserNameErrorMessage(usernameState: ValidationState): String {
     return when (usernameState) {
         ValidationState.VALID -> stringResource(id = R.string.empty)
@@ -96,6 +98,7 @@ fun getUserNameErrorMessage(usernameState: ValidationState): String {
 }
 
 @Composable
+@ReadOnlyComposable
 fun getEmailErrorMessage(emailState: ValidationState): String {
     return when (emailState) {
         ValidationState.FORMAT_ERROR -> stringResource(id = R.string.format_error_message_email)
@@ -104,6 +107,7 @@ fun getEmailErrorMessage(emailState: ValidationState): String {
 }
 
 @Composable
+@ReadOnlyComposable
 fun getPasswordErrorMessage(passwordState: ValidationState): String {
     return when (passwordState) {
         ValidationState.VALID -> stringResource(id = R.string.empty)
@@ -113,6 +117,7 @@ fun getPasswordErrorMessage(passwordState: ValidationState): String {
 }
 
 @Composable
+@ReadOnlyComposable
 fun getPasswordConfirmErrorMessage(passwordState: ValidationState): String {
     return when (passwordState) {
         ValidationState.FORMAT_ERROR -> stringResource(id = R.string.format_error_message_password_confirm)
