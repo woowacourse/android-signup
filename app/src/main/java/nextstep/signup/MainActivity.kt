@@ -42,7 +42,7 @@ class MainActivity : ComponentActivity() {
                         Modifier
                             .fillMaxSize()
                             .padding(top = 56.dp, start = 32.dp, end = 32.dp),
-                    color = MaterialTheme.colorScheme.background,
+                    color = MaterialTheme.colorScheme.surface,
                 ) {
                     SignUpScreen()
                 }
