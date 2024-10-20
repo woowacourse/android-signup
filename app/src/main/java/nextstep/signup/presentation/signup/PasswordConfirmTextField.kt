@@ -2,6 +2,9 @@ package nextstep.signup.presentation.signup
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
@@ -21,23 +24,32 @@ fun PasswordConfirmTextField(
     onValueChange: (String) -> Unit,
     labelText: String = stringResource(R.string.default_text_field_label)
 ) {
+    val passwordConfirmResult: PasswordConfirmResult by remember(
+        password,
+        passwordConfirm
+    ) {
+        mutableStateOf(PasswordConfirm.from(password, passwordConfirm))
+    }
     SignUpTextField(
         modifier = modifier,
         labelText = labelText,
         value = passwordConfirm,
         onValueChange = onValueChange,
-        isError = PasswordConfirm.from(password, passwordConfirm) is PasswordConfirmResult.Failure,
-        supportingText = {
-            when (PasswordConfirm.from(password, passwordConfirm)) {
-                is PasswordConfirmResult.EmptyField -> return@SignUpTextField
-                is PasswordConfirmResult.Success -> return@SignUpTextField
-                is PasswordConfirmResult.NotSamePasswordConfirm ->
-                    Text(text = stringResource(id = R.string.error_message_password_not_same))
-            }
-        },
+        isError = passwordConfirmResult is PasswordConfirmResult.Failure,
+        supportingText = { ErrorText(passwordConfirmResult) },
         keyboardType = KeyboardType.Password,
         visualTransformation = PasswordVisualTransformation()
     )
+}
+
+@Composable
+private fun ErrorText(passwordConfirmResult: PasswordConfirmResult) {
+    when (passwordConfirmResult) {
+        is PasswordConfirmResult.EmptyField -> return
+        is PasswordConfirmResult.Success -> return
+        is PasswordConfirmResult.NotSamePasswordConfirm ->
+            Text(text = stringResource(id = R.string.error_message_password_not_same))
+    }
 }
 
 @Preview
