@@ -62,8 +62,6 @@ fun SignUpScreen() {
         var passwordConfirm by remember { mutableStateOf(PasswordConfirm("")) }
 
         val userInformation = UserInformation(userName, email, password, passwordConfirm)
-        val isSubmitButtonEnabled =
-            userName.isValid() && email.isValid() && password.isValid() && passwordConfirm.isMatch(password.password)
 
         SignUpGreeting()
         SignUpInputBox(
@@ -73,7 +71,7 @@ fun SignUpScreen() {
             onPasswordChange = { password = password.copy(password = it) },
             onPasswordConfirmChange = { passwordConfirm = passwordConfirm.copy(passwordConfirm = it) },
         )
-        ButtonComponent(enabled = isSubmitButtonEnabled, description = R.string.main_sign_up)
+        ButtonComponent(enabled = userInformation.isAbleToSubmit(), description = R.string.main_sign_up)
     }
 }
 
