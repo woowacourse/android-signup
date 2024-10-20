@@ -26,7 +26,7 @@ class PasswordInputValidationTest {
                 value = password.value.value,
                 onValueChange = { password.value = Password(it) },
                 inputType = InputType.Password,
-                validateInput = { password.value.validatePassword() },
+                supportingText = password.value.validatePassword(),
             )
 
             SingleLineTextInput(
@@ -34,11 +34,9 @@ class PasswordInputValidationTest {
                 value = passwordConfirm.value,
                 onValueChange = { passwordConfirm.value = it },
                 inputType = InputType.Password,
-                validateInput = {
-                    passwordConfirm.value.validatePasswordConfirm(
+                supportingText = passwordConfirm.value.validatePasswordConfirm(
                         password.value.value,
-                    )
-                },
+                    ),
             )
         }
     }

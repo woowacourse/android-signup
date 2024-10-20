@@ -24,7 +24,7 @@ class UsernameInputValidationTest {
                 value = username.value.value,
                 onValueChange = { username.value = Username(it) },
                 inputType = InputType.Username,
-                validateInput = { username.value.validateUsername() },
+                supportingText = username.value.validateUsername(),
             )
         }
     }

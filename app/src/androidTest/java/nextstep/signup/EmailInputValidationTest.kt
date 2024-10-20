@@ -24,7 +24,7 @@ class EmailInputValidationTest {
                 value = email.value.value,
                 onValueChange = { email.value = Email(it) },
                 inputType = InputType.Email,
-                validateInput = { email.value.validateEmail() },
+                supportingText = email.value.validateEmail(),
             )
         }
     }

@@ -23,10 +23,8 @@ fun SingleLineTextInput(
     onValueChange: (String) -> Unit,
     label: String,
     inputType: InputType,
-    validateInput: @Composable ((String) -> String)? = null,
+    supportingText: String? = null,
 ) {
-    val supportingText = validateInput?.let { it(value) }
-
     TextField(
         modifier = modifier,
         value = value,
@@ -43,11 +41,10 @@ fun SingleLineTextInput(
                 focusedIndicatorColor = MaterialTheme.colorScheme.secondary,
                 focusedLabelColor = MaterialTheme.colorScheme.secondary,
             ),
-        isError = !supportingText.isNullOrBlank(),
+        isError = supportingText.isNullOrBlank().not(),
         supportingText = {
-            if (!supportingText.isNullOrBlank()) {
-                Text(supportingText)
-            }
+            val errorMessage = supportingText ?: return@TextField
+            Text(text = errorMessage)
         },
     )
 }
