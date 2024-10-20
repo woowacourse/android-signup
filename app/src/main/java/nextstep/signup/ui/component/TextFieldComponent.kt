@@ -1,6 +1,5 @@
 package nextstep.signup.ui.component
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Text
@@ -19,7 +18,7 @@ fun TextFieldComponent(
     modifier: Modifier = Modifier,
     newValue: String,
     onValueChange: (String) -> Unit,
-    @StringRes label: Int,
+    label: String,
     supportingText: @Composable () -> Unit,
     isError: Boolean = false,
     keyboardType: KeyboardType = KeyboardType.Text,
@@ -28,7 +27,7 @@ fun TextFieldComponent(
         value = newValue,
         onValueChange = { onValueChange(it) },
         modifier = modifier.fillMaxWidth(),
-        label = { Text(text = stringResource(id = label)) },
+        label = { Text(text = label) },
         supportingText = { supportingText() },
         isError = isError,
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
@@ -42,7 +41,7 @@ private fun TextFieldPreview() {
     TextFieldComponent(
         newValue = "",
         onValueChange = {},
-        label = R.string.main_user_name,
+        label = stringResource(id = R.string.main_user_name),
         supportingText = {},
         isError = true,
     )

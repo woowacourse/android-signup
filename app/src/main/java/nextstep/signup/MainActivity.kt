@@ -71,7 +71,7 @@ fun SignUpScreen() {
             onPasswordChange = { password = password.copy(password = it) },
             onPasswordConfirmChange = { passwordConfirm = passwordConfirm.copy(passwordConfirm = it) },
         )
-        ButtonComponent(enabled = userInformation.isAbleToSubmit(), description = R.string.main_sign_up)
+        ButtonComponent(enabled = userInformation.isAbleToSubmit(), description = stringResource(id = R.string.main_sign_up))
     }
 }
 
@@ -107,7 +107,7 @@ fun UserNameComposable(
     TextFieldComponent(
         newValue = userName.userName,
         onValueChange = onUserNameChange,
-        label = R.string.main_user_name,
+        label = stringResource(R.string.main_user_name),
         supportingText = {
             val errorMessage = userName.getErrorMessage() ?: return@TextFieldComponent
             TextComponent(description = errorMessage)
@@ -125,7 +125,7 @@ fun EmailComposable(
     TextFieldComponent(
         newValue = email.email,
         onValueChange = onEmailChange,
-        label = R.string.main_email,
+        label = stringResource(R.string.main_email),
         supportingText = {
             val errorMessage = email.getErrorMessage() ?: return@TextFieldComponent
             TextComponent(description = errorMessage)
@@ -144,7 +144,7 @@ fun PasswordComposable(
     TextFieldComponent(
         newValue = password.password,
         onValueChange = onPasswordChange,
-        label = R.string.main_password,
+        label = stringResource(R.string.main_password),
         supportingText = {
             val errorMessage = password.getErrorMessage() ?: return@TextFieldComponent
             TextComponent(description = errorMessage)
@@ -164,7 +164,7 @@ fun PasswordConfirmComposable(
     TextFieldComponent(
         newValue = passwordConfirm.passwordConfirm,
         onValueChange = onPasswordConfirmChange,
-        label = R.string.main_password_confirm,
+        label = stringResource(R.string.main_password_confirm),
         supportingText = {
             val errorMessage = passwordConfirm.getErrorMessage(password.password) ?: return@TextFieldComponent
             TextComponent(description = errorMessage)

@@ -1,6 +1,5 @@
 package nextstep.signup.ui.component
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Button
@@ -18,7 +17,7 @@ import nextstep.signup.ui.theme.Blue50
 fun ButtonComponent(
     modifier: Modifier = Modifier,
     enabled: Boolean = false,
-    @StringRes description: Int,
+    description: String,
 ) {
     Button(
         onClick = {},
@@ -27,12 +26,12 @@ fun ButtonComponent(
         colors = ButtonDefaults.buttonColors(containerColor = Blue50),
         contentPadding = PaddingValues(vertical = 15.dp),
     ) {
-        Text(text = stringResource(id = description))
+        Text(text = description)
     }
 }
 
 @Preview(showBackground = true)
 @Composable
 private fun ButtonPreview() {
-    ButtonComponent(description = R.string.main_sign_up)
+    ButtonComponent(description = stringResource(id = R.string.main_sign_up))
 }
