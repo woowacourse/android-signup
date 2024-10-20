@@ -9,14 +9,6 @@ import androidx.compose.ui.Modifier
 import nextstep.signup.ui.theme.Typography
 
 @Composable
-fun LabelText(label: String) {
-    Text(
-        text = label,
-        style = Typography.labelMedium,
-    )
-}
-
-@Composable
 fun SingleLineTextInput(
     modifier: Modifier = Modifier,
     value: String,
@@ -46,5 +38,13 @@ fun SingleLineTextInput(
             val errorMessage = supportingText ?: return@TextField
             Text(text = errorMessage)
         },
+    )
+}
+
+@Composable
+fun LabelText(label: String) {
+    Text(
+        text = label,
+        style = Typography.labelMedium,
     )
 }

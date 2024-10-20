@@ -41,11 +41,82 @@ import nextstep.signup.ui.theme.SignUpTheme
 import nextstep.signup.ui.theme.Typography
 
 @Composable
+fun SignUpLayout() {
+    val snackbarHostState by remember { mutableStateOf(SnackbarHostState()) }
+    val coroutineScope = rememberCoroutineScope()
+    val localContextResources = LocalContext.current.resources
+    val showSignUpSuccessSnackbar: () -> Unit = {
+        coroutineScope.launch {
+            snackbarHostState.showSnackbar(localContextResources.getString(R.string.signup_signup_success))
+        }
+    }
+
+    Column(
+        modifier =
+        Modifier
+            .fillMaxHeight(0.7f)
+            .padding(32.dp),
+        verticalArrangement = Arrangement.SpaceEvenly,
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        SignUpTitle()
+        Box {
+            SignUpInteractionLayer {
+                showSignUpSuccessSnackbar()
+            }
+            SnackbarHost(
+                modifier = Modifier.align(Alignment.BottomCenter),
+                hostState = snackbarHostState,
+            )
+        }
+    }
+}
+
+@Composable
 fun SignUpTitle() {
     Text(
         text = stringResource(id = R.string.signup_title),
         style = Typography.titleLarge,
     )
+}
+
+@Composable
+fun SignUpInteractionLayer(onButtonClicked: () -> Unit) {
+    var username by remember { mutableStateOf(Username()) }
+    var email by remember { mutableStateOf(Email()) }
+    var password by remember { mutableStateOf(Password()) }
+    var passwordConfirm by remember { mutableStateOf("") }
+    val isFormatValid by remember {
+        derivedStateOf {
+            username.isValid && email.isValid && password.isValid && passwordConfirm == password.value
+        }
+    }
+
+    Column(
+        modifier = Modifier.fillMaxHeight(0.8f),
+        verticalArrangement = Arrangement.SpaceEvenly,
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        val modifier = Modifier.fillMaxWidth()
+        SignUpInputs(
+            modifier = modifier,
+            username = username,
+            email = email,
+            password = password,
+            passwordConfirm = passwordConfirm,
+            onUsernameChanged = { username = username.copy(value = it) },
+            onEmailChanged = { email = email.copy(value = it) },
+            onPasswordChanged = { password = password.copy(value = it) },
+            onPasswordConfirmChanged = { passwordConfirm = it }
+        )
+        StateButton(
+            modifier = modifier.requiredHeight(50.dp),
+            text = stringResource(id = R.string.signup_signup),
+            enabled = isFormatValid,
+        ) {
+            onButtonClicked()
+        }
+    }
 }
 
 @Composable
@@ -92,77 +163,6 @@ fun SignUpInputs(
         inputType = InputType.Password,
         supportingText = passwordConfirm.validatePasswordConfirm(password.value),
     )
-}
-
-@Composable
-fun SignUpInteractionLayer(onButtonClicked: () -> Unit) {
-    var username by remember { mutableStateOf(Username()) }
-    var email by remember { mutableStateOf(Email()) }
-    var password by remember { mutableStateOf(Password()) }
-    var passwordConfirm by remember { mutableStateOf("") }
-    val isFormatValid by remember {
-        derivedStateOf {
-            username.isValid && email.isValid && password.isValid && passwordConfirm == password.value
-        }
-    }
-
-    Column(
-        modifier = Modifier.fillMaxHeight(0.8f),
-        verticalArrangement = Arrangement.SpaceEvenly,
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        val modifier = Modifier.fillMaxWidth()
-        SignUpInputs(
-            modifier = modifier,
-            username = username,
-            email = email,
-            password = password,
-            passwordConfirm = passwordConfirm,
-            onUsernameChanged = { username = username.copy(value = it) },
-            onEmailChanged = { email = email.copy(value = it) },
-            onPasswordChanged = { password = password.copy(value = it) },
-            onPasswordConfirmChanged = { passwordConfirm = it }
-        )
-        StateButton(
-            modifier = modifier.requiredHeight(50.dp),
-            text = stringResource(id = R.string.signup_signup),
-            enabled = isFormatValid,
-        ) {
-            onButtonClicked()
-        }
-    }
-}
-
-@Composable
-fun SignUpLayout() {
-    val snackbarHostState by remember { mutableStateOf(SnackbarHostState()) }
-    val coroutineScope = rememberCoroutineScope()
-    val localContextResources = LocalContext.current.resources
-    val showSignUpSuccessSnackbar: () -> Unit = {
-        coroutineScope.launch {
-            snackbarHostState.showSnackbar(localContextResources.getString(R.string.signup_signup_success))
-        }
-    }
-
-    Column(
-        modifier =
-            Modifier
-                .fillMaxHeight(0.7f)
-                .padding(32.dp),
-        verticalArrangement = Arrangement.SpaceEvenly,
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        SignUpTitle()
-        Box {
-            SignUpInteractionLayer {
-                showSignUpSuccessSnackbar()
-            }
-            SnackbarHost(
-                modifier = Modifier.align(Alignment.BottomCenter),
-                hostState = snackbarHostState,
-            )
-        }
-    }
 }
 
 @Preview(showBackground = true)
