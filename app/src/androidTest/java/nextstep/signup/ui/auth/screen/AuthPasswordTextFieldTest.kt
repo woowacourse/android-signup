@@ -24,7 +24,7 @@ class AuthPasswordTextFieldTest {
             passwordErrorMessage = PasswordValidateResult.InValidNotContainAlpha.toErrorMessage()
             AuthPasswordTextField(
                 password = password,
-                onPasswordChange = {},
+                onPasswordChange = {}
             )
         }
 
@@ -45,7 +45,7 @@ class AuthPasswordTextFieldTest {
             passwordErrorMessage = PasswordValidateResult.InValidNotContainNumber.toErrorMessage()
             AuthPasswordTextField(
                 password = password,
-                onPasswordChange = {},
+                onPasswordChange = {}
             )
         }
 
@@ -66,7 +66,7 @@ class AuthPasswordTextFieldTest {
             passwordErrorMessage = PasswordValidateResult.Success.toErrorMessage()
             AuthPasswordTextField(
                 password = password,
-                onPasswordChange = {},
+                onPasswordChange = {}
             )
         }
 

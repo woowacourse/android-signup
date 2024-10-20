@@ -38,17 +38,17 @@ internal fun SignUpForm(
     AuthUserNameTextField(
         modifier = Modifier.focusRequester(focusRequester),
         userName = signUpFormState.userName,
-        onUserNameChange = onUserNameChange,
+        onUserNameChange = onUserNameChange
     )
     Spacer(modifier = Modifier.height(16.dp))
     AuthEmailTextField(
         email = signUpFormState.email,
-        onEmailChange = onEmailChange,
+        onEmailChange = onEmailChange
     )
     Spacer(modifier = Modifier.height(16.dp))
     AuthPasswordTextField(
         password = signUpFormState.password,
-        onPasswordChange = onPasswordChange,
+        onPasswordChange = onPasswordChange
     )
     Spacer(modifier = Modifier.height(16.dp))
     AuthPasswordConfirmTextField(

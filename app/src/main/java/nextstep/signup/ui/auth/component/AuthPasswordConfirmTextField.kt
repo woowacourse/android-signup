@@ -20,7 +20,7 @@ internal fun AuthPasswordConfirmTextField(
     keyboardType: KeyboardType = KeyboardType.Password,
     imeAction: ImeAction = ImeAction.Next,
     onNext: () -> Unit = {},
-    onDone: () -> Unit = {},
+    onDone: () -> Unit = {}
 ) {
     val passwordConfirmValidateResult = remember(password, passwordConfirm) {
         PasswordConfirm.validate(
@@ -41,7 +41,6 @@ internal fun AuthPasswordConfirmTextField(
         onDone = onDone
     )
 }
-
 
 @Composable
 @ReadOnlyComposable

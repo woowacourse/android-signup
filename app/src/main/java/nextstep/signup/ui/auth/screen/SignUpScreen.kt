@@ -168,7 +168,6 @@ private fun PreviewSignUpConfirmButton2() {
     }
 }
 
-
 @Preview(showSystemUi = true)
 @Composable
 private fun Preview1() {

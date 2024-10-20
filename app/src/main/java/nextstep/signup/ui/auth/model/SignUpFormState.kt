@@ -30,9 +30,9 @@ data class SignUpFormState(
     val enableSignUp: Boolean
         get() =
             userNameValidateResult.isValid &&
-                    emailValidateResult.isValid &&
-                    passwordValidateResult.isValid &&
-                    passwordConfirmValidateResult.isValid
+                emailValidateResult.isValid &&
+                passwordValidateResult.isValid &&
+                passwordConfirmValidateResult.isValid
 
     companion object {
         fun empty(): SignUpFormState {

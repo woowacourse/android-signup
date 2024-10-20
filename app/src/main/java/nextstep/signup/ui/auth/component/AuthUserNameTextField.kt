@@ -37,7 +37,6 @@ internal fun AuthUserNameTextField(
     )
 }
 
-
 @Composable
 fun UserNameValidateResult.toErrorMessage(): String? {
     return when (this) {

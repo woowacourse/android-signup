@@ -38,7 +38,6 @@ internal fun AuthPasswordTextField(
     )
 }
 
-
 @Composable
 @ReadOnlyComposable
 fun PasswordValidateResult.toErrorMessage(): String? {

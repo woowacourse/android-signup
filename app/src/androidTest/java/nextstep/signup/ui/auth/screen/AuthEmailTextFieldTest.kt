@@ -23,7 +23,7 @@ class AuthEmailTextFieldTest {
             emailErrorMessage = EmailValidateResult.InvalidEmailFormat.toErrorMessage()
             AuthEmailTextField(
                 email = invalidEmail,
-                onEmailChange = {},
+                onEmailChange = {}
             )
         }
 
@@ -43,7 +43,7 @@ class AuthEmailTextFieldTest {
             emailErrorMessage = EmailValidateResult.InvalidBlank.toErrorMessage()
             AuthEmailTextField(
                 email = invalidEmail,
-                onEmailChange = {},
+                onEmailChange = {}
             )
         }
 
@@ -63,7 +63,7 @@ class AuthEmailTextFieldTest {
             emailErrorMessage = EmailValidateResult.Success.toErrorMessage()
             AuthEmailTextField(
                 email = validEmail,
-                onEmailChange = {},
+                onEmailChange = {}
             )
         }
         composeTestRule

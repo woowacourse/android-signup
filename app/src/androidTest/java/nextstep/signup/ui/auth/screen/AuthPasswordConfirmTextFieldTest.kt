@@ -26,7 +26,7 @@ class AuthPasswordConfirmTextFieldTest {
             AuthPasswordConfirmTextField(
                 password = password,
                 passwordConfirm = passwordConfirm,
-                onPasswordConfirmChange = {},
+                onPasswordConfirmChange = {}
             )
         }
 
@@ -49,7 +49,7 @@ class AuthPasswordConfirmTextFieldTest {
             AuthPasswordConfirmTextField(
                 password = password,
                 passwordConfirm = passwordConfirm,
-                onPasswordConfirmChange = {},
+                onPasswordConfirmChange = {}
             )
         }
 

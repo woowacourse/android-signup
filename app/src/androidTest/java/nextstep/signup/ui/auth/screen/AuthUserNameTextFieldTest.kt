@@ -24,7 +24,7 @@ class AuthUserNameTextFieldTest {
             userNameErrorMessage = UserNameValidateResult.InvalidOutOfLength.toErrorMessage()
             AuthUserNameTextField(
                 userName = userName,
-                onUserNameChange = {},
+                onUserNameChange = {}
             )
         }
 
@@ -45,7 +45,7 @@ class AuthUserNameTextFieldTest {
             userNameErrorMessage = UserNameValidateResult.InvalidContainNumber.toErrorMessage()
             AuthUserNameTextField(
                 userName = userName,
-                onUserNameChange = {},
+                onUserNameChange = {}
             )
         }
 
@@ -67,7 +67,7 @@ class AuthUserNameTextFieldTest {
                 UserNameValidateResult.InvalidContainSpecialCharacter.toErrorMessage()
             AuthUserNameTextField(
                 userName = userName,
-                onUserNameChange = {},
+                onUserNameChange = {}
             )
         }
 
@@ -88,7 +88,7 @@ class AuthUserNameTextFieldTest {
             userNameErrorMessage = UserNameValidateResult.Success.toErrorMessage()
             AuthUserNameTextField(
                 userName = userName,
-                onUserNameChange = {},
+                onUserNameChange = {}
             )
         }
 

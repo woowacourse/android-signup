@@ -54,7 +54,9 @@ fun EmailValidateResult.toErrorMessage(): String? {
 class EmailPreviewParamsProvider : PreviewParameterProvider<String> {
     override val values: Sequence<String>
         get() = sequenceOf(
-            "sample@gmail.com", "  ", "asd"
+            "sample@gmail.com",
+            "  ",
+            "asd"
         )
 }
 
@@ -66,6 +68,6 @@ private fun AuthEmailTextFieldPreview(
 ) {
     AuthEmailTextField(
         email = email,
-        onEmailChange = {},
+        onEmailChange = {}
     )
 }
