@@ -42,7 +42,7 @@ class SignUpTextFieldTest {
 
     // 에러메세지가 보여지지 않는 경우
     @Test
-    fun 에러메세지가_없다면_에러메세지가_뜨지_않는다() {
+    fun 에러가_발생되지_않는_입력값이면_에러메세지가_뜨지_않는다() {
         email.value = Email("test@example.com")
 
         composeTestRule.setContent {
