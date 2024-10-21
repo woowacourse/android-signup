@@ -12,7 +12,7 @@ data class UserName(
             else -> null
         }
 
-    private fun hasValidLength(): Boolean = content.length in 2..5
+    private fun hasValidLength(): Boolean = content.length in MINIMUM_LENGTH..MAXIMUM_LENGTH
 
     private fun hasValidFormat(): Boolean = content.matches(Regex(USERNAME_REGEX))
 
@@ -20,5 +20,7 @@ data class UserName(
         const val USERNAME_REGEX = "^[a-zA-Z가-힣]+$"
         const val ERROR_USERNAME_LENGTH_MESSAGE = "이름은 2~5자여야 합니다."
         const val ERROR_USERNAME_FORMAT_MESSAGE = "이름에는 숫자나 기호가 포함될 수 없습니다."
+        const val MAXIMUM_LENGTH = 5
+        const val MINIMUM_LENGTH = 2
     }
 }
