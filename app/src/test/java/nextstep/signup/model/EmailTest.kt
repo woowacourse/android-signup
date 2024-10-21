@@ -1,7 +1,7 @@
 package nextstep.signup.model
 
-import nextstep.signup.R
-import nextstep.signup.presentation.model.Email
+import nextstep.signup.domain.Email
+import nextstep.signup.domain.ErrorCode
 import org.junit.Assert
 import org.junit.Test
 
@@ -40,7 +40,7 @@ class EmailTest {
 
         // then
         Assert.assertTrue(result.isError)
-        Assert.assertEquals(result.errorMessageRes, R.string.error_invalid_email_format)
+        Assert.assertEquals(result.errorCode, ErrorCode.ERROR_INVALID_EMAIL_FORMAT)
     }
 
     @Test
@@ -53,7 +53,7 @@ class EmailTest {
 
         // then
         Assert.assertTrue(result.isError)
-        Assert.assertEquals(result.errorMessageRes, R.string.error_invalid_email_format)
+        Assert.assertEquals(result.errorCode, ErrorCode.ERROR_INVALID_EMAIL_FORMAT)
     }
 
     @Test

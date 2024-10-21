@@ -13,8 +13,8 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performTextInput
 import nextstep.signup.R
+import nextstep.signup.domain.UserName
 import nextstep.signup.presentation.componet.CustomTextField
-import nextstep.signup.presentation.model.UserName
 import nextstep.signup.presentation.ui.SignUpState
 import org.junit.Before
 import org.junit.Rule

@@ -1,7 +1,7 @@
 package nextstep.signup.model
 
-import nextstep.signup.R
-import nextstep.signup.presentation.model.Password
+import nextstep.signup.domain.ErrorCode
+import nextstep.signup.domain.Password
 import org.junit.Assert
 import org.junit.Test
 
@@ -40,7 +40,7 @@ class PasswordTest {
 
         // then
         Assert.assertTrue(result.isError)
-        Assert.assertEquals(result.errorMessageRes, R.string.error_password_length)
+        Assert.assertEquals(result.errorCode, ErrorCode.ERROR_PASSWORD_LENGTH)
     }
 
     @Test
@@ -53,7 +53,7 @@ class PasswordTest {
 
         // then
         Assert.assertTrue(result.isError)
-        Assert.assertEquals(result.errorMessageRes, R.string.error_password_length)
+        Assert.assertEquals(result.errorCode, ErrorCode.ERROR_PASSWORD_LENGTH)
     }
 
     @Test
@@ -66,7 +66,7 @@ class PasswordTest {
 
         // then
         Assert.assertTrue(result.isError)
-        Assert.assertEquals(result.errorMessageRes, R.string.error_password_requirements)
+        Assert.assertEquals(result.errorCode, ErrorCode.ERROR_PASSWORD_REQUIREMENTS)
     }
 
     @Test
@@ -93,7 +93,7 @@ class PasswordTest {
 
         // then
         Assert.assertTrue(result.isError)
-        Assert.assertEquals(result.errorMessageRes, R.string.error_password_mismatch)
+        Assert.assertEquals(result.errorCode, ErrorCode.ERROR_PASSWORD_MISMATCH)
     }
 
     @Test

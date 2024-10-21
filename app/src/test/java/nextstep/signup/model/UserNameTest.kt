@@ -1,7 +1,7 @@
 package nextstep.signup.model
 
-import nextstep.signup.R
-import nextstep.signup.presentation.model.UserName
+import nextstep.signup.domain.ErrorCode
+import nextstep.signup.domain.UserName
 import org.junit.Assert
 import org.junit.Test
 
@@ -40,7 +40,7 @@ class UserNameTest {
 
         // then
         Assert.assertTrue(result.isError)
-        Assert.assertEquals(result.errorMessageRes, R.string.error_username_length)
+        Assert.assertEquals(result.errorCode, ErrorCode.ERROR_USERNAME_LENGTH)
     }
 
     @Test
@@ -53,7 +53,7 @@ class UserNameTest {
 
         // then
         Assert.assertTrue(result.isError)
-        Assert.assertEquals(result.errorMessageRes, R.string.error_username_length)
+        Assert.assertEquals(result.errorCode, ErrorCode.ERROR_USERNAME_LENGTH)
     }
 
     @Test
@@ -66,7 +66,7 @@ class UserNameTest {
 
         // then
         Assert.assertTrue(result.isError)
-        Assert.assertEquals(result.errorMessageRes, R.string.error_username_invalid_characters)
+        Assert.assertEquals(result.errorCode, ErrorCode.ERROR_USERNAME_INVALID_CHARACTERS)
     }
 
     @Test
@@ -79,7 +79,7 @@ class UserNameTest {
 
         // then
         Assert.assertTrue(result.isError)
-        Assert.assertEquals(result.errorMessageRes, R.string.error_username_invalid_characters)
+        Assert.assertEquals(result.errorCode, ErrorCode.ERROR_USERNAME_INVALID_CHARACTERS)
     }
 
     @Test

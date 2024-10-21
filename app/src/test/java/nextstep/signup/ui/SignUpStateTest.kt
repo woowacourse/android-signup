@@ -1,8 +1,8 @@
 package nextstep.signup.ui
 
-import nextstep.signup.presentation.model.Email
-import nextstep.signup.presentation.model.Password
-import nextstep.signup.presentation.model.UserName
+import nextstep.signup.domain.Email
+import nextstep.signup.domain.Password
+import nextstep.signup.domain.UserName
 import nextstep.signup.presentation.ui.SignUpState
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
