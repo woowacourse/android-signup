@@ -11,13 +11,23 @@ data class SignUpState(
     val passwordConfirm: Password = Password(),
 ) {
     val enabled: Boolean
+        get() = isNotBlank && isValid
+
+    private val isNotBlank: Boolean
         get() =
-            username.value.isNotBlank() &&
-                email.value.isNotBlank() &&
-                password.value.isNotBlank() &&
-                passwordConfirm.value.isNotBlank() &&
-                !username.validate().isError &&
-                !email.validate().isError &&
-                !password.validate().isError &&
-                !passwordConfirm.validateConfirmation(password).isError
+            listOf(
+                username.value,
+                email.value,
+                password.value,
+                passwordConfirm.value,
+            ).all { it.isNotBlank() }
+
+    private val isValid: Boolean
+        get() =
+            listOf(
+                username.validate(),
+                email.validate(),
+                password.validate(),
+                passwordConfirm.validateConfirmation(password),
+            ).all { !it.isError }
 }
