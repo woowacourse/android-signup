@@ -22,7 +22,7 @@ internal fun SignUpPasswordTextField(
         ValidationResult.INVALID_LENGTH -> stringResource(
             R.string.error_password_length,
             PASSWORD_RANGE.first,
-            PASSWORD_RANGE.last,
+            PASSWORD_RANGE.last
         )
 
         ValidationResult.INVALID_FORMAT -> stringResource(R.string.error_password_format)

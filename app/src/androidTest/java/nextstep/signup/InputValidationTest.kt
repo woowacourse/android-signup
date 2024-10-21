@@ -1,21 +1,13 @@
 package nextstep.signup
 
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.test.assertIsEnabled
-import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performTextInput
 import nextstep.signup.component.SignUpEmailTextField
 import nextstep.signup.component.SignUpPasswordConfirmTextField
 import nextstep.signup.component.SignUpPasswordTextField
-import nextstep.signup.component.SignUpSubmitButton
 import nextstep.signup.component.SignUpUsernameTextField
-import nextstep.signup.domain.validation.Email
-import nextstep.signup.domain.validation.Password
-import nextstep.signup.domain.validation.PasswordConfirm
-import nextstep.signup.domain.validation.SignUpState
-import nextstep.signup.domain.validation.Username
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

@@ -21,7 +21,7 @@ internal fun SignUpUsernameTextField(
         ValidationResult.INVALID_LENGTH -> stringResource(
             R.string.error_name_length,
             USERNAME_RANGE.first,
-            USERNAME_RANGE.last,
+            USERNAME_RANGE.last
         )
 
         ValidationResult.INVALID_FORMAT -> stringResource(R.string.error_name_format)
