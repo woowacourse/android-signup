@@ -56,10 +56,9 @@ class ConfirmPasswordTest {
 
     @Test
     fun 확인비밀번호가_유효할_때_유효_상태인_Valid를_반환한다() {
-        confirmPassword = ConfirmPassword(password = password,"password")
+        confirmPassword = ConfirmPassword(password = password, "password")
         composeTestRule
             .onNodeWithText(errorConfirmPassword)
             .assertDoesNotExist()
     }
 }
-
