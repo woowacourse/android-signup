@@ -1,6 +1,5 @@
 package nextstep.signup.ui.model
 
-import android.util.Log
 import nextstep.signup.R
 
 data class ConfirmedPassword(val value: String = "", private val password: String) {
@@ -21,13 +20,10 @@ data class ConfirmedPassword(val value: String = "", private val password: Strin
         }
     }
 
-
     private fun validateConfirmedPassword(
         password: String,
         confirmedPassword: String,
-    ):Boolean  {
-        Log.e("seogi","password: $password")
-        Log.e("seogi","confirmedPassword: $confirmedPassword")
+    ): Boolean {
         return password == confirmedPassword
     }
 }

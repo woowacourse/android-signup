@@ -20,7 +20,6 @@ data class Email(val value: String = "") {
         }
     }
 
-
     private fun validateEmailComposition(): Boolean =
         value.matches(
             Regex(EMAIL_REGEX),

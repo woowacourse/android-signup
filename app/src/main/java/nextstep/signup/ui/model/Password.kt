@@ -6,7 +6,6 @@ data class Password(val value: String = "") {
     val validation: SignUpResult
         get() = isValidPassword()
 
-
     private fun isValidPassword(): SignUpResult {
         return when {
             value.isEmpty() -> SignUpResult.Blank(isValid = false)
@@ -33,7 +32,6 @@ data class Password(val value: String = "") {
         value.matches(
             Regex(PASSWORD_REGEX),
         )
-
 
     companion object {
         private const val PASSWORD_REGEX = "^(?=.*[a-zA-Z])(?=.*[0-9]).{8,16}$"

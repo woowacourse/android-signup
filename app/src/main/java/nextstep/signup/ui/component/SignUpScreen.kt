@@ -30,9 +30,9 @@ fun SignUpScreen() {
     val signUpInfoValidation by remember {
         derivedStateOf {
             userName.validation.isValid &&
-                    email.validation.isValid &&
-                    password.validation.isValid &&
-                    confirmedPassword.validation.isValid
+                email.validation.isValid &&
+                password.validation.isValid &&
+                confirmedPassword.validation.isValid
         }
     }
 
