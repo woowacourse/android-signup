@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.sp
 import nextstep.signup.ui.theme.Blue50
 import nextstep.signup.ui.theme.BlueGray20
 import nextstep.signup.ui.theme.Gray50
-import nextstep.signup.ui.theme.RED
+import nextstep.signup.ui.theme.Red
 
 @Composable
 fun SingleLineTextField(
@@ -58,7 +58,7 @@ fun SingleLineTextField(
         ),
         supportingText = {
             errorMessage?.let {
-                Text(text = stringResource(it), fontSize = 12.sp, color = RED)
+                Text(text = stringResource(it), fontSize = 12.sp, color = Red)
             }
         },
         keyboardOptions = KeyboardOptions(

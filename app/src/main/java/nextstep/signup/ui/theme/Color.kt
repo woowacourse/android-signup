@@ -15,4 +15,4 @@ val Blue50 = Color(0xFF2196F3)
 
 val Gray50 = Color(0xFF1D1B20)
 
-val RED = Color(0xFFB3261E)
+val Red = Color(0xFFB3261E)
