@@ -14,8 +14,16 @@ class PasswordTest {
     }
 
     @Test
-    fun `비밀번호가 8자에서 16자가 아니면 유효하지 않다`() {
+    fun `비밀번호가 8자에서 16자가 아니면 유효하지 않다 - 8글자보다 짧은 경우`() {
         val password = Password("pw12")
+
+        assertFalse(password.isValid())
+        assertEquals(password.getErrorMessage(), Password.ERROR_PASSWORD_LENGTH_MESSAGE)
+    }
+
+    @Test
+    fun `비밀번호가 8자에서 16자가 아니면 유효하지 않다 - 16글자보다 긴 경우`() {
+        val password = Password("password123password123")
 
         assertFalse(password.isValid())
         assertEquals(password.getErrorMessage(), Password.ERROR_PASSWORD_LENGTH_MESSAGE)
