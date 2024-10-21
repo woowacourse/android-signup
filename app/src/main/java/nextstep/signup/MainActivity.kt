@@ -39,20 +39,20 @@ class MainActivity : ComponentActivity() {
             SignupTheme(dynamicColor = false) {
                 val snackbarHostState = remember { SnackbarHostState() }
                 val coroutineScope = rememberCoroutineScope()
+                val snackBarEvent: (String) -> Unit = { message ->
+                    coroutineScope.launch {
+                        snackbarHostState.showSnackbar(
+                            message = message,
+                            duration = SnackbarDuration.Short,
+                        )
+                    }
+                }
                 Scaffold(
                     snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
                 ) { paddingValues ->
-
                     SignUpComponent(
                         modifier = Modifier.fillMaxSize().padding(paddingValues),
-                        snackBarEvent = { message ->
-                            coroutineScope.launch {
-                                snackbarHostState.showSnackbar(
-                                    message = message,
-                                    duration = SnackbarDuration.Short,
-                                )
-                            }
-                        },
+                        snackBarEvent = snackBarEvent,
                     )
                 }
             }
@@ -86,35 +86,35 @@ fun SignUpComponent(
         TitleText(R.string.sign_up_title)
 
         InputText(
-            R.string.sign_up_user_name_title,
-            userName.content,
-            { userName = userName.copy(content = it) },
-            userName,
+            title = R.string.sign_up_user_name_title,
+            content = userName.content,
+            onContentChange = { userName = userName.copy(content = it) },
+            inputValidator = userName,
         )
         InputText(
-            R.string.sign_up_email_title,
-            email.content,
-            { email = email.copy(content = it) },
-            email,
+            title = R.string.sign_up_email_title,
+            content = email.content,
+            onContentChange = { email = email.copy(content = it) },
+            inputValidator = email,
         )
         InputText(
-            R.string.sign_up_password_title,
-            password.content,
-            {
+            title = R.string.sign_up_password_title,
+            content = password.content,
+            onContentChange = {
                 password = password.copy(content = it)
                 passwordConfirm = passwordConfirm.copy(password = it)
             },
-            password,
-            KeyboardType.Password,
-            PasswordVisualTransformation(),
+            inputValidator = password,
+            keyBoardType = KeyboardType.Password,
+            visualTransformation = PasswordVisualTransformation(),
         )
         InputText(
-            R.string.sign_up_password_confirm_title,
-            passwordConfirm.content,
-            { passwordConfirm = passwordConfirm.copy(content = it) },
-            passwordConfirm,
-            KeyboardType.Password,
-            PasswordVisualTransformation(),
+            title = R.string.sign_up_password_confirm_title,
+            content = passwordConfirm.content,
+            onContentChange = { passwordConfirm = passwordConfirm.copy(content = it) },
+            inputValidator = passwordConfirm,
+            keyBoardType = KeyboardType.Password,
+            visualTransformation = PasswordVisualTransformation(),
         )
 
         TextButton(R.string.sign_up_button_title, isValid, { snackBarEvent("Sign UP!") })
