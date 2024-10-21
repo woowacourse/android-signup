@@ -2,12 +2,12 @@ package nextstep.signup.component
 
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
-import nextstep.signup.ui.component.SignUpHeaderText
+import nextstep.signup.ui.component.HeaderText
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-class SignUpHeaderTextTest {
+class HeaderTextTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
@@ -16,7 +16,7 @@ class SignUpHeaderTextTest {
     @Before
     fun setUp() {
         composeTestRule.setContent {
-            SignUpHeaderText(text = text)
+            HeaderText(text = text)
         }
     }
 

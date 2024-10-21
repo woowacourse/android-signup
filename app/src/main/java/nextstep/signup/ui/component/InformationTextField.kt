@@ -12,7 +12,7 @@ import nextstep.signup.ui.theme.Blue50
 import nextstep.signup.ui.theme.BlueGray
 
 @Composable
-fun SignUpTextField(
+fun InformationTextField(
     modifier: Modifier = Modifier,
     label: String,
     value: String,

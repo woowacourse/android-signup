@@ -7,7 +7,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun SignUpHeaderText(
+fun HeaderText(
     modifier: Modifier = Modifier,
     text: String,
 ) {
