@@ -14,7 +14,7 @@ import androidx.compose.ui.test.performTextInput
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertFalse
 import junit.framework.Assert.assertTrue
-import nextstep.signup.ui.component.InformationTextField
+import nextstep.signup.ui.component.SignUpInformationTextField
 import nextstep.signup.ui.model.UserName
 import org.junit.Before
 import org.junit.Rule
@@ -33,7 +33,7 @@ class SignUpInformationTextFieldTest {
     @Before
     fun setUp() {
         composeTestRule.setContent {
-            InformationTextField(
+            SignUpInformationTextField(
                 modifier = Modifier.testTag(tag),
                 label = label,
                 value = userName.text,

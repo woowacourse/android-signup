@@ -29,7 +29,7 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import nextstep.signup.R
 import nextstep.signup.ui.component.HeaderText
-import nextstep.signup.ui.component.InformationTextField
+import nextstep.signup.ui.component.SignUpInformationTextField
 import nextstep.signup.ui.component.SubmitButton
 import nextstep.signup.ui.model.Email
 import nextstep.signup.ui.model.Password
@@ -88,7 +88,7 @@ fun SignUpScreen() {
                         bottom = 42.dp,
                     ),
             ) {
-                InformationTextField(
+                SignUpInformationTextField(
                     modifier =
                         Modifier.fillMaxWidth(),
                     label = stringResource(R.string.username_label),
@@ -100,7 +100,7 @@ fun SignUpScreen() {
                     errorMessage = userName.errorMessage(),
                 )
 
-                InformationTextField(
+                SignUpInformationTextField(
                     modifier =
                         Modifier
                             .fillMaxWidth()
@@ -115,7 +115,7 @@ fun SignUpScreen() {
                     keyboardType = KeyboardType.Email,
                 )
 
-                InformationTextField(
+                SignUpInformationTextField(
                     modifier =
                         Modifier
                             .fillMaxWidth()
@@ -132,7 +132,7 @@ fun SignUpScreen() {
                     visualTransformation = PasswordVisualTransformation(),
                 )
 
-                InformationTextField(
+                SignUpInformationTextField(
                     modifier =
                         Modifier
                             .fillMaxWidth()
