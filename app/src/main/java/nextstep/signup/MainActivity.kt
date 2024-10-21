@@ -19,6 +19,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
@@ -51,7 +52,10 @@ class MainActivity : ComponentActivity() {
                     snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
                 ) { paddingValues ->
                     SignUpComponent(
-                        modifier = Modifier.fillMaxSize().padding(paddingValues),
+                        modifier =
+                            Modifier
+                                .fillMaxSize()
+                                .padding(paddingValues),
                         snackBarEvent = snackBarEvent,
                     )
                 }
@@ -83,7 +87,7 @@ fun SignUpComponent(
         }
         val isValid = listOf(userName, email, password, passwordConfirm).all { it.isValid() }
 
-        TitleText(R.string.sign_up_title)
+        TitleText(stringResource(R.string.sign_up_title))
 
         InputText(
             title = R.string.sign_up_user_name_title,
