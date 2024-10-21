@@ -1,6 +1,5 @@
 package nextstep.signup.presentation.components.signup
 
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
@@ -13,12 +12,14 @@ import nextstep.signup.ui.theme.Blue50
 
 @Composable
 fun SignUpButton(
-    availability: () -> Boolean
+    availability: () -> Boolean,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit = {}
 ) {
     Button(
-        onClick = { /*TODO  Logic for after Sign Up*/ },
+        onClick = { onClick() },
         enabled = availability(),
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier,
         colors = ButtonDefaults.buttonColors(
             containerColor = Blue50
         )

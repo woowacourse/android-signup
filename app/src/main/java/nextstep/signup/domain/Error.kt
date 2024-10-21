@@ -1,0 +1,11 @@
+package nextstep.signup.domain
+
+enum class Error {
+    NO_ERROR,
+    INVALID_USERNAME_LENGTH,
+    INVALID_USERNAME_TYPE,
+    INVALID_EMAIL,
+    INVALID_PASSWORD_LENGTH,
+    INVALID_PASSWORD_TYPE,
+    INVALID_CONFIRM_PASSWORD
+}

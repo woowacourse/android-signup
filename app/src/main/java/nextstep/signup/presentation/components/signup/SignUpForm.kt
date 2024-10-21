@@ -4,8 +4,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -15,18 +20,22 @@ import nextstep.signup.R
 import nextstep.signup.domain.Email
 import nextstep.signup.domain.SignUp
 import nextstep.signup.domain.Username
+import nextstep.signup.ui.model.ErrorMessage
 
 @Composable
 fun SignUpForm(
     signUpData: SignUp,
-    onDataChange: (SignUp) -> Unit = {}
+    onDataChange: (SignUp) -> Unit = {},
+    onClick: () -> Unit = {}
 ) {
+    var showSnackbar by remember { mutableStateOf(false) }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(horizontal = 24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(40.dp)
+        verticalArrangement = Arrangement.spacedBy(32.dp)
     ) {
         Spacer(modifier = Modifier.padding(top = 80.dp))
 
@@ -42,28 +51,43 @@ fun SignUpForm(
                     )
                 )
             },
-            label = stringResource(R.string.sign_up_form_username)
+            modifier = Modifier.fillMaxWidth(),
+            label = stringResource(R.string.sign_up_form_username),
+            errorMessage = ErrorMessage(signUpData.password.error).message
         )
 
         // Email Input
-        SignUpTextField(value = signUpData.email.address, onValueChange = {
-            onDataChange(
-                signUpData.copy(
-                    email = Email(it)
-                )
-            )
-        }, label = stringResource(R.string.sign_up_form_email))
-
-        // Password Input
-        SignUpTextField(value = signUpData.password.value, onValueChange = {
-            onDataChange(
-                signUpData.copy(
-                    password = signUpData.password.copy(
-                        value = it
+        SignUpTextField(
+            value = signUpData.email.address,
+            onValueChange = {
+                onDataChange(
+                    signUpData.copy(
+                        email = Email(it)
                     )
                 )
-            )
-        }, label = stringResource(R.string.sign_up_form_password), isPassword = true)
+            },
+            modifier = Modifier.fillMaxWidth(),
+            label = stringResource(R.string.sign_up_form_email),
+            errorMessage = ErrorMessage(signUpData.password.error).message
+        )
+
+        // Password Input
+        SignUpTextField(
+            value = signUpData.password.value,
+            onValueChange = {
+                onDataChange(
+                    signUpData.copy(
+                        password = signUpData.password.copy(
+                            value = it
+                        )
+                    )
+                )
+            },
+            modifier = Modifier.fillMaxWidth(),
+            label = stringResource(R.string.sign_up_form_password),
+            isPassword = true,
+            errorMessage = ErrorMessage(signUpData.password.error).message
+        )
 
         // Password Confirm Input
         SignUpTextField(
@@ -77,16 +101,33 @@ fun SignUpForm(
                     )
                 )
             },
+            modifier = Modifier.fillMaxWidth(),
             label = stringResource(R.string.sign_up_form_password_confirm),
-            isPassword = true
+            isPassword = true,
+            errorMessage = ErrorMessage(signUpData.password.error).message
         )
 
         // Sign Up Button
         SignUpButton(
             availability = (
                 { signUpData.isValid() }
-                )
+                ),
+            onClick = {
+                onClick()
+                showSnackbar = true
+            },
+            modifier = Modifier.fillMaxWidth()
         )
+
+        if (showSnackbar) {
+            SignUpSnackbar(
+                message = "회원가입 완료",
+                onDismiss = {
+                    onDataChange(SignUp.BLANK_SIGN_UP)
+                    showSnackbar = false
+                }
+            )
+        }
     }
 }
 
