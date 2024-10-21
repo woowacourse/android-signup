@@ -1,8 +1,12 @@
 package nextstep.signup
 
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
+import nextstep.signup.model.validation.CompositeValidation
+import nextstep.signup.model.validation.LengthValidation
+import nextstep.signup.model.validation.RegexValidation
 import nextstep.signup.ui.signup.PasswordTextField
 import org.junit.Before
 import org.junit.Rule
@@ -19,8 +23,19 @@ class PasswordValidationTest{
 
     @Before
     fun setup() {
+
+        val passwordLengthValidation =
+            LengthValidation(8..16, PASSWORD_LENGTH_ERROR)
+        val passwordRegex = "^(?=.*[a-zA-Z])(?=.*[0-9]).+\$".toRegex()
+        val regexValidation =
+            RegexValidation(passwordRegex, PASSWORD_CHARACTER_ERROR)
+        val passwordValidation = CompositeValidation(passwordLengthValidation, regexValidation)
         composeTestRule.setContent {
-            PasswordTextField(label = "password", text = password)
+            PasswordTextField(
+                label = "password",
+                text = password,
+                validation = passwordValidation,
+            )
         }
     }
 

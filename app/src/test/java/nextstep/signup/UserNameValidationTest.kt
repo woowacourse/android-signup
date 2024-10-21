@@ -1,8 +1,12 @@
 package nextstep.signup
 
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
+import nextstep.signup.model.validation.CompositeValidation
+import nextstep.signup.model.validation.LengthValidation
+import nextstep.signup.model.validation.RegexValidation
 import nextstep.signup.ui.signup.UsernameTextField
 import org.junit.Before
 import org.junit.Rule
@@ -19,8 +23,18 @@ class UserNameValidationTest {
 
     @Before
     fun setup() {
+        val userNameLengthValidation =
+            LengthValidation(2..5, USERNAME_LENGTH_ERROR)
+        val characterValidation = RegexValidation(
+            "[a-zA-Z가-힣]+".toRegex(),
+            USERNAME_CHARACTER_ERROR
+        )
+        val userNameValidation = CompositeValidation(userNameLengthValidation, characterValidation)
         composeTestRule.setContent {
-            UsernameTextField(username = username)
+            UsernameTextField(
+                username = username,
+                validation = userNameValidation,
+            )
         }
     }
 

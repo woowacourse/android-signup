@@ -1,9 +1,11 @@
 package nextstep.signup
 
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
-import nextstep.signup.ui.signup.PasswordConfirmTextField
+import nextstep.signup.model.validation.EqualValidation
+import nextstep.signup.ui.signup.PasswordTextField
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -15,16 +17,18 @@ class PasswordConfirmValidationTest{
 
     @get:Rule
     val composeTestRule = createComposeRule()
-    private val password = mutableStateOf("")
+    private val password = "a11111111"
     private val passwordConfirm = mutableStateOf("")
 
     @Before
     fun setup() {
+        val passwordConfirmValidation =
+            EqualValidation(password, PASSWORD_CONFIRM_ERROR)
         composeTestRule.setContent {
-            PasswordConfirmTextField(
+            PasswordTextField(
                 label = "PasswordConfirm",
-                password = password,
-                passwordConfirm = passwordConfirm,
+                text = passwordConfirm,
+                validation = passwordConfirmValidation,
             )
         }
     }
@@ -32,7 +36,6 @@ class PasswordConfirmValidationTest{
     @Test
     fun 비밀번호_검증_칸과_비밀번호가_일치해야_한다() {
         // when
-        password.value = "a11111111"
         passwordConfirm.value = "a11111111"
 
         // then
@@ -44,7 +47,6 @@ class PasswordConfirmValidationTest{
     @Test
     fun 비밀번호_검증_칸과_비밀번호가_일치하지_않을_경우_오류_메시지가_노출된다() {
         // when
-        password.value = "a11111111"
         passwordConfirm.value = "a11111112"
 
         // then

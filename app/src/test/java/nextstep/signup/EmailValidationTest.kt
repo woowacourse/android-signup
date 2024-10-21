@@ -2,8 +2,10 @@ package nextstep.signup
 
 import nextstep.signup.ui.signup.EmailTextField
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
+import nextstep.signup.model.validation.RegexValidation
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -19,8 +21,17 @@ class EmailValidationTest {
 
     @Before
     fun setup() {
+        val emailValidation =
+            RegexValidation(
+                "[a-zA-Z0-9._-]+@[a-zA-Z]+\\.+[a-zA-Z]+".toRegex(),
+                EMAIL_FORM_ERROR
+            )
         composeTestRule.setContent {
-            EmailTextField(label = "email", text = email)
+            EmailTextField(
+                label = "email",
+                text = email,
+                validation = emailValidation,
+            )
         }
     }
 
