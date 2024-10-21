@@ -1,6 +1,7 @@
 package nextstep.signup.model
 
 import nextstep.signup.R
+import nextstep.signup.presentation.model.Email
 import org.junit.Assert
 import org.junit.Test
 

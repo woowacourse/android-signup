@@ -12,6 +12,7 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import nextstep.signup.R
+import nextstep.signup.presentation.componet.CustomButton
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule

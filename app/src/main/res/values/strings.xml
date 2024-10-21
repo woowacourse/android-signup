@@ -10,6 +10,7 @@
     <string name="sign_up_button">Sign Up</string>
 
     <!--회원가입 입력 에러 텍스트-->
+    <string name="default_error">알 수 없는 에러입니다.</string>
     <string name="error_username_length">이름은 2~5자여야 합니다.</string>
     <string name="error_username_invalid_characters">이름에는 숫자나 기호가 포함될 수 없습니다.</string>
     <string name="error_invalid_email_format">이메일 형식이 올바르지 않습니다.</string>

@@ -1,4 +1,4 @@
-package nextstep.signup.componet
+package nextstep.signup.presentation.componet
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -16,8 +16,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nextstep.signup.R
-import nextstep.signup.model.InputValidation
-import nextstep.signup.ui.theme.Blue50
+import nextstep.signup.domain.InputValidation
+import nextstep.signup.presentation.ui.theme.Blue50
+import nextstep.signup.presentation.util.toErrorMessage
 
 @Composable
 fun CustomTextField(
@@ -53,8 +54,8 @@ fun CustomTextField(
         visualTransformation = visualTransformation,
         isError = inputValidation.isError,
         supportingText = {
-            inputValidation.errorMessageRes ?: return@TextField
-            Text(text = stringResource(id = inputValidation.errorMessageRes))
+            inputValidation.errorCode ?: return@TextField
+            Text(text = inputValidation.toErrorMessage())
         },
     )
 }

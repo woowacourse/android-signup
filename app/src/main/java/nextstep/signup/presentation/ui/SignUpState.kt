@@ -1,8 +1,8 @@
-package nextstep.signup.ui
+package nextstep.signup.presentation.ui
 
-import nextstep.signup.model.Email
-import nextstep.signup.model.Password
-import nextstep.signup.model.UserName
+import nextstep.signup.domain.Email
+import nextstep.signup.domain.Password
+import nextstep.signup.domain.UserName
 
 data class SignUpState(
     val username: UserName = UserName(),

@@ -1,4 +1,4 @@
-package nextstep.signup.componet
+package nextstep.signup.presentation.componet
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -15,7 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nextstep.signup.R
-import nextstep.signup.ui.theme.Blue50
+import nextstep.signup.presentation.ui.theme.Blue50
 
 @Composable
 fun CustomButton(

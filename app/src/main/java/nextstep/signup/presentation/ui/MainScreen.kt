@@ -1,4 +1,4 @@
-package nextstep.signup.ui
+package nextstep.signup.presentation.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -18,13 +18,13 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.signup.R
-import nextstep.signup.componet.CustomButton
-import nextstep.signup.componet.CustomText
-import nextstep.signup.componet.CustomTextField
-import nextstep.signup.model.Email
-import nextstep.signup.model.Password
-import nextstep.signup.model.UserName
-import nextstep.signup.ui.theme.Blue50
+import nextstep.signup.domain.Email
+import nextstep.signup.domain.Password
+import nextstep.signup.domain.UserName
+import nextstep.signup.presentation.componet.CustomButton
+import nextstep.signup.presentation.componet.CustomText
+import nextstep.signup.presentation.componet.CustomTextField
+import nextstep.signup.presentation.ui.theme.Blue50
 
 @Composable
 fun MainScreen() {
