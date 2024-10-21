@@ -14,6 +14,7 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -23,15 +24,21 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import nextstep.signup.R
-import nextstep.signup.ui.auth.component.SignUpForm
+import nextstep.signup.ui.auth.component.AuthEmailTextField
+import nextstep.signup.ui.auth.component.AuthPasswordConfirmTextField
+import nextstep.signup.ui.auth.component.AuthPasswordTextField
+import nextstep.signup.ui.auth.component.AuthUserNameTextField
 import nextstep.signup.ui.auth.model.SignUpFormState
 import nextstep.signup.ui.auth.preview.SignUpPreviewParamsProvider
 import nextstep.signup.ui.interaction.clearFocusWith
@@ -56,11 +63,6 @@ fun SignUpScreen() {
     }
     val onPasswordConfirmChange = { newPasswordConfirm: String ->
         onSignUpFormStateChange(formState.copy(passwordConfirm = newPasswordConfirm))
-    }
-    val enableSignUp by remember {
-        derivedStateOf {
-            formState.enableSignUp
-        }
     }
     val snackbarHostState = SnackbarHostState()
     val coroutineScope = rememberCoroutineScope()
@@ -135,6 +137,47 @@ private fun SignUpTitle() {
 }
 
 @Composable
+private fun SignUpForm(
+    signUpFormState: SignUpFormState,
+    onUserNameChange: (String) -> Unit,
+    onEmailChange: (String) -> Unit,
+    onPasswordChange: (String) -> Unit,
+    onPasswordConfirmChange: (String) -> Unit,
+    onDoneSignUp: () -> Unit
+) {
+    val focusRequester = remember {
+        FocusRequester()
+    }
+
+    LaunchedEffect(key1 = Unit) {
+        focusRequester.requestFocus()
+    }
+    AuthUserNameTextField(
+        modifier = Modifier.focusRequester(focusRequester),
+        userName = signUpFormState.userName,
+        onUserNameChange = onUserNameChange
+    )
+    Spacer(modifier = Modifier.height(16.dp))
+    AuthEmailTextField(
+        email = signUpFormState.email,
+        onEmailChange = onEmailChange
+    )
+    Spacer(modifier = Modifier.height(16.dp))
+    AuthPasswordTextField(
+        password = signUpFormState.password,
+        onPasswordChange = onPasswordChange
+    )
+    Spacer(modifier = Modifier.height(16.dp))
+    AuthPasswordConfirmTextField(
+        password = signUpFormState.password,
+        passwordConfirm = signUpFormState.passwordConfirm,
+        onPasswordConfirmChange = onPasswordConfirmChange,
+        imeAction = ImeAction.Done,
+        onDone = onDoneSignUp
+    )
+}
+
+@Composable
 private fun SignUpConfirmButton(onClickSignUp: () -> Unit, enableSignUp: Boolean) {
     Button(
         modifier = Modifier
@@ -147,6 +190,35 @@ private fun SignUpConfirmButton(onClickSignUp: () -> Unit, enableSignUp: Boolean
             text = stringResource(id = R.string.sign_up_confirm_button),
             style = MaterialTheme.typography.bodyMedium
         )
+    }
+}
+
+@Preview
+@Composable
+private fun PreviewSignUpTitle() {
+    SignupTheme {
+        Surface {
+            SignUpTitle()
+        }
+    }
+}
+
+@Preview
+@Composable
+private fun PreviewSignUpForm() {
+    SignupTheme {
+        Surface {
+            Column {
+                SignUpForm(
+                    SignUpFormState("", "", "", ""),
+                    {},
+                    {},
+                    {},
+                    {},
+                    {}
+                )
+            }
+        }
     }
 }
 
@@ -172,7 +244,7 @@ private fun PreviewSignUpConfirmButton2() {
 
 @Preview(showSystemUi = true)
 @Composable
-private fun Preview1() {
+private fun EditModeScreenPreview() {
     SignupTheme {
         SignUpScreen()
     }
@@ -180,7 +252,9 @@ private fun Preview1() {
 
 @Preview(showSystemUi = true)
 @Composable
-private fun Preview2(@PreviewParameter(SignUpPreviewParamsProvider::class) state: SignUpFormState) {
+private fun ViewModeScreenPreview(
+    @PreviewParameter(SignUpPreviewParamsProvider::class) state: SignUpFormState
+) {
     SignupTheme {
         SignUpScreen(
             signUpFormState = state,
@@ -188,7 +262,7 @@ private fun Preview2(@PreviewParameter(SignUpPreviewParamsProvider::class) state
             onEmailChange = {},
             onPasswordChange = {},
             onPasswordConfirmChange = {},
-            onDoneSignUp = {},
+            onDoneSignUp = {}
         )
     }
 }

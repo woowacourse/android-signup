@@ -19,12 +19,12 @@ import nextstep.signup.ui.theme.SignupTheme
 
 @Composable
 internal fun AuthTextField(
-    modifier: Modifier = Modifier,
     label: String,
     text: String,
+    modifier: Modifier = Modifier,
+    imeAction: ImeAction = ImeAction.Next,
     errorMessage: String? = null,
     isValid: Boolean = true,
-    imeAction: ImeAction,
     keyboardType: KeyboardType = KeyboardType.Text,
     onTextChange: (String) -> Unit,
     onNext: () -> Unit = {},
@@ -65,9 +65,9 @@ internal fun AuthTextField(
 
 @Composable
 internal fun AuthTextField(
-    modifier: Modifier = Modifier,
     label: String,
     text: String,
+    modifier: Modifier = Modifier,
     isValid: Boolean = true,
     errorMessage: String? = null,
     visualTransformation: VisualTransformation = VisualTransformation.None,

@@ -12,9 +12,9 @@ import nextstep.signup.domain.UserNameValidateResult
 
 @Composable
 internal fun AuthUserNameTextField(
-    modifier: Modifier = Modifier,
     userName: String,
     onUserNameChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
     keyboardType: KeyboardType = KeyboardType.Text,
     imeAction: ImeAction = ImeAction.Next,
     onNext: () -> Unit = {},

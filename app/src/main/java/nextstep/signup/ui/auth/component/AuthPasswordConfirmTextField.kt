@@ -13,10 +13,10 @@ import nextstep.signup.domain.PasswordConfirmValidateResult
 
 @Composable
 internal fun AuthPasswordConfirmTextField(
-    modifier: Modifier = Modifier,
     password: String,
     passwordConfirm: String,
     onPasswordConfirmChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
     keyboardType: KeyboardType = KeyboardType.Password,
     imeAction: ImeAction = ImeAction.Next,
     onNext: () -> Unit = {},

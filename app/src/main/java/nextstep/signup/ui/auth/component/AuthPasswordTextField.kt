@@ -13,9 +13,9 @@ import nextstep.signup.domain.PasswordValidateResult
 
 @Composable
 internal fun AuthPasswordTextField(
-    modifier: Modifier = Modifier,
     password: String,
     onPasswordChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
     keyboardType: KeyboardType = KeyboardType.Password,
     imeAction: ImeAction = ImeAction.Next,
     onNext: () -> Unit = {},

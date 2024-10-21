@@ -16,9 +16,9 @@ import nextstep.signup.domain.EmailValidateResult
 
 @Composable
 internal fun AuthEmailTextField(
-    modifier: Modifier = Modifier,
     email: String,
     onEmailChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
     keyboardType: KeyboardType = KeyboardType.Text,
     imeAction: ImeAction = ImeAction.Next,
     onNext: () -> Unit = {},
