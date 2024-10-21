@@ -5,7 +5,7 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import nextstep.signup.R
 import nextstep.signup.ui.component.SignUpField
-import nextstep.signup.ui.model.SignUpInfo
+import nextstep.signup.ui.model.UserName
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -13,16 +13,16 @@ import org.junit.Test
 class UserNameInputValidationTest {
     @get:Rule
     val composeTestRule = createComposeRule()
-    private val signUpInfo = mutableStateOf(SignUpInfo())
+    private val userName = mutableStateOf(UserName())
 
     @Before
     fun setup() {
         composeTestRule.setContent {
             SignUpField(
                 labelId = R.string.signup_username_label,
-                value = signUpInfo.value.password,
-                onValueChange = { signUpInfo.value = signUpInfo.value.copy(userName = it) },
-                signUpResult = signUpInfo.value.userNameValidation,
+                value = userName.value.value,
+                onValueChange = { userName.value = userName.value.copy(value = it) },
+                signUpResult = userName.value.validation,
             )
         }
     }
@@ -30,7 +30,7 @@ class UserNameInputValidationTest {
     @Test
     fun `사용자_이름은_2에서_5자여야_한다`() {
         // when
-        signUpInfo.value = SignUpInfo(userName = "남서기")
+        userName.value = UserName(value = "남서기")
 
         // then
         composeTestRule
@@ -41,7 +41,7 @@ class UserNameInputValidationTest {
     @Test
     fun `사용자_이름이_2자_미만일_경우_에러메시지가_노출된다`() {
         // when
-        signUpInfo.value = SignUpInfo(userName = "남")
+        userName.value = UserName(value = "남")
 
         // then
         composeTestRule
@@ -52,7 +52,7 @@ class UserNameInputValidationTest {
     @Test
     fun `사용자_이름이_5자를_넘을_경우_에러메시지가_노출된다`() {
         // when
-        signUpInfo.value = SignUpInfo(userName = "남서기입니다")
+        userName.value = UserName(value = "남서기입니다")
 
         // then
         composeTestRule
@@ -63,7 +63,7 @@ class UserNameInputValidationTest {
     @Test
     fun `사용자_이름은_숫자나_기호가_아닌_문자로_구성되어야_한다`() {
         // when
-        signUpInfo.value = SignUpInfo(userName = "abcde")
+        userName.value = UserName(value = "abcde")
 
         // then
         composeTestRule
@@ -74,7 +74,7 @@ class UserNameInputValidationTest {
     @Test
     fun `사용자_이름에_숫자가_있으면_에러메시지가_노출된다`() {
         // when
-        signUpInfo.value = SignUpInfo(userName = "abcd1")
+        userName.value = UserName(value = "abcd1")
 
         // then
         composeTestRule
@@ -85,7 +85,7 @@ class UserNameInputValidationTest {
     @Test
     fun `사용자_이름에_기호가_있으면_에러메시지가_노출된다`() {
         // when
-        signUpInfo.value = SignUpInfo(userName = "@bcde")
+        userName.value = UserName(value = "@bcde")
 
         // then
         composeTestRule
