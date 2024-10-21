@@ -3,7 +3,11 @@ package nextstep.signup.ui.auth.screen
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.assert
+import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.isDisplayed
 import androidx.compose.ui.test.isFocused
 import androidx.compose.ui.test.isNotFocused
@@ -137,6 +141,27 @@ class SignUpScreenTest {
         // then
         composeTestRule.onNodeWithText(passwordConfirmFormLabel)
             .assert(isNotFocused())
+    }
+
+    @Test
+    fun `회원가입_양식이_모두_유효하면_버튼이_활성화된다`() {
+        // given
+        composeTestRule.setContent {
+            val validFormState = SignUpFormState("user", "sample@naver.com", "abcd1234", "abcd1234")
+            SignUpScreen(
+                signUpFormState = validFormState,
+                onUserNameChange = {},
+                onEmailChange = {},
+                onPasswordChange = {},
+                onPasswordConfirmChange = {},
+                onDoneSignUp = {}
+            )
+        }
+
+        // then
+        composeTestRule.onNode(
+            SemanticsMatcher.expectValue(SemanticsProperties.Role, Role.Button)
+        ).assertIsEnabled()
     }
 
     @Test
