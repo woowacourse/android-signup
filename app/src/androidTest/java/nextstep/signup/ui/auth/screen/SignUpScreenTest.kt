@@ -37,7 +37,6 @@ class SignUpScreenTest {
                 onEmailChange = {},
                 onPasswordChange = {},
                 onPasswordConfirmChange = {},
-                enableSignUp = true,
                 onDoneSignUp = {}
             )
         }
@@ -66,7 +65,6 @@ class SignUpScreenTest {
                 onEmailChange = {},
                 onPasswordChange = {},
                 onPasswordConfirmChange = {},
-                enableSignUp = false,
                 onDoneSignUp = {}
             )
         }
@@ -96,7 +94,6 @@ class SignUpScreenTest {
                 onEmailChange = {},
                 onPasswordChange = {},
                 onPasswordConfirmChange = {},
-                enableSignUp = false,
                 onDoneSignUp = {}
             )
         }
@@ -127,7 +124,6 @@ class SignUpScreenTest {
                 onEmailChange = {},
                 onPasswordChange = {},
                 onPasswordConfirmChange = {},
-                enableSignUp = false,
                 onDoneSignUp = {}
             )
         }
@@ -160,7 +156,6 @@ class SignUpScreenTest {
                 onEmailChange = {},
                 onPasswordChange = {},
                 onPasswordConfirmChange = {},
-                enableSignUp = true,
                 onDoneSignUp = {}
             )
         }

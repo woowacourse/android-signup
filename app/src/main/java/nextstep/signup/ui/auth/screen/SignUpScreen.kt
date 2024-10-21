@@ -82,7 +82,6 @@ fun SignUpScreen() {
             onEmailChange = onEmailChange,
             onPasswordChange = onPasswordChange,
             onPasswordConfirmChange = onPasswordConfirmChange,
-            enableSignUp = enableSignUp,
             onDoneSignUp = onDone
         )
     }
@@ -96,9 +95,12 @@ internal fun SignUpScreen(
     onEmailChange: (String) -> Unit,
     onPasswordChange: (String) -> Unit,
     onPasswordConfirmChange: (String) -> Unit,
-    enableSignUp: Boolean,
     onDoneSignUp: () -> Unit
 ) {
+    val enableSignUp by remember(signUpFormState) {
+        derivedStateOf { signUpFormState.enableSignUp }
+    }
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -187,7 +189,6 @@ private fun Preview2(@PreviewParameter(SignUpPreviewParamsProvider::class) state
             onPasswordChange = {},
             onPasswordConfirmChange = {},
             onDoneSignUp = {},
-            enableSignUp = state.enableSignUp
         )
     }
 }
