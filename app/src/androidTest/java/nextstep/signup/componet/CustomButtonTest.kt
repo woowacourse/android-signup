@@ -38,7 +38,7 @@ class CustomButtonTest {
     }
 
     @Test
-    fun `커스텀_버튼이_올바른_텍스트로_표시되는지_확인한다`() {
+    fun `버튼의_텍스트가_올바르게_표시된다`() {
         // given
         val buttonText = "Sign Up"
 
@@ -50,7 +50,7 @@ class CustomButtonTest {
     }
 
     @Test
-    fun `커스텀_버튼_클릭_시_클릭_상태가_반영되는지_확인한다`() {
+    fun `버튼_클릭_시_클릭_상태가_반영된다`() {
         // given & when
         composeTestRule
             .onNodeWithTag(tag)
@@ -61,7 +61,7 @@ class CustomButtonTest {
     }
 
     @Test
-    fun `비활성화된_커스텀_버튼이_클릭되지_않는지_확인한다`() {
+    fun `비활성화된_버튼이_클릭되지_않는다`() {
         // given
         enabled = false
 

@@ -13,7 +13,7 @@ class CustomTextTest {
     val composeTestRule = createComposeRule()
 
     @Test
-    fun `CustomText가_제목을_정확하게_표시한다`() {
+    fun `값을_정확하게_표시한다`() {
         // given
         val expectedText = "Username"
 

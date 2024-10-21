@@ -42,7 +42,7 @@ class CustomTextFieldTest {
     }
 
     @Test
-    fun `CustomTextField에_값이_정상적으로_입력된다`() {
+    fun `입력된_값이_정상적으로_입력된다`() {
         // given & when
         val inputText = "하하핳"
         composeTestRule
@@ -56,7 +56,7 @@ class CustomTextFieldTest {
     }
 
     @Test
-    fun `사용자_이름은_2에서_5자여야_한다`() {
+    fun `사용자_이름은_2에서_5자면_에러메시지가_노출되지_않는다`() {
         // when
         signUpState = signUpState.copy(username = UserName("김컴포즈"))
 
