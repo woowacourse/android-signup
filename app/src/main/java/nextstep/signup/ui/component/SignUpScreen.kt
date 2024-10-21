@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -14,12 +15,26 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.signup.R
-import nextstep.signup.ui.model.SignUpInfo
+import nextstep.signup.ui.model.ConfirmedPassword
+import nextstep.signup.ui.model.Email
+import nextstep.signup.ui.model.Password
+import nextstep.signup.ui.model.UserName
 import nextstep.signup.ui.theme.SignupTheme
 
 @Composable
 fun SignUpScreen() {
-    var signUpInfo by remember { mutableStateOf(SignUpInfo()) }
+    var userName by remember { mutableStateOf(UserName()) }
+    var email by remember { mutableStateOf(Email()) }
+    var password by remember { mutableStateOf(Password()) }
+    var confirmedPassword by remember { mutableStateOf(ConfirmedPassword(password = password.value)) }
+    val signUpInfoValidation by remember {
+        derivedStateOf {
+            userName.validation.isValid &&
+                    email.validation.isValid &&
+                    password.validation.isValid &&
+                    confirmedPassword.validation.isValid
+        }
+    }
 
     Column(
         modifier = Modifier.padding(horizontal = 33.0.dp),
@@ -27,35 +42,40 @@ fun SignUpScreen() {
         SignUpTitle(R.string.signup_title)
         SignUpField(
             R.string.signup_username_label,
-            value = signUpInfo.userName,
-            signUpResult = signUpInfo.userNameValidation,
-            onValueChange = { signUpInfo = signUpInfo.copy(userName = it) },
+            value = userName.value,
+            signUpResult = userName.validation,
+            onValueChange = { userName = userName.copy(value = it) },
         )
         SignUpField(
             R.string.signup_email_label,
-            value = signUpInfo.email,
-            signUpResult = signUpInfo.emailValidation,
-            onValueChange = { signUpInfo = signUpInfo.copy(email = it) },
+            value = email.value,
+            signUpResult = email.validation,
+            onValueChange = { email = email.copy(value = it) },
         )
 
         SignUpField(
             R.string.signup_password_label,
-            value = signUpInfo.password,
-            signUpResult = signUpInfo.passwordValidation,
-            onValueChange = { signUpInfo = signUpInfo.copy(password = it) },
+            value = password.value,
+            signUpResult = password.validation,
+            onValueChange = {
+                password = password.copy(value = it)
+                confirmedPassword = confirmedPassword.copy(password = it)
+            },
             hidden = true,
         )
 
         SignUpField(
             R.string.signup_password_confirm_label,
-            value = signUpInfo.confirmedPassword,
-            signUpResult = signUpInfo.confirmedPasswordValidation,
-            onValueChange = { signUpInfo = signUpInfo.copy(confirmedPassword = it) },
+            value = confirmedPassword.value,
+            signUpResult = confirmedPassword.validation,
+            onValueChange = {
+                confirmedPassword = confirmedPassword.copy(value = it)
+            },
             hidden = true,
         )
         SignUpButton(
             R.string.signup_button,
-            enabled = signUpInfo.signUpInfoValidation,
+            enabled = signUpInfoValidation,
         )
     }
 }
