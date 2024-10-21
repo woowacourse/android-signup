@@ -39,7 +39,7 @@ class EmailInputValidationTest {
     }
 
     @Test
-    fun `이메일_형식이_올바지_않을_경우_에러메시지가_노출된다_1`() {
+    fun `이메일_형식에_최상위_도메인이_없을_경우_에러메시지가_노출된다`() {
         // when
         signUpInfo.value = SignUpInfo(email = "seogi@seogida")
 
@@ -50,7 +50,7 @@ class EmailInputValidationTest {
     }
 
     @Test
-    fun `이메일_형식이_올바지_않을_경우_에러메시지가_노출된다_2`() {
+    fun `이메일_형식에_도메인이_없을_경우_에러메시지가_노출된다`() {
         // when
         signUpInfo.value = SignUpInfo(email = "seogi.com")
 

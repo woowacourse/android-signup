@@ -39,7 +39,7 @@ class PasswordInputValidationTest {
     }
 
     @Test
-    fun `비밀번호가_8에서_16자가_아니면_에러메시지가_노출된다_1`() {
+    fun `비밀번호가_8자_미만일_경우_에러메시지가_노출된다`() {
         // when
         signUpInfo.value = SignUpInfo(password = "abc4567")
 
@@ -50,7 +50,7 @@ class PasswordInputValidationTest {
     }
 
     @Test
-    fun `비밀번호가_8에서_16자가_아니면_에러메시지가_노출된다_2`() {
+    fun `비밀번호가_16자를_넘을_경우_에러메시지가_노출된다`() {
         // when
         signUpInfo.value = SignUpInfo(password = "abcdefghijklmn123")
 
@@ -72,7 +72,7 @@ class PasswordInputValidationTest {
     }
 
     @Test
-    fun `비밀번호는_영문과_숫자를_포함하지_않으면_에러메시지가_노출된다_1`() {
+    fun `비밀번호가_숫자를_포함하지_않으면_에러메시지가_노출된다`() {
         // when
         signUpInfo.value = SignUpInfo(password = "abcdefghi")
 
@@ -83,7 +83,7 @@ class PasswordInputValidationTest {
     }
 
     @Test
-    fun `비밀번호는_영문과_숫자를_포함하지_않으면_에러메시지가_노출된다_2`() {
+    fun `비밀번호가_영문을_포함하지_않으면_에러메시지가_노출된다`() {
         // when
         signUpInfo.value = SignUpInfo(password = "123456789")
 

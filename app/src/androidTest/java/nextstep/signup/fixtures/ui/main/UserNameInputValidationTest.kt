@@ -39,7 +39,7 @@ class UserNameInputValidationTest {
     }
 
     @Test
-    fun `사용자_이름이_2에서_5자가_아니면_에러메시지가_노출된다_1`() {
+    fun `사용자_이름이_2자_미만일_경우_에러메시지가_노출된다`() {
         // when
         signUpInfo.value = SignUpInfo(userName = "남")
 
@@ -50,7 +50,7 @@ class UserNameInputValidationTest {
     }
 
     @Test
-    fun `사용자_이름이_2에서_5자가_아니면_에러메시지가_노출된다_2`() {
+    fun `사용자_이름이_5자를_넘을_경우_에러메시지가_노출된다`() {
         // when
         signUpInfo.value = SignUpInfo(userName = "남서기입니다")
 
@@ -72,7 +72,7 @@ class UserNameInputValidationTest {
     }
 
     @Test
-    fun `사용자_이름에_숫자나_기호가_있으면_에러메시지가_노출된다_1`() {
+    fun `사용자_이름에_숫자가_있으면_에러메시지가_노출된다`() {
         // when
         signUpInfo.value = SignUpInfo(userName = "abcd1")
 
@@ -83,7 +83,7 @@ class UserNameInputValidationTest {
     }
 
     @Test
-    fun `사용자_이름에_숫자나_기호가_있으면_에러메시지가_노출된다_2`() {
+    fun `사용자_이름에_기호가_있으면_에러메시지가_노출된다`() {
         // when
         signUpInfo.value = SignUpInfo(userName = "@bcde")
 
