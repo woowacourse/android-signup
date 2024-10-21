@@ -14,7 +14,7 @@ class UsernameTest {
 
     @get:Rule
     val composeTestRule = createComposeRule()
-    
+
     private val username = mutableStateOf("")
 
     @Before
@@ -23,7 +23,7 @@ class UsernameTest {
             SignUpTextFieldComponent(
                 signUpModel = Username(text = username.value),
                 onTextChange = { username.value = it },
-                labelText = stringResource(R.string.username_label),
+                labelText = stringResource(R.string.username_label)
             )
         }
     }

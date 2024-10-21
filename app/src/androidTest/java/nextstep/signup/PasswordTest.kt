@@ -14,7 +14,7 @@ class PasswordTest {
 
     @get:Rule
     val composeTestRule = createComposeRule()
-    
+
     private val password = mutableStateOf("")
 
     @Before
@@ -33,7 +33,7 @@ class PasswordTest {
     fun 비밀번호가_빈_값이면_Blank_상태를_반환한다() {
         // when
         password.value = ""
-        
+
         // then
         val result = Password(password.value).validState()
         assert(result is SignUpState.Blank)
@@ -43,7 +43,7 @@ class PasswordTest {
     fun 비밀번호가_8자_미만이면_PasswordLength_에러를_반환한다() {
         // when
         password.value = "12345"
-        
+
         // then
         val result = Password(password.value).validState()
         assert(result is SignUpState.InValid.PasswordLength)
@@ -53,7 +53,7 @@ class PasswordTest {
     fun 비밀번호가_유효하지_않으면_PasswordType_에러를_반환한다() {
         // when
         password.value = "abcdefgh"
-        
+
         // then
         val result = Password(password.value).validState()
         assert(result is SignUpState.InValid.PasswordType)
@@ -63,7 +63,7 @@ class PasswordTest {
     fun 비밀번호가_유효할_경우_유효_상태인_Valid를_반환한다() {
         // when
         password.value = "Password1"
-        
+
         // then
         val result = Password(password.value).validState()
         assert(result is SignUpState.Valid)

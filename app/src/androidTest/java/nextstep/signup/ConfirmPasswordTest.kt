@@ -15,7 +15,7 @@ class ConfirmPasswordTest {
 
     @get:Rule
     val composeTestRule = createComposeRule()
-    
+
     private val password = Password(text = "Password1")
     private val confirmPassword = mutableStateOf("")
 
@@ -35,7 +35,7 @@ class ConfirmPasswordTest {
     fun 확인비밀번호가_빈_값이면_Blank_상태를_반환한다() {
         // when
         confirmPassword.value = ""
-        
+
         // then
         val result = ConfirmPassword(password, confirmPassword.value).validState()
         assert(result is SignUpState.Blank)
@@ -45,7 +45,7 @@ class ConfirmPasswordTest {
     fun 확인비밀번호가_원래비밀번호와_다르면_Confirm_에러를_반환한다() {
         // when
         confirmPassword.value = "WrongPassword"
-        
+
         // then
         val result = ConfirmPassword(password, confirmPassword.value).validState()
         assert(result is SignUpState.InValid.Confirm)
@@ -55,7 +55,7 @@ class ConfirmPasswordTest {
     fun 확인비밀번호가_유효할_경우_유효_상태인_Valid를_반환한다() {
         // when
         confirmPassword.value = "Password1"
-        
+
         // then
         val result = ConfirmPassword(password, confirmPassword.value).validState()
         assert(result is SignUpState.Valid)

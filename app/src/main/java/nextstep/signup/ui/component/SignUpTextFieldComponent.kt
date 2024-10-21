@@ -93,6 +93,6 @@ fun PreviewTextFieldComponent() {
     SignUpTextFieldComponent(
         signUpModel = Username(),
         onTextChange = {},
-        labelText = "",
+        labelText = ""
     )
 }

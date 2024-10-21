@@ -20,7 +20,7 @@ import nextstep.signup.ui.theme.Gray50
 
 @Composable
 fun SignUpSubmitButtonComponent(
-    signUpStates : List<SignUpState>,
+    signUpStates: List<SignUpState>,
     buttonText: String,
     onButtonClick: () -> Unit
 ) {
@@ -35,7 +35,7 @@ fun SignUpSubmitButtonComponent(
         colors = ButtonDefaults.buttonColors(
             containerColor = Blue50
         ),
-        enabled = isValid,
+        enabled = isValid
     ) {
         Text(
             text = buttonText,

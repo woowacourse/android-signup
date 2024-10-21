@@ -1,7 +1,7 @@
 package nextstep.signup.ui.model
 
 class Password(
-    override val text: String = DEFAULT_PASSWORD_TEXT,
+    override val text: String = DEFAULT_PASSWORD_TEXT
 ) : SignUpModel {
     override fun validState(): SignUpState {
         return when {

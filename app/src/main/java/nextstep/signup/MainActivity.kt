@@ -74,7 +74,7 @@ fun SignupScreen() {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(horizontal = 32.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Spacer(Modifier.height(30.dp))
             SignUpSubjectComponent(
@@ -118,7 +118,7 @@ fun SignupScreen() {
                     userName.validState(),
                     email.validState(),
                     password.validState(),
-                    passwordConfirm.validState(),
+                    passwordConfirm.validState()
                 ),
                 buttonText = stringResource(R.string.sign_up_button_label),
                 onButtonClick = { confirmSignUp() }

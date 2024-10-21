@@ -15,7 +15,7 @@ data class Email(
         return text.isBlank()
     }
 
-    private fun isValidEmail() : Boolean {
+    private fun isValidEmail(): Boolean {
         return text.matches(EMAIL_REGEX.toRegex())
     }
 

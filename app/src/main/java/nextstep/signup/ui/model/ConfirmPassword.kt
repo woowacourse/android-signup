@@ -2,7 +2,7 @@ package nextstep.signup.ui.model
 
 data class ConfirmPassword(
     val password: Password,
-    override val text: String = DEFAULT_TEXT,
+    override val text: String = DEFAULT_TEXT
 ) : SignUpModel {
     override fun validState(): SignUpState {
         return when {
@@ -16,7 +16,7 @@ data class ConfirmPassword(
         return text.isBlank()
     }
 
-    private fun isSamePassword(): Boolean{
+    private fun isSamePassword(): Boolean {
         return password.text == text
     }
 

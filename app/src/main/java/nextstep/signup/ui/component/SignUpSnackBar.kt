@@ -28,13 +28,13 @@ fun SignUpSnackBar(message: String) {
             .fillMaxWidth()
             .padding(
                 vertical = 15.dp,
-                horizontal = 20.dp,
+                horizontal = 20.dp
             )
     ) {
         Text(
             text = message,
             color = Color.Black,
-            fontSize = 16.sp,
+            fontSize = 16.sp
         )
     }
 }

@@ -2,7 +2,7 @@ package nextstep.signup.ui.model
 
 data class Username(
     override val text: String = DEFAULT_NAME
-): SignUpModel {
+) : SignUpModel {
     override fun validState(): SignUpState {
         return when {
             isBlank() -> SignUpState.Blank
@@ -19,7 +19,7 @@ data class Username(
     private fun isValidLength(): Boolean =
         text.matches(USERNAME_REGEX_LENGTH.toRegex())
 
-    private fun isValidText() : Boolean =
+    private fun isValidText(): Boolean =
         text.matches(USERNAME_REGEX_TEXT.toRegex())
 
     companion object {
