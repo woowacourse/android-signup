@@ -75,19 +75,19 @@ internal fun AuthTextField(
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     onTextChange: (String) -> Unit
 ) {
+    val shouldShowErrorMsg = text.isNotEmpty() && isValid.not()
     Column {
         TextField(
             modifier = modifier,
             value = text,
             onValueChange = onTextChange,
             label = { Text(label) },
-            isError = text.isNotEmpty() && isValid.not(),
+            isError = shouldShowErrorMsg,
             singleLine = true,
             visualTransformation = visualTransformation,
             keyboardOptions = keyboardOptions,
             keyboardActions = keyboardActions
         )
-        val shouldShowErrorMsg = text.isNotEmpty() && isValid.not()
         if (shouldShowErrorMsg) {
             Text(
                 text = errorMessage.orEmpty(),
