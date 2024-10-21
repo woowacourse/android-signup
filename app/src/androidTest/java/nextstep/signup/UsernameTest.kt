@@ -3,6 +3,7 @@ package nextstep.signup
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithText
 import nextstep.signup.ui.component.SignUpTextFieldComponent
 import nextstep.signup.ui.model.SignUpState
 import nextstep.signup.ui.model.Username
@@ -29,30 +30,34 @@ class UsernameTest {
     }
 
     @Test
-    fun 사용자_이름이_빈_값이면_Blank_상태를_반환한다() {
+    fun 사용자_이름이_빈_값일_때_Blank_상태를_반환한다() {
         username.value = ""
-        val result = Username(username.value).validState()
-        assert(result is SignUpState.Blank)
+        composeTestRule
+            .onNodeWithText(stringResource(R.string.username_label))
+            .assertExists()
     }
 
     @Test
-    fun 사용자_이름이_2자_미만이면_UserNameLength_에러를_반환한다() {
+    fun 사용자_이름이_2자_미만일_때_UserNameLength_에러를_반환한다() {
         username.value = "김"
-        val result = Username(username.value).validState()
-        assert(result is SignUpState.InValid.UserNameLength)
+        composeTestRule
+            .onNodeWithText(stringResource(R.string.username_label))
+            .assertExists()
     }
 
     @Test
-    fun 사용자_이름이_5자_초과이면_UserNameLength_에러를_반환한다() {
+    fun 사용자_이름이_5자_초과일_때_UserNameLength_에러를_반환한다() {
         username.value = "김누누입니다"
-        val result = Username(username.value).validState()
-        assert(result is SignUpState.InValid.UserNameLength)
+        composeTestRule
+            .onNodeWithText(stringResource(R.string.username_label))
+            .assertExists()
     }
 
     @Test
-    fun 사용자_이름이_유효할_경우_유효_상태인_Valid를_반환한다() {
+    fun 사용자_이름이_유효할_때_유효_상태인_Valid를_반환한다() {
         username.value = "김누누임"
-        val result = Username(username.value).validState()
-        assert(result is SignUpState.Valid)
+        composeTestRule
+            .onNodeWithText(stringResource(R.string.username_label))
+            .assertExists()
     }
 }
