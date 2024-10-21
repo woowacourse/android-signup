@@ -17,9 +17,9 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import nextstep.signup.R
-import nextstep.signup.ui.component.SignUpButton
 import nextstep.signup.ui.component.SignUpHeaderText
 import nextstep.signup.ui.component.SignUpTextField
+import nextstep.signup.ui.component.SubmitButton
 import nextstep.signup.ui.model.Email
 import nextstep.signup.ui.model.Password
 import nextstep.signup.ui.model.PasswordConfirm
@@ -131,7 +131,7 @@ fun SignUpScreen(
             )
         }
 
-        SignUpButton(
+        SubmitButton(
             modifier =
                 Modifier
                     .fillMaxWidth()

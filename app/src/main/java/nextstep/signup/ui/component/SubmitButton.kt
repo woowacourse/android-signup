@@ -9,7 +9,7 @@ import androidx.compose.ui.unit.sp
 import nextstep.signup.ui.theme.Blue50
 
 @Composable
-fun SignUpButton(
+fun SubmitButton(
     modifier: Modifier = Modifier,
     text: String,
     onclick: () -> Unit,

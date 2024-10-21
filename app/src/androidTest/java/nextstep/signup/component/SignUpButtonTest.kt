@@ -11,7 +11,7 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import junit.framework.Assert.assertFalse
 import junit.framework.Assert.assertTrue
-import nextstep.signup.ui.component.SignUpButton
+import nextstep.signup.ui.component.SubmitButton
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -28,7 +28,7 @@ class SignUpButtonTest {
     @Before
     fun setUp() {
         composeTestRule.setContent {
-            SignUpButton(modifier = Modifier.testTag(tag), text = text, onclick = {
+            SubmitButton(modifier = Modifier.testTag(tag), text = text, onclick = {
                 isClicked = true
             }, enabled = enabled)
         }
