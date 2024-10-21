@@ -100,6 +100,7 @@ fun SignupScreen() {
                 signUpModel = password,
                 onTextChange = { newPassword ->
                     password = Password(newPassword)
+                    passwordConfirm = ConfirmPassword(password, passwordConfirm.text)
                 },
                 labelText = stringResource(R.string.password_label),
                 isPassword = true
