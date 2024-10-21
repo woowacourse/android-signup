@@ -24,7 +24,7 @@ class ConfirmedPasswordInputValidationTest {
                 onValueChange = {
                     signUpInfo.value = signUpInfo.value.copy(confirmedPassword = it)
                 },
-                validationResult = signUpInfo.value.confirmedPasswordValidation,
+                signUpResult = signUpInfo.value.confirmedPasswordValidation,
             )
         }
     }

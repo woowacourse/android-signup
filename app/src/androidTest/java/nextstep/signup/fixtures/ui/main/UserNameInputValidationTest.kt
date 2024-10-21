@@ -22,7 +22,7 @@ class UserNameInputValidationTest {
                 labelId = R.string.signup_username_label,
                 value = signUpInfo.value.password,
                 onValueChange = { signUpInfo.value = signUpInfo.value.copy(userName = it) },
-                validationResult = signUpInfo.value.userNameValidation,
+                signUpResult = signUpInfo.value.userNameValidation,
             )
         }
     }

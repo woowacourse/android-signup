@@ -1,91 +1,93 @@
 package nextstep.signup.ui.model
 
+import nextstep.signup.R
+
 data class SignUpInfo(
     val userName: String = "",
     val email: String = "",
     val password: String = "",
     val confirmedPassword: String = "",
 ) {
-    val userNameValidation: ValidationResult
+    val userNameValidation: SignUpResult
         get() = isValidUserName()
 
-    val emailValidation: ValidationResult
+    val emailValidation: SignUpResult
         get() = isValidEmail()
 
-    val passwordValidation: ValidationResult
+    val passwordValidation: SignUpResult
         get() = isValidPassword()
 
-    val confirmedPasswordValidation: ValidationResult
+    val confirmedPasswordValidation: SignUpResult
         get() = isValidConfirmedPassword()
 
     val signUpInfoValidation: Boolean
         get() = userNameValidation.isValid && emailValidation.isValid && passwordValidation.isValid && confirmedPasswordValidation.isValid
 
-    private fun isValidUserName(): ValidationResult {
+    private fun isValidUserName(): SignUpResult {
         return when {
-            userName.isEmpty() -> ValidationResult(isValid = false)
+            userName.isEmpty() -> SignUpResult.Blank(isValid = false)
 
             !validateUserNameLength() ->
-                ValidationResult(
+                SignUpResult.Error(
                     isValid = false,
-                    errorMessage = USERNAME_LENGTH_ERROR_MESSAGE,
+                    errorMessage = R.string.signup_username_length_error,
                 )
 
             !validateUserNameComposition() ->
-                ValidationResult(
+                SignUpResult.Error(
                     isValid = false,
-                    errorMessage = USERNAME_COMPOSITION_ERROR_MESSAGE,
+                    errorMessage = R.string.signup_username_composition_error,
                 )
 
-            else -> ValidationResult(isValid = true)
+            else -> SignUpResult.Success(isValid = true)
         }
     }
 
-    private fun isValidEmail(): ValidationResult {
+    private fun isValidEmail(): SignUpResult {
         return when {
-            email.isEmpty() -> ValidationResult(isValid = false)
+            email.isEmpty() -> SignUpResult.Blank(isValid = false)
 
             !validateEmailComposition() ->
-                ValidationResult(
+                SignUpResult.Error(
                     false,
-                    EMAIL_COMPOSITION_ERROR_MESSAGE,
+                    R.string.signup_email_composition_error,
                 )
 
-            else -> ValidationResult(isValid = true)
+            else -> SignUpResult.Success(isValid = true)
         }
     }
 
-    private fun isValidPassword(): ValidationResult {
+    private fun isValidPassword(): SignUpResult {
         return when {
-            password.isEmpty() -> ValidationResult(isValid = false)
+            password.isEmpty() -> SignUpResult.Blank(isValid = false)
 
             !validatePasswordLength() ->
-                ValidationResult(
+                SignUpResult.Error(
                     isValid = false,
-                    errorMessage = PASSWORD_LENGTH_ERROR_MESSAGE,
+                    errorMessage = R.string.signup_password_length_error,
                 )
 
             !validatePasswordComposition() ->
-                ValidationResult(
+                SignUpResult.Error(
                     isValid = false,
-                    errorMessage = PASSWORD_COMPOSITION_ERROR_MESSAGE,
+                    errorMessage = R.string.signup_password_composition_error,
                 )
 
-            else -> ValidationResult(isValid = true)
+            else -> SignUpResult.Success(isValid = true)
         }
     }
 
-    private fun isValidConfirmedPassword(): ValidationResult {
+    private fun isValidConfirmedPassword(): SignUpResult {
         return when {
-            confirmedPassword.isEmpty() -> ValidationResult(isValid = false)
+            confirmedPassword.isEmpty() -> SignUpResult.Blank(isValid = false)
 
             !validateConfirmedPassword(password, confirmedPassword) ->
-                ValidationResult(
+                SignUpResult.Error(
                     isValid = false,
-                    errorMessage = PASSWORD_CONFIRM_ERROR_MESSAGE,
+                    errorMessage = R.string.signup_password_confirm_error,
                 )
 
-            else -> ValidationResult(isValid = true)
+            else -> SignUpResult.Success(isValid = true)
         }
     }
 
@@ -115,20 +117,11 @@ data class SignUpInfo(
 
     companion object {
         private const val USERNAME_REGEX = "^[a-zA-Z가-힣]+$"
-        private const val USERNAME_COMPOSITION_ERROR_MESSAGE = "이름에는 숫자나 기호가 포함될 수 없습니다."
-
         private val USERNAME_LENGTH = 2..5
-        private const val USERNAME_LENGTH_ERROR_MESSAGE = "이름은 2~5자여야 합니다."
 
         private const val EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$"
-        private const val EMAIL_COMPOSITION_ERROR_MESSAGE = "이메일 형식이 올바르지 않습니다."
 
         private const val PASSWORD_REGEX = "^(?=.*[a-zA-Z])(?=.*[0-9]).{8,16}$"
-        private const val PASSWORD_COMPOSITION_ERROR_MESSAGE = "비밀번호는 영문과 숫자를 포함해야 합니다."
-
         private val PASSWORD_LENGTH = 8..16
-        private const val PASSWORD_LENGTH_ERROR_MESSAGE = "비밀번호는 8~16자여야 합니다."
-
-        private const val PASSWORD_CONFIRM_ERROR_MESSAGE = "비밀번호가 일치하지 않습니다."
     }
 }

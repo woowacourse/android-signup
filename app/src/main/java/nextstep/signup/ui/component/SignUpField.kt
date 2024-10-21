@@ -13,26 +13,26 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import nextstep.signup.ui.model.ValidationResult
+import nextstep.signup.ui.model.SignUpResult
 import nextstep.signup.ui.theme.Blue50
 
 @Composable
 fun SignUpField(
     @StringRes labelId: Int,
     value: String,
-    validationResult: ValidationResult,
+    signUpResult: SignUpResult,
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
     hidden: Boolean = false,
 ) {
-    val textColor = if (validationResult.isValid) Blue50 else Color.Red
+    val textColor = if (signUpResult.isValid) Blue50 else Color.Red
 
     TextField(
         value = value,
         onValueChange = { onValueChange(it) },
         supportingText = {
             Text(
-                text = validationResult.errorMessage,
+                text = signUpResult.errorMessage?.let { stringResource(it) } ?: "",
                 color = textColor,
             )
         },

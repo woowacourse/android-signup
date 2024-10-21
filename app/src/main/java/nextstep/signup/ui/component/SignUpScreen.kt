@@ -28,20 +28,20 @@ fun SignUpScreen() {
         SignUpField(
             R.string.signup_username_label,
             value = signUpInfo.userName,
-            validationResult = signUpInfo.userNameValidation,
+            signUpResult = signUpInfo.userNameValidation,
             onValueChange = { signUpInfo = signUpInfo.copy(userName = it) },
         )
         SignUpField(
             R.string.signup_email_label,
             value = signUpInfo.email,
-            validationResult = signUpInfo.emailValidation,
+            signUpResult = signUpInfo.emailValidation,
             onValueChange = { signUpInfo = signUpInfo.copy(email = it) },
         )
 
         SignUpField(
             R.string.signup_password_label,
             value = signUpInfo.password,
-            validationResult = signUpInfo.passwordValidation,
+            signUpResult = signUpInfo.passwordValidation,
             onValueChange = { signUpInfo = signUpInfo.copy(password = it) },
             hidden = true,
         )
@@ -49,7 +49,7 @@ fun SignUpScreen() {
         SignUpField(
             R.string.signup_password_confirm_label,
             value = signUpInfo.confirmedPassword,
-            validationResult = signUpInfo.confirmedPasswordValidation,
+            signUpResult = signUpInfo.confirmedPasswordValidation,
             onValueChange = { signUpInfo = signUpInfo.copy(confirmedPassword = it) },
             hidden = true,
         )

@@ -22,7 +22,7 @@ class PasswordInputValidationTest {
                 labelId = R.string.signup_password_label,
                 value = signUpInfo.value.password,
                 onValueChange = { signUpInfo.value = signUpInfo.value.copy(password = it) },
-                validationResult = signUpInfo.value.passwordValidation,
+                signUpResult = signUpInfo.value.passwordValidation,
             )
         }
     }

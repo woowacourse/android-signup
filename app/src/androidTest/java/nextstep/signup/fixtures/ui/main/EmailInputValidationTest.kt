@@ -22,7 +22,7 @@ class EmailInputValidationTest {
                 labelId = R.string.signup_email_label,
                 value = signUpInfo.value.email,
                 onValueChange = { signUpInfo.value = signUpInfo.value.copy(email = it) },
-                validationResult = signUpInfo.value.emailValidation,
+                signUpResult = signUpInfo.value.emailValidation,
             )
         }
     }
