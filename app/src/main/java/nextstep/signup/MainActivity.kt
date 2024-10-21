@@ -121,7 +121,8 @@ fun SignUpComponent(
             visualTransformation = PasswordVisualTransformation(),
         )
 
-        TextButton(R.string.sign_up_button_title, isValid, { snackBarEvent("Sign UP!") })
+        val message = stringResource(R.string.sign_up_complete_message)
+        TextButton(R.string.sign_up_button_title, isValid, { snackBarEvent(message) })
     }
 }
 
