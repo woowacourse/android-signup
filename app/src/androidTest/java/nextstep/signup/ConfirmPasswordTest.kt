@@ -1,8 +1,12 @@
 package nextstep.signup
 
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithText
 import nextstep.signup.ui.component.SignUpTextFieldComponent
 import nextstep.signup.ui.model.ConfirmPassword
@@ -17,14 +21,17 @@ class ConfirmPasswordTest {
     val composeTestRule = createComposeRule()
 
     private val password = Password(text = "password")
-    private val confirmPassword = mutableStateOf("")
+    private var confirmPassword by mutableStateOf(ConfirmPassword(password))
+    private var errorConfirmPassword = ""
 
     @Before
     fun setup() {
         composeTestRule.setContent {
+            errorConfirmPassword = stringResource(R.string.error_confirm)
+
             SignUpTextFieldComponent(
-                signUpModel = ConfirmPassword(password = password, text = confirmPassword.value),
-                onTextChange = { confirmPassword.value = it },
+                signUpModel = ConfirmPassword(password = password, text = confirmPassword.text),
+                onTextChange = { confirmPassword = ConfirmPassword(password = password, text = it) },
                 labelText = stringResource(R.string.password_confirm_label),
                 isPassword = true
             )
@@ -33,26 +40,26 @@ class ConfirmPasswordTest {
 
     @Test
     fun 확인비밀번호가_빈_값일_때_Blank_상태를_반환한다() {
-        confirmPassword.value = ""
+        confirmPassword = ConfirmPassword(password = password)
         composeTestRule
-            .onNodeWithText(stringResource(R.string.password_confirm_label))
-            .assertExists()
+            .onAllNodesWithText("")
+            .assertCountEquals(2)
     }
 
     @Test
     fun 확인비밀번호가_원래비밀번호와_다를_때_Confirm_에러를_반환한다() {
-        confirmPassword.value = "wrongPassword"
+        confirmPassword = ConfirmPassword(password = password, "wrongPassword")
         composeTestRule
-            .onNodeWithText(stringResource(R.string.password_confirm_label))
+            .onNodeWithText(errorConfirmPassword)
             .assertExists()
     }
 
     @Test
     fun 확인비밀번호가_유효할_때_유효_상태인_Valid를_반환한다() {
-        confirmPassword.value = "password"
+        confirmPassword = ConfirmPassword(password = password,"password")
         composeTestRule
-            .onNodeWithText(stringResource(R.string.password_confirm_label))
-            .assertExists()
+            .onNodeWithText(errorConfirmPassword)
+            .assertDoesNotExist()
     }
 }
 

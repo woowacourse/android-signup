@@ -1,11 +1,14 @@
 package nextstep.signup
 
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithText
 import nextstep.signup.ui.component.SignUpTextFieldComponent
-import nextstep.signup.ui.model.SignUpState
 import nextstep.signup.ui.model.Username
 import org.junit.Before
 import org.junit.Rule
@@ -15,15 +18,19 @@ class UsernameTest {
 
     @get:Rule
     val composeTestRule = createComposeRule()
-
-    private val username = mutableStateOf("")
+    private var username by mutableStateOf(Username())
+    private var errorUsernameLength = ""
+    private var errorUsernameType = ""
 
     @Before
     fun setup() {
         composeTestRule.setContent {
+            errorUsernameLength = stringResource(R.string.error_username_length)
+            errorUsernameType = stringResource(R.string.error_username_type)
+
             SignUpTextFieldComponent(
-                signUpModel = Username(text = username.value),
-                onTextChange = { username.value = it },
+                signUpModel = username,
+                onTextChange = { username = Username(it) },
                 labelText = stringResource(R.string.username_label)
             )
         }
@@ -31,33 +38,25 @@ class UsernameTest {
 
     @Test
     fun 사용자_이름이_빈_값일_때_Blank_상태를_반환한다() {
-        username.value = ""
+        username = Username("")
         composeTestRule
-            .onNodeWithText(stringResource(R.string.username_label))
-            .assertExists()
+            .onAllNodesWithText("")
+            .assertCountEquals(2)
     }
 
     @Test
     fun 사용자_이름이_2자_미만일_때_UserNameLength_에러를_반환한다() {
-        username.value = "김"
+        username = Username("김")
         composeTestRule
-            .onNodeWithText(stringResource(R.string.username_label))
+            .onNodeWithText(errorUsernameLength)
             .assertExists()
     }
 
     @Test
     fun 사용자_이름이_5자_초과일_때_UserNameLength_에러를_반환한다() {
-        username.value = "김누누입니다"
+        username = Username("김누누입니다")
         composeTestRule
-            .onNodeWithText(stringResource(R.string.username_label))
-            .assertExists()
-    }
-
-    @Test
-    fun 사용자_이름이_유효할_때_유효_상태인_Valid를_반환한다() {
-        username.value = "김누누임"
-        composeTestRule
-            .onNodeWithText(stringResource(R.string.username_label))
+            .onNodeWithText(errorUsernameLength)
             .assertExists()
     }
 }
