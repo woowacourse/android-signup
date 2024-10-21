@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Email(
     override val text: String = DEFAULT_TEXT,
-) : Information(text),
+) : SignUpInformation(),
     Parcelable {
     override fun isValid(): Boolean = validPattern()
 

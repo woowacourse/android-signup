@@ -34,7 +34,7 @@ import nextstep.signup.ui.component.SubmitButton
 import nextstep.signup.ui.model.Email
 import nextstep.signup.ui.model.Password
 import nextstep.signup.ui.model.PasswordConfirm
-import nextstep.signup.ui.model.SignUpInformation
+import nextstep.signup.ui.model.SignUp
 import nextstep.signup.ui.model.UserName
 
 @Composable
@@ -60,12 +60,12 @@ fun SignUpScreen() {
             var password by rememberSaveable { mutableStateOf(Password()) }
             var passwordConfirm by rememberSaveable { mutableStateOf(PasswordConfirm()) }
 
-            val signUpInformation =
-                SignUpInformation(
-                    userName = userName,
-                    email = email,
-                    password = password,
-                    passwordConfirm = passwordConfirm,
+            val signUp =
+                SignUp(
+                    userName,
+                    email,
+                    passwordConfirm,
+                    passwordConfirm,
                 )
 
             Spacer(modifier = Modifier.padding(top = 84.dp))
@@ -164,7 +164,7 @@ fun SignUpScreen() {
                         )
                     }
                 },
-                enabled = signUpInformation.isEligibleForSignUp(),
+                enabled = signUp.isEligible(),
             )
 
             Spacer(modifier = Modifier.padding(bottom = 28.dp))

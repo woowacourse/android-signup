@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 data class PasswordConfirm(
     override val text: String = DEFAULT_TEXT,
     val passwordText: String = DEFAULT_TEXT,
-) : Information(text),
+) : SignUpInformation(),
     Parcelable {
     override fun isValid(): Boolean = isPasswordMatching()
 
