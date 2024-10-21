@@ -32,6 +32,8 @@ import nextstep.signup.ui.component.SignUpTextFieldComponent
 import nextstep.signup.ui.model.ConfirmPassword
 import nextstep.signup.ui.model.Email
 import nextstep.signup.ui.model.Password
+import nextstep.signup.ui.model.SignUpState
+import nextstep.signup.ui.model.SignUpStates
 import nextstep.signup.ui.model.Username
 import nextstep.signup.ui.theme.SignupTheme
 
@@ -61,6 +63,15 @@ fun SignupScreen() {
     var email by remember { mutableStateOf(Email()) }
     var password by remember { mutableStateOf(Password()) }
     var passwordConfirm by remember { mutableStateOf(ConfirmPassword(password = password)) }
+
+    val signUpState = SignUpStates(
+        states = listOf(
+            userName.validState(),
+            email.validState(),
+            password.validState(),
+            passwordConfirm.validState()
+        )
+    )
 
     fun confirmSignUp() {
         toastVisible.value = true
@@ -115,12 +126,7 @@ fun SignupScreen() {
             )
             Spacer(Modifier.height(24.dp))
             SignUpSubmitButtonComponent(
-                signUpStates = listOf(
-                    userName.validState(),
-                    email.validState(),
-                    password.validState(),
-                    passwordConfirm.validState()
-                ),
+                signUpStates = signUpState,
                 buttonText = stringResource(R.string.sign_up_button_label),
                 onButtonClick = { confirmSignUp() }
             )
