@@ -39,7 +39,7 @@ class UserNameTest {
 
         // then
         Assert.assertTrue(result.isError)
-        Assert.assertEquals(result.stringRes, R.string.error_username_length)
+        Assert.assertEquals(result.errorMessageRes, R.string.error_username_length)
     }
 
     @Test
@@ -52,7 +52,7 @@ class UserNameTest {
 
         // then
         Assert.assertTrue(result.isError)
-        Assert.assertEquals(result.stringRes, R.string.error_username_length)
+        Assert.assertEquals(result.errorMessageRes, R.string.error_username_length)
     }
 
     @Test
@@ -65,7 +65,7 @@ class UserNameTest {
 
         // then
         Assert.assertTrue(result.isError)
-        Assert.assertEquals(result.stringRes, R.string.error_username_invalid_characters)
+        Assert.assertEquals(result.errorMessageRes, R.string.error_username_invalid_characters)
     }
 
     @Test
@@ -78,7 +78,7 @@ class UserNameTest {
 
         // then
         Assert.assertTrue(result.isError)
-        Assert.assertEquals(result.stringRes, R.string.error_username_invalid_characters)
+        Assert.assertEquals(result.errorMessageRes, R.string.error_username_invalid_characters)
     }
 
     @Test

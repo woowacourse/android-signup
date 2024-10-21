@@ -39,7 +39,7 @@ class EmailTest {
 
         // then
         Assert.assertTrue(result.isError)
-        Assert.assertEquals(result.stringRes, R.string.error_invalid_email_format)
+        Assert.assertEquals(result.errorMessageRes, R.string.error_invalid_email_format)
     }
 
     @Test
@@ -52,7 +52,7 @@ class EmailTest {
 
         // then
         Assert.assertTrue(result.isError)
-        Assert.assertEquals(result.stringRes, R.string.error_invalid_email_format)
+        Assert.assertEquals(result.errorMessageRes, R.string.error_invalid_email_format)
     }
 
     @Test

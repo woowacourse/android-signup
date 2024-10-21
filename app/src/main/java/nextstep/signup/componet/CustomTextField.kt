@@ -53,8 +53,8 @@ fun CustomTextField(
         visualTransformation = visualTransformation,
         isError = inputValidation.isError,
         supportingText = {
-            inputValidation.stringRes ?: return@TextField
-            Text(text = stringResource(id = inputValidation.stringRes))
+            inputValidation.errorMessageRes ?: return@TextField
+            Text(text = stringResource(id = inputValidation.errorMessageRes))
         },
     )
 }

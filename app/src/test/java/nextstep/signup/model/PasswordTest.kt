@@ -39,7 +39,7 @@ class PasswordTest {
 
         // then
         Assert.assertTrue(result.isError)
-        Assert.assertEquals(result.stringRes, R.string.error_password_length)
+        Assert.assertEquals(result.errorMessageRes, R.string.error_password_length)
     }
 
     @Test
@@ -52,7 +52,7 @@ class PasswordTest {
 
         // then
         Assert.assertTrue(result.isError)
-        Assert.assertEquals(result.stringRes, R.string.error_password_length)
+        Assert.assertEquals(result.errorMessageRes, R.string.error_password_length)
     }
 
     @Test
@@ -65,7 +65,7 @@ class PasswordTest {
 
         // then
         Assert.assertTrue(result.isError)
-        Assert.assertEquals(result.stringRes, R.string.error_password_requirements)
+        Assert.assertEquals(result.errorMessageRes, R.string.error_password_requirements)
     }
 
     @Test
@@ -92,7 +92,7 @@ class PasswordTest {
 
         // then
         Assert.assertTrue(result.isError)
-        Assert.assertEquals(result.stringRes, R.string.error_password_mismatch)
+        Assert.assertEquals(result.errorMessageRes, R.string.error_password_mismatch)
     }
 
     @Test

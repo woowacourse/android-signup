@@ -9,7 +9,7 @@ value class Email(
     fun validate(): InputValidation {
         if (value.isBlank()) return InputValidation(isError = false)
         if (!value.matches(Regex(EMAIL_REGEX))) {
-            return InputValidation(stringRes = R.string.error_invalid_email_format, isError = true)
+            return InputValidation(errorMessageRes = R.string.error_invalid_email_format, isError = true)
         }
         return InputValidation(isError = false)
     }
