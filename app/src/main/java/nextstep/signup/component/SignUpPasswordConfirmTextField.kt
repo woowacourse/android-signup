@@ -20,7 +20,7 @@ internal fun SignUpPasswordConfirmTextField(
     val validationResult =
         PasswordConfirm(
             password = password,
-            passwordConfirm = passwordConfirm
+            value = passwordConfirm
         ).validationResult()
     val supportingText = when (validationResult) {
         ValidationResult.INVALID_MATCH -> stringResource(R.string.error_password_confirm)

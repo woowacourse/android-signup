@@ -2,20 +2,20 @@ package nextstep.signup.domain.validation
 
 data class PasswordConfirm(
     private val password: String = DEFAULT_PASSWORD,
-    private val passwordConfirm: String = DEFAULT_PASSWORD_CONFIRM
+    private val value: String = DEFAULT_VALUE
 ) {
     fun validationResult(): ValidationResult {
         return when {
-            passwordConfirm.isEmpty() -> ValidationResult.EMPTY
+            value.isEmpty() -> ValidationResult.EMPTY
             !isMatched() -> ValidationResult.INVALID_MATCH
             else -> ValidationResult.SUCCESS
         }
     }
 
-    private fun isMatched(): Boolean = password == passwordConfirm
+    private fun isMatched(): Boolean = password == value
 
     companion object {
         const val DEFAULT_PASSWORD = ""
-        const val DEFAULT_PASSWORD_CONFIRM = ""
+        const val DEFAULT_VALUE = ""
     }
 }

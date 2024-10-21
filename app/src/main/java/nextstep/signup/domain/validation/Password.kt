@@ -1,23 +1,23 @@
 package nextstep.signup.domain.validation
 
-data class Password(private val password: String = DEFAULT_PASSWORD) {
+data class Password(private val value: String = DEFAULT_VALUE) {
     private val regex = Regex(PASSWORD_REGEX)
 
     fun validationResult(): ValidationResult {
         return when {
-            password.isEmpty() -> ValidationResult.EMPTY
+            value.isEmpty() -> ValidationResult.EMPTY
             !isValidLength() -> ValidationResult.INVALID_LENGTH
             !isValidFormat() -> ValidationResult.INVALID_FORMAT
             else -> ValidationResult.SUCCESS
         }
     }
 
-    private fun isValidLength(): Boolean = password.length in 8..16
+    private fun isValidLength(): Boolean = value.length in 8..16
 
-    private fun isValidFormat(): Boolean = password.matches(regex)
+    private fun isValidFormat(): Boolean = value.matches(regex)
 
     companion object {
-        const val DEFAULT_PASSWORD = ""
+        const val DEFAULT_VALUE = ""
         const val PASSWORD_REGEX = "^(?=.*[a-zA-Z])(?=.*[0-9]).{8,16}$"
     }
 }
