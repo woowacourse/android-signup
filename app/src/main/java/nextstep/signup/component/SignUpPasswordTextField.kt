@@ -8,6 +8,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import nextstep.signup.R
 import nextstep.signup.domain.validation.Password
+import nextstep.signup.domain.validation.Password.Companion.PASSWORD_RANGE
 import nextstep.signup.domain.validation.ValidationResult
 
 @Composable
@@ -18,7 +19,12 @@ internal fun SignUpPasswordTextField(
 ) {
     val validationResult = Password(password).validationResult()
     val supportingText = when (validationResult) {
-        ValidationResult.INVALID_LENGTH -> stringResource(R.string.error_password_length)
+        ValidationResult.INVALID_LENGTH -> stringResource(
+            R.string.error_password_length,
+            PASSWORD_RANGE.first,
+            PASSWORD_RANGE.last,
+        )
+
         ValidationResult.INVALID_FORMAT -> stringResource(R.string.error_password_format)
         else -> ""
     }

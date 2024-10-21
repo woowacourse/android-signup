@@ -12,12 +12,13 @@ data class Username(private val value: String = DEFAULT_VALUE) {
         }
     }
 
-    private fun isValidLength(): Boolean = value.length in 2..5
+    private fun isValidLength(): Boolean = value.length in USERNAME_RANGE
 
     private fun isValidFormat(): Boolean = value.matches(regex)
 
     companion object {
         const val DEFAULT_VALUE = ""
         const val USERNAME_REGEX = "^[a-zA-Z가-힣]+$"
+        val USERNAME_RANGE = 2..5
     }
 }

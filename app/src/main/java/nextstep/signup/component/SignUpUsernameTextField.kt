@@ -7,6 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import nextstep.signup.R
 import nextstep.signup.domain.validation.Username
+import nextstep.signup.domain.validation.Username.Companion.USERNAME_RANGE
 import nextstep.signup.domain.validation.ValidationResult
 
 @Composable
@@ -17,7 +18,12 @@ internal fun SignUpUsernameTextField(
 ) {
     val validationResult = Username(username).validationResult()
     val supportingText = when (validationResult) {
-        ValidationResult.INVALID_LENGTH -> stringResource(R.string.error_name_length)
+        ValidationResult.INVALID_LENGTH -> stringResource(
+            R.string.error_name_length,
+            USERNAME_RANGE.first,
+            USERNAME_RANGE.last,
+        )
+
         ValidationResult.INVALID_FORMAT -> stringResource(R.string.error_name_format)
         else -> ""
     }

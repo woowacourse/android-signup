@@ -12,12 +12,13 @@ data class Password(private val value: String = DEFAULT_VALUE) {
         }
     }
 
-    private fun isValidLength(): Boolean = value.length in 8..16
+    private fun isValidLength(): Boolean = value.length in PASSWORD_RANGE
 
     private fun isValidFormat(): Boolean = value.matches(regex)
 
     companion object {
         const val DEFAULT_VALUE = ""
-        const val PASSWORD_REGEX = "^(?=.*[a-zA-Z])(?=.*[0-9]).{8,16}$"
+        const val PASSWORD_REGEX = "^(?=.*[a-zA-Z])(?=.*[0-9]).*$"
+        val PASSWORD_RANGE = 8..16
     }
 }
