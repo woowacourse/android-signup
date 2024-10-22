@@ -12,7 +12,7 @@ import nextstep.signup.ui.InputFieldConfig
 import org.junit.Rule
 import org.junit.Test
 
-class CustomTextFieldTest {
+class InputFieldTest {
 
     @get:Rule
     val composeTestRule = createComposeRule()
