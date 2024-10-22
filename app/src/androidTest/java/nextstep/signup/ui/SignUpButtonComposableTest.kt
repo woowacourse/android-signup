@@ -1,4 +1,4 @@
-package nextstep.signup
+package nextstep.signup.ui
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -10,6 +10,7 @@ import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
+import nextstep.signup.R
 import nextstep.signup.model.Email
 import nextstep.signup.model.Password
 import nextstep.signup.model.PasswordConfirm

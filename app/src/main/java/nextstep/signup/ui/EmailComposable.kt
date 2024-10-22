@@ -1,4 +1,4 @@
-package nextstep.signup
+package nextstep.signup.ui
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
@@ -8,6 +8,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import nextstep.signup.R
 import nextstep.signup.model.Email
 import nextstep.signup.model.EmailValidResult
 import nextstep.signup.ui.component.TextComponent

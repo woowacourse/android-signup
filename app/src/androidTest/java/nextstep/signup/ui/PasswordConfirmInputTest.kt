@@ -1,4 +1,4 @@
-package nextstep.signup
+package nextstep.signup.ui
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

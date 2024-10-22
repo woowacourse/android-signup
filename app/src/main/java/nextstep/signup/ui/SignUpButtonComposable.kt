@@ -1,8 +1,9 @@
-package nextstep.signup
+package nextstep.signup.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import nextstep.signup.R
 import nextstep.signup.ui.component.ButtonComponent
 
 @Composable
