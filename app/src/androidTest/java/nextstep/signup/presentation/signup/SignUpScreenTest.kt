@@ -9,13 +9,13 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import org.junit.Rule
 import org.junit.Test
 
-// TODO: 다시 해보려고 합니다.
 class SignUpScreenTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
     private val button = SemanticsMatcher.expectValue(
-        SemanticsProperties.Role, Role.Button
+        SemanticsProperties.Role,
+        Role.Button
     )
 
     @Test
@@ -33,7 +33,6 @@ class SignUpScreenTest {
             .assertIsNotEnabled()
     }
 
-
     @Test
     fun signup_is_not_enabled_when_email_is_invalid() {
         // given
@@ -43,7 +42,7 @@ class SignUpScreenTest {
                     username = "test",
                     email = "qwer@qwer",
                     password = "qwer12345",
-                    passwordConfirm = "qwer12345",
+                    passwordConfirm = "qwer12345"
                 )
             )
         }
@@ -63,7 +62,7 @@ class SignUpScreenTest {
                     username = "test",
                     email = "qwer@qwer.com",
                     password = "qwer12345",
-                    passwordConfirm = "qwer12345",
+                    passwordConfirm = "qwer12345"
                 )
             )
         }

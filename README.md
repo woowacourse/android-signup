@@ -38,8 +38,8 @@
 
 ### step4 이후 추가로 할 것들
 
-- [ ] recomposition study 테스트
-- [ ] recomposition 프로덕션에 적용
+- [x] recomposition study 테스트
+- [x] SignupScreen 테스트가 가능한가?
+- [x] recomposition 프로덕션에 적용
 - [ ] rememberSavable 추가하기
 - [ ] [TextField 의 focus 를 빼내는 법?](https://velog.io/@heeung/Android-Compose-Textfield-%ED%8F%AC%EC%BB%A4%EC%8A%A4%EB%A5%BC-%EC%B2%98%EB%A6%AC%ED%95%B4%EB%B3%B4%EC%9E%90) 
-- [ ] SignupScreen 테스트가 가능한가?
