@@ -3,13 +3,12 @@ package nextstep.signup.model
 data class Password(
     val content: String,
 ) : InputValidator {
-    override fun isValid(): Boolean = hasValidLength() && hasValidFormat()
-
-    override fun getErrorMessage(): String? =
+    override fun validate(): ValidationState =
         when {
-            !hasValidLength() -> ERROR_PASSWORD_LENGTH_MESSAGE
-            !hasValidFormat() -> ERROR_PASSWORD_FORMAT_MESSAGE
-            else -> null
+            content.isEmpty() -> ValidationState.Blank
+            !hasValidLength() -> ValidationState.Invalid.Password.Length
+            !hasValidFormat() -> ValidationState.Invalid.Password.Format
+            else -> ValidationState.Valid
         }
 
     private fun hasValidLength(): Boolean = content.length in MINIMUM_LENGTH..MAXIMUM_LENGTH
@@ -18,8 +17,6 @@ data class Password(
 
     companion object {
         const val PASSWORD_REGEX = "^(?=.*[a-zA-Z])(?=.*[0-9]).*$"
-        const val ERROR_PASSWORD_LENGTH_MESSAGE = "비밀번호는 8~16자여야 합니다."
-        const val ERROR_PASSWORD_FORMAT_MESSAGE = "비밀번호는 영문과 숫자를 포함해야 합니다."
         const val MAXIMUM_LENGTH = 16
         const val MINIMUM_LENGTH = 8
     }

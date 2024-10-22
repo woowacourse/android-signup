@@ -3,13 +3,12 @@ package nextstep.signup.model
 data class UserName(
     val content: String,
 ) : InputValidator {
-    override fun isValid(): Boolean = hasValidLength() && hasValidFormat()
-
-    override fun getErrorMessage(): String? =
+    override fun validate(): ValidationState =
         when {
-            !hasValidLength() -> ERROR_USERNAME_LENGTH_MESSAGE
-            !hasValidFormat() -> ERROR_USERNAME_FORMAT_MESSAGE
-            else -> null
+            content.isEmpty() -> ValidationState.Blank
+            !hasValidLength() -> ValidationState.Invalid.UserName.Length
+            !hasValidFormat() -> ValidationState.Invalid.UserName.Format
+            else -> ValidationState.Valid
         }
 
     private fun hasValidLength(): Boolean = content.length in MINIMUM_LENGTH..MAXIMUM_LENGTH
@@ -18,8 +17,6 @@ data class UserName(
 
     companion object {
         const val USERNAME_REGEX = "^[a-zA-Z가-힣]+$"
-        const val ERROR_USERNAME_LENGTH_MESSAGE = "이름은 2~5자여야 합니다."
-        const val ERROR_USERNAME_FORMAT_MESSAGE = "이름에는 숫자나 기호가 포함될 수 없습니다."
         const val MAXIMUM_LENGTH = 5
         const val MINIMUM_LENGTH = 2
     }
