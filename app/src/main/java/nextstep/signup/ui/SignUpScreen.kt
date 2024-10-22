@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import nextstep.signup.R
@@ -79,7 +80,7 @@ fun SignUpLabel() {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp)
+            .padding(36.dp)
     ) {
         Text(
             text = stringResource(R.string.title),
@@ -139,7 +140,7 @@ fun SignUpButton(isButtonEnabled: Boolean, onSignUpSuccess: () -> Unit) {
         },
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp),
+            .padding(36.dp),
         enabled = isButtonEnabled
     ) {
         Text(text = stringResource(R.string.sign_up))
@@ -162,7 +163,7 @@ fun CustomTextField(
             label = { Text(label) },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 8.dp),
+                .padding(horizontal = 32.dp, vertical = 18.dp),
             visualTransformation = if (isPasswordField) PasswordVisualTransformation() else VisualTransformation.None,
             isError = isError
         )
@@ -174,4 +175,10 @@ fun CustomTextField(
             )
         }
     }
+}
+
+@Preview
+@Composable
+fun PreviewSignUpScreen() {
+    SignUpScreen()
 }
