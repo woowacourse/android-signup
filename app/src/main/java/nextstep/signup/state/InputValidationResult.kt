@@ -5,5 +5,5 @@ enum class InputValidationResult {
     Empty,
     WrongFormat,
     LengthError,
-    NotSame
+    NotSamePassword
 }

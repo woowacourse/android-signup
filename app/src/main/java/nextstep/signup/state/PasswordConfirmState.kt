@@ -1,7 +1,7 @@
 package nextstep.signup.state
 
 import nextstep.signup.state.InputValidationResult.Empty
-import nextstep.signup.state.InputValidationResult.NotSame
+import nextstep.signup.state.InputValidationResult.NotSamePassword
 import nextstep.signup.state.InputValidationResult.Valid
 
 data class PasswordConfirmState(
@@ -13,7 +13,7 @@ data class PasswordConfirmState(
         }
 
         if (password != targetPassword) {
-            return NotSame
+            return NotSamePassword
         }
 
         return Valid

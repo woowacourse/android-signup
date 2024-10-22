@@ -16,7 +16,7 @@ import nextstep.signup.R
 import nextstep.signup.state.InputValidationResult
 import nextstep.signup.state.InputValidationResult.Empty
 import nextstep.signup.state.InputValidationResult.LengthError
-import nextstep.signup.state.InputValidationResult.NotSame
+import nextstep.signup.state.InputValidationResult.NotSamePassword
 import nextstep.signup.state.InputValidationResult.Valid
 import nextstep.signup.state.InputValidationResult.WrongFormat
 
@@ -90,7 +90,7 @@ fun PasswordTextField(
         Empty -> stringResource(id = R.string.input_length_error)
         LengthError -> stringResource(id = R.string.password_length_error)
         WrongFormat -> stringResource(id = R.string.password_format_error)
-        NotSame -> stringResource(id = R.string.password_mismatch_error)
+        NotSamePassword -> stringResource(id = R.string.password_mismatch_error)
         else -> ""
     }
 
