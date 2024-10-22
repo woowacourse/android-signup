@@ -59,7 +59,7 @@ fun SignUpScreen(
     onValueChange: (SignUpUiModel) -> Unit
 ) {
 
-    val userNameResult = UserName.from(uiModel.userName, Regex("^[a-zA-Z가-힣]+$"))
+    val userNameResult = UserName.from(uiModel.userName, Regex(stringResource(R.string.user_name_regex)))
     val emailResult = Email.from(uiModel.email)
     val passwordResult = Password.from(uiModel.password)
     val passwordConfirmResult = PasswordConfirm.from(uiModel.passwordConfirm, uiModel.password)

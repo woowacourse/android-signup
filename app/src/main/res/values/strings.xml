@@ -16,4 +16,5 @@
     <string name="sign_up_password_confirm_error">비밀번호가 일치하지 않습니다.</string>
 
     <string name="sign_up_complete">회원가입이 완료되었습니다.</string>
+    <string name="user_name_regex">^[a-zA-Z가-힣]+$</string>
 </resources>
