@@ -6,6 +6,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import nextstep.signup.model.Password
+import nextstep.signup.ui.ERROR_PASSWORD_FORMAT_MESSAGE
+import nextstep.signup.ui.ERROR_PASSWORD_LENGTH_MESSAGE
 import nextstep.signup.ui.component.InputText
 import org.junit.Before
 import org.junit.Rule
@@ -34,7 +36,7 @@ class PasswordInputTextTest {
 
         // then
         composeTestRule
-            .onNodeWithText(Password.ERROR_PASSWORD_LENGTH_MESSAGE)
+            .onNodeWithText(ERROR_PASSWORD_LENGTH_MESSAGE)
             .assertDoesNotExist()
     }
 
@@ -45,7 +47,7 @@ class PasswordInputTextTest {
 
         // then
         composeTestRule
-            .onNodeWithText(Password.ERROR_PASSWORD_LENGTH_MESSAGE)
+            .onNodeWithText(ERROR_PASSWORD_LENGTH_MESSAGE)
             .assertExists()
     }
 
@@ -56,7 +58,7 @@ class PasswordInputTextTest {
 
         // then
         composeTestRule
-            .onNodeWithText(Password.ERROR_PASSWORD_FORMAT_MESSAGE)
+            .onNodeWithText(ERROR_PASSWORD_FORMAT_MESSAGE)
             .assertExists()
     }
 }

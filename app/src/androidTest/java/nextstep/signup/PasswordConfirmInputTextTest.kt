@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import nextstep.signup.model.PasswordConfirm
+import nextstep.signup.ui.ERROR_PASSWORD_CONFIRM_MESSAGE
 import nextstep.signup.ui.component.InputText
 import org.junit.Before
 import org.junit.Rule
@@ -35,7 +36,7 @@ class PasswordConfirmInputTextTest {
 
         // then
         composeTestRule
-            .onNodeWithText(PasswordConfirm.ERROR_PASSWORD_CONFIRM_MESSAGE)
+            .onNodeWithText(ERROR_PASSWORD_CONFIRM_MESSAGE)
             .assertExists()
     }
 
@@ -46,7 +47,7 @@ class PasswordConfirmInputTextTest {
 
         // then
         composeTestRule
-            .onNodeWithText(PasswordConfirm.ERROR_PASSWORD_CONFIRM_MESSAGE)
+            .onNodeWithText(ERROR_PASSWORD_CONFIRM_MESSAGE)
             .assertDoesNotExist()
     }
 }

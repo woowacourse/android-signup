@@ -1,7 +1,6 @@
 package nextstep.signup.model
 
-import org.junit.Assert.assertFalse
-import org.junit.Assert.assertTrue
+import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class PasswordConfirmTest {
@@ -10,7 +9,9 @@ class PasswordConfirmTest {
         val password = "password12"
         val passwordConfirm = PasswordConfirm(password, "password12")
 
-        assertTrue(passwordConfirm.isValid())
+        val result = passwordConfirm.validate()
+        val expect = ValidationState.Valid
+        assertEquals(expect, result)
     }
 
     @Test
@@ -18,6 +19,8 @@ class PasswordConfirmTest {
         val password = "password12"
         val passwordConfirm = PasswordConfirm(password, "password")
 
-        assertFalse(passwordConfirm.isValid())
+        val result = passwordConfirm.validate()
+        val expect = ValidationState.Invalid.ConfirmMismatch
+        assertEquals(expect, result)
     }
 }

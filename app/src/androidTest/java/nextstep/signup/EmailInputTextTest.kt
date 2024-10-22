@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import nextstep.signup.model.Email
+import nextstep.signup.ui.ERROR_EMAIL_MESSAGE
 import nextstep.signup.ui.component.InputText
 import org.junit.Before
 import org.junit.Rule
@@ -34,7 +35,7 @@ class EmailInputTextTest {
 
         // then
         composeTestRule
-            .onNodeWithText(Email.ERROR_EMAIL_MESSAGE)
+            .onNodeWithText(ERROR_EMAIL_MESSAGE)
             .assertDoesNotExist()
     }
 
@@ -45,7 +46,7 @@ class EmailInputTextTest {
 
         // then
         composeTestRule
-            .onNodeWithText(Email.ERROR_EMAIL_MESSAGE)
+            .onNodeWithText(ERROR_EMAIL_MESSAGE)
             .assertExists()
     }
 }
