@@ -7,6 +7,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import nextstep.signup.R
 import nextstep.signup.model.Password
@@ -44,12 +46,24 @@ private fun PasswordConfirm.getErrorMessage(password: String): String? =
         else -> null
     }
 
+class PasswordConfirmPreviewParameterProvider : PreviewParameterProvider<PasswordConfirm> {
+    override val values =
+        sequenceOf(
+            PasswordConfirm("hannah0731"),
+            PasswordConfirm("hannah"),
+            PasswordConfirm(""),
+        )
+}
+
 @Preview(showBackground = true)
 @Composable
-private fun PasswordConfirmComposablePreview() {
+private fun PasswordConfirmComposablePreview(
+    @PreviewParameter(PasswordConfirmPreviewParameterProvider::class)
+    passwordConfirm: PasswordConfirm,
+) {
     PasswordConfirmComposable(
         password = Password("hannah0731"),
-        passwordConfirm = PasswordConfirm("hannah0731"),
+        passwordConfirm = passwordConfirm,
         onPasswordConfirmChange = {},
     )
 }

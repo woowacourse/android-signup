@@ -6,6 +6,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import nextstep.signup.R
 import nextstep.signup.model.UserName
@@ -42,11 +44,26 @@ private fun UserName.getErrorMessage(): String? =
         else -> null
     }
 
+class UserPreviewParameterProvider : PreviewParameterProvider<UserName> {
+    override val values =
+        sequenceOf(
+            UserName("해나"),
+            UserName("해나1"),
+            UserName("해나&"),
+            UserName("해나해나해나"),
+            UserName("해"),
+            UserName(""),
+        )
+}
+
 @Preview(showBackground = true)
 @Composable
-private fun UserNameComposablePreview() {
+private fun UserNameComposablePreview(
+    @PreviewParameter(UserPreviewParameterProvider::class)
+    userName: UserName,
+) {
     UserNameComposable(
-        userName = UserName("해나"),
+        userName = userName,
         onUserNameChange = {},
     )
 }

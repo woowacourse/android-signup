@@ -7,6 +7,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import nextstep.signup.R
 import nextstep.signup.model.Email
@@ -42,11 +44,25 @@ private fun Email.getErrorMessage(): String? =
         else -> null
     }
 
+class EmailPreviewParameterProvider : PreviewParameterProvider<Email> {
+    override val values =
+        sequenceOf(
+            Email("hannah@gmail.com"),
+            Email("hannahgmail.com"),
+            Email("hannah@gmailcom"),
+            Email("hannahgmailcom"),
+            Email(""),
+        )
+}
+
 @Preview(showBackground = true)
 @Composable
-private fun EmailComposablePreview() {
+private fun EmailComposablePreview(
+    @PreviewParameter(EmailPreviewParameterProvider::class)
+    email: Email,
+) {
     EmailComposable(
-        email = Email("hannah@naver.com"),
+        email = email,
         onEmailChange = {},
     )
 }
