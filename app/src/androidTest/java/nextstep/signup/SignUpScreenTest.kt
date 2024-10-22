@@ -5,8 +5,8 @@ import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
-import nextstep.signup.ui.SignUpInfo
-import nextstep.signup.ui.SignUpScreen
+import nextstep.signup.ui.signup.SignUpScreen
+import nextstep.signup.ui.signup.SignUpUiModel
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -15,7 +15,7 @@ class SignUpScreenTest {
 
     @get:Rule
     val composeTestRule = createComposeRule()
-    private val signUpInfo = mutableStateOf(SignUpInfo())
+    private val signUpInfo = mutableStateOf(SignUpUiModel())
 
     @Before
     fun setUp() {
