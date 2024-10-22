@@ -1,17 +1,17 @@
 package nextstep.signup.model
 
 class Email(private val value: String) : InputValidation {
-    private var errorMessage: String? = null
+    private var inputError: InputError = InputError.None
 
     override fun isInvalid(): Boolean {
         return regexValidate()
     }
 
-    override fun getErrorMessage() = if (isInvalid()) errorMessage else null
+    override fun getValidationError(): InputError = if (isInvalid()) inputError else InputError.None
 
     private fun regexValidate(): Boolean {
         if (!value.matches(EMAIL_REGEX.toRegex())) {
-            errorMessage = ERROR_USER_EMAIL_REGEX
+            inputError = InputError.EmailError.InvalidFormat
             return true
         }
         return false

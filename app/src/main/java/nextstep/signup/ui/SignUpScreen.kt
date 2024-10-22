@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import getErrorMessage
 import nextstep.signup.R
 import nextstep.signup.component.CustomButton
 import nextstep.signup.component.CustomPasswordTextField
@@ -151,7 +152,7 @@ fun InputField(
         onValueChange = onValueChange,
         label = label,
         isError = showError && model.isInvalid(),
-        errorMessage = if (showError) model.getErrorMessage() else null,
+        errorMessage = if (showError) model.getValidationError().getErrorMessage()?.let { stringResource(it) } else null,
         keyboardOptions = keyboardOptions
     )
 }
@@ -168,7 +169,7 @@ fun PasswordInputField(
         value = value,
         onValueChange = onValueChange,
         isError = showError && model.isInvalid(),
-        errorMessage = if (showError) model.getErrorMessage() else null,
+        errorMessage = if (showError) model.getValidationError().getErrorMessage()?.let { stringResource(it) } else null,
         label = label
     )
 }

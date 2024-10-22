@@ -4,17 +4,17 @@ class PasswordConfirm(
     private var value: String,
     private var originalPassword: String
 ) : InputValidation {
-    private var errorMessage: String? = null
+    private var inputError: InputError = InputError.None
 
     override fun isInvalid(): Boolean {
         if (value != originalPassword) {
-            errorMessage = ERROR_USER_PASSWORD_CONFIRM
+            inputError = InputError.PasswordConfirmError.PasswordMismatch
             return true
         }
         return false
     }
 
-    override fun getErrorMessage() = if (isInvalid()) errorMessage else null
+    override fun getValidationError(): InputError = if (isInvalid()) inputError else InputError.None
 
     fun setValue(password: String, passwordConfirm: String) {
         value = passwordConfirm

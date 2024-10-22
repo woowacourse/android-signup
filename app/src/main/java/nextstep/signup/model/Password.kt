@@ -1,17 +1,17 @@
 package nextstep.signup.model
 
 class Password(private val value: String) : InputValidation {
-    private var errorMessage: String? = null
+    private var inputError: InputError = InputError.None
 
     override fun isInvalid(): Boolean {
         return lengthValidate() || regexValidate()
     }
 
-    override fun getErrorMessage() = if (isInvalid()) errorMessage else null
+    override fun getValidationError(): InputError = if (isInvalid()) inputError else InputError.None
 
     private fun regexValidate(): Boolean {
         if (!value.matches(PASSWORD_REGEX.toRegex())) {
-            errorMessage = ERROR_USER_PASSWORD_REGEX
+            inputError = InputError.PasswordError.InvalidFormat
             return true
         }
         return false
@@ -19,7 +19,7 @@ class Password(private val value: String) : InputValidation {
 
     private fun lengthValidate(): Boolean {
         if (value.length !in MIN_LENGTH..MAX_LENGTH) {
-            errorMessage = ERROR_USER_PASSWORD_LENGTH
+            inputError = InputError.PasswordError.InvalidLength
             return true
         }
         return false
