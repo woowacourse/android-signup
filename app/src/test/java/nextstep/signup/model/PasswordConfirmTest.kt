@@ -7,7 +7,7 @@ import org.junit.Test
 
 class PasswordConfirmTest {
     @Test
-    fun `비밀번호 확인 값이 비밀번호 값과 다르다면 isInavalid는 true이다`() {
+    fun `비밀번호 확인 값이 비밀번호 값과 다르다면 isInvalid는 true이다`() {
         // given
         val password = PasswordConfirm("1q", "2q")
 
@@ -31,7 +31,7 @@ class PasswordConfirmTest {
     }
 
     @Test
-    fun `비밀번호 확인 값이 비밀번호 값과 같다면 isInavalid는 false이다`() {
+    fun `비밀번호 확인 값이 비밀번호 값과 같다면 isInvalid는 false이다`() {
         // given
         val password = PasswordConfirm(VALID_PASSWORD, VALID_PASSWORD)
 

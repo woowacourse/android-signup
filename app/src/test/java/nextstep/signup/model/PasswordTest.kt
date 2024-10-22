@@ -37,7 +37,7 @@ class PasswordTest {
         val password = Password("1q2w3e4r5t6y7u8i9o0p1q2w3e4r5t6y7u8i9o0p")
 
         // when
-        val result = password.isInvalid() // 'isInavalid'를 'isInvalid'로 수정
+        val result = password.isInvalid()
 
         // then
         assertTrue(result)
@@ -85,7 +85,7 @@ class PasswordTest {
         val password = Password(VALID_PASSWORD)
 
         // when
-        val result = password.isInvalid() // 'isInavalid'를 'isInvalid'로 수정
+        val result = password.isInvalid()
 
         // then
         assertFalse(result)

@@ -6,7 +6,7 @@ import org.junit.Test
 
 class NameTest {
     @Test
-    fun `이름 값이 2자 미만일 때 isInavalid는 true이다`() {
+    fun `이름 값이 2자 미만일 때 isInvalid는 true이다`() {
         // given
         val name = Name("a")
 
@@ -30,7 +30,7 @@ class NameTest {
     }
 
     @Test
-    fun `이름 값이 5자 초과일 때 isInavalid는 true이다`() {
+    fun `이름 값이 5자 초과일 때 isInvalid는 true이다`() {
         // given
         val name = Name("abcdef")
 
@@ -54,7 +54,7 @@ class NameTest {
     }
 
     @Test
-    fun `이름 값에 특수문자가 포함되어 있을 때 isInavalid는 true이다`() {
+    fun `이름 값에 특수문자가 포함되어 있을 때 isInvalid는 true이다`() {
         // given
         val name = Name("a!")
 
@@ -78,7 +78,7 @@ class NameTest {
     }
 
     @Test
-    fun `이름 값이 조건에 부합할 때 isInavalid는 false이다`() {
+    fun `이름 값이 조건에 부합할 때 isInvalid는 false이다`() {
         // given
         val name = Name("abcde")
 

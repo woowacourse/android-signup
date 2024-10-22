@@ -7,7 +7,7 @@ import org.junit.Test
 
 class EmailTest {
     @Test
-    fun `이메일 값이 이메일 형식이 아닐 때 isInavalid는 true이다`() {
+    fun `이메일 값이 이메일 형식이 아닐 때 isInvalid는 true이다`() {
         // given
         val email = Email("a")
 
@@ -31,7 +31,7 @@ class EmailTest {
     }
 
     @Test
-    fun `이메일 값이 이메일 형식이 맞을 때 isInavalid는 false이다`() {
+    fun `이메일 값이 이메일 형식이 맞을 때 isInvalid는 false이다`() {
         // given
         val email = Email(VALID_EMAIL)
 
