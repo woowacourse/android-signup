@@ -4,10 +4,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import nextstep.signup.domain.Password
+import nextstep.signup.domain.PasswordConfirm
 import nextstep.signup.ui.common.textfield.InputType
 import nextstep.signup.ui.common.textfield.SingleLineTextInput
-import nextstep.signup.ui.signup.SignUpValidator.validatePassword
-import nextstep.signup.ui.signup.SignUpValidator.validatePasswordConfirm
+import nextstep.signup.ui.signup.SignUpValidator.getValidationMessage
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -16,7 +16,7 @@ class PasswordInputValidationTest {
     @get:Rule
     val composeTestRule = createComposeRule()
     private val password = mutableStateOf(Password(""))
-    private val passwordConfirm = mutableStateOf("")
+    private val passwordConfirm = mutableStateOf(PasswordConfirm())
 
     @Before
     fun setup() {
@@ -26,16 +26,16 @@ class PasswordInputValidationTest {
                 value = password.value.value,
                 onValueChange = { password.value = Password(it) },
                 inputType = InputType.Password,
-                supportingText = password.value.validatePassword(),
+                supportingText = password.value.getValidationMessage(),
             )
 
             SingleLineTextInput(
                 label = "비밀번호 확인 테스트",
-                value = passwordConfirm.value,
-                onValueChange = { passwordConfirm.value = it },
+                value = passwordConfirm.value.value,
+                onValueChange = { passwordConfirm.value = PasswordConfirm(it) },
                 inputType = InputType.Password,
                 supportingText =
-                    passwordConfirm.value.validatePasswordConfirm(
+                    passwordConfirm.value.getValidationMessage(
                         password.value.value,
                     ),
             )
@@ -90,7 +90,7 @@ class PasswordInputValidationTest {
     fun `비밀번호_확인_시_비밀번호가_일치해야_한다`() {
         // when
         password.value = Password("abcd1234")
-        passwordConfirm.value = "abcd1234"
+        passwordConfirm.value = PasswordConfirm("abcd1234")
 
         // then
         composeTestRule
@@ -102,7 +102,7 @@ class PasswordInputValidationTest {
     fun `비밀번호가_일치하지_않으면_에러메시지가_노출된다`() {
         // when
         password.value = Password("abcd5678")
-        passwordConfirm.value = "abcd1234"
+        passwordConfirm.value = PasswordConfirm("abcd1234")
 
         // then
         composeTestRule

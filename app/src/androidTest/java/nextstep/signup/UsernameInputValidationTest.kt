@@ -6,7 +6,7 @@ import androidx.compose.ui.test.onNodeWithText
 import nextstep.signup.domain.Username
 import nextstep.signup.ui.common.textfield.InputType
 import nextstep.signup.ui.common.textfield.SingleLineTextInput
-import nextstep.signup.ui.signup.SignUpValidator.validateUsername
+import nextstep.signup.ui.signup.SignUpValidator.getValidationMessage
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -24,7 +24,7 @@ class UsernameInputValidationTest {
                 value = username.value.value,
                 onValueChange = { username.value = Username(it) },
                 inputType = InputType.Username,
-                supportingText = username.value.validateUsername(),
+                supportingText = username.value.getValidationMessage(),
             )
         }
     }

@@ -29,14 +29,12 @@ import kotlinx.coroutines.launch
 import nextstep.signup.R
 import nextstep.signup.domain.Email
 import nextstep.signup.domain.Password
+import nextstep.signup.domain.PasswordConfirm
 import nextstep.signup.domain.Username
 import nextstep.signup.ui.common.button.StateButton
 import nextstep.signup.ui.common.textfield.InputType
 import nextstep.signup.ui.common.textfield.SingleLineTextInput
-import nextstep.signup.ui.signup.SignUpValidator.validateEmail
-import nextstep.signup.ui.signup.SignUpValidator.validatePassword
-import nextstep.signup.ui.signup.SignUpValidator.validatePasswordConfirm
-import nextstep.signup.ui.signup.SignUpValidator.validateUsername
+import nextstep.signup.ui.signup.SignUpValidator.getValidationMessage
 import nextstep.signup.ui.theme.SignUpTheme
 import nextstep.signup.ui.theme.Typography
 
@@ -85,10 +83,10 @@ fun SignUpInteractionLayer(onButtonClicked: () -> Unit) {
     var username by remember { mutableStateOf(Username()) }
     var email by remember { mutableStateOf(Email()) }
     var password by remember { mutableStateOf(Password()) }
-    var passwordConfirm by remember { mutableStateOf("") }
+    var passwordConfirm by remember { mutableStateOf(PasswordConfirm()) }
     val isFormatValid by remember {
         derivedStateOf {
-            username.isValid && email.isValid && password.isValid && passwordConfirm == password.value
+            username.isValid && email.isValid && password.isValid && passwordConfirm.isMatchWithPassword(password.value)
         }
     }
 
@@ -107,7 +105,7 @@ fun SignUpInteractionLayer(onButtonClicked: () -> Unit) {
             onUsernameChanged = { username = username.copy(value = it) },
             onEmailChanged = { email = email.copy(value = it) },
             onPasswordChanged = { password = password.copy(value = it) },
-            onPasswordConfirmChanged = { passwordConfirm = it },
+            onPasswordConfirmChanged = { passwordConfirm = passwordConfirm.copy(value = it) },
         )
         StateButton(
             modifier = modifier.requiredHeight(50.dp),
@@ -125,7 +123,7 @@ fun SignUpInputs(
     username: Username,
     email: Email,
     password: Password,
-    passwordConfirm: String,
+    passwordConfirm: PasswordConfirm,
     onUsernameChanged: (String) -> Unit,
     onEmailChanged: (String) -> Unit,
     onPasswordChanged: (String) -> Unit,
@@ -137,7 +135,7 @@ fun SignUpInputs(
         onValueChange = onUsernameChanged,
         label = stringResource(id = R.string.signup_username),
         inputType = InputType.Username,
-        supportingText = username.validateUsername(),
+        supportingText = username.getValidationMessage(),
     )
     SingleLineTextInput(
         modifier = modifier,
@@ -145,7 +143,7 @@ fun SignUpInputs(
         onValueChange = onEmailChanged,
         label = stringResource(id = R.string.signup_email),
         inputType = InputType.Email,
-        supportingText = email.validateEmail(),
+        supportingText = email.getValidationMessage(),
     )
     SingleLineTextInput(
         modifier = modifier,
@@ -153,15 +151,15 @@ fun SignUpInputs(
         onValueChange = onPasswordChanged,
         label = stringResource(id = R.string.signup_password),
         inputType = InputType.Password,
-        supportingText = password.validatePassword(),
+        supportingText = password.getValidationMessage(),
     )
     SingleLineTextInput(
         modifier = modifier,
-        value = passwordConfirm,
+        value = passwordConfirm.value,
         onValueChange = onPasswordConfirmChanged,
         label = stringResource(id = R.string.signup_password_confirm),
         inputType = InputType.Password,
-        supportingText = passwordConfirm.validatePasswordConfirm(password.value),
+        supportingText = passwordConfirm.getValidationMessage(password.value),
     )
 }
 

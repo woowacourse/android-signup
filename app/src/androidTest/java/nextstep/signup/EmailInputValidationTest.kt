@@ -6,7 +6,7 @@ import androidx.compose.ui.test.onNodeWithText
 import nextstep.signup.domain.Email
 import nextstep.signup.ui.common.textfield.InputType
 import nextstep.signup.ui.common.textfield.SingleLineTextInput
-import nextstep.signup.ui.signup.SignUpValidator.validateEmail
+import nextstep.signup.ui.signup.SignUpValidator.getValidationMessage
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -24,7 +24,7 @@ class EmailInputValidationTest {
                 value = email.value.value,
                 onValueChange = { email.value = Email(it) },
                 inputType = InputType.Email,
-                supportingText = email.value.validateEmail(),
+                supportingText = email.value.getValidationMessage(),
             )
         }
     }
