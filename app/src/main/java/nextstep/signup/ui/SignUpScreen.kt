@@ -19,14 +19,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import getErrorMessage
 import nextstep.signup.R
 import nextstep.signup.component.CustomButton
-import nextstep.signup.component.CustomPasswordTextField
-import nextstep.signup.component.CustomTextField
+import nextstep.signup.component.InputField
 import nextstep.signup.component.TitleText
 import nextstep.signup.model.Email
-import nextstep.signup.model.InputValidation
 import nextstep.signup.model.Name
 import nextstep.signup.model.Password
 import nextstep.signup.model.PasswordConfirm
@@ -63,62 +60,67 @@ fun SignUpScreen() {
             .padding(start = 32.dp, end = 32.dp)
     ) {
         Spacer(modifier = Modifier.height(60.dp))
-        TitleText(
-            title = stringResource(R.string.sign_up_title)
-        )
+        TitleText(title = stringResource(R.string.sign_up_title))
 
         Spacer(modifier = Modifier.height(40.dp))
 
-        InputField(
+        val nameConfig = InputFieldConfig(
             value = name,
             onValueChange = {
                 name = it
-                nameInputStarted = true
+                if (!nameInputStarted) nameInputStarted = true
             },
             model = nameModel,
-            label = stringResource(R.string.user_name),
-            showError = nameInputStarted
+            label = stringResource(R.string.user_name)
         )
+        InputField(config = nameConfig, showError = nameInputStarted)
 
         Spacer(modifier = Modifier.height(36.dp))
 
-        InputField(
+        val emailConfig = InputFieldConfig(
             value = email,
             onValueChange = {
                 email = it
-                emailInputStarted = true
+                if (!emailInputStarted) emailInputStarted = true
             },
             model = emailModel,
-            label = stringResource(R.string.user_email),
+            label = stringResource(R.string.user_email)
+        )
+        InputField(
+            config = emailConfig,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
             showError = emailInputStarted
         )
 
         Spacer(modifier = Modifier.height(36.dp))
 
-        PasswordInputField(
+        val passwordConfig = InputFieldConfig(
             value = password,
             onValueChange = {
                 password = it
-                passwordInputStarted = true
+                if (!passwordInputStarted) passwordInputStarted = true
                 passwordConfirmModel.setValue(password, passwordConfirm)
             },
             model = passwordModel,
-            label = stringResource(R.string.user_password),
-            showError = passwordInputStarted
+            label = stringResource(R.string.user_password)
         )
+        InputField(config = passwordConfig, showError = passwordInputStarted, isPassword = true)
 
         Spacer(modifier = Modifier.height(36.dp))
 
-        PasswordInputField(
+        val passwordConfirmConfig = InputFieldConfig(
             value = passwordConfirm,
             onValueChange = {
                 passwordConfirm = it
-                passwordConfirmInputStarted = true
+                if (!passwordConfirmInputStarted) passwordConfirmInputStarted = true
             },
             model = passwordConfirmModel,
-            label = stringResource(R.string.user_password_confirm),
-            showError = passwordConfirmInputStarted
+            label = stringResource(R.string.user_password_confirm)
+        )
+        InputField(
+            config = passwordConfirmConfig,
+            showError = passwordConfirmInputStarted,
+            isPassword = true
         )
 
         Spacer(modifier = Modifier.height(42.dp))
@@ -136,40 +138,4 @@ fun SignUpScreen() {
             enabled = !user.isInvalid()
         )
     }
-}
-
-@Composable
-fun InputField(
-    value: String,
-    onValueChange: (String) -> Unit,
-    model: InputValidation,
-    label: String,
-    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    showError: Boolean = false
-) {
-    CustomTextField(
-        value = value,
-        onValueChange = onValueChange,
-        label = label,
-        isError = showError && model.isInvalid(),
-        errorMessage = if (showError) model.getValidationError().getErrorMessage()?.let { stringResource(it) } else null,
-        keyboardOptions = keyboardOptions
-    )
-}
-
-@Composable
-fun PasswordInputField(
-    value: String,
-    onValueChange: (String) -> Unit,
-    model: InputValidation,
-    label: String,
-    showError: Boolean = false
-) {
-    CustomPasswordTextField(
-        value = value,
-        onValueChange = onValueChange,
-        isError = showError && model.isInvalid(),
-        errorMessage = if (showError) model.getValidationError().getErrorMessage()?.let { stringResource(it) } else null,
-        label = label
-    )
 }
