@@ -24,10 +24,10 @@ class PasswordConfirmTest {
         val password = PasswordConfirm("1q", "2q")
 
         // when
-        val errorMessage = password.getErrorMessage()
+        val error = password.getValidationError()
 
         // then
-        assertEquals(PasswordConfirm.ERROR_USER_PASSWORD_CONFIRM, errorMessage)
+        assertEquals(InputError.PasswordConfirmError.PasswordMismatch, error)
     }
 
     @Test

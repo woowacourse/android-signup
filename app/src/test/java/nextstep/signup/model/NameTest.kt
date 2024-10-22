@@ -18,15 +18,15 @@ class NameTest {
     }
 
     @Test
-    fun `이름 값이 2자 미만일 때 올바른 에러 메시지를 반환한다`() {
+    fun `이름 값이 2자 미만일 때 올바른 에러를 반환한다`() {
         // given
         val name = Name("a")
 
         // when
-        val errorMessage = name.getErrorMessage()
+        val error = name.getValidationError()
 
         // then
-        assertEquals(Name.ERROR_USER_NAME_LENGTH, errorMessage)
+        assertEquals(InputError.NameError.InvalidLength, error)
     }
 
     @Test
@@ -42,15 +42,15 @@ class NameTest {
     }
 
     @Test
-    fun `이름 값이 5자 초과일 때 올바른 에러 메시지를 반환한다`() {
+    fun `이름 값이 5자 초과일 때 올바른 에러를 반환한다`() {
         // given
         val name = Name("abcdef")
 
         // when
-        val errorMessage = name.getErrorMessage()
+        val error = name.getValidationError()
 
         // then
-        assertEquals(Name.ERROR_USER_NAME_LENGTH, errorMessage)
+        assertEquals(InputError.NameError.InvalidLength, error)
     }
 
     @Test
@@ -66,15 +66,15 @@ class NameTest {
     }
 
     @Test
-    fun `이름 값에 특수문자가 포함되어 있을 때 올바른 에러 메시지를 반환한다`() {
+    fun `이름 값에 특수문자가 포함되어 있을 때 올바른 에러를 반환한다`() {
         // given
         val name = Name("a!")
 
         // when
-        val errorMessage = name.getErrorMessage()
+        val error = name.getValidationError()
 
         // then
-        assertEquals(Name.ERROR_USER_NAME_REGEX, errorMessage)
+        assertEquals(InputError.NameError.InvalidFormat, error)
     }
 
     @Test
@@ -90,14 +90,14 @@ class NameTest {
     }
 
     @Test
-    fun `이름 값이 조건에 부합할 때 에러메시지는 null을 반환한다`() {
+    fun `이름 값이 조건에 부합할 때 에러메시지는 을 반환한다`() {
         // given
         val name = Name(VALID_NAME)
 
         // when
-        val errorMessage = name.getErrorMessage()
+        val error = name.getValidationError()
 
         // then
-        assertEquals(null, errorMessage)
+        assertEquals(InputError.None, error)
     }
 }
