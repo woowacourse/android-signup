@@ -1,7 +1,10 @@
 package nextstep.signup.domain
 
 import android.os.Parcelable
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
 import kotlinx.parcelize.Parcelize
+import nextstep.signup.R
 
 @Parcelize
 data class SignUpForm(
@@ -51,6 +54,40 @@ data class SignUpForm(
             ValidationState.FORMAT_ERROR
         } else {
             ValidationState.VALID
+        }
+    }
+
+    @Composable
+    fun getUserNameErrorMessage(): String {
+        return when (validateUserName()) {
+            ValidationState.VALID -> stringResource(id = R.string.empty)
+            ValidationState.FORMAT_ERROR -> stringResource(id = R.string.format_error_message_user_name)
+            ValidationState.LENGTH_ERROR -> stringResource(id = R.string.length_error_message_user_name)
+        }
+    }
+
+    @Composable
+    fun getEmailErrorMessage(): String {
+        return when (validateEmail()) {
+            ValidationState.FORMAT_ERROR -> stringResource(id = R.string.format_error_message_email)
+            else -> stringResource(id = R.string.empty)
+        }
+    }
+
+    @Composable
+    fun getPasswordErrorMessage(): String {
+        return when (validatePassword()) {
+            ValidationState.VALID -> stringResource(id = R.string.empty)
+            ValidationState.FORMAT_ERROR -> stringResource(id = R.string.format_error_message_password)
+            ValidationState.LENGTH_ERROR -> stringResource(id = R.string.length_error_message_password)
+        }
+    }
+
+    @Composable
+    fun getPasswordConfirmErrorMessage(): String {
+        return when (validatePasswordConfirm()) {
+            ValidationState.FORMAT_ERROR -> stringResource(id = R.string.format_error_message_password_confirm)
+            else -> stringResource(id = R.string.empty)
         }
     }
 

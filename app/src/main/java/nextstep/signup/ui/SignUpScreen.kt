@@ -9,9 +9,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -22,13 +22,36 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.signup.R
 import nextstep.signup.domain.SignUpForm
-import nextstep.signup.domain.ValidationState
 
 @Composable
 fun SignUpScreen(
     signUpForm: SignUpForm,
     onSignUpFormChanged: (SignUpForm) -> Unit,
 ) {
+    val onUserNameChanged =
+        remember(signUpForm.userName) {
+            { newUserName: String ->
+                onSignUpFormChanged(signUpForm.copy(userName = newUserName))
+            }
+        }
+    val onEmailChanged =
+        remember(signUpForm.email) {
+            { newEmail: String ->
+                onSignUpFormChanged(signUpForm.copy(email = newEmail))
+            }
+        }
+    val onPasswordChanged =
+        remember(signUpForm.password) {
+            { newPassword: String ->
+                onSignUpFormChanged(signUpForm.copy(password = newPassword))
+            }
+        }
+    val onPasswordConfirmChanged =
+        remember(signUpForm.passwordConfirm) {
+            { newPasswordConfirm: String ->
+                onSignUpFormChanged(signUpForm.copy(passwordConfirm = newPasswordConfirm))
+            }
+        }
     Surface(
         modifier =
             Modifier
@@ -48,35 +71,31 @@ fun SignUpScreen(
             SignUpTextField(
                 value = signUpForm.userName,
                 hint = stringResource(R.string.user_name),
-                onValueChange = { onSignUpFormChanged(signUpForm.copy(userName = it)) },
-                getErrorMessage = { getUserNameErrorMessage(signUpForm.validateUserName()) },
+                onValueChange = onUserNameChanged,
+                errorMessage = signUpForm.getUserNameErrorMessage(),
             )
             Spacer(modifier = Modifier.height(36.dp))
             SignUpTextField(
                 value = signUpForm.email,
                 hint = stringResource(R.string.email),
-                onValueChange = { onSignUpFormChanged(signUpForm.copy(email = it)) },
-                getErrorMessage = { getEmailErrorMessage(signUpForm.validateEmail()) },
+                onValueChange = onEmailChanged,
+                errorMessage = signUpForm.getEmailErrorMessage(),
             )
             Spacer(modifier = Modifier.height(36.dp))
             SignUpTextField(
                 value = signUpForm.password,
                 hint = stringResource(R.string.password),
                 visualTransformation = PasswordVisualTransformation(),
-                onValueChange = { onSignUpFormChanged(signUpForm.copy(password = it)) },
-                getErrorMessage = { getPasswordErrorMessage(signUpForm.validatePassword()) },
+                onValueChange = onPasswordChanged,
+                errorMessage = signUpForm.getPasswordErrorMessage(),
             )
             Spacer(modifier = Modifier.height(36.dp))
             SignUpTextField(
                 value = signUpForm.passwordConfirm,
                 hint = stringResource(R.string.password_confirm),
                 visualTransformation = PasswordVisualTransformation(),
-                onValueChange = { onSignUpFormChanged(signUpForm.copy(passwordConfirm = it)) },
-                getErrorMessage = {
-                    getPasswordConfirmErrorMessage(
-                        signUpForm.validatePasswordConfirm(),
-                    )
-                },
+                onValueChange = onPasswordConfirmChanged,
+                errorMessage = signUpForm.getPasswordConfirmErrorMessage(),
             )
             Spacer(modifier = Modifier.height(42.dp))
             SignUpButton(
@@ -84,44 +103,6 @@ fun SignUpScreen(
                 isEnabled = signUpForm.isValidForm,
             )
         }
-    }
-}
-
-@Composable
-@ReadOnlyComposable
-fun getUserNameErrorMessage(usernameState: ValidationState): String {
-    return when (usernameState) {
-        ValidationState.VALID -> stringResource(id = R.string.empty)
-        ValidationState.FORMAT_ERROR -> stringResource(id = R.string.format_error_message_user_name)
-        ValidationState.LENGTH_ERROR -> stringResource(id = R.string.length_error_message_user_name)
-    }
-}
-
-@Composable
-@ReadOnlyComposable
-fun getEmailErrorMessage(emailState: ValidationState): String {
-    return when (emailState) {
-        ValidationState.FORMAT_ERROR -> stringResource(id = R.string.format_error_message_email)
-        else -> stringResource(id = R.string.empty)
-    }
-}
-
-@Composable
-@ReadOnlyComposable
-fun getPasswordErrorMessage(passwordState: ValidationState): String {
-    return when (passwordState) {
-        ValidationState.VALID -> stringResource(id = R.string.empty)
-        ValidationState.FORMAT_ERROR -> stringResource(id = R.string.format_error_message_password)
-        ValidationState.LENGTH_ERROR -> stringResource(id = R.string.length_error_message_password)
-    }
-}
-
-@Composable
-@ReadOnlyComposable
-fun getPasswordConfirmErrorMessage(passwordState: ValidationState): String {
-    return when (passwordState) {
-        ValidationState.FORMAT_ERROR -> stringResource(id = R.string.format_error_message_password_confirm)
-        else -> stringResource(id = R.string.empty)
     }
 }
 

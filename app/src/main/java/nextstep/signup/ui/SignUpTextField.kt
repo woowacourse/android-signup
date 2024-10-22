@@ -5,10 +5,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -21,10 +17,10 @@ fun SignUpTextField(
     hint: String,
     modifier: Modifier = Modifier,
     visualTransformation: VisualTransformation = VisualTransformation.None,
-    getErrorMessage: @Composable (String) -> String = { "" },
+    errorMessage: String = "",
     onValueChange: (String) -> Unit,
 ) {
-    val isError = getErrorMessage(value).isNotEmpty() && value.isNotEmpty()
+    val isError = errorMessage.isNotEmpty() && value.isNotEmpty()
     Column {
         TextField(
             value = value,
@@ -37,7 +33,7 @@ fun SignUpTextField(
             visualTransformation = visualTransformation,
             supportingText = {
                 if (isError) {
-                    Text(text = getErrorMessage(value))
+                    Text(text = errorMessage)
                 }
             },
         )
@@ -47,10 +43,9 @@ fun SignUpTextField(
 @Preview(showBackground = true)
 @Composable
 fun SignUpTextFieldPreview() {
-    var value by remember { mutableStateOf("") }
     SignupTheme {
         SignUpTextField(
-            value = value,
+            value = "",
             modifier = Modifier,
             hint = "텍스트 필드 힌트",
         ) {
@@ -61,12 +56,11 @@ fun SignUpTextFieldPreview() {
 @Preview(showBackground = true)
 @Composable
 fun SignUpTextFieldPreviewWithoutMask() {
-    var value by remember { mutableStateOf("userPassword") }
     SignupTheme {
         SignUpTextField(
-            value = value,
+            value = "userPassword",
             hint = "텍스트 필드 힌트",
-            Modifier,
+            modifier = Modifier,
         ) {
         }
     }
@@ -75,13 +69,12 @@ fun SignUpTextFieldPreviewWithoutMask() {
 @Preview(showBackground = true)
 @Composable
 fun SignUpTextFieldPreviewWithMask() {
-    var value by remember { mutableStateOf("미리 보기 텍스트 값") }
     SignupTheme {
         SignUpTextField(
-            value = value,
+            value = "미리 보기 텍스트",
             hint = "텍스트 필드 힌트",
-            Modifier,
-            PasswordVisualTransformation(),
+            modifier = Modifier,
+            visualTransformation = PasswordVisualTransformation(),
         ) {
         }
     }
@@ -90,14 +83,13 @@ fun SignUpTextFieldPreviewWithMask() {
 @Preview(showBackground = true)
 @Composable
 fun InvalidSignUpTextFieldPreview() {
-    var value by remember { mutableStateOf("미리 보기 텍스트 값") }
     SignupTheme {
         SignUpTextField(
-            value = value,
+            value = "미리 보기 텍스트 ",
             modifier = Modifier,
             hint = "텍스트 필드 힌트",
             visualTransformation = PasswordVisualTransformation(),
-            getErrorMessage = { "에러 메시지" },
+            errorMessage = "에러 메시지",
         ) {
         }
     }

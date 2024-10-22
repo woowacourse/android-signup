@@ -23,15 +23,13 @@ class SignUpTextFieldKtTest {
             SignUpTextField(
                 value = value,
                 hint = "test hint",
-                getErrorMessage = {
-                    getErrorMessage(state)
-                },
+                errorMessage = "에러 메시지",
             ) { value = it }
         }
     }
 
     @Test
-    fun 입력값이_존재하며_유효할_시_에러_메시지가_노출되지_않는다() {
+    fun `입력값이_존재하며_유효할_시_에러_메시지가_노출되지_않는다`() {
         // when
         value = "입력값"
         state = ValidationState.LENGTH_ERROR
@@ -43,7 +41,7 @@ class SignUpTextFieldKtTest {
     }
 
     @Test
-    fun 입력값이_존재하며_길이_오류일_시_해당하는_에러_메시지가_노출된다() {
+    fun `입력값이_존재하며_길이_오류일_시_해당하는_에러_메시지가_노출된다`() {
         // when
         value = "입력값"
         state = ValidationState.LENGTH_ERROR
@@ -55,7 +53,7 @@ class SignUpTextFieldKtTest {
     }
 
     @Test
-    fun 입력값이_존재하며_형식_오류일_시_해당하는_에러_메시지가_노출된다() {
+    fun `입력값이_존재하며_형식_오류일_시_해당하는_에러_메시지가_노출된다`() {
         // when
         value = "입력값"
         state = ValidationState.FORMAT_ERROR
