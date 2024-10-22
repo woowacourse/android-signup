@@ -59,7 +59,8 @@ fun SignUpScreen(
     onValueChange: (SignUpUiModel) -> Unit
 ) {
 
-    val userNameResult = UserName.from(uiModel.userName, Regex(stringResource(R.string.user_name_regex)))
+    val userNameResult =
+        UserName.from(uiModel.userName, Regex(stringResource(R.string.user_name_regex)))
     val emailResult = Email.from(uiModel.email)
     val passwordResult = Password.from(uiModel.password)
     val passwordConfirmResult = PasswordConfirm.from(uiModel.passwordConfirm, uiModel.password)
@@ -82,8 +83,8 @@ fun SignUpScreen(
                 onValueChange(uiModel.copy(userName = it))
             },
             isError = userNameResult is SignUpInfoResult.Fail,
-            errorMessage = userNameResult.toErrorMessageOrNull(),
-            label = R.string.sign_up_input_user_name
+            errorMessage = userNameResult.toErrorMessageOrNull()?.let { stringResource(it) },
+            label = stringResource(R.string.sign_up_input_user_name)
         )
 
         Spacer(Modifier.height(42.dp))
@@ -94,8 +95,8 @@ fun SignUpScreen(
                 onValueChange(uiModel.copy(email = it))
             },
             isError = emailResult is SignUpInfoResult.Fail,
-            errorMessage = emailResult.toErrorMessageOrNull(),
-            label = R.string.sign_up_input_user_email,
+            errorMessage = emailResult.toErrorMessageOrNull()?.let { stringResource(it) },
+            label = stringResource(R.string.sign_up_input_user_email),
             keyBoardType = KeyboardType.Email,
         )
 
@@ -108,8 +109,8 @@ fun SignUpScreen(
             },
             modifier = Modifier.fillMaxWidth(),
             isError = passwordResult is SignUpInfoResult.Fail,
-            errorMessage = passwordResult.toErrorMessageOrNull(),
-            label = R.string.sign_up_input_user_password,
+            errorMessage = passwordResult.toErrorMessageOrNull()?.let { stringResource(it) },
+            label = stringResource(R.string.sign_up_input_user_password),
             keyBoardType = KeyboardType.Password
         )
         Spacer(Modifier.height(42.dp))
@@ -120,8 +121,8 @@ fun SignUpScreen(
                 onValueChange(uiModel.copy(passwordConfirm = it))
             },
             isError = passwordConfirmResult is SignUpInfoResult.Fail,
-            errorMessage = passwordConfirmResult.toErrorMessageOrNull(),
-            label = R.string.sign_up_input_user_password_confirm,
+            errorMessage = passwordConfirmResult.toErrorMessageOrNull()?.let { stringResource(it) },
+            label = stringResource(R.string.sign_up_input_user_password_confirm),
             keyBoardType = KeyboardType.Password
         )
         Spacer(Modifier.height(42.dp))

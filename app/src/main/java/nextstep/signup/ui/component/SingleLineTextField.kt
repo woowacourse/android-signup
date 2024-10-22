@@ -26,10 +26,8 @@ fun SingleLineTextField(
     onTextChange: (String) -> Unit,
     modifier: Modifier = Modifier,
     isError: Boolean = false,
-    @StringRes
-    label: Int? = null,
-    @StringRes
-    errorMessage: Int? = null,
+    label: String? = null,
+    errorMessage: String? = null,
     keyBoardType: KeyboardType = KeyboardType.Text,
     visualTransformation: VisualTransformation = VisualTransformation.None,
 ) {
@@ -49,7 +47,7 @@ fun SingleLineTextField(
         singleLine = true,
         label = {
             label?.let {
-                Text(text = stringResource(it), fontSize = 16.sp)
+                Text(text = it, fontSize = 16.sp)
             }
         },
         textStyle = TextStyle(
@@ -58,7 +56,7 @@ fun SingleLineTextField(
         ),
         supportingText = {
             errorMessage?.let {
-                Text(text = stringResource(it), fontSize = 12.sp, color = Red)
+                Text(text = it, fontSize = 12.sp, color = Red)
             }
         },
         keyboardOptions = KeyboardOptions(
