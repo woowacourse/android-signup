@@ -1,6 +1,5 @@
 package nextstep.signup
 
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import nextstep.signup.ui.Validator.getUserNameError
@@ -13,8 +12,8 @@ class InputValidationTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
-    private val userName = mutableStateOf("")
-    private val userNameError = mutableStateOf("")
+    private var userName = ""
+    private var userNameError = ""
 
     @Before
     fun setUp() {
@@ -26,7 +25,7 @@ class InputValidationTest {
                 errorState = userNameError,
                 label = TestFixture.USERNAME_LABEL,
                 onValueChange = {
-                    userNameError.value = getUserNameError(
+                    userNameError = getUserNameError(
                         it,
                         TestFixture.USERNAME_LENGTH_ERROR,
                         TestFixture.USERNAME_FORMAT_ERROR
@@ -40,7 +39,7 @@ class InputValidationTest {
     fun username_with_exactly_2_characters_shows_no_error() {
         // when
         composeTestRule.runOnUiThread {
-            userName.value = "길동"
+            userName = "길동"
         }
 
         // then
@@ -53,7 +52,7 @@ class InputValidationTest {
     fun username_with_exactly_5_characters_shows_no_error() {
         // when
         composeTestRule.runOnUiThread {
-            userName.value = "김철수김"
+            userName = "김철수김"
         }
 
         // then

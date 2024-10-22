@@ -78,24 +78,23 @@ object TestFixture {
 
     @Composable
     fun TestCustomTextField(
-        valueState: MutableState<String>,
-        errorState: MutableState<String>,
+        valueState: String,
+        errorState: String,
         label: String,
         onValueChange: (String) -> Unit
     ) {
         Column {
             CustomTextField(
-                value = valueState.value,
+                value = valueState,
                 onValueChange = {
-                    valueState.value = it
                     onValueChange(it)
                 },
                 label = label,
-                isError = errorState.value.isNotEmpty()
+                isError = errorState.isNotEmpty()
             )
-            if (errorState.value.isNotEmpty()) {
+            if (errorState.isNotEmpty()) {
                 Text(
-                    text = errorState.value,
+                    text = errorState,
                     color = MaterialTheme.colorScheme.error,
                     modifier = Modifier.padding(start = 24.dp)
                 )
