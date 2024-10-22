@@ -25,6 +25,7 @@ import nextstep.signup.model.Email
 import nextstep.signup.model.EmailValidResult
 import nextstep.signup.model.Password
 import nextstep.signup.model.PasswordConfirm
+import nextstep.signup.model.PasswordValidResult
 import nextstep.signup.model.User
 import nextstep.signup.model.UserName
 import nextstep.signup.model.UserNameValidResult
@@ -172,6 +173,14 @@ fun PasswordComposable(
     Spacer(modifier = Modifier.size(36.dp))
 }
 
+private fun Password.getErrorMessage(): String? =
+    when (this.validate()) {
+        PasswordValidResult.Blank -> null
+        PasswordValidResult.InvalidLength -> PASSWORD_LENGTH_ERROR
+        PasswordValidResult.InvalidCharacter -> PASSWORD_FORM_ERROR
+        else -> null
+    }
+
 @Composable
 fun PasswordConfirmComposable(
     password: Password,
@@ -203,3 +212,5 @@ private fun GreetingPreview() {
 private const val USERNAME_LENGTH_ERROR = "이름은 2~5자여야 합니다."
 private const val USERNAME_FORM_ERROR = "이름에는 숫자나 기호가 포함될 수 없습니다."
 private const val EMAIL_FORM_ERROR = "이메일 형식이 올바르지 않습니다."
+private const val PASSWORD_LENGTH_ERROR = "비밀번호는 8~16자여야 합니다."
+private const val PASSWORD_FORM_ERROR = "비밀번호는 영문과 숫자를 포함해야 합니다."

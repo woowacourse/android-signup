@@ -5,45 +5,45 @@ import org.junit.Test
 
 class PasswordTest {
     @Test
-    fun `비밀번호가 8자 이상 16자 이하라면 에러 메시지는 null이 반환된다`() {
-        val errorMessage: String? = Password("hannah0731").getErrorMessage()
-        assertEquals(null, errorMessage)
+    fun `비밀번호가 8자 이상 16자 이하라면 PasswordValidResult는 Success가 반환된다`() {
+        val passwordValidResult: PasswordValidResult = Password("hannah0731").validate()
+        assertEquals(PasswordValidResult.Success, passwordValidResult)
     }
 
     @Test
-    fun `비밀번호가 8자 미만이라면 에러 메시지가 반환된다`() {
-        val errorMessage: String? = Password("hye731").getErrorMessage()
-        assertEquals(PASSWORD_LENGTH_ERROR, errorMessage)
+    fun `비밀번호가 8자 미만이라면 PasswordValidResult는 InvalidLength가 반환된다`() {
+        val passwordValidResult: PasswordValidResult = Password("hye731").validate()
+        assertEquals(PasswordValidResult.InvalidLength, passwordValidResult)
     }
 
     @Test
-    fun `비밀번호가 16자 초과라면 에러 메시지가 반환된다`() {
-        val errorMessage: String? = Password("hannah731gonghyeyeon").getErrorMessage()
-        assertEquals(PASSWORD_LENGTH_ERROR, errorMessage)
+    fun `비밀번호가 16자 초과라면 PasswordValidResult는 InvalidLength가 반환된다`() {
+        val passwordValidResult: PasswordValidResult = Password("hannah731gonghyeyeon").validate()
+        assertEquals(PasswordValidResult.InvalidLength, passwordValidResult)
     }
 
     @Test
-    fun `비밀번호가 영문과 숫자를 포함하고 있다면 에러 메시지는 null이 반환된다`() {
-        val errorMessage: String? = Password("hannah0731").getErrorMessage()
-        assertEquals(null, errorMessage)
+    fun `비밀번호가 영문과 숫자를 포함하고 있다면 PasswordValidResult는 Success가 반환된다`() {
+        val passwordValidResult: PasswordValidResult = Password("hannah0731").validate()
+        assertEquals(PasswordValidResult.Success, passwordValidResult)
     }
 
     @Test
-    fun `비밀번호가 숫자를 포함하지 않으면 에러 메시지가 반환된다`() {
-        val errorMessage: String? = Password("gonghyeyeon").getErrorMessage()
-        assertEquals(PASSWORD_FORM_ERROR, errorMessage)
+    fun `비밀번호가 숫자를 포함하지 않으면 PasswordValidResult는 InvalidCharacter가 반환된다`() {
+        val passwordValidResult: PasswordValidResult = Password("gonghyeyeon").validate()
+        assertEquals(PasswordValidResult.InvalidCharacter, passwordValidResult)
     }
 
     @Test
-    fun `비밀번호가 영문을 포함하지 않으면 에러 메시지가 반환된다`() {
-        val errorMessage: String? = Password("1234567899").getErrorMessage()
-        assertEquals(PASSWORD_FORM_ERROR, errorMessage)
+    fun `비밀번호가 영문을 포함하지 않으면 PasswordValidResult는 InvalidCharacter가 반환된다`() {
+        val passwordValidResult: PasswordValidResult = Password("1234567899").validate()
+        assertEquals(PasswordValidResult.InvalidCharacter, passwordValidResult)
     }
 
     @Test
-    fun `비밀번호가 영문과 숫자를 포함하지 않으면 에러 메시지가 반환된다`() {
-        val errorMessage: String? = Password("해나해나해나@#$").getErrorMessage()
-        assertEquals(PASSWORD_FORM_ERROR, errorMessage)
+    fun `비밀번호가 영문과 숫자를 포함하지 않으면 PasswordValidResult는 InvalidCharacter가 반환된다`() {
+        val passwordValidResult: PasswordValidResult = Password("해나해나해나@#$").validate()
+        assertEquals(PasswordValidResult.InvalidCharacter, passwordValidResult)
     }
 
     @Test
@@ -86,10 +86,5 @@ class PasswordTest {
     fun `비밀번호가 비어있다면 isError의 값은 false이다`() {
         val isError: Boolean = Password("").isError()
         assertEquals(false, isError)
-    }
-
-    companion object {
-        private const val PASSWORD_LENGTH_ERROR = "비밀번호는 8~16자여야 합니다."
-        private const val PASSWORD_FORM_ERROR = "비밀번호는 영문과 숫자를 포함해야 합니다."
     }
 }
