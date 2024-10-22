@@ -1,6 +1,5 @@
-package nextstep.signup.componet
+package nextstep.signup.presentation.componet
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
@@ -17,21 +16,24 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nextstep.signup.R
-import nextstep.signup.ui.theme.Blue50
+import nextstep.signup.domain.InputValidation
+import nextstep.signup.presentation.ui.theme.Blue50
+import nextstep.signup.presentation.util.toErrorMessage
 
 @Composable
 fun CustomTextField(
     modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit,
-    @StringRes labelResId: Int,
+    label: String,
+    inputValidation: InputValidation,
     visualTransformation: VisualTransformation = VisualTransformation.None,
 ) {
     TextField(
         modifier = modifier.fillMaxWidth(),
         label = {
             Text(
-                text = stringResource(id = labelResId),
+                text = label,
                 fontWeight = FontWeight.W400,
             )
         },
@@ -50,6 +52,11 @@ fun CustomTextField(
                 cursorColor = Blue50,
             ),
         visualTransformation = visualTransformation,
+        isError = inputValidation.isError,
+        supportingText = {
+            inputValidation.errorCode ?: return@TextField
+            Text(text = inputValidation.toErrorMessage())
+        },
     )
 }
 
@@ -60,7 +67,8 @@ fun CustomTextFieldPreview() {
         modifier = Modifier.padding(horizontal = 32.dp, vertical = 18.dp),
         value = "",
         onValueChange = { },
-        labelResId = R.string.username_input,
+        label = stringResource(R.string.username_input),
+        inputValidation = InputValidation(isError = false),
         visualTransformation = PasswordVisualTransformation(),
     )
 }
