@@ -1,6 +1,6 @@
 package nextstep.signup.model
 
-data class UserInformation(
+data class User(
     val userName: UserName,
     val email: Email,
     val password: Password,

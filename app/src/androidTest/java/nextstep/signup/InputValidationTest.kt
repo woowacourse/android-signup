@@ -14,7 +14,7 @@ import androidx.compose.ui.test.onNodeWithText
 import nextstep.signup.model.Email
 import nextstep.signup.model.Password
 import nextstep.signup.model.PasswordConfirm
-import nextstep.signup.model.UserInformation
+import nextstep.signup.model.User
 import nextstep.signup.model.UserName
 import nextstep.signup.ui.component.ButtonComponent
 import org.junit.Before
@@ -172,14 +172,14 @@ class InputValidationTest {
 
     @Test
     fun `회원가입_정보가_모두_유효하다면_회원가입_버튼의_isEnabled_상태는_true이다`() {
-        val userInformation =
-            UserInformation(
+        val user =
+            User(
                 UserName("해나"),
                 Email("hannah@naver.com"),
                 Password("hannah0731"),
                 PasswordConfirm("hannah0731"),
             )
-        isEnabled = userInformation.isAbleToSubmit()
+        isEnabled = user.isAbleToSubmit()
 
         composeTestRule
             .onNodeWithTag("test")
@@ -188,14 +188,14 @@ class InputValidationTest {
 
     @Test
     fun `사용자_이름이_유효하지_않다면_회원가입_버튼의_isEnabled_상태는_false이다`() {
-        val userInformation =
-            UserInformation(
+        val user =
+            User(
                 UserName("해나해나해나"),
                 Email("hannah@naver.com"),
                 Password("hannah0731"),
                 PasswordConfirm("hannah0731"),
             )
-        isEnabled = userInformation.isAbleToSubmit()
+        isEnabled = user.isAbleToSubmit()
 
         composeTestRule
             .onNodeWithTag("test")
@@ -204,14 +204,14 @@ class InputValidationTest {
 
     @Test
     fun `Email_형식이_유효하지_않다면_회원가입_버튼의_isEnabled_상태는_false이다`() {
-        val userInformation =
-            UserInformation(
+        val user =
+            User(
                 UserName("해나"),
                 Email("hannahnaver.com"),
                 Password("hannah0731"),
                 PasswordConfirm("hannah0731"),
             )
-        isEnabled = userInformation.isAbleToSubmit()
+        isEnabled = user.isAbleToSubmit()
 
         composeTestRule
             .onNodeWithTag("test")
@@ -220,14 +220,14 @@ class InputValidationTest {
 
     @Test
     fun `비밀번호_형식이_유효하지_않다면_회원가입_버튼의_isEnabled_상태는_false이다`() {
-        val userInformation =
-            UserInformation(
+        val user =
+            User(
                 UserName("해나"),
                 Email("hannah@naver.com"),
                 Password("gonghyeyeon"),
                 PasswordConfirm("gonghyeyeon"),
             )
-        isEnabled = userInformation.isAbleToSubmit()
+        isEnabled = user.isAbleToSubmit()
 
         composeTestRule
             .onNodeWithTag("test")
@@ -236,14 +236,14 @@ class InputValidationTest {
 
     @Test
     fun `비밀번호와_확인용_비밀번호가_일치하지_않는다면_회원가입_버튼의_isEnabled_상태는_false이다`() {
-        val userInformation =
-            UserInformation(
+        val user =
+            User(
                 UserName("해나"),
                 Email("hannah@naver.com"),
                 Password("hannah0731"),
                 PasswordConfirm("hannah07"),
             )
-        isEnabled = userInformation.isAbleToSubmit()
+        isEnabled = user.isAbleToSubmit()
 
         composeTestRule
             .onNodeWithTag("test")
@@ -252,14 +252,14 @@ class InputValidationTest {
 
     @Test
     fun `입력란이_모두_비어있다면_회원가입_버튼의_isEnabled_상태는_false이다`() {
-        val userInformation =
-            UserInformation(
+        val user =
+            User(
                 UserName(""),
                 Email(""),
                 Password(""),
                 PasswordConfirm(""),
             )
-        isEnabled = userInformation.isAbleToSubmit()
+        isEnabled = user.isAbleToSubmit()
 
         composeTestRule
             .onNodeWithTag(BUTTON_TEST_TAG)

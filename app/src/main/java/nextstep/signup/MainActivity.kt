@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import nextstep.signup.model.Email
 import nextstep.signup.model.Password
 import nextstep.signup.model.PasswordConfirm
-import nextstep.signup.model.UserInformation
+import nextstep.signup.model.User
 import nextstep.signup.model.UserName
 import nextstep.signup.ui.component.ButtonComponent
 import nextstep.signup.ui.component.TextComponent
@@ -61,17 +61,17 @@ fun SignUpScreen() {
         var password by remember { mutableStateOf(Password("")) }
         var passwordConfirm by remember { mutableStateOf(PasswordConfirm("")) }
 
-        val userInformation = UserInformation(userName, email, password, passwordConfirm)
+        val user = User(userName, email, password, passwordConfirm)
 
         SignUpTitle()
         SignUpInputBox(
-            userInformation,
+            user,
             onUserNameChange = { userName = userName.copy(userName = it) },
             onEmailChange = { email = email.copy(email = it) },
             onPasswordChange = { password = password.copy(password = it) },
             onPasswordConfirmChange = { passwordConfirm = passwordConfirm.copy(passwordConfirm = it) },
         )
-        ButtonComponent(enabled = userInformation.isAbleToSubmit(), description = stringResource(id = R.string.main_sign_up))
+        ButtonComponent(enabled = user.isAbleToSubmit(), description = stringResource(id = R.string.main_sign_up))
     }
 }
 
@@ -83,18 +83,18 @@ private fun SignUpTitle() {
 
 @Composable
 private fun SignUpInputBox(
-    userInformation: UserInformation,
+    user: User,
     onUserNameChange: (String) -> Unit,
     onEmailChange: (String) -> Unit,
     onPasswordChange: (String) -> Unit,
     onPasswordConfirmChange: (String) -> Unit,
 ) {
-    UserNameComposable(userName = userInformation.userName, onUserNameChange)
-    EmailComposable(email = userInformation.email, onEmailChange)
-    PasswordComposable(password = userInformation.password, onPasswordChange)
+    UserNameComposable(userName = user.userName, onUserNameChange)
+    EmailComposable(email = user.email, onEmailChange)
+    PasswordComposable(password = user.password, onPasswordChange)
     PasswordConfirmComposable(
-        password = userInformation.password,
-        passwordConfirm = userInformation.passwordConfirm,
+        password = user.password,
+        passwordConfirm = user.passwordConfirm,
         onPasswordConfirmChange,
     )
 }
