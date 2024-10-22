@@ -19,10 +19,12 @@ class InputValidationTest {
     @Before
     fun setUp() {
         composeTestRule.setContent {
+            TestFixture.InitializeStrings()
+
             TestFixture.TestCustomTextField(
                 valueState = userName,
                 errorState = userNameError,
-                label = "Username",
+                label = TestFixture.USERNAME_LABEL,
                 onValueChange = {
                     userNameError.value = getUserNameError(
                         it,

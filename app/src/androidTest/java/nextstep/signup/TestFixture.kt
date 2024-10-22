@@ -12,6 +12,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -25,8 +26,16 @@ object TestFixture {
     const val SECOND_TEXT = "끔포즈"
     const val PREVIEW_TEXT = "안녕 난 컴포즈야~"
 
-    const val USERNAME_LENGTH_ERROR = "이름은 2~5자여야 합니다."
-    const val USERNAME_FORMAT_ERROR = "이름에는 숫자나 기호가 포함될 수 없습니다."
+    lateinit var USERNAME_LABEL: String
+    lateinit var USERNAME_LENGTH_ERROR: String
+    lateinit var USERNAME_FORMAT_ERROR: String
+
+    @Composable
+    fun InitializeStrings() {
+        USERNAME_LABEL = stringResource(R.string.username)
+        USERNAME_LENGTH_ERROR = stringResource(R.string.username_length_error)
+        USERNAME_FORMAT_ERROR = stringResource(R.string.username_format_error)
+    }
 
     @Composable
     fun MakeColumnText() {
