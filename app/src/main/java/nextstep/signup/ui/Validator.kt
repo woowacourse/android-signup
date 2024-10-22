@@ -1,6 +1,5 @@
 package nextstep.signup.ui
 
-
 object Validator {
     private const val USERNAME_REGEX = "^[a-zA-Z가-힣]+$"
     private const val EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$"

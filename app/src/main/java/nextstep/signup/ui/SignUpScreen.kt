@@ -66,13 +66,13 @@ fun SignUpScreen() {
 @Composable
 private fun canClickedButton(formState: SignUpFormState): Boolean {
     return formState.userNameError.isEmpty() &&
-            formState.emailError.isEmpty() &&
-            formState.passwordError.isEmpty() &&
-            formState.passwordConfirmError.isEmpty() &&
-            formState.userName.isNotEmpty() &&
-            formState.email.isNotEmpty() &&
-            formState.password.isNotEmpty() &&
-            formState.passwordConfirm.isNotEmpty()
+        formState.emailError.isEmpty() &&
+        formState.passwordError.isEmpty() &&
+        formState.passwordConfirmError.isEmpty() &&
+        formState.userName.isNotEmpty() &&
+        formState.email.isNotEmpty() &&
+        formState.password.isNotEmpty() &&
+        formState.passwordConfirm.isNotEmpty()
 }
 
 @Composable
