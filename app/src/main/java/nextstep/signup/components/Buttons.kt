@@ -19,7 +19,7 @@ fun DefaultButton(
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues,
     enabled: Boolean,
-    onClick: () -> Unit
+    onClick: () -> Unit = {}
 ) {
     Button(
         onClick = onClick,

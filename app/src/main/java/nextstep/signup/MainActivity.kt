@@ -104,6 +104,6 @@ fun SignUpScreen() {
         DefaultButton(
             contentPadding = PaddingValues(15.dp),
             enabled = isSignUpEnabled
-        ) {}
+        )
     }
 }
