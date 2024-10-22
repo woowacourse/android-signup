@@ -32,9 +32,12 @@ class SignUpInteractionLayerTest {
     private val passwordConfirm = mutableStateOf(PasswordConfirm())
     private val isFormatValid =
         derivedStateOf {
-            username.value.isValid && email.value.isValid && password.value.isValid && passwordConfirm.value.isMatchWithPassword(
-                password.value.value
-            )
+            username.value.isValid &&
+                email.value.isValid &&
+                password.value.isValid &&
+                passwordConfirm.value.isMatchWithPassword(
+                    password.value.value,
+                )
         }
 
     @Before
@@ -58,9 +61,10 @@ class SignUpInteractionLayerTest {
                 onPasswordConfirmChanged = { passwordConfirm.value = PasswordConfirm(value = it) },
             )
             SignUpButton(
-                modifier = modifier
-                    .requiredHeight(50.dp)
-                    .testTag(SIGN_UP_BUTTON_TAG),
+                modifier =
+                    modifier
+                        .requiredHeight(50.dp)
+                        .testTag(SIGN_UP_BUTTON_TAG),
                 isSignUpAvailiable = isFormatValid.value,
                 onButtonClicked = { },
             )
