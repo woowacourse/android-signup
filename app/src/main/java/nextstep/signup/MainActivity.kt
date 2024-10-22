@@ -26,6 +26,7 @@ import nextstep.signup.model.Password
 import nextstep.signup.model.PasswordConfirm
 import nextstep.signup.model.User
 import nextstep.signup.model.UserName
+import nextstep.signup.model.UserNameValidResult
 import nextstep.signup.ui.component.ButtonComponent
 import nextstep.signup.ui.component.TextComponent
 import nextstep.signup.ui.component.TextFieldComponent
@@ -117,6 +118,14 @@ fun UserNameComposable(
     Spacer(modifier = Modifier.size(36.dp))
 }
 
+private fun UserName.getErrorMessage(): String? =
+    when (this.validate()) {
+        UserNameValidResult.Blank -> null
+        UserNameValidResult.InvalidLength -> USERNAME_LENGTH_ERROR
+        UserNameValidResult.InvalidCharacter -> USERNAME_FORM_ERROR
+        else -> null
+    }
+
 @Composable
 fun EmailComposable(
     email: Email,
@@ -182,3 +191,6 @@ private fun GreetingPreview() {
         SignUpScreen()
     }
 }
+
+private const val USERNAME_LENGTH_ERROR = "이름은 2~5자여야 합니다."
+private const val USERNAME_FORM_ERROR = "이름에는 숫자나 기호가 포함될 수 없습니다."
