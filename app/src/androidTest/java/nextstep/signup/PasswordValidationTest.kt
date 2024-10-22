@@ -75,9 +75,20 @@ class PasswordValidationTest {
     }
 
     @Test
-    fun 비밀번호에_영어나_숫자가_아니면_에러메시지가_노출된다() {
+    fun 비밀번호에_숫자만_있으면_에러메시지가_노출된다() {
         // when
-        passwordState.value = passwordState.value.copy(password = "a123456@")
+        passwordState.value = passwordState.value.copy(password = "12345678")
+
+        // then
+        composeTestRule
+            .onNodeWithText(PASSWORD_FORMAT_ERROR)
+            .isDisplayed()
+    }
+
+    @Test
+    fun 비밀번호에_알파벳만_있으면_에러메시지가_노출된다() {
+        // when
+        passwordState.value = passwordState.value.copy(password = "abcdefgh")
 
         // then
         composeTestRule
