@@ -26,9 +26,7 @@ class InputValidationTest {
                 label = TestFixture.USERNAME_LABEL,
                 onValueChange = {
                     userNameError = getUserNameError(
-                        it,
-                        TestFixture.USERNAME_LENGTH_ERROR,
-                        TestFixture.USERNAME_FORMAT_ERROR
+                        it
                     )
                 }
             )

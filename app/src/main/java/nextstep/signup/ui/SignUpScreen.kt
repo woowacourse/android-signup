@@ -20,45 +20,19 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
 import nextstep.signup.R
-import nextstep.signup.ui.theme.SignupTheme
 
 @Composable
 fun SignUpScreen() {
-    var userName by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var passwordConfirm by remember { mutableStateOf("") }
+    var formState by remember { mutableStateOf(SignUpFormState()) }
 
-    var userNameError by remember { mutableStateOf("") }
-    var emailError by remember { mutableStateOf("") }
-    var passwordError by remember { mutableStateOf("") }
-    var passwordConfirmError by remember { mutableStateOf("") }
+    val signUpSuccessMessage = stringResource(R.string.sign_up_success)
 
-    val usernameLengthError = stringResource(R.string.username_length_error)
-    val usernameFormatError = stringResource(R.string.username_format_error)
-    val emailFormatError = stringResource(R.string.email_format_error)
-    val passwordLengthError = stringResource(R.string.password_length_error)
-    val passwordFormatError = stringResource(R.string.password_format_error)
-    val passwordConfirmErrorString = stringResource(R.string.password_confirm_error)
-
-    val isButtonEnabled = canClickedButton(
-        userNameError,
-        emailError,
-        passwordError,
-        passwordConfirmError,
-        userName,
-        email,
-        password,
-        passwordConfirm
-    )
+    val isButtonEnabled = canClickedButton(formState)
 
     val snackBarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
@@ -71,51 +45,16 @@ fun SignUpScreen() {
         ) {
             SignUpLabel()
             SignUpForm(
-                userName = userName,
-                onUserNameChange = {
-                    userName = it
-                    userNameError =
-                        Validator.getUserNameError(it, usernameLengthError, usernameFormatError)
-                },
-                userNameError = userNameError,
-
-                email = email,
-                onEmailChange = {
-                    email = it
-                    emailError = Validator.getEmailError(it, emailFormatError)
-                },
-                emailError = emailError,
-
-                password = password,
-                onPasswordChange = {
-                    password = it
-                    passwordError =
-                        Validator.getPasswordError(it, passwordLengthError, passwordFormatError)
-                    passwordConfirmError =
-                        if (passwordConfirm.isNotEmpty() && passwordConfirm != it) {
-                            passwordConfirmErrorString
-                        } else {
-                            ""
-                        }
-                },
-                passwordError = passwordError,
-
-                passwordConfirm = passwordConfirm,
-                onPasswordConfirmChange = {
-                    passwordConfirm = it
-                    passwordConfirmError = if (password != it) {
-                        passwordConfirmErrorString
-                    } else {
-                        ""
-                    }
-                },
-                passwordConfirmError = passwordConfirmError
+                formState = formState,
+                onFieldChange = { field, value ->
+                    formState = formState.updateField(field, value)
+                }
             )
             SignUpButton(
                 isButtonEnabled = isButtonEnabled,
                 onSignUpSuccess = {
                     coroutineScope.launch {
-                        snackBarHostState.showSnackbar(message = "회원가입 성공")
+                        snackBarHostState.showSnackbar(message = signUpSuccessMessage)
                     }
                 }
             )
@@ -124,30 +63,15 @@ fun SignUpScreen() {
 }
 
 @Composable
-private fun canClickedButton(
-    userNameError: String,
-    emailError: String,
-    passwordError: String,
-    passwordConfirmError: String,
-    userName: String,
-    email: String,
-    password: String,
-    passwordConfirm: String
-): Boolean {
-    val isButtonEnabled = remember(
-        userNameError,
-        emailError,
-        passwordError,
-        passwordConfirmError,
-        userName,
-        email,
-        password,
-        passwordConfirm
-    ) {
-        userNameError.isEmpty() && emailError.isEmpty() && passwordError.isEmpty() && passwordConfirmError.isEmpty() &&
-            userName.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty() && passwordConfirm.isNotEmpty()
-    }
-    return isButtonEnabled
+private fun canClickedButton(formState: SignUpFormState): Boolean {
+    return formState.userNameError.isEmpty() &&
+            formState.emailError.isEmpty() &&
+            formState.passwordError.isEmpty() &&
+            formState.passwordConfirmError.isEmpty() &&
+            formState.userName.isNotEmpty() &&
+            formState.email.isNotEmpty() &&
+            formState.password.isNotEmpty() &&
+            formState.passwordConfirm.isNotEmpty()
 }
 
 @Composable
@@ -160,63 +84,49 @@ fun SignUpLabel() {
         Text(
             text = stringResource(R.string.title),
             modifier = Modifier.align(Alignment.Center),
-            fontSize = 28.sp,
-            fontWeight = FontWeight.Bold
+            style = MaterialTheme.typography.headlineMedium
         )
     }
 }
 
 @Composable
 fun SignUpForm(
-    userName: String,
-    onUserNameChange: (String) -> Unit,
-    userNameError: String,
-
-    email: String,
-    onEmailChange: (String) -> Unit,
-    emailError: String,
-
-    password: String,
-    onPasswordChange: (String) -> Unit,
-    passwordError: String,
-
-    passwordConfirm: String,
-    onPasswordConfirmChange: (String) -> Unit,
-    passwordConfirmError: String
+    formState: SignUpFormState,
+    onFieldChange: (FieldType, String) -> Unit
 ) {
     Column {
         CustomTextField(
-            value = userName,
-            onValueChange = onUserNameChange,
+            value = formState.userName,
+            onValueChange = { onFieldChange(FieldType.USERNAME, it) },
             label = stringResource(R.string.username),
-            isError = userNameError.isNotEmpty(),
-            errorMessage = userNameError
+            isError = formState.userNameError.isNotEmpty(),
+            errorMessage = formState.userNameError
         )
 
         CustomTextField(
-            value = email,
-            onValueChange = onEmailChange,
+            value = formState.email,
+            onValueChange = { onFieldChange(FieldType.EMAIL, it) },
             label = stringResource(R.string.email),
-            isError = emailError.isNotEmpty(),
-            errorMessage = emailError
+            isError = formState.emailError.isNotEmpty(),
+            errorMessage = formState.emailError
         )
 
         CustomTextField(
-            value = password,
-            onValueChange = onPasswordChange,
+            value = formState.password,
+            onValueChange = { onFieldChange(FieldType.PASSWORD, it) },
             label = stringResource(R.string.password),
             isPasswordField = true,
-            isError = passwordError.isNotEmpty(),
-            errorMessage = passwordError
+            isError = formState.passwordError.isNotEmpty(),
+            errorMessage = formState.passwordError
         )
 
         CustomTextField(
-            value = passwordConfirm,
-            onValueChange = onPasswordConfirmChange,
+            value = formState.passwordConfirm,
+            onValueChange = { onFieldChange(FieldType.PASSWORD_CONFIRM, it) },
             label = stringResource(R.string.password_confirm),
             isPasswordField = true,
-            isError = passwordConfirmError.isNotEmpty(),
-            errorMessage = passwordConfirmError
+            isError = formState.passwordConfirmError.isNotEmpty(),
+            errorMessage = formState.passwordConfirmError
         )
     }
 }
@@ -263,13 +173,5 @@ fun CustomTextField(
                 modifier = Modifier.padding(start = 24.dp)
             )
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun SignUpPreview() {
-    SignupTheme {
-        SignUpScreen()
     }
 }
