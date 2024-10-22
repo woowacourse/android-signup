@@ -26,6 +26,7 @@ import nextstep.signup.ui.theme.BlueGrey20
 
 @Composable
 fun InputText(
+    modifier: Modifier = Modifier,
     @StringRes title: Int,
     content: String,
     onContentChange: (String) -> Unit = {},
@@ -50,6 +51,7 @@ fun InputText(
                 inputValidator.getErrorMessage()?.let { Text(it) }
             }
         },
+        modifier = modifier,
     )
     Spacer(Modifier.height(36.dp))
 }
@@ -60,9 +62,9 @@ private fun InputTextPreview() {
     var userName: UserName by remember { mutableStateOf(UserName("")) }
     userName = UserName("김컴포즈입니다")
     InputText(
-        R.string.sign_up_user_name_title,
-        userName.content,
-        { userName = userName.copy(content = it) },
-        userName,
+        title = R.string.sign_up_user_name_title,
+        content = userName.content,
+        onContentChange = { userName = userName.copy(content = it) },
+        inputValidator = userName,
     )
 }
