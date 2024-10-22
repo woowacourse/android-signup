@@ -32,7 +32,6 @@ class PasswordConfirmInputTextTest {
     fun `비밀번호_확인란_값이_비밀번호와_같지않은_경우_에러메세지가_표시된다`() {
         // when
         passwordConfirm = passwordConfirm.copy(content = "password34")
-        composeTestRule.waitForIdle()
 
         // then
         composeTestRule
@@ -44,7 +43,6 @@ class PasswordConfirmInputTextTest {
     fun `비밀번호_확인란의_값은_비밀번호와_같아야한다`() {
         // when
         passwordConfirm = passwordConfirm.copy(content = "password12")
-        composeTestRule.waitForIdle()
 
         // then
         composeTestRule

@@ -31,7 +31,6 @@ class EmailInputTextTest {
     fun `유효한_형식의_이메일을_입력해야_한다`() {
         // when
         email = Email("choco@naver.com")
-        composeTestRule.waitForIdle()
 
         // then
         composeTestRule
@@ -43,7 +42,6 @@ class EmailInputTextTest {
     fun `유효하지_않은_형식의_이메일을_입력할_경우_에러메세지가_표시된다`() {
         // when
         email = Email("choco")
-        composeTestRule.waitForIdle()
 
         // then
         composeTestRule

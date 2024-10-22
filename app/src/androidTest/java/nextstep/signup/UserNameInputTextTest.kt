@@ -31,7 +31,6 @@ class UserNameInputTextTest {
     fun `사용자_이름이_2자에서_5자라면_에러메세지가_출력되지_않는다`() {
         // when
         userName = UserName("김컴포즈")
-        composeTestRule.waitForIdle()
 
         // then
         composeTestRule
@@ -43,7 +42,6 @@ class UserNameInputTextTest {
     fun `사용자_이름이_2에서_5자가_아니면_에러메시지가_노출된다`() {
         // when
         userName = UserName("김컴포즈입니다")
-        composeTestRule.waitForIdle()
 
         // then
         composeTestRule
@@ -55,7 +53,6 @@ class UserNameInputTextTest {
     fun `사용자_이름에는_숫자나_기호가_포함될_경우_에러메세지가_표시된다`() {
         // when
         userName = UserName("예니12")
-        composeTestRule.waitForIdle()
 
         // then
         composeTestRule

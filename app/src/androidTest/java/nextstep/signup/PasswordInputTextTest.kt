@@ -31,7 +31,6 @@ class PasswordInputTextTest {
     fun `비밀번호는_8에서_16글자_사이의_영문과_숫자를_포함한다`() {
         // when
         password = Password("password1")
-        composeTestRule.waitForIdle()
 
         // then
         composeTestRule
@@ -43,7 +42,6 @@ class PasswordInputTextTest {
     fun `비밀번호가_8에서_16글자_사이가_아니라면_에러메세지가_노출된다`() {
         // when
         password = Password("pw")
-        composeTestRule.waitForIdle()
 
         // then
         composeTestRule
@@ -55,7 +53,6 @@ class PasswordInputTextTest {
     fun `비밀번호가_영문과_숫자를_포함하지_않는_경우_에러메세지가_노출된다`() {
         // when
         password = Password("password")
-        composeTestRule.waitForIdle()
 
         // then
         composeTestRule
