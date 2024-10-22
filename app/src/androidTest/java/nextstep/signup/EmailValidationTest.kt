@@ -1,6 +1,10 @@
 package nextstep.signup
 
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertTextEquals
+import androidx.compose.ui.test.hasTestTag
+import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.isDisplayed
 import androidx.compose.ui.test.isNotDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
@@ -48,8 +52,8 @@ class EmailValidationTest {
 
         // then
         composeTestRule
-            .onNodeWithText(EMAIL_FORMAT_ERROR)
-            .isNotDisplayed()
+            .onNode(hasSupportingText(""))
+            .isDisplayed()
     }
 
     @Test
@@ -62,6 +66,9 @@ class EmailValidationTest {
             .onNodeWithText(EMAIL_FORMAT_ERROR)
             .isDisplayed()
     }
+
+    private fun hasSupportingText(text: String) =
+        hasTestTag("TextFieldSupportingText") and hasText(text)
 
     companion object {
         private const val INPUT_LENGTH_ERROR = "필수 입력란 입니다."
