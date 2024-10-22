@@ -25,7 +25,7 @@ import nextstep.signup.ui.theme.SignupTheme
 
 @Composable
 fun SignUpScreen(
-    initialSignUpInput: SignUpInput = SignUpInput.intial,
+    initialSignUpInput: SignUpInput = SignUpInput.intial
 ) {
     var signUpInput: SignUpInput by remember { mutableStateOf(initialSignUpInput) }
 

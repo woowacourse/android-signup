@@ -24,22 +24,14 @@ fun PasswordConfirmTextField(
     onValueChange: (String) -> Unit,
     labelText: String = stringResource(R.string.default_text_field_label)
 ) {
-    val passwordConfirmIsEmpty by remember(passwordConfirm) {
-        mutableStateOf(passwordConfirm.isEmpty())
-    }
+    val passwordConfirmResult: PasswordConfirmResult = PasswordConfirm.from(password, passwordConfirm)
 
-    val passwordConfirmResult: PasswordConfirmResult by remember(
-        password,
-        passwordConfirm
-    ) {
-        mutableStateOf(PasswordConfirm.from(password, passwordConfirm))
-    }
     SignUpTextField(
         modifier = modifier,
         labelText = labelText,
         value = passwordConfirm,
         onValueChange = onValueChange,
-        isError = !passwordConfirmIsEmpty && passwordConfirmResult is PasswordConfirmResult.Failure,
+        isError = passwordConfirmResult is PasswordConfirmResult.Failure,
         supportingText = { ErrorText(passwordConfirmResult) },
         keyboardType = KeyboardType.Password,
         visualTransformation = PasswordVisualTransformation()

@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -21,9 +22,7 @@ fun UserNameTextField(
     onValueChange: (String) -> Unit,
     labelText: String = stringResource(R.string.default_text_field_label)
 ) {
-    val userNameResult: UserNameResult by remember(name) {
-        mutableStateOf(UserName.from(name))
-    }
+    val userNameResult: UserNameResult = UserName.from(name)
 
     SignUpTextField(
         modifier = modifier,

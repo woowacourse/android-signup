@@ -9,12 +9,6 @@ import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
-import nextstep.signup.domain.Email
-import nextstep.signup.domain.Password
-import nextstep.signup.domain.PasswordConfirm
-import nextstep.signup.domain.SignUp
-import nextstep.signup.domain.SignUpResult
-import nextstep.signup.domain.UserName
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

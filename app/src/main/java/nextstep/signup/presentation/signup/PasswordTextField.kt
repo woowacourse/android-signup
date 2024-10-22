@@ -23,9 +23,7 @@ fun PasswordTextField(
     onValueChange: (String) -> Unit,
     labelText: String = stringResource(R.string.default_text_field_label)
 ) {
-    val passwordResult: PasswordResult by remember(password) {
-        mutableStateOf(Password.from(password))
-    }
+    val passwordResult: PasswordResult = Password.from(password)
 
     SignUpTextField(
         modifier = modifier,
