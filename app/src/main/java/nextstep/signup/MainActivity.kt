@@ -22,6 +22,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.signup.model.Email
+import nextstep.signup.model.EmailValidResult
 import nextstep.signup.model.Password
 import nextstep.signup.model.PasswordConfirm
 import nextstep.signup.model.User
@@ -145,6 +146,13 @@ fun EmailComposable(
     Spacer(modifier = Modifier.size(36.dp))
 }
 
+private fun Email.getErrorMessage(): String? =
+    when (this.validate()) {
+        EmailValidResult.Blank -> null
+        EmailValidResult.InvalidForm -> EMAIL_FORM_ERROR
+        else -> null
+    }
+
 @Composable
 fun PasswordComposable(
     password: Password,
@@ -194,3 +202,4 @@ private fun GreetingPreview() {
 
 private const val USERNAME_LENGTH_ERROR = "이름은 2~5자여야 합니다."
 private const val USERNAME_FORM_ERROR = "이름에는 숫자나 기호가 포함될 수 없습니다."
+private const val EMAIL_FORM_ERROR = "이메일 형식이 올바르지 않습니다."
