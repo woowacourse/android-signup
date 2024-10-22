@@ -2,7 +2,7 @@ package nextstep.signup.domain.signupinfo
 
 class Email private constructor(
     val value: String
-) {
+):SignUpInfoResult.Success {
 
     init {
         require(value.matches(EMAIL_REGEX)) {
@@ -20,7 +20,7 @@ class Email private constructor(
         fun from(value: String): SignUpInfoResult = when {
             value.isEmpty() -> SignUpInfoResult.Empty
             !value.matches(EMAIL_REGEX) -> EmailFail.Regex
-            else -> SignUpInfoResult.Success(Email(value))
+            else -> Email(value)
         }
 
         private val EMAIL_REGEX = Regex("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")

@@ -2,7 +2,7 @@ package nextstep.signup.domain.signupinfo
 
 class UserName private constructor(
     val value: String
-) {
+) : SignUpInfoResult.Success {
 
     sealed interface UserNameFail : SignUpInfoResult.Fail {
         data object Regex : UserNameFail
@@ -16,7 +16,7 @@ class UserName private constructor(
             value.isEmpty() -> SignUpInfoResult.Empty
             !value.matches(regex) -> UserNameFail.Regex
             value.length !in USER_NAME_RANGE -> UserNameFail.Length
-            else -> SignUpInfoResult.Success(UserName(value))
+            else -> UserName(value)
         }
 
 

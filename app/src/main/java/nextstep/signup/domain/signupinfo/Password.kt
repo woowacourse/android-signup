@@ -2,7 +2,7 @@ package nextstep.signup.domain.signupinfo
 
 class Password private constructor(
     val value: String,
-) {
+):SignUpInfoResult.Success {
 
     init {
         require(value.matches(PASSWORD_REGEX)) {
@@ -26,7 +26,7 @@ class Password private constructor(
             value.isEmpty() -> SignUpInfoResult.Empty
             !value.matches(PASSWORD_REGEX) -> PasswordFail.Regex
             value.length !in PASSWORD_RANGE -> PasswordFail.Length
-            else -> SignUpInfoResult.Success(Password(value))
+            else -> Password(value)
         }
 
         private val PASSWORD_RANGE = 8..16

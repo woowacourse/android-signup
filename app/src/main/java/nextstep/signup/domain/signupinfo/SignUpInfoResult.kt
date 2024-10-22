@@ -4,7 +4,7 @@ sealed interface SignUpInfoResult {
 
     data object Empty : SignUpInfoResult
 
-    data class Success(val result: Any?) : SignUpInfoResult
+    interface Success : SignUpInfoResult
 
     sealed interface Fail : SignUpInfoResult
 
