@@ -64,7 +64,7 @@ private fun SignUpScreen() {
             onPasswordChange = { password = password.copy(password = it) },
             onPasswordConfirmChange = { passwordConfirm = passwordConfirm.copy(passwordConfirm = it) },
         )
-        SignUpButtonComposable(user)
+        SignUpButtonComposable(user.isAbleToSubmit())
     }
 }
 
