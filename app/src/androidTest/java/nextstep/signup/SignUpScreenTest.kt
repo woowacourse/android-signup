@@ -32,12 +32,13 @@ class SignUpScreenTest {
         signUpInfo.value = signUpInfo.value.copy(userName = "test")
 
         // then
-        composeTestRule
-            .onNodeWithText(USER_NAME_LENGTH_ERROR)
-            .assertDoesNotExist()
-        composeTestRule
-            .onNodeWithText(USER_NAME_REGEX_ERROR)
-            .assertDoesNotExist()
+        composeTestRule.onNodeWithText(
+            USER_NAME_LENGTH_ERROR
+        ).assertDoesNotExist()
+
+        composeTestRule.onNodeWithText(
+            USER_NAME_REGEX_ERROR
+        ).assertDoesNotExist()
     }
 
     @Test
@@ -57,7 +58,9 @@ class SignUpScreenTest {
         signUpInfo.value = signUpInfo.value.copy(userName = "test1")
 
         // then
-        composeTestRule.onNodeWithText(USER_NAME_REGEX_ERROR).assertExists()
+        composeTestRule.onNodeWithText(
+            USER_NAME_REGEX_ERROR
+        ).assertExists()
     }
 
     @Test
@@ -92,8 +95,9 @@ class SignUpScreenTest {
             PASSWORD_REGEX_ERROR
         ).assertDoesNotExist()
 
-        composeTestRule.onNodeWithText(PASSWORD_LENGTH_ERROR)
-            .assertDoesNotExist()
+        composeTestRule.onNodeWithText(
+            PASSWORD_LENGTH_ERROR
+        ).assertDoesNotExist()
     }
 
     @Test
@@ -102,7 +106,9 @@ class SignUpScreenTest {
         signUpInfo.value = signUpInfo.value.copy(password = "test12")
 
         // then
-        composeTestRule.onNodeWithText(PASSWORD_LENGTH_ERROR).assertExists()
+        composeTestRule.onNodeWithText(
+            PASSWORD_LENGTH_ERROR
+        ).assertExists()
     }
 
     @Test
@@ -111,7 +117,9 @@ class SignUpScreenTest {
         signUpInfo.value = signUpInfo.value.copy(password = "test")
 
         // then
-        composeTestRule.onNodeWithText(PASSWORD_REGEX_ERROR).assertExists()
+        composeTestRule.onNodeWithText(
+            PASSWORD_REGEX_ERROR
+        ).assertExists()
     }
 
     @Test
@@ -121,7 +129,9 @@ class SignUpScreenTest {
             signUpInfo.value.copy(password = "test1234", passwordConfirm = "test1234")
 
         // then
-        composeTestRule.onNodeWithText(PASSWORD_CONFIRM_ERROR).assertDoesNotExist()
+        composeTestRule.onNodeWithText(
+            PASSWORD_CONFIRM_ERROR
+        ).assertDoesNotExist()
     }
 
     @Test
@@ -131,8 +141,9 @@ class SignUpScreenTest {
             signUpInfo.value.copy(password = "test1234", passwordConfirm = "test5678")
 
         // then
-        composeTestRule.onNodeWithText(PASSWORD_CONFIRM_ERROR).assertExists()
-
+        composeTestRule.onNodeWithText(
+            PASSWORD_CONFIRM_ERROR
+        ).assertExists()
     }
 
     @Test
@@ -146,8 +157,9 @@ class SignUpScreenTest {
         )
 
         // then
-        composeTestRule.onNodeWithText("Sign Up").assertIsEnabled()
-
+        composeTestRule.onNodeWithText(
+            SIGN_UP_BUTTON_TEXT
+        ).assertIsEnabled()
     }
 
     @Test
@@ -161,7 +173,9 @@ class SignUpScreenTest {
         )
 
         // then
-        composeTestRule.onNodeWithText("Sign Up").assertIsNotEnabled()
+        composeTestRule.onNodeWithText(
+            SIGN_UP_BUTTON_TEXT
+        ).assertIsNotEnabled()
     }
 
     companion object {
@@ -171,5 +185,6 @@ class SignUpScreenTest {
         private const val PASSWORD_REGEX_ERROR = "비밀번호는 영문과 숫자를 포함해야 합니다."
         private const val PASSWORD_LENGTH_ERROR = "비밀번호는 8~16자여야 합니다."
         private const val PASSWORD_CONFIRM_ERROR = "비밀번호가 일치하지 않습니다."
+        private const val SIGN_UP_BUTTON_TEXT = "Sign Up"
     }
 }

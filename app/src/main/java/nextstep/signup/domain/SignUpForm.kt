@@ -9,9 +9,6 @@ data class SignUpForm(
     val passwordConfirm: SignUpInfoResult,
 ) {
 
-
     fun canSubmit(): Boolean =
-        userName is SignUpInfoResult.Success && email is SignUpInfoResult.Success
-                && password is SignUpInfoResult.Success && passwordConfirm is SignUpInfoResult.Success
-
+        userName is SignUpInfoResult.Success && email is SignUpInfoResult.Success && password is SignUpInfoResult.Success && passwordConfirm is SignUpInfoResult.Success
 }

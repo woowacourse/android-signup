@@ -30,26 +30,38 @@ class SignUpButtonTest {
     @Test
     fun 버튼이_비활성화되면_클릭해도_스낵바가_노출되지_않는다() {
         // given
-        composeTestRule.onNodeWithText(BUTTON_CONTENT).assertIsNotEnabled()
+        composeTestRule.onNodeWithText(
+            BUTTON_CONTENT
+        ).assertIsNotEnabled()
 
         // when
-        composeTestRule.onNodeWithText(BUTTON_CONTENT).performClick()
+        composeTestRule.onNodeWithText(
+            BUTTON_CONTENT
+        ).performClick()
 
         // then
-        composeTestRule.onNodeWithText(SNACKBAR_MESSAGE).isNotDisplayed()
+        composeTestRule.onNodeWithText(
+            SNACKBAR_MESSAGE
+        ).isNotDisplayed()
     }
 
     @Test
     fun 버튼이_활성화되면_클릭했을_때_스낵바가_노출된다() {
         // given
         isButtonEnable.value = true
-        composeTestRule.onNodeWithText(BUTTON_CONTENT).assertIsEnabled()
+        composeTestRule.onNodeWithText(
+            BUTTON_CONTENT
+        ).assertIsEnabled()
 
         // when
-        composeTestRule.onNodeWithText(BUTTON_CONTENT).performClick()
+        composeTestRule.onNodeWithText(
+            BUTTON_CONTENT
+        ).performClick()
 
         // then
-        composeTestRule.onNodeWithText(SNACKBAR_MESSAGE).isDisplayed()
+        composeTestRule.onNodeWithText(
+            SNACKBAR_MESSAGE
+        ).isDisplayed()
     }
 
     companion object {

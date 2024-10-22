@@ -19,9 +19,6 @@ class UserName private constructor(
             else -> UserName(value)
         }
 
-
         private val USER_NAME_RANGE = 2..5
-
     }
 }
-
