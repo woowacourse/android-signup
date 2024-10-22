@@ -13,14 +13,21 @@ class SignUpFormTest {
     }
 
     @Test
-    fun `유저 이름은 2글자 이하면 LENGTH_ERROR를 반환한다`() {
+    fun `유저 이름이 2글자 이상 5글자 이하면 VALID를 반환한다`() {
+        signUpForm = signUpForm.copy(userName = "빙티")
+
+        assertEquals(ValidationState.VALID, signUpForm.validateUserName())
+    }
+
+    @Test
+    fun `유저 이름은 2글자 미만이면 LENGTH_ERROR를 반환한다`() {
         signUpForm = signUpForm.copy(userName = "한")
 
         assertEquals(ValidationState.LENGTH_ERROR, signUpForm.validateUserName())
     }
 
     @Test
-    fun `유저 이름은 5글자 이상이면 LENGTH_ERROR를 반환한다`() {
+    fun `유저 이름은 5글자 초과면 LENGTH_ERROR를 반환한다`() {
         signUpForm = signUpForm.copy(userName = "여섯글자이다")
 
         assertEquals(ValidationState.LENGTH_ERROR, signUpForm.validateUserName())
