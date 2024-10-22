@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -56,18 +57,13 @@ fun SignUpScreen() {
     var emailState by remember { mutableStateOf(EmailState()) }
     var passwordState by remember { mutableStateOf(PasswordState()) }
     var passwordConfirmState by remember { mutableStateOf(PasswordConfirmState()) }
-    val isSignUpEnabled by remember(
-        usernameState,
-        emailState,
-        passwordState,
-        passwordConfirmState
-    ) {
-        mutableStateOf(
+    val isSignUpEnabled by remember {
+        derivedStateOf {
             usernameState.validate() == Valid &&
-                emailState.validate() == Valid &&
-                passwordState.validate() == Valid &&
-                passwordConfirmState.validate(passwordState.password) == Valid
-        )
+                    emailState.validate() == Valid &&
+                    passwordState.validate() == Valid &&
+                    passwordConfirmState.validate(passwordState.password) == Valid
+        }
     }
 
     Column(
