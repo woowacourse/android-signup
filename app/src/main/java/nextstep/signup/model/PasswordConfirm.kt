@@ -7,16 +7,12 @@ data class PasswordConfirm(
 
     fun isMatch(password: String): Boolean = password == passwordConfirm
 
-    fun getErrorMessage(password: String): String? =
+    fun validate(password: String): PasswordConfirmValidResult =
         when {
-            isBlank() -> null
-            !isMatch(password) -> PASSWORD_CONFIRM_ERROR
-            else -> null
+            isBlank() -> PasswordConfirmValidResult.Blank
+            !isMatch(password) -> PasswordConfirmValidResult.Invalid
+            else -> PasswordConfirmValidResult.Success
         }
 
     private fun isBlank(): Boolean = passwordConfirm.isBlank()
-
-    companion object {
-        private const val PASSWORD_CONFIRM_ERROR = "비밀번호가 일치하지 않습니다."
-    }
 }
