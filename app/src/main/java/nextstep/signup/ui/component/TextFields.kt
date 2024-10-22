@@ -22,6 +22,8 @@ import androidx.compose.ui.unit.dp
 import nextstep.signup.R
 import nextstep.signup.model.InputValidator
 import nextstep.signup.model.UserName
+import nextstep.signup.model.ValidationState
+import nextstep.signup.ui.getErrorMessage
 import nextstep.signup.ui.theme.BlueGrey20
 
 @Composable
@@ -45,10 +47,10 @@ fun InputText(
                 unfocusedContainerColor = BlueGrey20,
                 focusedContainerColor = BlueGrey20,
             ),
-        isError = if (content.isNotEmpty()) !inputValidator.isValid() else false,
+        isError = if (content.isNotEmpty()) inputValidator.validate() != ValidationState.Valid else false,
         supportingText = {
             if (content.isNotEmpty()) {
-                inputValidator.getErrorMessage()?.let { Text(it) }
+                inputValidator.validate().getErrorMessage()?.let { Text(it) }
             }
         },
         modifier = modifier,
