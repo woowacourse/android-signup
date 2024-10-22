@@ -63,7 +63,7 @@ fun SignUpScreen() {
 
         val userInformation = UserInformation(userName, email, password, passwordConfirm)
 
-        SignUpGreeting()
+        SignUpTitle()
         SignUpInputBox(
             userInformation,
             onUserNameChange = { userName = userName.copy(userName = it) },
@@ -76,7 +76,7 @@ fun SignUpScreen() {
 }
 
 @Composable
-private fun SignUpGreeting() {
+private fun SignUpTitle() {
     TextComponent(description = stringResource(R.string.main_greeting), style = MaterialTheme.typography.titleLarge)
     Spacer(modifier = Modifier.size(42.dp))
 }
