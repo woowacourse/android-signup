@@ -29,7 +29,5 @@ class Name(private val value: String) : InputValidation {
         const val MIN_LENGTH = 2
         const val MAX_LENGTH = 5
         const val NAME_REGEX = "^[a-zA-Z가-힣]+$"
-        const val ERROR_USER_NAME_LENGTH = "이름은 2~5자여야 합니다."
-        const val ERROR_USER_NAME_REGEX = "이름에는 특수문자가 포함될 수 없습니다."
     }
 }

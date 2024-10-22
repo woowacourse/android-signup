@@ -20,8 +20,4 @@ class PasswordConfirm(
         value = passwordConfirm
         originalPassword = password
     }
-
-    companion object {
-        const val ERROR_USER_PASSWORD_CONFIRM = "비밀번호가 일치하지 않습니다."
-    }
 }

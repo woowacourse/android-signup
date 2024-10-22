@@ -3,7 +3,7 @@ import nextstep.signup.R
 import nextstep.signup.model.InputError
 
 @StringRes
-fun InputError.getErrorMessage(): Int? {
+fun InputError.getErrorMessageResId(): Int? {
     return when (this) {
         InputError.NameError.InvalidLength -> R.string.error_user_name_length
         InputError.NameError.InvalidFormat -> R.string.error_user_name_format
