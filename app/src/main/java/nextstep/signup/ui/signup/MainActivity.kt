@@ -1,4 +1,4 @@
-package nextstep.signup.ui
+package nextstep.signup.ui.signup
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -22,6 +22,12 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.signup.R
+import nextstep.signup.domain.SignUpForm
+import nextstep.signup.domain.signupinfo.Email
+import nextstep.signup.domain.signupinfo.Password
+import nextstep.signup.domain.signupinfo.PasswordConfirm
+import nextstep.signup.domain.signupinfo.SignUpInfoResult
+import nextstep.signup.domain.signupinfo.UserName
 import nextstep.signup.ui.component.SingleLineTextField
 import nextstep.signup.ui.theme.SignupTheme
 import nextstep.signup.ui.theme.Typography
@@ -35,9 +41,12 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = Color.White
                 ) {
-                    val (signUpInfo, onChange) = remember { mutableStateOf(SignUpInfo()) }
-
-                    SignUpScreen(signUpInfo, onChange)
+                    val (signUp, onValueChange) = remember {
+                        mutableStateOf(
+                            SignUpUiModel()
+                        )
+                    }
+                    SignUpScreen(signUp, onValueChange)
                 }
             }
         }
@@ -46,9 +55,15 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun SignUpScreen(
-    signUpInfo: SignUpInfo,
-    onChangeSignUpInfo: (SignUpInfo) -> Unit,
+    uiModel: SignUpUiModel,
+    onValueChange: (SignUpUiModel) -> Unit
 ) {
+
+    val userNameResult = UserName.from(uiModel.userName, Regex("^[a-zA-Z가-힣]+$"))
+    val emailResult = Email.from(uiModel.email)
+    val passwordResult = Password.from(uiModel.password)
+    val passwordConfirmResult = PasswordConfirm.from(uiModel.passwordConfirm, uiModel.password)
+
     Column(
         modifier = Modifier.padding(horizontal = 32.dp),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -62,24 +77,24 @@ fun SignUpScreen(
         Spacer(Modifier.height(42.dp))
 
         SingleLineTextField(
-            text = signUpInfo.userName,
+            text = uiModel.userName,
             onTextChange = {
-                onChangeSignUpInfo(signUpInfo.copy(userName = it))
+                onValueChange(uiModel.copy(userName = it))
             },
-            isError = signUpInfo.isUserNameError(),
-            errorMessage = signUpInfo.userNameErrorMessage(),
+            isError = userNameResult is SignUpInfoResult.Fail,
+            errorMessage = userNameResult.toErrorMessageOrNull(),
             label = R.string.sign_up_input_user_name
         )
 
         Spacer(Modifier.height(42.dp))
 
         SingleLineTextField(
-            text = signUpInfo.email,
+            text = uiModel.email,
             onTextChange = {
-                onChangeSignUpInfo(signUpInfo.copy(email = it))
+                onValueChange(uiModel.copy(email = it))
             },
-            isError = signUpInfo.isEmailError(),
-            errorMessage = signUpInfo.emailErrorMessage(),
+            isError = emailResult is SignUpInfoResult.Fail,
+            errorMessage = emailResult.toErrorMessageOrNull(),
             label = R.string.sign_up_input_user_email,
             keyBoardType = KeyboardType.Email,
         )
@@ -87,32 +102,37 @@ fun SignUpScreen(
         Spacer(Modifier.height(42.dp))
 
         SingleLineTextField(
-            text = signUpInfo.password,
+            text = uiModel.password,
             onTextChange = {
-                onChangeSignUpInfo(signUpInfo.copy(password = it))
+                onValueChange(uiModel.copy(password = it))
             },
             modifier = Modifier.fillMaxWidth(),
-            isError = signUpInfo.isPasswordError(),
-            errorMessage = signUpInfo.passwordErrorMessage(),
+            isError = passwordResult is SignUpInfoResult.Fail,
+            errorMessage = passwordResult.toErrorMessageOrNull(),
             label = R.string.sign_up_input_user_password,
             keyBoardType = KeyboardType.Password
         )
         Spacer(Modifier.height(42.dp))
 
         SingleLineTextField(
-            text = signUpInfo.passwordConfirm,
+            text = uiModel.passwordConfirm,
             onTextChange = {
-                onChangeSignUpInfo(signUpInfo.copy(passwordConfirm = it))
+                onValueChange(uiModel.copy(passwordConfirm = it))
             },
-            isError = signUpInfo.isPasswordConfirmError(),
-            errorMessage = signUpInfo.passwordConfirmMessage(),
+            isError = passwordConfirmResult is SignUpInfoResult.Fail,
+            errorMessage = passwordConfirmResult.toErrorMessageOrNull(),
             label = R.string.sign_up_input_user_password_confirm,
             keyBoardType = KeyboardType.Password
         )
         Spacer(Modifier.height(42.dp))
 
         SignUpButton(
-            enable = signUpInfo.isValidSignUpInfo(),
+            enable = SignUpForm(
+                userNameResult,
+                emailResult,
+                passwordResult,
+                passwordConfirmResult
+            ).canSubmit(),
         )
     }
 }
@@ -124,6 +144,10 @@ fun SignUpScreen(
 )
 @Composable
 private fun SignUpPreview() {
-    val (signUpInfo, onSignUpInfoChange) = remember { mutableStateOf(SignUpInfo()) }
+    val (signUpInfo, onSignUpInfoChange) = remember {
+        mutableStateOf(
+            SignUpUiModel()
+        )
+    }
     SignUpScreen(signUpInfo, onSignUpInfoChange)
 }
