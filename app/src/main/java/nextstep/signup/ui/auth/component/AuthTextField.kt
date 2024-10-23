@@ -1,4 +1,4 @@
-package nextstep.signup.auth.component
+package nextstep.signup.ui.auth.component
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.text.KeyboardActions
@@ -19,11 +19,12 @@ import nextstep.signup.ui.theme.SignupTheme
 
 @Composable
 internal fun AuthTextField(
-    modifier: Modifier = Modifier,
     label: String,
     text: String,
-    isValid: (String) -> Boolean,
-    imeAction: ImeAction,
+    modifier: Modifier = Modifier,
+    imeAction: ImeAction = ImeAction.Next,
+    errorMessage: String? = null,
+    isValid: Boolean = true,
     keyboardType: KeyboardType = KeyboardType.Text,
     onTextChange: (String) -> Unit,
     onNext: () -> Unit = {},
@@ -42,6 +43,7 @@ internal fun AuthTextField(
         label = label,
         text = text,
         isValid = isValid,
+        errorMessage = errorMessage,
         keyboardOptions = KeyboardOptions(
             imeAction = imeAction,
             keyboardType = keyboardType
@@ -63,29 +65,29 @@ internal fun AuthTextField(
 
 @Composable
 internal fun AuthTextField(
-    modifier: Modifier = Modifier,
     label: String,
     text: String,
-    isValid: (String) -> Boolean = { true },
+    modifier: Modifier = Modifier,
+    isValid: Boolean = true,
     errorMessage: String? = null,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     onTextChange: (String) -> Unit
 ) {
+    val shouldShowErrorMsg = text.isNotEmpty() && isValid.not()
     Column {
         TextField(
             modifier = modifier,
             value = text,
             onValueChange = onTextChange,
             label = { Text(label) },
-            isError = isValid(text).not(),
+            isError = shouldShowErrorMsg,
             singleLine = true,
             visualTransformation = visualTransformation,
             keyboardOptions = keyboardOptions,
             keyboardActions = keyboardActions
         )
-        val shouldShowErrorMsg = isValid(text).not() && errorMessage.isNullOrBlank().not()
         if (shouldShowErrorMsg) {
             Text(
                 text = errorMessage.orEmpty(),
@@ -128,7 +130,7 @@ private fun Preview3() {
             label = "ㅎㅇ",
             text = "나 오둥",
             onTextChange = {},
-            isValid = { false }
+            isValid = false
         )
     }
 }
@@ -142,7 +144,7 @@ private fun Preview4() {
             text = "나 오둥",
             onTextChange = {},
             errorMessage = "오류가 발생했습니다.",
-            isValid = { false }
+            isValid = false
         )
     }
 }

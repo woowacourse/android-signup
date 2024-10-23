@@ -1,24 +1,28 @@
-package nextstep.signup.auth.screen
+package nextstep.signup.ui.auth.screen
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.assert
-import androidx.compose.ui.test.click
+import androidx.compose.ui.test.assertIsEnabled
+import androidx.compose.ui.test.isDisplayed
 import androidx.compose.ui.test.isFocused
 import androidx.compose.ui.test.isNotFocused
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
-import androidx.compose.ui.test.onRoot
+import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performImeAction
 import androidx.compose.ui.test.performTextInput
-import androidx.compose.ui.test.performTouchInput
 import nextstep.signup.R
-import nextstep.signup.auth.state.SignUpFormState
+import nextstep.signup.ui.auth.model.SignUpFormState
 import org.junit.Rule
 import org.junit.Test
 
 class SignUpScreenTest {
+
     @get:Rule
     val composeTestRule = createComposeRule()
 
@@ -33,12 +37,16 @@ class SignUpScreenTest {
             nameFormLabel = stringResource(id = R.string.sign_up_user_name_form)
             SignUpScreen(
                 signUpFormState = formState,
-                onSignUpFormStateChange = onChangeFormState,
+                onUserNameChange = {},
+                onEmailChange = {},
+                onPasswordChange = {},
+                onPasswordConfirmChange = {},
                 onDoneSignUp = {}
             )
         }
 
         // then
+        composeTestRule.runOnIdle { }
         assert(nameFormLabel.isNotBlank())
         composeTestRule.onNodeWithText(nameFormLabel)
             .assert(isFocused())
@@ -48,23 +56,26 @@ class SignUpScreenTest {
     fun 외부_영역을_터치하면_유저_이름의_focus가_해제된다() {
         // given
         var nameFormLabel = ""
+        var title = ""
         composeTestRule.setContent {
             val (formState, onChangeFormState) = remember {
                 mutableStateOf(SignUpFormState.empty())
             }
             nameFormLabel = stringResource(id = R.string.sign_up_user_name_form)
+            title = stringResource(id = R.string.sign_up_title)
             SignUpScreen(
                 signUpFormState = formState,
-                onSignUpFormStateChange = onChangeFormState,
+                onUserNameChange = {},
+                onEmailChange = {},
+                onPasswordChange = {},
+                onPasswordConfirmChange = {},
                 onDoneSignUp = {}
             )
         }
-        // when
-        composeTestRule.onRoot()
-            .performTouchInput {
-                click()
-            }
 
+        // when
+        composeTestRule.onNodeWithText(title)
+            .performClick()
         // then
         composeTestRule.onNodeWithText(nameFormLabel)
             .assert(isNotFocused())
@@ -83,10 +94,14 @@ class SignUpScreenTest {
             emailFormLabel = stringResource(id = R.string.sign_up_email_form)
             SignUpScreen(
                 signUpFormState = formState,
-                onSignUpFormStateChange = onChangeFormState,
+                onUserNameChange = {},
+                onEmailChange = {},
+                onPasswordChange = {},
+                onPasswordConfirmChange = {},
                 onDoneSignUp = {}
             )
         }
+
         // when
         composeTestRule.onNodeWithText(nameFormLabel)
             .performImeAction()
@@ -109,10 +124,14 @@ class SignUpScreenTest {
             passwordConfirmFormLabel = stringResource(id = R.string.sign_up_password_confirm_form)
             SignUpScreen(
                 signUpFormState = formState,
-                onSignUpFormStateChange = onChangeFormState,
+                onUserNameChange = {},
+                onEmailChange = {},
+                onPasswordChange = {},
+                onPasswordConfirmChange = {},
                 onDoneSignUp = {}
             )
         }
+
         // when
         composeTestRule.onNodeWithText(passwordConfirmFormLabel)
             .performTextInput("password")
@@ -122,5 +141,55 @@ class SignUpScreenTest {
         // then
         composeTestRule.onNodeWithText(passwordConfirmFormLabel)
             .assert(isNotFocused())
+    }
+
+    @Test
+    fun `회원가입_양식이_모두_유효하면_버튼이_활성화된다`() {
+        // given
+        composeTestRule.setContent {
+            val validFormState = SignUpFormState("user", "sample@naver.com", "abcd1234", "abcd1234")
+            SignUpScreen(
+                signUpFormState = validFormState,
+                onUserNameChange = {},
+                onEmailChange = {},
+                onPasswordChange = {},
+                onPasswordConfirmChange = {},
+                onDoneSignUp = {}
+            )
+        }
+
+        // then
+        composeTestRule.onNode(
+            SemanticsMatcher.expectValue(SemanticsProperties.Role, Role.Button)
+        ).assertIsEnabled()
+    }
+
+    @Test
+    fun `회원가입_버튼이_활성화됐을때_누르면_스낵바_메세지가_뜬다`() {
+        // given
+        var passwordConfirmFormLabel = ""
+        var snackBarMessage = ""
+        composeTestRule.setContent {
+            val (formState, onChangeFormState) = remember {
+                mutableStateOf(SignUpFormState.empty())
+            }
+            passwordConfirmFormLabel = stringResource(id = R.string.sign_up_password_confirm_form)
+            snackBarMessage = stringResource(id = R.string.sign_up_success)
+            SignUpScreen(
+                signUpFormState = formState,
+                onUserNameChange = {},
+                onEmailChange = {},
+                onPasswordChange = {},
+                onPasswordConfirmChange = {},
+                onDoneSignUp = {}
+            )
+        }
+
+        // when
+        composeTestRule.onNodeWithText(passwordConfirmFormLabel)
+            .performClick()
+        // then
+        composeTestRule.onNodeWithText(snackBarMessage)
+            .isDisplayed()
     }
 }
