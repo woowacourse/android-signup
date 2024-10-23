@@ -3,7 +3,7 @@ package nextstep.signup.model.inputvalidity
 enum class UsernameInputValidity : InputValidity {
     INVALID_FORMAT,
     INVALID_LENGTH,
-    NO_ERROR,
+    VALID,
     ;
 
     companion object {
@@ -15,7 +15,7 @@ enum class UsernameInputValidity : InputValidity {
             return when {
                 isInputFormatInvalid(input) -> INVALID_FORMAT
                 isInputLengthInvalid(input) -> INVALID_LENGTH
-                else -> NO_ERROR
+                else -> VALID
             }
         }
 

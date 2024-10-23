@@ -85,8 +85,8 @@ fun PasswordInputField(
 
 private fun initInputValidity(type: PasswordInputFieldType): InputValidity {
     return when (type) {
-        PasswordInputFieldType.PASSWORD -> PasswordInputValidity.NO_ERROR
-        PasswordInputFieldType.PASSWORD_CONFIRM -> PasswordConfirmInputValidity.NO_ERROR
+        PasswordInputFieldType.PASSWORD -> PasswordInputValidity.VALID
+        PasswordInputFieldType.PASSWORD_CONFIRM -> PasswordConfirmInputValidity.VALID
     }
 }
 
@@ -107,8 +107,8 @@ private fun isSubmitOk(
 ): Boolean {
     Log.d("alsong", "$inputValidity")
     return when (type) {
-        PasswordInputFieldType.PASSWORD -> input.isNotEmpty() && inputValidity == PasswordInputValidity.NO_ERROR
-        PasswordInputFieldType.PASSWORD_CONFIRM -> input.isNotEmpty() && inputValidity == PasswordConfirmInputValidity.NO_ERROR
+        PasswordInputFieldType.PASSWORD -> input.isNotEmpty() && inputValidity == PasswordInputValidity.VALID
+        PasswordInputFieldType.PASSWORD_CONFIRM -> input.isNotEmpty() && inputValidity == PasswordConfirmInputValidity.VALID
     }
 }
 
@@ -117,7 +117,7 @@ private fun passwordErrorMessageOf(validity: PasswordInputValidity): String {
     return when (validity) {
         PasswordInputValidity.INVALID_FORMAT -> stringResource(R.string.invalid_password_format)
         PasswordInputValidity.INVALID_LENGTH -> stringResource(R.string.invalid_password_length)
-        PasswordInputValidity.NO_ERROR -> stringResource(R.string.no_error)
+        PasswordInputValidity.VALID -> stringResource(R.string.valid)
     }
 }
 
@@ -125,7 +125,7 @@ private fun passwordErrorMessageOf(validity: PasswordInputValidity): String {
 private fun passwordConfirmErrorMessageOf(validity: PasswordConfirmInputValidity): String {
     return when (validity) {
         PasswordConfirmInputValidity.DOES_NOT_MATCH -> stringResource(R.string.password_confirm_does_not_match)
-        PasswordConfirmInputValidity.NO_ERROR -> stringResource(R.string.no_error)
+        PasswordConfirmInputValidity.VALID -> stringResource(R.string.valid)
     }
 }
 
@@ -146,7 +146,7 @@ private fun passwordConfirmErrorMessage(
     passwordConfirm: String,
 ): String {
     return when (password == passwordConfirm) {
-        true -> stringResource(R.string.no_error)
+        true -> stringResource(R.string.valid)
         false -> stringResource(R.string.password_confirm_does_not_match)
     }
 }

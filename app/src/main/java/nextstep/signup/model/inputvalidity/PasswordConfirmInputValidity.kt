@@ -2,7 +2,7 @@ package nextstep.signup.model.inputvalidity
 
 enum class PasswordConfirmInputValidity : InputValidity {
     DOES_NOT_MATCH,
-    NO_ERROR,
+    VALID,
     ;
 
     companion object {
@@ -12,7 +12,7 @@ enum class PasswordConfirmInputValidity : InputValidity {
         fun of(): PasswordConfirmInputValidity {
             return when {
                 doesNotMatch() -> DOES_NOT_MATCH
-                else -> NO_ERROR
+                else -> VALID
             }
         }
 

@@ -68,8 +68,8 @@ fun InputField(
 
 private fun initInputValidity(type: InputFieldType): InputValidity {
     return when (type) {
-        InputFieldType.USER_NAME -> UsernameInputValidity.NO_ERROR
-        InputFieldType.EMAIL -> EmailInputValidity.NO_ERROR
+        InputFieldType.USER_NAME -> UsernameInputValidity.VALID
+        InputFieldType.EMAIL -> EmailInputValidity.VALID
     }
 }
 
@@ -89,8 +89,8 @@ private fun isSubmitOk(
     inputValidity: InputValidity,
 ): Boolean {
     return when (type) {
-        InputFieldType.USER_NAME -> input.isNotEmpty() && inputValidity == UsernameInputValidity.NO_ERROR
-        InputFieldType.EMAIL -> input.isNotEmpty() && inputValidity == EmailInputValidity.NO_ERROR
+        InputFieldType.USER_NAME -> input.isNotEmpty() && inputValidity == UsernameInputValidity.VALID
+        InputFieldType.EMAIL -> input.isNotEmpty() && inputValidity == EmailInputValidity.VALID
     }
 }
 
@@ -99,7 +99,7 @@ private fun usernameErrorMessageOf(validity: UsernameInputValidity): String {
     return when (validity) {
         UsernameInputValidity.INVALID_FORMAT -> stringResource(R.string.invalid_username_format)
         UsernameInputValidity.INVALID_LENGTH -> stringResource(R.string.invalid_username_length)
-        UsernameInputValidity.NO_ERROR -> stringResource(R.string.no_error)
+        UsernameInputValidity.VALID -> stringResource(R.string.valid)
     }
 }
 
@@ -107,7 +107,7 @@ private fun usernameErrorMessageOf(validity: UsernameInputValidity): String {
 private fun emailErrorMessageOf(validity: EmailInputValidity): String {
     return when (validity) {
         EmailInputValidity.INVALID_FORMAT -> stringResource(R.string.invalid_email_format)
-        EmailInputValidity.NO_ERROR -> stringResource(R.string.no_error)
+        EmailInputValidity.VALID -> stringResource(R.string.valid)
     }
 }
 

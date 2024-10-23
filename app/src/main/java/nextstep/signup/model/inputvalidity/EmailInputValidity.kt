@@ -2,7 +2,7 @@ package nextstep.signup.model.inputvalidity
 
 enum class EmailInputValidity : InputValidity {
     INVALID_FORMAT,
-    NO_ERROR,
+    VALID,
     ;
 
     companion object {
@@ -11,7 +11,7 @@ enum class EmailInputValidity : InputValidity {
         fun of(input: String): EmailInputValidity {
             return when {
                 isInputFormatInvalid(input) -> INVALID_FORMAT
-                else -> NO_ERROR
+                else -> VALID
             }
         }
 

@@ -8,7 +8,7 @@
     <string name="password">Password</string>
     <string name="password_confirm">Password Confirm</string>
     <string name="sign_up">Sign Up</string>
-    <string name="no_error"></string>
+    <string name="valid"></string>
     <string name="username_format_regex">^[a-zA-Z가-힣]+$</string>
     <string name="invalid_username_format">이름에는 숫자나 기호가 포함될 수 없습니다.</string>
     <string name="invalid_username_length">이름은 2~5자여야 합니다.</string>
