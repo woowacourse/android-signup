@@ -49,20 +49,32 @@ private fun SignUpScreen() {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        var userName by remember { mutableStateOf(UserName("")) }
-        var email by remember { mutableStateOf(Email("")) }
-        var password by remember { mutableStateOf(Password("")) }
-        var passwordConfirm by remember { mutableStateOf(PasswordConfirm("")) }
-
-        val user = User(userName, email, password, passwordConfirm)
+        var user by remember {
+            mutableStateOf(
+                User(
+                    UserName(""),
+                    Email(""),
+                    Password(""),
+                    PasswordConfirm(""),
+                ),
+            )
+        }
 
         SignUpTitleComposable()
         SignUpInputBox(
-            user,
-            onUserNameChange = { userName = userName.copy(userName = it) },
-            onEmailChange = { email = email.copy(email = it) },
-            onPasswordChange = { password = password.copy(password = it) },
-            onPasswordConfirmChange = { passwordConfirm = passwordConfirm.copy(passwordConfirm = it) },
+            user = user,
+            onUserNameChange = { newUserName ->
+                user = user.copy(userName = user.userName.copy(userName = newUserName))
+            },
+            onEmailChange = { newEmail ->
+                user = user.copy(email = user.email.copy(email = newEmail))
+            },
+            onPasswordChange = { newPassword ->
+                user = user.copy(password = user.password.copy(password = newPassword))
+            },
+            onPasswordConfirmChange = { newPasswordConfirm ->
+                user = user.copy(passwordConfirm = user.passwordConfirm.copy(passwordConfirm = newPasswordConfirm))
+            },
         )
         SignUpButtonComposable(user.isAbleToSubmit())
     }
