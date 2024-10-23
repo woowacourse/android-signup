@@ -14,30 +14,59 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import nextstep.signup.R
+import nextstep.signup.model.InputValidator
+import nextstep.signup.model.UserName
+import nextstep.signup.model.ValidationState
+import nextstep.signup.ui.getErrorMessage
 import nextstep.signup.ui.theme.BlueGrey20
 
 @Composable
 fun InputText(
-    @StringRes stringRes: Int,
+    modifier: Modifier = Modifier,
+    @StringRes title: Int,
+    content: String,
+    onContentChange: (String) -> Unit = {},
+    inputValidator: InputValidator,
     keyBoardType: KeyboardType = KeyboardType.Text,
     visualTransformation: VisualTransformation = VisualTransformation.None,
 ) {
-    val title = stringResource(stringRes)
-    var contents: String by remember { mutableStateOf("") }
     TextField(
-        contents,
-        label = { Text(text = title) },
-        onValueChange = { contents = it },
-        keyboardOptions = KeyboardOptions(keyboardType = keyBoardType),
+        value = content,
+        label = { Text(text = stringResource(title)) },
+        onValueChange = onContentChange,
+        keyboardOptions = KeyboardOptions(keyboardType = keyBoardType, imeAction = ImeAction.Done),
         visualTransformation = visualTransformation,
         colors =
             TextFieldDefaults.colors(
                 unfocusedContainerColor = BlueGrey20,
                 focusedContainerColor = BlueGrey20,
             ),
+        isError = if (content.isNotEmpty()) inputValidator.validate() != ValidationState.Valid else false,
+        supportingText = {
+            if (content.isNotEmpty()) {
+                inputValidator.validate().getErrorMessage()?.let { Text(it) }
+            }
+        },
+        modifier = modifier,
     )
     Spacer(Modifier.height(36.dp))
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun InputTextPreview() {
+    var userName: UserName by remember { mutableStateOf(UserName("")) }
+    userName = UserName("김컴포즈입니다")
+    InputText(
+        title = R.string.sign_up_user_name_title,
+        content = userName.content,
+        onContentChange = { userName = userName.copy(content = it) },
+        inputValidator = userName,
+    )
 }
