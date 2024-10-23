@@ -1,7 +1,6 @@
 package nextstep.signup.ui.signup
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,7 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import nextstep.signup.R
 import nextstep.signup.ui.theme.SignUpTheme
 
 class SignUpActivity : ComponentActivity() {
@@ -22,16 +20,10 @@ class SignUpActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                 ) {
-                    SignUpLayout(
-                        onButtonClicked = { onSignUpClicked() },
-                    )
+                    SignUpLayout()
                 }
             }
         }
-    }
-
-    private fun onSignUpClicked() {
-        Toast.makeText(this, getString(R.string.all_not_implemented_yet), Toast.LENGTH_LONG).show()
     }
 }
 
@@ -47,9 +39,7 @@ fun SignUpPreview() {
                     .fillMaxSize()
                     .padding(32.dp),
         ) {
-            SignUpLayout(
-                onButtonClicked = { },
-            )
+            SignUpLayout()
         }
     }
 }
