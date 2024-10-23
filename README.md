@@ -1,12 +1,12 @@
 ## 유효성 검사
 - 입력에 따른 유효성 검사
   - [x] UserName은 2~5자 사이 한글 또는 영문이어야 한다
-  - [ ] Email은 아래 정규식에 맞는지 검사한다.
+  - [x] Email은 아래 정규식에 맞는지 검사한다.
   "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$"
-  - [ ] Password는 아래 정규식에 맞는지 검사한다
+  - [x] Password는 아래 정규식에 맞는지 검사한다
   "^(?=.*[a-zA-Z])(?=.*[0-9]).{8,16}$" 
-  - [ ] Password와 Password Confirm이 동일한지 검사한다
+  - [x] Password와 Password Confirm이 동일한지 검사한다
  
 - 형식에 맞지 않는 입력을 넣을 경우
-  - [ ] border의 색을 바꾼다
-  - [ ] textfield 아래 에러 메시지를 표기한다
+  - [x] border의 색을 바꾼다
+  - [x] textfield 아래 에러 메시지를 표기한다
