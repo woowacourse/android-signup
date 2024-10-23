@@ -1,4 +1,4 @@
-package nextstep.signup.model.validation
+package nextstep.signup.ui.validation
 
 class CompositeValidation(
     private vararg val validations: Validation

@@ -1,10 +1,9 @@
 package nextstep.signup
 
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
-import nextstep.signup.model.validation.EqualValidation
+import nextstep.signup.ui.validation.EqualValidation
 import nextstep.signup.ui.signup.PasswordTextField
 import org.junit.Before
 import org.junit.Rule

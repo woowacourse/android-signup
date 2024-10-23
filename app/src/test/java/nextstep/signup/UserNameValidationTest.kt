@@ -1,12 +1,11 @@
 package nextstep.signup
 
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
-import nextstep.signup.model.validation.CompositeValidation
-import nextstep.signup.model.validation.LengthValidation
-import nextstep.signup.model.validation.RegexValidation
+import nextstep.signup.ui.validation.CompositeValidation
+import nextstep.signup.ui.validation.LengthValidation
+import nextstep.signup.ui.validation.RegexValidation
 import nextstep.signup.ui.signup.UsernameTextField
 import org.junit.Before
 import org.junit.Rule

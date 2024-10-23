@@ -8,10 +8,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.signup.R
-import nextstep.signup.model.validation.CompositeValidation
-import nextstep.signup.model.validation.LengthValidation
-import nextstep.signup.model.validation.RegexValidation
-import nextstep.signup.model.validation.Validation
+import nextstep.signup.ui.validation.CompositeValidation
+import nextstep.signup.ui.validation.LengthValidation
+import nextstep.signup.ui.validation.RegexValidation
+import nextstep.signup.ui.validation.Validation
 
 @Composable
 fun UsernameTextField(

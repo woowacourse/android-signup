@@ -1,11 +1,11 @@
-package nextstep.signup.model.validation
+package nextstep.signup.ui.validation
 
-class LengthValidation(
-    private val range: IntRange,
+class RegexValidation(
+    private val regex: Regex,
     private val errorMessage: String,
 ) : Validation {
     override fun validate(text: String): Boolean =
-        text.length in range
+        regex.matches(text)
 
     override fun errorMessage(text: String): String = errorMessage
 }
