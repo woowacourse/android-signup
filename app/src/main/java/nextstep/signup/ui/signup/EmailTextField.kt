@@ -40,14 +40,14 @@ fun EmailTextField(
 fun EmailTextFieldPreview() {
     val emailValidation =
         RegexValidation(
-            "[a-zA-Z0-9._-]+@[a-zA-Z]+\\.+[a-zA-Z]+".toRegex(),
-            stringResource(id = R.string.email_form_error)
+            regex = "[a-zA-Z0-9._-]+@[a-zA-Z]+\\.+[a-zA-Z]+".toRegex(),
+            errorMessage = stringResource(id = R.string.email_form_error)
         )
     SignupTheme {
         EmailTextField(
             label = "Email",
             text = remember { mutableStateOf("") },
-            emailValidation,
+            validation = emailValidation,
         )
     }
 }

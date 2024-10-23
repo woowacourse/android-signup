@@ -37,9 +37,15 @@ fun PasswordTextField(
 @Preview(showBackground = true)
 @Composable
 fun PasswordTextFieldPreview() {
-    val lengthValidation = LengthValidation(8..16, stringResource(R.string.password_length_error))
+    val lengthValidation = LengthValidation(
+        range = 8..16,
+        errorMessage = stringResource(R.string.password_length_error)
+    )
     val regex = "^(?=.*[a-zA-Z])(?=.*[0-9]).+\$".toRegex()
-    val regexValidation = RegexValidation(regex, stringResource(R.string.password_character_error))
+    val regexValidation = RegexValidation(
+        regex = regex,
+        errorMessage = stringResource(R.string.password_character_error)
+    )
     val passwordValidation = CompositeValidation(lengthValidation, regexValidation)
     SignupTheme {
         PasswordTextField(

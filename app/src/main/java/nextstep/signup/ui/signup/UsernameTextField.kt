@@ -32,8 +32,14 @@ fun UsernameTextField(
 @Preview(showBackground = true)
 @Composable
 fun UsernameTextFieldPreview() {
-    val lengthValidation = LengthValidation(2..5, stringResource(R.string.username_length_error))
-    val characterValidation = RegexValidation("[a-zA-Z가-힣]+".toRegex(), stringResource(R.string.username_character_error))
+    val lengthValidation = LengthValidation(
+        range = 2..5,
+        errorMessage = stringResource(R.string.username_length_error)
+    )
+    val characterValidation = RegexValidation(
+        regex = "[a-zA-Z가-힣]+".toRegex(),
+        errorMessage = stringResource(R.string.username_character_error)
+    )
     val userNameValidation = CompositeValidation(lengthValidation, characterValidation)
     UsernameTextField(
         username = remember { mutableStateOf("") },
