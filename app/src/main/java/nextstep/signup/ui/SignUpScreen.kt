@@ -2,7 +2,9 @@ package nextstep.signup.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -10,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,18 +21,37 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.signup.R
+import nextstep.signup.domain.SignUpForm
 
 @Composable
 fun SignUpScreen(
-    userName: String,
-    onUserNameChanged: (String) -> Unit,
-    email: String,
-    onEmailChanged: (String) -> Unit,
-    password: String,
-    onPasswordChanged: (String) -> Unit,
-    passwordConfirm: String,
-    onPasswordConfirmChanged: (String) -> Unit,
+    signUpForm: SignUpForm,
+    onSignUpFormChanged: (SignUpForm) -> Unit,
 ) {
+    val onUserNameChanged =
+        remember(signUpForm.userName) {
+            { newUserName: String ->
+                onSignUpFormChanged(signUpForm.copy(userName = newUserName))
+            }
+        }
+    val onEmailChanged =
+        remember(signUpForm.email) {
+            { newEmail: String ->
+                onSignUpFormChanged(signUpForm.copy(email = newEmail))
+            }
+        }
+    val onPasswordChanged =
+        remember(signUpForm.password) {
+            { newPassword: String ->
+                onSignUpFormChanged(signUpForm.copy(password = newPassword))
+            }
+        }
+    val onPasswordConfirmChanged =
+        remember(signUpForm.passwordConfirm) {
+            { newPasswordConfirm: String ->
+                onSignUpFormChanged(signUpForm.copy(passwordConfirm = newPasswordConfirm))
+            }
+        }
     Surface(
         modifier =
             Modifier
@@ -41,40 +63,44 @@ fun SignUpScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top,
         ) {
+            Spacer(modifier = Modifier.height(60.dp))
             SignupTitle(
                 stringResource(R.string.welcome_to_compose),
-                Modifier.padding(top = 60.dp),
             )
+            Spacer(modifier = Modifier.height(36.dp))
             SignUpTextField(
-                modifier = Modifier.padding(top = 36.dp),
+                value = signUpForm.userName,
                 hint = stringResource(R.string.user_name),
-                value = userName,
                 onValueChange = onUserNameChanged,
+                errorMessage = signUpForm.getUserNameErrorMessage(),
             )
+            Spacer(modifier = Modifier.height(36.dp))
             SignUpTextField(
-                modifier = Modifier.padding(top = 36.dp),
+                value = signUpForm.email,
                 hint = stringResource(R.string.email),
-                value = email,
                 onValueChange = onEmailChanged,
+                errorMessage = signUpForm.getEmailErrorMessage(),
             )
+            Spacer(modifier = Modifier.height(36.dp))
             SignUpTextField(
-                modifier = Modifier.padding(top = 36.dp),
+                value = signUpForm.password,
                 hint = stringResource(R.string.password),
-                value = password,
                 visualTransformation = PasswordVisualTransformation(),
                 onValueChange = onPasswordChanged,
+                errorMessage = signUpForm.getPasswordErrorMessage(),
             )
+            Spacer(modifier = Modifier.height(36.dp))
             SignUpTextField(
-                modifier = Modifier.padding(top = 36.dp),
+                value = signUpForm.passwordConfirm,
                 hint = stringResource(R.string.password_confirm),
-                value = passwordConfirm,
                 visualTransformation = PasswordVisualTransformation(),
                 onValueChange = onPasswordConfirmChanged,
+                errorMessage = signUpForm.getPasswordConfirmErrorMessage(),
             )
+            Spacer(modifier = Modifier.height(42.dp))
             SignUpButton(
-                Modifier
-                    .padding(top = 42.dp),
-                stringResource(R.string.sign_up),
+                title = stringResource(R.string.sign_up),
+                isEnabled = signUpForm.isValidForm,
             )
         }
     }
@@ -83,39 +109,28 @@ fun SignUpScreen(
 @Preview(showBackground = true)
 @Composable
 private fun SignUpPreview() {
-    var email by remember { mutableStateOf("") }
-    var userName by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var passwordConfirm by remember { mutableStateOf("") }
+    var signUpForm by rememberSaveable { mutableStateOf(SignUpForm.emptySignUpForm) }
 
-    SignUpScreen(
-        userName,
-        { userName = it },
-        email,
-        { email = it },
-        password,
-        { password = it },
-        passwordConfirm,
-        { passwordConfirm = it },
-    )
+    SignUpScreen(signUpForm) { newSignUpForm ->
+        signUpForm = newSignUpForm
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
 private fun SignUpPreviewWithValue() {
-    var email by remember { mutableStateOf("salth6@naver.com") }
-    var userName by remember { mutableStateOf("빙티") }
-    var password by remember { mutableStateOf("password") }
-    var passwordConfirm by remember { mutableStateOf("password") }
+    var signUpForm by rememberSaveable {
+        mutableStateOf(
+            SignUpForm(
+                "test",
+                "test@gmail.com",
+                "test1234",
+                "test1234",
+            ),
+        )
+    }
 
-    SignUpScreen(
-        userName,
-        { userName = it },
-        email,
-        { email = it },
-        password,
-        { password = it },
-        passwordConfirm,
-        { passwordConfirm = it },
-    )
+    SignUpScreen(signUpForm) { newSignUpForm ->
+        signUpForm = newSignUpForm
+    }
 }
