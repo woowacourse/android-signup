@@ -2,10 +2,7 @@ package nextstep.signup.ui.validation
 
 class LengthValidation(
     private val range: IntRange,
-    private val errorMessage: String,
 ) : Validation {
-    override fun validate(text: String): Boolean =
-        text.length in range
-
-    override fun errorMessage(text: String): String = errorMessage
+    override fun validate(text: String): ValidationResult =
+        if (text.length in range) ValidationResult.Success else ValidationResult.LengthError
 }

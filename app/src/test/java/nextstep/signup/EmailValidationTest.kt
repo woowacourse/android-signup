@@ -23,7 +23,6 @@ class EmailValidationTest {
         val emailValidation =
             RegexValidation(
                 "[a-zA-Z0-9._-]+@[a-zA-Z]+\\.+[a-zA-Z]+".toRegex(),
-                EMAIL_FORM_ERROR
             )
         composeTestRule.setContent {
             EmailTextField(

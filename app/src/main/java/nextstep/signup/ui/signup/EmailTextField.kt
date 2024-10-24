@@ -13,6 +13,7 @@ import nextstep.signup.R
 import nextstep.signup.ui.validation.RegexValidation
 import nextstep.signup.ui.validation.Validation
 import nextstep.signup.ui.theme.SignupTheme
+import nextstep.signup.ui.validation.ValidationResult
 
 @Composable
 fun EmailTextField(
@@ -22,6 +23,12 @@ fun EmailTextField(
     modifier: Modifier = Modifier,
     onValueChange: (String) -> Unit = {},
 ){
+    val validationResult = validation.validate(text.value)
+    val isError = validationResult !is ValidationResult.Success
+    val errorMessage = when (validationResult) {
+        is ValidationResult.RegexError-> stringResource(R.string.email_form_error)
+        else -> ""
+    }
     SignUpTextField(
         modifier = modifier,
         label = label,
@@ -30,8 +37,8 @@ fun EmailTextField(
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.Email
         ),
-        isError = !validation.validate(text.value),
-        errorMessage = validation.errorMessage(text.value),
+        isError = isError,
+        errorMessage = errorMessage,
     )
 }
 
@@ -41,7 +48,6 @@ fun EmailTextFieldPreview() {
     val emailValidation =
         RegexValidation(
             regex = "[a-zA-Z0-9._-]+@[a-zA-Z]+\\.+[a-zA-Z]+".toRegex(),
-            errorMessage = stringResource(id = R.string.email_form_error)
         )
     SignupTheme {
         EmailTextField(

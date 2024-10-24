@@ -14,21 +14,21 @@ import nextstep.signup.ui.validation.LengthValidation
 import nextstep.signup.ui.validation.RegexValidation
 import nextstep.signup.ui.validation.Validation
 import nextstep.signup.ui.theme.SignupTheme
+import nextstep.signup.ui.validation.EqualValidation
 import nextstep.signup.ui.validation.ValidationResult
 
 @Composable
-fun PasswordTextField(
+fun PasswordConfirmTextField(
     label: String,
     text: MutableState<String>,
     validation: Validation,
     modifier: Modifier = Modifier,
     onValueChange: (String) -> Unit = {},
-) {
+){
     val validationResult = validation.validate(text.value)
     val isError = validationResult !is ValidationResult.Success
     val errorMessage = when (validationResult) {
-        is ValidationResult.CompositeError -> validationResult.errors.map { it.toPasswordErrorMessage() }
-            .joinToString("\n")
+        is ValidationResult.EqualError -> stringResource(R.string.password_confirm_error)
         else -> ""
     }
     SignUpTextField(
@@ -42,29 +42,14 @@ fun PasswordTextField(
     )
 }
 
-@Composable
-fun ValidationResult.toPasswordErrorMessage(): String =
-    when (this) {
-        is ValidationResult.LengthError -> stringResource(R.string.password_length_error)
-        is ValidationResult.RegexError -> stringResource(R.string.password_character_error)
-        else -> ""
-    }
-
 @Preview(showBackground = true)
 @Composable
-fun PasswordTextFieldPreview() {
-    val lengthValidation = LengthValidation(
-        range = 8..16,
-    )
-    val regex = "^(?=.*[a-zA-Z])(?=.*[0-9]).+\$".toRegex()
-    val regexValidation = RegexValidation(
-        regex = regex,
-    )
-    val passwordValidation = CompositeValidation(lengthValidation, regexValidation)
+fun PasswordConfirmTextFieldPreview() {
+    val passwordConfirmValidation = EqualValidation("aaaa12342")
     SignupTheme {
         PasswordTextField(
             label = "Password",
-            validation = passwordValidation,
+            validation = passwordConfirmValidation,
             text = remember { mutableStateOf("aaaa12345") },
         )
     }

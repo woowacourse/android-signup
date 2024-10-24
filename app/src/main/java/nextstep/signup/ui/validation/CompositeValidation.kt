@@ -3,12 +3,11 @@ package nextstep.signup.ui.validation
 class CompositeValidation(
     private vararg val validations: Validation
 ) : Validation {
-    override fun validate(text: String): Boolean =
-        validations.all { it.validate(text) }
-
-    override fun errorMessage(text: String): String =
-        filterUnpassedValidations(text).joinToString(separator = "\n") { it.errorMessage(text) }
-
-    private fun filterUnpassedValidations(text: String): List<Validation> =
-        validations.filter { !it.validate(text) }
+    override fun validate(text: String): ValidationResult {
+        val unpassedResults =
+            validations.map { it.validate(text) }.filter { it !is ValidationResult.Success }
+        return if (unpassedResults.isEmpty()) ValidationResult.Success else ValidationResult.CompositeError(
+            unpassedResults
+        )
+    }
 }

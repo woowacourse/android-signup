@@ -12,6 +12,7 @@ import nextstep.signup.ui.validation.CompositeValidation
 import nextstep.signup.ui.validation.LengthValidation
 import nextstep.signup.ui.validation.RegexValidation
 import nextstep.signup.ui.validation.Validation
+import nextstep.signup.ui.validation.ValidationResult
 
 @Composable
 fun UsernameTextField(
@@ -20,25 +21,39 @@ fun UsernameTextField(
     modifier: Modifier = Modifier,
     onValueChange: (String) -> Unit = {},
 ) {
+    val validationResult = validation.validate(username.value)
+    val isError = validationResult !is ValidationResult.Success
+    val errorMessage = when (validationResult) {
+        is ValidationResult.CompositeError -> validationResult.errors.map { it.toUsernameErrorMessage() }
+            .joinToString("\n")
+        else -> ""
+    }
     SignUpTextField(
         modifier = modifier,
         label = stringResource(R.string.username),
         text = username,
         onValueChange = onValueChange,
-        isError = !validation.validate(username.value),
-        errorMessage = validation.errorMessage(username.value)
+        isError = isError,
+        errorMessage = errorMessage,
     )
 }
+
+@Composable
+fun ValidationResult.toUsernameErrorMessage(): String =
+    when (this) {
+        is ValidationResult.LengthError -> stringResource(R.string.username_length_error)
+        is ValidationResult.RegexError -> stringResource(R.string.username_character_error)
+        else -> ""
+    }
+
 @Preview(showBackground = true)
 @Composable
 fun UsernameTextFieldPreview() {
     val lengthValidation = LengthValidation(
         range = 2..5,
-        errorMessage = stringResource(R.string.username_length_error)
     )
     val characterValidation = RegexValidation(
         regex = "[a-zA-Z가-힣]+".toRegex(),
-        errorMessage = stringResource(R.string.username_character_error)
     )
     val userNameValidation = CompositeValidation(lengthValidation, characterValidation)
     UsernameTextField(

@@ -21,6 +21,7 @@ import nextstep.signup.ui.validation.EqualValidation
 import nextstep.signup.ui.validation.LengthValidation
 import nextstep.signup.ui.validation.RegexValidation
 import nextstep.signup.ui.theme.SignupTheme
+import nextstep.signup.ui.validation.ValidationResult
 
 @Composable
 fun SignUpScreen(
@@ -36,35 +37,33 @@ fun SignUpScreen(
         verticalArrangement = Arrangement.spacedBy(42.dp),
     ) {
         val userNameLengthValidation =
-            LengthValidation(2..5, stringResource(R.string.username_length_error))
+            LengthValidation(2..5)
         val characterValidation = RegexValidation(
             "[a-zA-Z가-힣]+".toRegex(),
-            stringResource(R.string.username_character_error)
         )
         val userNameValidation = CompositeValidation(userNameLengthValidation, characterValidation)
 
         val emailValidation =
             RegexValidation(
-                "[a-zA-Z0-9._-]+@[a-zA-Z]+\\.+[a-zA-Z]+".toRegex(),
-                stringResource(id = R.string.email_form_error)
+                "[a-zA-Z0-9._-]+@[a-zA-Z]+\\.+[a-zA-Z]+".toRegex()
             )
 
 
         val passwordLengthValidation =
-            LengthValidation(8..16, stringResource(R.string.password_length_error))
+            LengthValidation(8..16)
         val passwordRegex = "^(?=.*[a-zA-Z])(?=.*[0-9]).+\$".toRegex()
         val regexValidation =
-            RegexValidation(passwordRegex, stringResource(R.string.password_character_error))
+            RegexValidation(passwordRegex)
         val passwordValidation = CompositeValidation(passwordLengthValidation, regexValidation)
 
         val passwordConfirmValidation =
-            EqualValidation(password.value, stringResource(R.string.password_confirm_error))
+            EqualValidation(password.value)
 
         val isSignUpButtonEnabled =
-            userNameValidation.validate(userName.value) &&
-                    emailValidation.validate(email.value) &&
-                    passwordValidation.validate(password.value) &&
-                    passwordConfirmValidation.validate(passwordConfirm.value)
+            userNameValidation.validate(userName.value) is ValidationResult.Success &&
+                    emailValidation.validate(email.value) is ValidationResult.Success &&
+                    passwordValidation.validate(password.value) is ValidationResult.Success &&
+                    passwordConfirmValidation.validate(passwordConfirm.value) is ValidationResult.Success
 
         Text(
             text = stringResource(id = R.string.welcome),
@@ -91,7 +90,7 @@ fun SignUpScreen(
                 validation = passwordValidation,
                 onValueChange = { password.value = it },
             )
-            PasswordTextField(
+            PasswordConfirmTextField(
                 label = stringResource(id = R.string.password_confirm),
                 text = passwordConfirm,
                 validation = passwordConfirmValidation,

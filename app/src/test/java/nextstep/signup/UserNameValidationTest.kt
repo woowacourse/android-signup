@@ -23,10 +23,9 @@ class UserNameValidationTest {
     @Before
     fun setup() {
         val userNameLengthValidation =
-            LengthValidation(2..5, USERNAME_LENGTH_ERROR)
+            LengthValidation(2..5)
         val characterValidation = RegexValidation(
-            "[a-zA-Z가-힣]+".toRegex(),
-            USERNAME_CHARACTER_ERROR
+            "[a-zA-Z가-힣]+".toRegex()
         )
         val userNameValidation = CompositeValidation(userNameLengthValidation, characterValidation)
         composeTestRule.setContent {

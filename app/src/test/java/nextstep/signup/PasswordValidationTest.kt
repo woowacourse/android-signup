@@ -24,10 +24,10 @@ class PasswordValidationTest{
     fun setup() {
 
         val passwordLengthValidation =
-            LengthValidation(8..16, PASSWORD_LENGTH_ERROR)
+            LengthValidation(8..16)
         val passwordRegex = "^(?=.*[a-zA-Z])(?=.*[0-9]).+\$".toRegex()
         val regexValidation =
-            RegexValidation(passwordRegex, PASSWORD_CHARACTER_ERROR)
+            RegexValidation(passwordRegex)
         val passwordValidation = CompositeValidation(passwordLengthValidation, regexValidation)
         composeTestRule.setContent {
             PasswordTextField(

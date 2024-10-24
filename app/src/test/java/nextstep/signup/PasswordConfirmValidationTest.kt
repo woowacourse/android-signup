@@ -3,6 +3,7 @@ package nextstep.signup
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
+import nextstep.signup.ui.signup.PasswordConfirmTextField
 import nextstep.signup.ui.validation.EqualValidation
 import nextstep.signup.ui.signup.PasswordTextField
 import org.junit.Before
@@ -22,9 +23,9 @@ class PasswordConfirmValidationTest{
     @Before
     fun setup() {
         val passwordConfirmValidation =
-            EqualValidation(password, PASSWORD_CONFIRM_ERROR)
+            EqualValidation(password)
         composeTestRule.setContent {
-            PasswordTextField(
+            PasswordConfirmTextField(
                 label = "PasswordConfirm",
                 text = passwordConfirm,
                 validation = passwordConfirmValidation,
