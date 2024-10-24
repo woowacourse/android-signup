@@ -63,14 +63,16 @@ fun SignupScreen() {
     var password by remember { mutableStateOf(Password()) }
     var passwordConfirm by remember { mutableStateOf(ConfirmPassword(password = password)) }
 
-    val signUpState = SignUpStates(
-        states = listOf(
-            userName.validState(),
-            email.validState(),
-            password.validState(),
-            passwordConfirm.validState()
+    val signUpState = remember(userName, email, password, passwordConfirm) {
+        SignUpStates(
+            states = listOf(
+                userName.validState(),
+                email.validState(),
+                password.validState(),
+                passwordConfirm.validState()
+            )
         )
-    )
+    }
 
     fun confirmSignUp() {
         toastVisible.value = true
