@@ -2,6 +2,6 @@ package nextstep.signup.ui.model
 
 interface SignUpModel {
     val text: String
-    fun validState(): SignUpState
+    fun isValidState(): SignUpState
     fun isBlank(): Boolean
 }

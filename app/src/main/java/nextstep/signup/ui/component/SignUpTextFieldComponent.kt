@@ -50,7 +50,7 @@ fun SignUpTextFieldComponent(
                 .background(color = BlueGray20)
                 .fillMaxWidth(),
             singleLine = true,
-            isError = signUpModel.validState() is SignUpState.InValid,
+            isError = signUpModel.isValidState() is SignUpState.InValid,
             colors = TextFieldDefaults.colors(
                 focusedLabelColor = Blue50,
                 unfocusedLabelColor = Gray50,
@@ -66,7 +66,7 @@ fun SignUpTextFieldComponent(
             visualTransformation = if (isPassword) visualTransformation else VisualTransformation.None,
             keyboardOptions = if (isPassword) keyboardOptions else KeyboardOptions.Default
         )
-        val signUpStateText = when (signUpModel.validState()) {
+        val signUpStateText = when (signUpModel.isValidState()) {
             SignUpState.InValid.Confirm -> stringResource(R.string.error_confirm)
             SignUpState.InValid.Email -> stringResource(R.string.error_email)
             SignUpState.InValid.PasswordLength -> stringResource(R.string.error_password_length)

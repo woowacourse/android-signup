@@ -3,7 +3,7 @@ package nextstep.signup.ui.model
 class Password(
     override val text: String = DEFAULT_PASSWORD_TEXT
 ) : SignUpModel {
-    override fun validState(): SignUpState {
+    override fun isValidState(): SignUpState {
         return when {
             isBlank() -> SignUpState.Blank
             !isValidLength() -> SignUpState.InValid.PasswordLength

@@ -66,10 +66,10 @@ fun SignupScreen() {
     val signUpState = remember(userName, email, password, passwordConfirm) {
         SignUpStates(
             states = listOf(
-                userName.validState(),
-                email.validState(),
-                password.validState(),
-                passwordConfirm.validState()
+                userName.isValidState(),
+                email.isValidState(),
+                password.isValidState(),
+                passwordConfirm.isValidState()
             )
         )
     }

@@ -3,7 +3,7 @@ package nextstep.signup.ui.model
 data class Email(
     override val text: String = DEFAULT_EMAIL_ADDRESS
 ) : SignUpModel {
-    override fun validState(): SignUpState {
+    override fun isValidState(): SignUpState {
         return when {
             isBlank() -> SignUpState.Blank
             !isValidEmail() -> SignUpState.InValid.Email

@@ -4,7 +4,7 @@ data class ConfirmPassword(
     val password: Password,
     override val text: String = DEFAULT_TEXT
 ) : SignUpModel {
-    override fun validState(): SignUpState {
+    override fun isValidState(): SignUpState {
         return when {
             isBlank() -> SignUpState.Blank
             !isSamePassword() -> SignUpState.InValid.Confirm
