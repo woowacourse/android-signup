@@ -3,9 +3,9 @@ package nextstep.signup.ui.signup
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -16,29 +16,37 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nextstep.signup.R
+import nextstep.signup.model.validation.CompositeValidation
+import nextstep.signup.model.validation.EqualValidation
+import nextstep.signup.model.validation.LengthValidation
+import nextstep.signup.model.validation.RegexValidation
+import nextstep.signup.model.validation.Validation
 import nextstep.signup.ui.theme.SignupTheme
+import nextstep.signup.model.validation.ValidationResult
 
 @Composable
 fun SignUpScreen(
-    modifier: Modifier = Modifier
+    userNameValidation: Validation,
+    emailValidation: Validation,
+    passwordValidation: Validation,
+    modifier: Modifier = Modifier,
+    userName: MutableState<String>,
+    email: MutableState<String>,
+    password: MutableState<String>,
+    passwordConfirm: MutableState<String>,
 ) {
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(42.dp),
     ) {
-        val userName = remember { mutableStateOf("") }
-        val email = remember { mutableStateOf("") }
-        val password = remember { mutableStateOf("") }
-        val passwordConfirm = remember { mutableStateOf("") }
-
-        val isPasswordSame = password.value == passwordConfirm.value
-        val enabled =
-            userName.value.isNotBlank() &&
-                    email.value.isNotBlank() &&
-                    password.value.isNotBlank() &&
-                    passwordConfirm.value.isNotBlank() &&
-                    isPasswordSame
+        val passwordConfirmValidation =
+            EqualValidation(password.value)
+        val isSignUpButtonEnabled =
+            userNameValidation.validate(userName.value) is ValidationResult.Success &&
+                    emailValidation.validate(email.value) is ValidationResult.Success &&
+                    passwordValidation.validate(password.value) is ValidationResult.Success &&
+                    passwordConfirmValidation.validate(passwordConfirm.value) is ValidationResult.Success
 
         Text(
             text = stringResource(id = R.string.welcome),
@@ -48,30 +56,33 @@ fun SignUpScreen(
         Column(
             verticalArrangement = Arrangement.spacedBy(36.dp),
         ) {
-            SignUpTextField(
-                label = stringResource(id = R.string.user_name),
-                text = userName,
+            UsernameTextField(
+                username = userName,
                 onValueChange = { userName.value = it },
+                validation = userNameValidation,
             )
             EmailTextField(
                 label = stringResource(id = R.string.email),
                 text = email,
                 onValueChange = { email.value = it },
+                validation = emailValidation,
             )
             PasswordTextField(
                 label = stringResource(id = R.string.password),
                 text = password,
+                validation = passwordValidation,
                 onValueChange = { password.value = it },
             )
-            PasswordTextField(
+            PasswordConfirmTextField(
                 label = stringResource(id = R.string.password_confirm),
                 text = passwordConfirm,
+                validation = passwordConfirmValidation,
                 onValueChange = { passwordConfirm.value = it },
             )
         }
         ConfirmButton(
             modifier = Modifier.fillMaxWidth(),
-            enabled = enabled,
+            enabled = isSignUpButtonEnabled,
             text = stringResource(id = R.string.signup),
         )
     }
@@ -82,7 +93,38 @@ fun SignUpScreen(
 )
 @Composable
 fun SignUpFormScreen() {
+    val userNameLengthValidation =
+        LengthValidation(2..5)
+    val characterValidation = RegexValidation(
+        "[a-zA-Z가-힣]+".toRegex(),
+    )
+    val userNameValidation = CompositeValidation(userNameLengthValidation, characterValidation)
+
+    val emailValidation =
+        RegexValidation(
+            "[a-zA-Z0-9._-]+@[a-zA-Z]+\\.+[a-zA-Z]+".toRegex()
+        )
+
+    val passwordLengthValidation =
+        LengthValidation(8..16)
+    val passwordRegex = "^(?=.*[a-zA-Z])(?=.*[0-9]).+\$".toRegex()
+    val regexValidation =
+        RegexValidation(passwordRegex)
+    val passwordValidation = CompositeValidation(passwordLengthValidation, regexValidation)
+
+    val userName = remember { mutableStateOf("") }
+    val email = remember { mutableStateOf("") }
+    val password = remember { mutableStateOf("") }
+    val passwordConfirm = remember { mutableStateOf("") }
     SignupTheme {
-        SignUpScreen()
+        SignUpScreen(
+            userName = userName,
+            email = email,
+            password = password,
+            passwordConfirm = passwordConfirm,
+            userNameValidation = userNameValidation,
+            emailValidation = emailValidation,
+            passwordValidation = passwordValidation,
+        )
     }
 }
