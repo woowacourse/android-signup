@@ -20,11 +20,15 @@ import nextstep.signup.model.validation.CompositeValidation
 import nextstep.signup.model.validation.EqualValidation
 import nextstep.signup.model.validation.LengthValidation
 import nextstep.signup.model.validation.RegexValidation
+import nextstep.signup.model.validation.Validation
 import nextstep.signup.ui.theme.SignupTheme
 import nextstep.signup.model.validation.ValidationResult
 
 @Composable
 fun SignUpScreen(
+    userNameValidation: Validation,
+    emailValidation: Validation,
+    passwordValidation: Validation,
     modifier: Modifier = Modifier,
     userName: MutableState<String> = remember { mutableStateOf("") },
     email: MutableState<String> = remember { mutableStateOf("") },
@@ -36,29 +40,8 @@ fun SignUpScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(42.dp),
     ) {
-        val userNameLengthValidation =
-            LengthValidation(2..5)
-        val characterValidation = RegexValidation(
-            "[a-zA-Z가-힣]+".toRegex(),
-        )
-        val userNameValidation = CompositeValidation(userNameLengthValidation, characterValidation)
-
-        val emailValidation =
-            RegexValidation(
-                "[a-zA-Z0-9._-]+@[a-zA-Z]+\\.+[a-zA-Z]+".toRegex()
-            )
-
-
-        val passwordLengthValidation =
-            LengthValidation(8..16)
-        val passwordRegex = "^(?=.*[a-zA-Z])(?=.*[0-9]).+\$".toRegex()
-        val regexValidation =
-            RegexValidation(passwordRegex)
-        val passwordValidation = CompositeValidation(passwordLengthValidation, regexValidation)
-
         val passwordConfirmValidation =
             EqualValidation(password.value)
-
         val isSignUpButtonEnabled =
             userNameValidation.validate(userName.value) is ValidationResult.Success &&
                     emailValidation.validate(email.value) is ValidationResult.Success &&
@@ -110,7 +93,32 @@ fun SignUpScreen(
 )
 @Composable
 fun SignUpFormScreen() {
+    val userNameLengthValidation =
+        LengthValidation(2..5)
+    val characterValidation = RegexValidation(
+        "[a-zA-Z가-힣]+".toRegex(),
+    )
+    val userNameValidation = CompositeValidation(userNameLengthValidation, characterValidation)
+
+    val emailValidation =
+        RegexValidation(
+            "[a-zA-Z0-9._-]+@[a-zA-Z]+\\.+[a-zA-Z]+".toRegex()
+        )
+
+    val passwordLengthValidation =
+        LengthValidation(8..16)
+    val passwordRegex = "^(?=.*[a-zA-Z])(?=.*[0-9]).+\$".toRegex()
+    val regexValidation =
+        RegexValidation(passwordRegex)
+    val passwordValidation = CompositeValidation(passwordLengthValidation, regexValidation)
+
+    val password = remember { mutableStateOf("") }
     SignupTheme {
-        SignUpScreen()
+        SignUpScreen(
+            userNameValidation = userNameValidation,
+            emailValidation = emailValidation,
+            passwordValidation = passwordValidation,
+            password = password,
+        )
     }
 }
