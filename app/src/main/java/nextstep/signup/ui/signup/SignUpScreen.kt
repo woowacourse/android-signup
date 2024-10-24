@@ -30,10 +30,10 @@ fun SignUpScreen(
     emailValidation: Validation,
     passwordValidation: Validation,
     modifier: Modifier = Modifier,
-    userName: MutableState<String> = remember { mutableStateOf("") },
-    email: MutableState<String> = remember { mutableStateOf("") },
-    password: MutableState<String> = remember { mutableStateOf("") },
-    passwordConfirm: MutableState<String> = remember { mutableStateOf("") },
+    userName: MutableState<String>,
+    email: MutableState<String>,
+    password: MutableState<String>,
+    passwordConfirm: MutableState<String>,
 ) {
     Column(
         modifier = modifier,
@@ -112,13 +112,19 @@ fun SignUpFormScreen() {
         RegexValidation(passwordRegex)
     val passwordValidation = CompositeValidation(passwordLengthValidation, regexValidation)
 
+    val userName = remember { mutableStateOf("") }
+    val email = remember { mutableStateOf("") }
     val password = remember { mutableStateOf("") }
+    val passwordConfirm = remember { mutableStateOf("") }
     SignupTheme {
         SignUpScreen(
+            userName = userName,
+            email = email,
+            password = password,
+            passwordConfirm = passwordConfirm,
             userNameValidation = userNameValidation,
             emailValidation = emailValidation,
             passwordValidation = passwordValidation,
-            password = password,
         )
     }
 }

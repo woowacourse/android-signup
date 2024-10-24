@@ -30,13 +30,22 @@ class MainActivity : ComponentActivity() {
         val passwordLengthValidation = LengthValidation(PASSWORD_LENGTH_RANGE)
         val regexValidation = RegexValidation(PASSWORD_REGEX)
         val passwordValidation = CompositeValidation(passwordLengthValidation, regexValidation)
+
         setContent {
+            val userName = remember { mutableStateOf("") }
+            val email = remember { mutableStateOf("") }
+            val password = remember { mutableStateOf("") }
+            val passwordConfirm = remember { mutableStateOf("") }
             SignupTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background,
                 ) {
                     SignUpScreen(
+                        userName = userName,
+                        email = email,
+                        password = password,
+                        passwordConfirm = passwordConfirm,
                         userNameValidation = userNameValidation,
                         emailValidation = emailValidation,
                         passwordValidation = passwordValidation,
