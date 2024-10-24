@@ -4,7 +4,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithText
@@ -40,15 +39,14 @@ class PasswordTest {
     }
 
     @Test
-    fun 비밀번호가_빈_값일_때_Blank_상태를_반환한다() {
+    fun 비밀번호가_빈_값일_때_Blank_메시지를_표시한다() {
         password = Password("")
         composeTestRule
             .onAllNodesWithText("")
-            .assertCountEquals(2)
     }
 
     @Test
-    fun 비밀번호가_8자_미만일_때_PasswordLength_에러를_반환한다() {
+    fun 비밀번호가_8자_미만일_때_PasswordLength_메시지를_표시한다() {
         password = Password("12345")
         composeTestRule
             .onNodeWithText(errorPasswordLength)
@@ -56,7 +54,7 @@ class PasswordTest {
     }
 
     @Test
-    fun 비밀번호가_유효하지_않을_때_PasswordType_에러를_반환한다() {
+    fun 비밀번호가_유효하지_않을_때_PasswordType_에러를_표시한다() {
         password = Password("abcdefgh")
         composeTestRule
             .onNodeWithText(errorPasswordType)

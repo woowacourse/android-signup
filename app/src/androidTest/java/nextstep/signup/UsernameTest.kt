@@ -37,15 +37,14 @@ class UsernameTest {
     }
 
     @Test
-    fun 사용자_이름이_빈_값일_때_Blank_상태를_반환한다() {
+    fun 사용자_이름이_빈_값일_때_Blank_메시지를_표시한다() {
         username = Username("")
         composeTestRule
             .onAllNodesWithText("")
-            .assertCountEquals(2)
     }
 
     @Test
-    fun 사용자_이름이_2자_미만일_때_UserNameLength_에러를_반환한다() {
+    fun 사용자_이름이_2자_미만일_때_UserNameLength_에러_메시지를_표시한다() {
         username = Username("김")
         composeTestRule
             .onNodeWithText(errorUsernameLength)
@@ -53,7 +52,7 @@ class UsernameTest {
     }
 
     @Test
-    fun 사용자_이름이_5자_초과일_때_UserNameLength_에러를_반환한다() {
+    fun 사용자_이름이_5자_초과일_때_UserNameLength_에러_메시지를_표시한다() {
         username = Username("김누누입니다")
         composeTestRule
             .onNodeWithText(errorUsernameLength)

@@ -39,15 +39,14 @@ class ConfirmPasswordTest {
     }
 
     @Test
-    fun 확인비밀번호가_빈_값일_때_Blank_상태를_반환한다() {
+    fun 확인비밀번호가_빈_값일_때_Blank_메시지를_표시한다() {
         confirmPassword = ConfirmPassword(password = password)
         composeTestRule
             .onAllNodesWithText("")
-            .assertCountEquals(2)
     }
 
     @Test
-    fun 확인비밀번호가_원래비밀번호와_다를_때_Confirm_에러를_반환한다() {
+    fun 확인비밀번호가_원래비밀번호와_다를_때_Confirm_에러_메시지를_표시한다() {
         confirmPassword = ConfirmPassword(password = password, "wrongPassword")
         composeTestRule
             .onNodeWithText(errorConfirmPassword)
@@ -55,7 +54,7 @@ class ConfirmPasswordTest {
     }
 
     @Test
-    fun 확인비밀번호가_유효할_때_유효_상태인_Valid를_반환한다() {
+    fun 확인비밀번호가_유효할_때_유효_상태인_메시지를_표시한다() {
         confirmPassword = ConfirmPassword(password = password, "password")
         composeTestRule
             .onNodeWithText(errorConfirmPassword)

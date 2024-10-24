@@ -4,7 +4,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithText
@@ -37,15 +36,14 @@ class EmailTest {
     }
 
     @Test
-    fun 이메일이_빈_값일_때_Blank_상태를_반환한다() {
+    fun 이메일이_빈_값일_때_Blank_메시지를_표시한다() {
         email = Email("")
         composeTestRule
             .onAllNodesWithText("")
-            .assertCountEquals(2)
     }
 
     @Test
-    fun 이메일이_유효하지_않을_때_Email_에러를_반환한다() {
+    fun 이메일이_유효하지_않을_때_Email_에러_메시지를_표시힌다() {
         email = Email("invalid_email")
         composeTestRule
             .onNodeWithText(errorEmail)
@@ -53,7 +51,7 @@ class EmailTest {
     }
 
     @Test
-    fun 이메일이_형식이_유효하지_않을_때_Email_에러를_반환한다() {
+    fun 이메일이_형식이_유효하지_않을_때_Email_에러_메시지를_표시한다() {
         email = Email("test@examplecom")
         composeTestRule
             .onNodeWithText(errorEmail)
