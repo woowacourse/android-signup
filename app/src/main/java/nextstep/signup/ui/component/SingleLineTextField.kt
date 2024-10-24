@@ -16,20 +16,23 @@ import androidx.compose.ui.unit.sp
 import nextstep.signup.ui.theme.Blue50
 import nextstep.signup.ui.theme.BlueGray20
 import nextstep.signup.ui.theme.Gray50
+import nextstep.signup.ui.theme.Red
 
 @Composable
 fun SingleLineTextField(
     text: String,
     onTextChange: (String) -> Unit,
-    hint: String,
-    modifier: Modifier = Modifier.fillMaxWidth(),
+    modifier: Modifier = Modifier,
+    isError: Boolean = false,
+    label: String? = null,
+    errorMessage: String? = null,
     keyBoardType: KeyboardType = KeyboardType.Text,
     visualTransformation: VisualTransformation = VisualTransformation.None,
 ) {
     TextField(
         value = text,
         onValueChange = onTextChange,
-        modifier = modifier,
+        modifier = modifier.fillMaxWidth(),
         colors = TextFieldDefaults.colors(
             focusedLabelColor = Blue50,
             unfocusedLabelColor = Gray50,
@@ -38,17 +41,22 @@ fun SingleLineTextField(
             focusedIndicatorColor = Blue50,
             unfocusedIndicatorColor = Gray50,
         ),
+        isError = isError,
         singleLine = true,
-        placeholder = {
-            Text(text = hint)
-        },
         label = {
-            Text(text = hint)
+            label?.let {
+                Text(text = it, fontSize = 16.sp)
+            }
         },
         textStyle = TextStyle(
             color = Gray50,
             fontSize = 16.sp,
         ),
+        supportingText = {
+            errorMessage?.let {
+                Text(text = it, fontSize = 12.sp, color = Red)
+            }
+        },
         keyboardOptions = KeyboardOptions(
             keyboardType = keyBoardType,
         ),
@@ -63,5 +71,5 @@ fun SingleLineTextField(
 )
 @Composable
 private fun SingleLineTextFieldPreview() {
-    SingleLineTextField("테스트", {}, "테스트 힌트")
+    SingleLineTextField("테스트", {})
 }
