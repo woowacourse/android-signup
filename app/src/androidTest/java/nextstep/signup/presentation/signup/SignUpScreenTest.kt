@@ -1,15 +1,11 @@
 package nextstep.signup.presentation.signup
 
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
-import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createComposeRule
-import nextstep.signup.domain.Email
-import nextstep.signup.domain.EmailDomain
-import nextstep.signup.domain.EmailId
-import nextstep.signup.domain.Password
-import nextstep.signup.domain.SignUp
-import nextstep.signup.domain.UserName
 import org.junit.Rule
 import org.junit.Test
 
@@ -17,16 +13,44 @@ class SignUpScreenTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
-    // username 이 공백이면 회원가입 불가능
+    private val button = SemanticsMatcher.expectValue(
+        SemanticsProperties.Role,
+        Role.Button
+    )
+
     @Test
-    fun signup_is_not_enabled_when_signup_condition_is_not_satisfied() {
+    fun signup_is_not_enabled_when_signup_input_is_initial() {
         // given
         composeTestRule.setContent {
-            SignUpScreen(initialSignUp = SignUp.INITIAL)
+            SignUpScreen(
+                SignUpInput.intial
+            )
         }
 
         // then
-        composeTestRule.onNode(hasText("Sign Up")).assertIsNotEnabled()
+        composeTestRule
+            .onNode(button)
+            .assertIsNotEnabled()
+    }
+
+    @Test
+    fun signup_is_not_enabled_when_email_is_invalid() {
+        // given
+        composeTestRule.setContent {
+            SignUpScreen(
+                SignUpInput(
+                    username = "test",
+                    email = "qwer@qwer",
+                    password = "qwer12345",
+                    passwordConfirm = "qwer12345"
+                )
+            )
+        }
+
+        // then
+        composeTestRule
+            .onNode(button)
+            .assertIsNotEnabled()
     }
 
     @Test
@@ -34,21 +58,18 @@ class SignUpScreenTest {
         // given
         composeTestRule.setContent {
             SignUpScreen(
-                initialSignUp = SignUp(
-                    userName = UserName("악어"),
-                    email = Email(
-                        EmailId("sh1mj1"),
-                        EmailDomain("wooteco.com")
-                    ),
-                    password = Password(
-                        password = "1234",
-                        passwordConfirm = "1234"
-                    )
+                SignUpInput(
+                    username = "test",
+                    email = "qwer@qwer.com",
+                    password = "qwer12345",
+                    passwordConfirm = "qwer12345"
                 )
             )
         }
 
         // then
-        composeTestRule.onNode(hasText("Sign Up")).assertIsEnabled()
+        composeTestRule
+            .onNode(button)
+            .assertIsEnabled()
     }
 }

@@ -17,82 +17,29 @@
 
 - [x] TextField 의 배경색을 피그마 시안에 맞도록
 
-Color 설정
+### step3
 
-```kotlin
-package nextstep.signup.ui.theme
+- [x] 디자인 시안을 참고하여 회원가입 뷰에 유효성 검사 로직을 추가한다.
+- [x] 유효성 검사 로직에 대한 테스트 코드를 추가한다.
+    - [x] 이름은 2~5자여야 합니다.
+    - [x] 이름에는 숫자나 기호가 포함될 수 없습니다.
+    - [x] 이메일 형식이 올바르지 않습니다.
+    - [x] 비밀번호는 8~16자여야 합니다.
+    - [x] 비밀번호는 영문과 숫자를 포함해야 합니다.
+    - [x] 비밀번호가 일치하지 않습니다.
 
-import androidx.compose.ui.graphics.Color
+### step4
 
-val BlueGrey20 = Color(0xFFE3E8F1)
-```
+- [x] 디자인 시안을 참고하여 모든 필드가 에러 없이 채워진 경우에만 Sign up 버튼을 활성화한다.
+- [x] 유효성 검사 로직과 뷰 로직을 나누어 관심사를 분리한다.
+- [ ] 모든 로직에 테스트 코드를 추가한다. todo: SignUpScreen
+- [x] 테스트 가능한 부분과 테스트하기 힘든 부분을 분리해 테스트 가능한 부분에 대해서만 테스트를 진행한다.
+- [ ] (선택사항) Sign up 버튼을 클릭하면 회원가입 완료 스낵바가 노출된다.
 
-| 특징            | xml 기반                          | kotlin 기반 (Compose)                                  |
-|---------------|---------------------------------|------------------------------------------------------|
-| 색상 정의 위치      | colors.xml 리소스 파일               | kotlin 파일 (보통 Color.kt 등)                            |
-| 사용 방식         | xml 또는 ContextCompat.getColor() | Composable 함수 내에서 바로 참조 가능                           |
-| 유연성           | 리소스 파일로 관리, 리소스 ID 필요           | kotlin 코드에서 즉시 정의 및 사용 가능                            |
-| 상태 관리 및 동적 변경 | 변경이 어렵고 리소스 id 로 고정됨            | 색상을 동적으로 변경하거나 상태에 맞게 조정 가능 (예를 들어, 다크 모드나 동적 테마 변경) |
-| 명확성 및 구조      | 색상 정의가 xml 에 고정, UI 와 코드 분리     | 코드와 Ui 가 같은 파일에서 처리될 수 잇음.                           |
+### step4 이후 추가로 할 것들
 
-TextField 의 배경 색 변경
-
-```kotlin
-TextField(
-    /*...*/
-    colors = TextFieldDefaults.colors(
-        focusedContainerColor = BlueGrey20,
-        unfocusedContainerColor = BlueGrey20,
-        errorContainerColor = Color.Red,
-        disabledContainerColor = PurpleGrey40,
-    ),
-)
-```
-
-이런 식으로 해야 하나?
-focusedContainerColor, unfocusedContainerColor, errorContainerColor, disabledContainerColor 를 한번에 해줄 수 없나?
-
-그런데 내가 직접 지정을 안 해줘도 처음부터 기본 색상이 들어가잖아.
-즉, 기본 테마 색상을 내가 지정하면 여기서 직접 해주지 않아도 된다는 뜻?
-
-이렇게 해서 찾아서 해주면 된다~
-
-![img.png](img.png)
-
-![img_1.png](img_1.png)
-
-![img_2.png](img_2.png)
-
-![img_3.png](img_3.png)
-
-![img_4.png](img_4.png)
-
-![img_5.png](img_5.png)
-
-```kotlin
-private val LightColorScheme = lightColorScheme(
-    primary = Blue50,
-    secondary = PurpleGrey40,
-    tertiary = Pink40,
-    surfaceVariant = BlueGrey20,
-    onSurfaceVariant = Black30,
-)
-
-@Composable
-fun SignupTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    content: @Composable () -> Unit
-) {
-    val colorScheme = when {
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
-    }
-
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Typography,
-        content = content
-    )
-}
-
-```
+- [x] recomposition study 테스트
+- [x] SignupScreen 테스트가 가능한가?
+- [x] recomposition 프로덕션에 적용
+- [ ] rememberSavable 추가하기
+- [ ] [TextField 의 focus 를 빼내는 법?](https://velog.io/@heeung/Android-Compose-Textfield-%ED%8F%AC%EC%BB%A4%EC%8A%A4%EB%A5%BC-%EC%B2%98%EB%A6%AC%ED%95%B4%EB%B3%B4%EC%9E%90) 

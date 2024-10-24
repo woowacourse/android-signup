@@ -16,12 +16,12 @@ import nextstep.signup.ui.theme.Typography
 fun SignUpButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit = {},
-    enable: () -> Boolean = { true },
+    enabled: Boolean,
     text: String = stringResource(R.string.sign_up_button)
 ) {
     Button(
         onClick = { onClick() },
-        enabled = enable(),
+        enabled = enabled,
         modifier = modifier
     ) {
         Text(
@@ -33,10 +33,12 @@ fun SignUpButton(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun SignUpButtonPreview() {
     SignupTheme {
-        SignUpButton()
+        SignUpButton(
+            enabled = false
+        )
     }
 }
