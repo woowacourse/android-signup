@@ -16,12 +16,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nextstep.signup.R
-import nextstep.signup.ui.validation.CompositeValidation
-import nextstep.signup.ui.validation.EqualValidation
-import nextstep.signup.ui.validation.LengthValidation
-import nextstep.signup.ui.validation.RegexValidation
+import nextstep.signup.model.validation.CompositeValidation
+import nextstep.signup.model.validation.EqualValidation
+import nextstep.signup.model.validation.LengthValidation
+import nextstep.signup.model.validation.RegexValidation
 import nextstep.signup.ui.theme.SignupTheme
-import nextstep.signup.ui.validation.ValidationResult
+import nextstep.signup.model.validation.ValidationResult
 
 @Composable
 fun SignUpScreen(

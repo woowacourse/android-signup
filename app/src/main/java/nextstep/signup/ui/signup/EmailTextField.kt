@@ -10,10 +10,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.signup.R
-import nextstep.signup.ui.validation.RegexValidation
-import nextstep.signup.ui.validation.Validation
+import nextstep.signup.model.validation.RegexValidation
+import nextstep.signup.model.validation.Validation
 import nextstep.signup.ui.theme.SignupTheme
-import nextstep.signup.ui.validation.ValidationResult
+import nextstep.signup.model.validation.ValidationResult
 
 @Composable
 fun EmailTextField(

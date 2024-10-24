@@ -1,4 +1,4 @@
-package nextstep.signup.ui.validation
+package nextstep.signup.model.validation
 
 class RegexValidation(
     private val regex: Regex,
